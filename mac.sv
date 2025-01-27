@@ -12,7 +12,7 @@ module mac #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
 
 	// Signal declarations
 	logic [IN_WIDTH*2-1:0] mul_result;     // 16-bit result from multiplier
-	logic [OUT_WIDTH-1:0] mul_register;    // Register to hold multiplier output
+	logic [IN_WIDTH*2-1:0] mul_register;    // Register to hold multiplier output
 	logic [OUT_WIDTH-1:0] acc_register;    // Register to hold Accumulator output
 	
 	// Multiplier
@@ -21,20 +21,20 @@ module mac #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
 	end
 	
 	// Multiplier register with enable
-	always_ff @(posedge clk or posedge rst_mem) begin
+	always @(posedge clk) begin
 		if (rst_mem) begin
 			mul_register <= '0;  // Reset the register
 		end else if (mul_mem_en) begin
-			mul_register <= {6'b0 ,mul_result};  // Zero-extend the mul result to 22-bit width and store it in mul_register
+			mul_register <= mul_result;  // Zero-extend the mul result to 22-bit width and store it in mul_register
 		end
 	end
 	
 	// Adder and Accumulator
-	always_ff @(posedge clk or posedge rst_mem) begin
+	always @(posedge clk) begin
 		if (rst_mem) begin
 			acc_register <= '0;  // Reset the accumulator register
 		end else if (ac_mem_en) begin
-			acc_register <= acc_register + mul_register;  // Accumulate the result
+			acc_register <= acc_register + {6'b0 ,mul_register};  // Accumulate the result
 		end
 	end
 	
