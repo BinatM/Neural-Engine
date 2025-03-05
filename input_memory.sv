@@ -3,7 +3,7 @@ module input_memory (
 	input logic [7:0] data_in, //8-bit data input
 	output logic [7:0] data_out, 
 	
-	// Write and read pointers
+	// Write and read pointers.
 	input logic [5:0] wr_data_ptr, // Write pointer (6 bits to address 64 locations)
 	input logic [5:0] rd_data_ptr // read pointer (6 bits to address 64 locations)
 );
