@@ -20,8 +20,9 @@ module mac #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
 		mul_result = img_in * weight_in;
 	end
 	
+
 	// Multiplier register with enable
-	always @(posedge clk) begin
+	always_ff @(posedge clk) begin
 		if (rst_mem) begin
 			mul_register <= '0;  // Reset the register
 		end else if (mul_mem_en) begin
@@ -30,7 +31,7 @@ module mac #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
 	end
 	
 	// Adder and Accumulator
-	always @(posedge clk) begin
+	always_ff @(posedge clk) begin
 		if (rst_mem) begin
 			acc_register <= '0;  // Reset the accumulator register
 		end else if (ac_mem_en) begin

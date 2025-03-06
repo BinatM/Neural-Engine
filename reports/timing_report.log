@@ -1,0 +1,66 @@
+****************************************
+Report : timing
+        -path_type full
+        -delay_type max
+        -max_paths 1
+        -report_by design
+Design : mac
+Version: V-2023.12-SP3
+Date   : Thu Mar  6 20:44:48 2025
+****************************************
+
+  Startpoint: acc_register_reg[0] (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: acc_register_reg[21] (rising edge-triggered flip-flop clocked by clk)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk (rise edge)                            0.00      0.00
+  clock network delay (ideal)                      0.00      0.00
+
+  acc_register_reg[0]/CP (SDFQD0BWP30P140HVT)      0.00      0.00 r
+  acc_register_reg[0]/Q (SDFQD0BWP30P140HVT)       0.07      0.07 r
+  add_38/ctmi_711/Z (AN2D0BWP30P140HVT)            0.03      0.10 r
+  add_38/U_3/CO (FA1D0BWP30P140HVT)                0.04      0.14 r
+  add_38/U_5/CO (FA1D0BWP30P140HVT)                0.04      0.18 r
+  add_38/U_8/CO (FA1D0BWP30P140HVT)                0.04      0.22 r
+  add_38/U_10/CO (FA1D0BWP30P140HVT)               0.04      0.26 r
+  add_38/U_13/CO (FA1D0BWP30P140HVT)               0.04      0.30 r
+  add_38/U_15/CO (FA1D0BWP30P140HVT)               0.04      0.34 r
+  add_38/U_18/CO (FA1D0BWP30P140HVT)               0.04      0.38 r
+  add_38/U_20/CO (FA1D0BWP30P140HVT)               0.04      0.42 r
+  add_38/U_23/CO (FA1D0BWP30P140HVT)               0.04      0.46 r
+  add_38/U_25/CO (FA1D0BWP30P140HVT)               0.04      0.50 r
+  add_38/U_28/CO (FA1D0BWP30P140HVT)               0.05      0.55 r
+  add_38/U_30/CO (FA1D0BWP30P140HVT)               0.04      0.59 r
+  add_38/U_33/CO (FA1D0BWP30P140HVT)               0.04      0.63 r
+  add_38/U_35/CO (FA1D0BWP30P140HVT)               0.04      0.67 r
+  add_38/U_38/CO (FA1D0BWP30P140HVT)               0.04      0.71 r
+  add_38/ctmi_709/ZN (ND2D0BWP30P140HVT)           0.03      0.74 f
+  add_38/ctmi_708/ZN (INR2D0BWP30P140HVT)          0.02      0.76 r
+  add_38/ctmi_710/ZN (ND2D0BWP30P140HVT)           0.03      0.79 f
+  add_38/ctmi_717/ZN (INR2D0BWP30P140HVT)          0.02      0.81 r
+  add_38/ctmi_718/ZN (ND2D0BWP30P140HVT)           0.02      0.83 f
+  add_38/ctmi_719/ZN (XNR2UD0BWP30P140HVT)         0.02      0.85 r
+  ctmi_589/Z (AO22D0BWP30P140HVT)                  0.03      0.88 r
+  acc_register_reg[21]/D (SDFQD0BWP30P140HVT)      0.00      0.88 r
+  data arrival time                                          0.88
+
+  clock clk (rise edge)                           10.00     10.00
+  clock network delay (ideal)                      0.00     10.00
+  acc_register_reg[21]/CP (SDFQD0BWP30P140HVT)     0.00     10.00 r
+  clock uncertainty                               -0.15      9.85
+  library setup time                              -0.02      9.83
+  data required time                                         9.83
+  ------------------------------------------------------------------------
+  data required time                                         9.83
+  data arrival time                                         -0.88
+  ------------------------------------------------------------------------
+  slack (MET)                                                8.94
+
+
+1
