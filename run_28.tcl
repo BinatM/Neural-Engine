@@ -13,7 +13,7 @@ read_parasitic_tech -tlup /data/tsmc/28HPCPMMWAVE/dig_libs/snpsflow/rcbest/crn28
 read_parasitic_tech -tlup /data/tsmc/28HPCPMMWAVE/dig_libs/snpsflow/rcworst/crn28hpc+_1p09m+ut-alrdl_6x1z1u_rcworst.tluplus -name rcworst
 
 save_lib
-analyze -format sverilog  mac.sv
+analyze -format sverilog  CHIP/rtl/mac/mac.sv
 elaborate mac
 set_top_module  mac
 start_gui
@@ -57,12 +57,12 @@ compile_fusion -to logic_opto
 compile_fusion -to final_opto
 
 ## Reports Generation
-report_area > reports/area_report.log
-report_cells > reports/cell_count.log
-report_lib_cells -objects [get_lib_cells tcbn28hpcplusbwp30p140] > reports/lib_cells.log
-report_power > reports/power_report.log
-report_timing > reports/timing_report.log
-report_utilization > reports/utilization.log
-report_qor > reports/qor_report.log
+report_area > CHIP/reports/area_report.log
+report_cells > CHIP/reports/cell_count.log
+report_lib_cells -objects [get_lib_cells tcbn28hpcplusbwp30p140] > CHIP/reports/lib_cells.log
+report_power > CHIP/reports/power_report.log
+report_timing > rCHIP/eports/timing_report.log
+report_utilization > CHIP/reports/utilization.log
+report_qor > CHIP/reports/qor_report.log
 # קפםראד קמק
-save_block -as neuron/final_opto
+save_block -as neuron/final_opto1

@@ -6,7 +6,7 @@
 #set_current_design TOP
 
 # Create clock object and set uncertainty
-create_clock -period 10 [get_ports clk]
+create_clock -period 1 [get_ports clk]
 set_clock_uncertainty -setup 0.15 [get_clocks clk]
 #set_case_analysis 0 [get_port rst_mem]
 #set_case_analysis 0 [get_port mul_mem_en]
