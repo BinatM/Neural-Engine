@@ -1,0 +1,3 @@
+Command Line: /tools/synopsys/verdi/T-2022.06-SP1/platform/LINUXAMD64/bin/Novas -ssf novas.fsdb
+uname(Linux micron7.eng.tau.ac.il 4.18.0-553.el8_10.x86_64 #1 SMP Fri May 24 13:05:10 UTC 2024 x86_64)
+au time 131.224068 8.374202 2.170215 delta 297541632 297541632 total 869634048 869634048
