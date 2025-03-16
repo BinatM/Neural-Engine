@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="euclide.feature:2024.1.1"/>
+		<item value="org.eclipse.emf.common:2.29.0.v20230223-0922"/>
+		<item value="org.eclipse.emf.ecore:2.31.0.v20230226-0921"/>
+		<item value="org.eclipse.epp.mpc:1.10.1.v20221110-1841"/>
+		<item value="org.eclipse.help:2.3.1300.v20230302-0300"/>
+		<item value="org.eclipse.jdt:3.19.0.v20230302-0300"/>
+		<item value="org.eclipse.platform:4.27.0.v20230302-0300"/>
+		<item value="org.eclipse.rcp:4.27.0.v20230302-0300"/>
+		<item value="org.eclipse.tm.terminal.connector.ssh.feature:11.1.0.202212091724"/>
+		<item value="org.eclipse.tm.terminal.control.feature:11.1.0.202212091724"/>
+		<item value="org.eclipse.tm.terminal.feature:11.1.0.202212091724"/>
+		<item value="org.eclipse.tm.terminal.view.feature:11.1.0.202212091724"/>
+		<item value="org.eclipse.userstorage:1.2.0.v20210517-0327"/>
+		<item value="org.eclipse.wst.xml_ui.feature:3.29.0.v202212250111"/>
+	</list>
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+	</section>
+</section>

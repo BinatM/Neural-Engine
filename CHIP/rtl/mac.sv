@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module mac #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
 (
 	output logic [OUT_WIDTH-1:0] mac_out,

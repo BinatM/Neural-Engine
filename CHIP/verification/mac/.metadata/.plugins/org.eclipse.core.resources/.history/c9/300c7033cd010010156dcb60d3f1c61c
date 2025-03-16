@@ -14,7 +14,7 @@ endinterface
 // =============================================================
 // DUT: Multiply-and-Accumulate (MAC) Module
 // =============================================================
-module mac_m #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
+module mac #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
 (
 	output logic [OUT_WIDTH-1:0] mac_out,
 	input  logic clk,
@@ -158,31 +158,30 @@ endclass
 // Scoreboard Class
 // =============================================================
 class mac_scoreboard;
+	// Golden model: for each transaction, if mul_mem_en is active then update a temporary
+	// stored product; if ac_mem_en is active then accumulate that stored product.
 	function void check_results(mac_item transactions[$]);
-		mac_item last;
-		mac_item tr;
-		int unsigned stored_product;
-		int unsigned expected_accum;
+		int unsigned stored_product = 0;
+		int unsigned expected_accum = 0;
 		int i;
-		
-		stored_product = 0;
-		expected_accum = 0;
 		for (i = 0; i < transactions.size(); i++) begin
-			tr = transactions[i];
+			mac_item tr = transactions[i];
+			// On the same cycle the DUT would update its registers:
 			if (tr.mul_mem_en)
 				stored_product = tr.img_in * tr.weight_in;
 			if (tr.ac_mem_en)
 				expected_accum = expected_accum + stored_product;
 		end
-		
-		last = transactions[transactions.size()-1];
 		$display("Scoreboard - Computed Expected Accumulation: %0d", expected_accum);
+		// Compare against the captured DUT output in the last transaction
+		mac_item last = transactions[transactions.size()-1];
 		if (expected_accum !== last.captured_dut)
 			$error("MAC Mismatch! Expected: %0d, Got: %0d", expected_accum, last.captured_dut);
 		else
 			$display("MAC PASS: Expected = Actual = %0d", expected_accum);
 	endfunction
 endclass
+
 // =============================================================
 // Top-Level Testbench Module
 // =============================================================

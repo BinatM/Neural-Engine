@@ -1,0 +1,20 @@
+# The Compilation Unit Definition (CUD) is where files and folders that make the compilation unit are specified.
+# The following can be specified directly (without any flags):
+#    Verilog source files
+#    Other CUD files (this allows hierarchical structures)
+#    Folders (results in all of its member Verilog source files being added to the compilation unit)
+# Paths can be relative to project roots, relative to the working directory, or absolute.
+# Each path or command, should be in a separate line.
+# For content assistance which shows all available flags, type '-' in a new line outside the commented area, and press CTRL+SPACE.
+rtl/mac.sv
+#rtl/Control_unit.sv
+#rtl/activation_function.sv
+#rtl/input_memory.sv
+#rtl/neuron_io.sv
+#rtl/output_memory.sv
+#rtl/top.sv
+#verification/top.sv
+verification/mac/mac_tb.sv
+
+
+

@@ -1,0 +1,19 @@
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06-SP1-1_Full64; Runtime version T-2022.06-SP1-1_Full64;  Mar 16 21:42 2025
+*Verdi* Loading libsscore_vcs202206.so
+FSDB Dumper for VCS, Release Verdi_T-2022.06-SP1, Linux x86_64/64bit, 08/28/2022
+(C) 1996 - 2022 by Synopsys, Inc.
+*Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
+*Verdi* : Create FSDB file 'novas.fsdb'
+*Verdi* : Begin traversing the scopes, layer (0).
+*Verdi* : End of traversing.
+Scoreboard - Computed Expected Accumulation: 1296693
+Error: "verification/mac/mac_tb.sv", 181: $unit::\mac_scoreboard::check_results : at time 665000 ps
+MAC Mismatch! Expected: 1296693, Got: x
+$finish called from file "verification/mac/mac_tb.sv", line 265.
+$finish at simulation time               675000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 675000 ps
+CPU Time:      0.430 seconds;       Data structure size:   0.0Mb
+Sun Mar 16 21:42:56 2025

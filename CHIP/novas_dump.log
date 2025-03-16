@@ -1,0 +1,500 @@
+#######################################################################################
+# log primitive debug message of FSDB dumping                                         #
+# This is for R&D to analyze when there are issues happening when FSDB dump           #
+#######################################################################################
+ANF: vcsd_get_serial_mode_status('./simv: undefined symbol: vcsd_get_serial_mode_status')
+ANF: vcsd_enable_sva_success_callback('./simv: undefined symbol: vcsd_enable_sva_success_callback')
+ANF: vcsd_disable_sva_success_callback('./simv: undefined symbol: vcsd_disable_sva_success_callback')
+ANF: vcsd_get_power_scope_name('./simv: undefined symbol: vcsd_get_power_scope_name')
+ANF: vcsd_begin_no_value_var_info('./simv: undefined symbol: vcsd_begin_no_value_var_info')
+ANF: vcsd_end_no_value_var_info('./simv: undefined symbol: vcsd_end_no_value_var_info')
+ANF: vcsd_remove_xprop_merge_mode_callback('./simv: undefined symbol: vcsd_remove_xprop_merge_mode_callback')
+ANF: vhpi_get_cb_info('./simv: undefined symbol: vhpi_get_cb_info')
+ANF: vhpi_free_handle('./simv: undefined symbol: vhpi_free_handle')
+ANF: vhpi_fetch_vcsd_handle('./simv: undefined symbol: vhpi_fetch_vcsd_handle')
+ANF: vhpi_fetch_vpi_handle('./simv: undefined symbol: vhpi_fetch_vpi_handle')
+ANF: vhpi_has_verilog_parent('./simv: undefined symbol: vhpi_has_verilog_parent')
+ANF: vhpi_is_verilog_scope('./simv: undefined symbol: vhpi_is_verilog_scope')
+ANF: scsd_xprop_is_enabled('./simv: undefined symbol: scsd_xprop_is_enabled')
+ANF: scsd_xprop_sig_is_promoted('./simv: undefined symbol: scsd_xprop_sig_is_promoted')
+ANF: scsd_xprop_int_xvalue('./simv: undefined symbol: scsd_xprop_int_xvalue')
+ANF: scsd_xprop_bool_xvalue('./simv: undefined symbol: scsd_xprop_bool_xvalue')
+ANF: scsd_xprop_enum_xvalue('./simv: undefined symbol: scsd_xprop_enum_xvalue')
+ANF: scsd_xprop_register_merge_mode_cb('./simv: undefined symbol: scsd_xprop_register_merge_mode_cb')
+ANF: scsd_xprop_delete_merge_mode_cb('./simv: undefined symbol: scsd_xprop_delete_merge_mode_cb')
+ANF: scsd_xprop_get_merge_mode('./simv: undefined symbol: scsd_xprop_get_merge_mode')
+ANF: scsd_thread_get_info('./simv: undefined symbol: scsd_thread_get_info')
+ANF: scsd_thread_vc_init('./simv: undefined symbol: scsd_thread_vc_init')
+ANF: scsd_master_set_delta_sync_cbk('./simv: undefined symbol: scsd_master_set_delta_sync_cbk')
+ANF: scsd_fgp_get_fsdb_cores('./simv: undefined symbol: scsd_fgp_get_fsdb_cores')
+ANF: scsd_fgp_get_is_cpu_affinity_disabled('./simv: undefined symbol: scsd_fgp_get_is_cpu_affinity_disabled')
+ANF: vhdi_dt_get_type('./simv: undefined symbol: vhdi_dt_get_type')
+ANF: vhdi_dt_get_key('./simv: undefined symbol: vhdi_dt_get_key')
+ANF: vhdi_dt_get_vhdl_enum_info('./simv: undefined symbol: vhdi_dt_get_vhdl_enum_info')
+ANF: vhdi_dt_get_vhdl_physical_info('./simv: undefined symbol: vhdi_dt_get_vhdl_physical_info')
+ANF: vhdi_dt_get_vhdl_array_info('./simv: undefined symbol: vhdi_dt_get_vhdl_array_info')
+ANF: vhdi_dt_get_vhdl_record_info('./simv: undefined symbol: vhdi_dt_get_vhdl_record_info')
+ANF: vhdi_def_traverse_module('./simv: undefined symbol: vhdi_def_traverse_module')
+ANF: vhdi_def_traverse_scope('./simv: undefined symbol: vhdi_def_traverse_scope')
+ANF: vhdi_def_traverse_variable('./simv: undefined symbol: vhdi_def_traverse_variable')
+ANF: vhdi_def_get_module_id_by_vhpi('./simv: undefined symbol: vhdi_def_get_module_id_by_vhpi')
+ANF: vhdi_def_get_handle_by_module_id('./simv: undefined symbol: vhdi_def_get_handle_by_module_id')
+ANF: vhdi_def_get_variable_info_by_vhpi('./simv: undefined symbol: vhdi_def_get_variable_info_by_vhpi')
+ANF: vhdi_def_free('./simv: undefined symbol: vhdi_def_free')
+ANF: vhdi_ist_traverse_scope('./simv: undefined symbol: vhdi_ist_traverse_scope')
+ANF: vhdi_ist_traverse_variable('./simv: undefined symbol: vhdi_ist_traverse_variable')
+ANF: vhdi_ist_convert_by_vhpi('./simv: undefined symbol: vhdi_ist_convert_by_vhpi')
+ANF: vhdi_ist_clone('./simv: undefined symbol: vhdi_ist_clone')
+ANF: vhdi_ist_free('./simv: undefined symbol: vhdi_ist_free')
+ANF: vhdi_ist_hash_key('./simv: undefined symbol: vhdi_ist_hash_key')
+ANF: vhdi_ist_compare('./simv: undefined symbol: vhdi_ist_compare')
+ANF: vhdi_ist_get_value_addr('./simv: undefined symbol: vhdi_ist_get_value_addr')
+ANF: vhdi_set_scsd_callback('./simv: undefined symbol: vhdi_set_scsd_callback')
+ANF: vhdi_cbk_set_force_callback('./simv: undefined symbol: vhdi_cbk_set_force_callback')
+ANF: vhdi_trigger_init_force('./simv: undefined symbol: vhdi_trigger_init_force')
+ANF: vhdi_ist_check_scsd_callback('./simv: undefined symbol: vhdi_ist_check_scsd_callback')
+ANF: vhdi_ist_add_scsd_callback('./simv: undefined symbol: vhdi_ist_add_scsd_callback')
+ANF: vhdi_ist_remove_scsd_callback('./simv: undefined symbol: vhdi_ist_remove_scsd_callback')
+ANF: vhdi_ist_get_scsd_user_data('./simv: undefined symbol: vhdi_ist_get_scsd_user_data')
+ANF: vhdi_add_time_change_callback('./simv: undefined symbol: vhdi_add_time_change_callback')
+ANF: vhdi_get_real_value_by_value_addr('./simv: undefined symbol: vhdi_get_real_value_by_value_addr')
+ANF: vhdi_get_64_value_by_value_addr('./simv: undefined symbol: vhdi_get_64_value_by_value_addr')
+ANF: vhdi_xprop_inst_is_promoted('./simv: undefined symbol: vhdi_xprop_inst_is_promoted')
+ANF: vdi_ist_convert_by_vhdi('./simv: undefined symbol: vdi_ist_convert_by_vhdi')
+ANF: vhdi_ist_get_module_id('./simv: undefined symbol: vhdi_ist_get_module_id')
+ANF: vhdi_refine_foreign_scope_type('./simv: undefined symbol: vhdi_refine_foreign_scope_type')
+ANF: vhdi_flush_callback('./simv: undefined symbol: vhdi_flush_callback')
+ANF: vhdi_set_orig_name('./simv: undefined symbol: vhdi_set_orig_name')
+ANF: vhdi_set_dump_pt('./simv: undefined symbol: vhdi_set_dump_pt')
+ANF: vhdi_get_fsdb_option('./simv: undefined symbol: vhdi_get_fsdb_option')
+ANF: vhdi_fgp_get_mode('./simv: undefined symbol: vhdi_fgp_get_mode')
+ANF: vhdi_node_register_composite_var('./simv: undefined symbol: vhdi_node_register_composite_var')
+ANF: vhdi_node_analysis('./simv: undefined symbol: vhdi_node_analysis')
+ANF: vhdi_node_id('./simv: undefined symbol: vhdi_node_id')
+ANF: vhdi_node_ist_check_scsd_callback('./simv: undefined symbol: vhdi_node_ist_check_scsd_callback')
+ANF: vhdi_node_ist_add_scsd_callback('./simv: undefined symbol: vhdi_node_ist_add_scsd_callback')
+ANF: vhdi_node_ist_get_value_addr('./simv: undefined symbol: vhdi_node_ist_get_value_addr')
+ANF: vhdi_enc_def_traverse_module('./simv: undefined symbol: vhdi_enc_def_traverse_module')
+ANF: vhdi_enc_def_traverse_scope('./simv: undefined symbol: vhdi_enc_def_traverse_scope')
+ANF: vhdi_enc_def_traverse_variable('./simv: undefined symbol: vhdi_enc_def_traverse_variable')
+ANF: vhdi_enc_ist_traverse_scope('./simv: undefined symbol: vhdi_enc_ist_traverse_scope')
+ANF: vhdi_enc_ist_traverse_variable('./simv: undefined symbol: vhdi_enc_ist_traverse_variable')
+ANF: vhdi_enc_ist_get_module_id('./simv: undefined symbol: vhdi_enc_ist_get_module_id')
+ANF: vhdi_enc_def_get_handle_by_module_id('./simv: undefined symbol: vhdi_enc_def_get_handle_by_module_id')
+VCS compile option:
+ option[0]: ./simv
+ option[1]: /tools/synopsys/vcs/T-2022.06-SP1-1/linux64/bin/vcs1
+ option[2]: -Mcc=gcc
+ option[3]: -Mcplusplus=g++
+ option[4]: -Masflags=
+ option[5]: -Mcfl= -pipe -fPIC -O -I/tools/synopsys/vcs/T-2022.06-SP1-1/include 
+ option[6]: -Mxllcflags=
+ option[7]: -Mxcflags= -pipe -fPIC -I/tools/synopsys/vcs/T-2022.06-SP1-1/include
+ option[8]: -Mldflags= -rdynamic 
+ option[9]: -Mout=simv
+ option[10]: -Mamsrun=
+ option[11]: -Mvcsaceobjs=
+ option[12]: -Mobjects= /tools/synopsys/vcs/T-2022.06-SP1-1/linux64/lib/libvirsim.so /tools/synopsys/vcs/T-2022.06-SP1-1/linux64/lib/liberrorinf.so /tools/synopsys/vcs/T-2022.06-SP1-1/linux64/lib/libsnpsmalloc.so /tools/synopsys/vcs/T-2022.06-SP1-1/linux64/lib/libvfs.so 
+ option[13]: -Mexternalobj=
+ option[14]: -Msaverestoreobj=/tools/synopsys/vcs/T-2022.06-SP1-1/linux64/lib/vcs_save_restore_new.o
+ option[15]: -Mcrt0=
+ option[16]: -Mcrtn=
+ option[17]: -Mcsrc=
+ option[18]: -Msyslibs=/tools/synopsys/verdi/T-2022.06-SP1/share/PLI/VCS/LINUX64/pli.a -ldl 
+ option[19]: -kdb
+ option[20]: -Xufe=2steps
+ option[21]: -debug_access
+ option[22]: +vpi
+ option[23]: +vcsd1
+ option[24]: +itf+/tools/synopsys/vcs/T-2022.06-SP1-1/linux64/lib/vcsdp_lite.tab
+ option[25]: +vcs+fsdbon
+ option[26]: -picarchive
+ option[27]: -P
+ option[28]: /tools/synopsys/verdi/T-2022.06-SP1/share/PLI/VCS/LINUX64/verdi.tab
+ option[29]: -fsdb
+ option[30]: -sverilog
+ option[31]: -gen_obj
+ option[32]: -f
+ option[33]: build.cud
+ option[34]: -load
+ option[35]: /tools/synopsys/verdi/T-2022.06-SP1/share/PLI/VCS/LINUX64/libnovas.so:FSDBDumpCmd
+Chronologic Simulation VCS Release T-2022.06-SP1-1_Full64
+Linux 3.10.0-1160.92.1.el7.x86_64 #1 SMP Tue Jun 20 11:48:01 UTC 2023 x86_64
+CPU cores: 112
+Limit information:
+======================================
+cputime		unlimited
+filesize		unlimited
+datasize		unlimited
+stacksize		8192 kbytes
+coredumpsize		0 kbytes
+memoryuse		unlimited
+vmemoryuse		unlimited
+descriptors		4096
+memorylocked		64 kbytes
+maxproc		4125133
+======================================
+(Special)Runtime environment variables:
+
+Runtime environment variables:
+SGE_CELL=default
+PATH=/tools/keysight/ADS/2023/bin:/tools/mentor/CALIBRE/2022.1_36.16/aoi_cal_2022.1_36.16/bin:/tools/ansys/AnsysEM/22.2/v222/Linux64:/tools/synopsys/fc/V-2023.12-SP3/bin:/tools/synopsys/euclide/V-2023.12-1/linux.gtk.x86_64/eclipse/bin:/tools/synopsys/icv/W-2024.09-SP3-1/bin:/tools/synopsys/starrc/W-2024.09-SP3/bin:/tools/synopsys/prime/T-2022.03-SP3/bin:/tools/synopsys/verdi/T-2022.06-SP1/bin:/tools/synopsys/vcs/T-2022.06-SP1-1/bin:/tools/synopsys/syn/W-2024.09-SP3/bin:/tools/synopsys/lc/S-2021.06-SP5/bin:/tools/cadence/PVS/23.11/tools/bin:/tools/keysight/GOLDENGATE/2022_1.1/bin:/tools/cadence/XCELIUM/24.09.005/tools/bin/64bit:/tools/cadence/XCELIUM/24.09.005/tools/bin:/tools/cadence/XCELIUM/24.09.005/bin:/tools/cadence/GENUS/19.15.00/tools/bin:/tools/cadence/DDI/22.15/INNOVUS221/bin:/tools/cadence/EXT/21.11/tools/bin:/tools/cadence/SPECTRE/23.10.562/tools/bin:/tools/cadence/IC/23.10.120/tools/dfII/bin:/tools/cadence/IC/23.10.120/tools/bin:/tools/cadence/EMX/63.10/bin:/tools/common/sge/8.1.9/bin:/tools/common/sge/8.1.9/bin/lx-amd64:/tmp/595813.1.sim_light:/tools/synopsys/euclide/T-2022.06-SP1-1/linux.gtk.x86_64/eclipse/bin:/tools/synopsys/icv/T-2022.03-SP3-4/bin:/tools/synopsys/starrc/T-2022.03-SP5/bin:/tools/synopsys/icc2/S-2021.06-SP5/bin:/tools/synopsys/verdi/S-2021.09-SP1/bin:/tools/synopsys/euclide/S-2021.09-SP1/linux.gtk.x86_64/eclipse/bin:/tools/synopsys/syn/S-2021.06-SP5/bin:/tools/synopsys/fc/T-2022.03-SP3/bin:/tools/common/sge/8.1.9/bin:/tools/common/sge/8.1.9/bin/lx-amd64:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/bin:/usr/bin:/bin:/tools/cadence/DDI/22.15/bin
+PWD=/project/tsmc28mmwave/users/jp1/ws/neural-engine/Neural-Engine/CHIP
+LANG=en_US.UTF-8
+SGE_ROOT=/tools/common/sge/8.1.9
+SHLVL=10
+_=/tools/common/sge/8.1.9/bin/lx-amd64/qrsh
+TERM=xterm-256color
+QTINC=/usr/lib64/qt-3.3/include
+LD_LIBRARY_PATH=/tools/cadence/DDI/22.15/tools/cdsgcc/gcc/9.3/install/lib64
+QRSH_PORT=micron7.eng.tau.ac.il:36763
+LS_COLORS=rs=0:di=38;5;27:ln=38;5;51:mh=44;38;5;15:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=05;48;5;232;38;5;15:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;34:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.axv=38;5;13:*.anx=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.axa=38;5;45:*.oga=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+HOSTTYPE=x86_64-linux
+SSH_CONNECTION=10.12.9.82 55068 132.66.48.104 22
+MGC_CALIBRE_DRC_RUNSET_FILE=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/runsets_9m/drcrunset
+INTSFTD_LICENSE_FILE=5280@micron2.eng.tau.ac.il
+QUEUE=sim_light
+MGC_CALIBRE_LVS_RUNSET_FILE=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/runsets_9m/lvsrunset
+MODULES_RUN_QUARANTINE=LD_LIBRARY_PATH LD_PRELOAD
+HISTCONTROL=ignoredups
+DISPLAY=micron-x03:24.0
+SGE_O_HOST=micron7.eng.tau.ac.il
+CDS_LIC_ONLY=Yes
+VNCDESKTOP=micron-x03:24 (jp1)
+HOSTNAME=micron3.eng.tau.ac.il
+QTDIR=/usr/lib64/qt-3.3
+OLDPWD=/root
+ENVIRONMENT=BATCH
+GTK_OVERLAY_SCROLLING=0
+REQUEST=simv
+MY_WS=/project/tsmc28mmwave/users/jp1/ws
+SGE_STDIN_PATH=/dev/null
+COLORTERM=truecolor
+EMXVERSION=63.10
+BEOL_STACK=9m
+MOM_MODULE_PATH=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Momentum/9m/current/tsmcN28
+KDEDIRS=/usr
+DRMAA_LIBRARY_PATH=/tools/common/sge/8.1.9/lib//libdrmaa.so
+VENDOR=unknown
+MACHTYPE=x86_64
+QCI_DIR=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/qci/1.0_3j/9m
+MGC_CALIBRE_PEX_RUNSET_FILE=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/runsets_9m/xactrunset
+MODULES_USE_COMPAT_VERSION=0
+OXYGEN_DISABLE_INNER_SHADOWS_HACK=1
+SSH_AUTH_SOCK=/a/home/cc/students/enginer/jp1/.cache/keyring-RWBS32/ssh
+MFLAGS=
+which_declare=declare -f
+OSTYPE=linux
+dont_check_binaries=y
+EMXHOME=/tools/cadence/EMX/63.10
+XDG_SESSION_ID=172
+MODULES_CMD=/usr/share/Modules/libexec/modulecmd.tcl
+NHOSTS=1
+SGE_O_WORKDIR=/project/tsmc28mmwave/users/jp1/ws/neural-engine/Neural-Engine/CHIP
+USER=jp1
+DEFAULTMODULES=CDSLIC DDI EXT IC SPECTRE XCELIUM CALIBRE PVS ADS COMMON
+SGE_TASK_ID=undefined
+SGE_TASK_FIRST=undefined
+NSLOTS=1
+CDSPLOTINIT=/tools/cadence/IC/local
+SELINUX_ROLE_REQUESTED=
+GROUP=enginer
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HOME=/a/home/cc/students/enginer/jp1
+NQUEUES=1
+TMP=/tmp/595813.1.sim_light
+MGC_CALIBRE_VIEWER_MENU_CMDS=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/runsets_9m/menu_custom.cmd
+HOST=micron3.eng.tau.ac.il
+SSH_CLIENT=10.12.9.82 55068 22
+SGE_O_HOME=/a/home/cc/students/enginer/jp1
+GPDKHOME=/data/cadence/gpdk
+JOB_NAME=simv
+SELINUX_LEVEL_REQUESTED=
+XDG_DATA_DIRS=/root/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+MOM_TECH_NAME=tsmcN28
+MATE_DESKTOP_SESSION_ID=this-is-deprecated
+MGC_CALIBRE_DRC_CUSTOMIZATION_FILE=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/runsets_9m/drccustom
+PROJECT=tsmc28mmwave
+SGE_TASK_LAST=undefined
+SGE_ACCOUNT=sge
+GDK_CORE_DEVICE_EVENTS=1
+TMPDIR=/tmp/595813.1.sim_light
+RESTARTED=0
+W3264_NO_HOST_CHECK=1
+LOADEDMODULES=CDSLIC/base:DDI/22.15:COMMON/1.0:SGE/8.1.9:EMX/63.10:SNPSLIC/base:IC/23.10.120:SPECTRE/23.10.562:EXT/21.11:INNOVUS/22.15:GENUS/19.15.00:XCELIUM/24.09.005:GOLDENGATE/2022_1.1:PVS/23.11:RubySKILL/r20250303.3:SYN/W-2024.09-SP3:VCS/T-2022.06-SP1-1:VERDI/T-2022.06-SP1:PT/T-2022.03-SP3:STARRC/W-2024.09-SP3:ICV/W-2024.09-SP3-1:EUCLIDE/V-2023.12-1:FC/V-2023.12-SP3:HFSS/AnsysEM22.2:CALIBRE/2022.1_36.16:ADS/2023
+SGE_O_PATH=/tools/synopsys/euclide/T-2022.06-SP1-1/linux.gtk.x86_64/eclipse/bin:/tools/synopsys/icv/T-2022.03-SP3-4/bin:/tools/synopsys/starrc/T-2022.03-SP5/bin:/tools/synopsys/prime/T-2022.03-SP3/bin:/tools/synopsys/icc2/S-2021.06-SP5/bin:/tools/synopsys/verdi/S-2021.09-SP1/bin:/tools/synopsys/euclide/S-2021.09-SP1/linux.gtk.x86_64/eclipse/bin:/tools/synopsys/vcs/T-2022.06-SP1-1/bin:/tools/synopsys/syn/S-2021.06-SP5/bin:/tools/synopsys/fc/T-2022.03-SP3/bin:/tools/synopsys/lc/S-2021.06-SP5/bin:/tools/common/sge/8.1.9/bin:/tools/common/sge/8.1.9/bin/lx-amd64:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/bin
+SGE_O_SHELL=/bin/tcsh
+COMMONHOME=/tools/common
+SSH_TTY=/dev/pts/0
+DDIHOME=/tools/cadence/DDI/22.15
+MAIL=/var/spool/mail/jp1
+SGE_CWD_PATH=/project/tsmc28mmwave/users/jp1/ws/neural-engine/Neural-Engine/CHIP
+SPACE=students
+QTLIB=/usr/lib64/qt-3.3/lib
+CDS_LIC_FILE=5280@micron2.eng.tau.ac.il
+QT_PLUGIN_PATH=/usr/lib64/kde4/plugins:/usr/lib/kde4/plugins
+REMOTEHOST=micron-x01.eng.tau.ac.il
+LIBOVERLAY_SCROLLBAR=0
+SGE_TASK_STEPSIZE=undefined
+VTE_VERSION=5204
+SHELL=/bin/tcsh
+GNOME_KEYRING_CONTROL=/a/home/cc/students/enginer/jp1/.cache/keyring-RWBS32
+QT_GRAPHICSSYSTEM_CHECKED=1
+SGE_JOB_SPOOL_DIR=/tools/common/sge/8.1.9/default/spool/micron3/active_jobs/595813.1
+CDS_AUTO_64BIT=all
+JOB_ID=595813
+XDG_CURRENT_DESKTOP=MATE
+TECH_ROOT=/data
+SELINUX_USE_CURRENT_RANGE=
+MAKELEVEL=1
+kit_dir=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m
+JOB_SCRIPT=QRSH
+MGC_CALIBRE_QCI_RUNSET_FILE=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/runsets_9m/qcirunset
+SGE_O_LOGNAME=jp1
+SGE_O_MAIL=/var/spool/mail/jp1
+CDNSHELP_DOC=/tools/cadence/DDI/22.15/GENUS221/doc:/tools/cadence/DDI/22.15/JOULES221/doc:/tools/cadence/DDI/22.15/INNOVUS221/doc:/tools/cadence/IC/23.10.120/doc:/tools/cadence/SPECTRE/23.10.562/doc:/tools/cadence/EXT/21.11/doc:/tools/cadence/GENUS/19.15.00/doc:/tools/cadence/XCELIUM/24.09.005/doc:/tools/cadence/PVS/23.11/doc
+QRSH_COMMAND=./simv
+MANPATH=/tools/cadence/GENUS/19.15.00/tools/share/synth/man:/tools/common/sge/8.1.9/man:/tools/common/sge/8.1.9/man:/tools/common/sge/8.1.9/man:/tools/common/sge/8.1.9/man:/usr/share/man/overrides:/usr/share/man:/usr/local/share/man
+WINDOWID=4194310
+LBS_BASE_SYSTEM=LBS_SGE
+MODULEPATH=/tools/modules/modulefiles
+LOGNAME=jp1
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-nmRxlAvBh6,guid=aefa04c7ce6060be2756ab0b67d6e608
+MGC_CALIBRE_XACT_RUNSET_FILE=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/../../../Calibre/runsets_9m/xactrunset
+XDG_RUNTIME_DIR=/run/user/0
+EMX_GDSVIEW_INDIRECT=0
+MODULEPATH_modshare=/usr/share/Modules/modulefiles:2:/etc/modulefiles:2:/usr/share/modulefiles:2
+SGE_STDERR_PATH=/dev/null
+DEBUGINFOD_URLS=https://debuginfod.centos.org/ 
+MODULESHOME=/usr/share/Modules
+PVSUI_LVS_PRESETS_LIST=/data/tsmc/28HPCPMMWAVE/PDK/1.8.2.3a/9m/pvs/pvs_lvs_presets
+SGE_INFOTEXT_MAX_COLUMN=5000
+HISTSIZE=1000
+MAKEFLAGS=
+SGE_ARCH=lx-amd64
+ARC=lx-amd64
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/28887,unix/unix:/tmp/.ICE-unix/28887
+SGE_BINARY_PATH=/tools/common/sge/8.1.9/bin/lx-amd64
+SGE_STDOUT_PATH=/dev/null
+REQNAME=simv
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+SGE_CLUSTER_NAME=p6444
+BASH_FUNC_which%%=() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+BASH_FUNC_module%%=() {  _module_raw "$@" 2>&1
+}
+BASH_FUNC__module_raw%%=() {  unset _mlshdbg;
+ if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then
+ case "$-" in 
+ *v*x*)
+ set +vx;
+ _mlshdbg='vx'
+ ;;
+ *v*)
+ set +v;
+ _mlshdbg='v'
+ ;;
+ *x*)
+ set +x;
+ _mlshdbg='x'
+ ;;
+ *)
+ _mlshdbg=''
+ ;;
+ esac;
+ fi;
+ unset _mlre _mlIFS;
+ if [ -n "${IFS+x}" ]; then
+ _mlIFS=$IFS;
+ fi;
+ IFS=' ';
+ for _mlv in ${MODULES_RUN_QUARANTINE:-};
+ do
+ if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then
+ if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then
+ _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";
+ fi;
+ _mlrv="MODULES_RUNENV_${_mlv}";
+ _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";
+ fi;
+ done;
+ if [ -n "${_mlre:-}" ]; then
+ eval `eval ${_mlre} /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash '"$@"'`;
+ else
+ eval `/usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash "$@"`;
+ fi;
+ _mlstatus=$?;
+ if [ -n "${_mlIFS+x}" ]; then
+ IFS=$_mlIFS;
+ else
+ unset IFS;
+ fi;
+ unset _mlre _mlv _mlrv _mlIFS;
+ if [ -n "${_mlshdbg:-}" ]; then
+ set -$_mlshdbg;
+ fi;
+ unset _mlshdbg;
+ return $_mlstatus
+}
+BASH_FUNC_switchml%%=() {  typeset swfound=1;
+ if [ "${MODULES_USE_COMPAT_VERSION:-0}" = '1' ]; then
+ typeset swname='main';
+ if [ -e /usr/share/Modules/libexec/modulecmd.tcl ]; then
+ typeset swfound=0;
+ unset MODULES_USE_COMPAT_VERSION;
+ fi;
+ else
+ typeset swname='compatibility';
+ if [ -e /usr/share/Modules/libexec/modulecmd-compat ]; then
+ typeset swfound=0;
+ MODULES_USE_COMPAT_VERSION=1;
+ export MODULES_USE_COMPAT_VERSION;
+ fi;
+ fi;
+ if [ $swfound -eq 0 ]; then
+ echo "Switching to Modules $swname version";
+ source /usr/share/Modules/init/bash;
+ else
+ echo "Cannot switch to Modules $swname version, command not found";
+ return 1;
+ fi
+}
+BASH_FUNC_ml%%=() {  module ml "$@"
+}
+CDN_SYNTH_ROOT=/tools/cadence/GENUS/19.15.00/tools
+CDS_LOAD_ENV=CSF
+CDS_Netlisting_Mode=Analog
+CDS_SITE=/tools/rubyeda/RubySKILL/r20250303.3
+CDS_USE_XVFB=1
+EXTHOME=/tools/cadence/EXT/21.11
+GENUSHOME=/tools/cadence/GENUS/19.15.00
+GOLDENGATE_DIR=/tools/keysight/GOLDENGATE/2022_1.1
+ICHOME=/tools/cadence/IC/23.10.120
+INNOVUSHOME=/tools/cadence/DDI/22.15/INNOVUS221
+PVSHOME=/tools/cadence/PVS/23.11
+PVSUI_FORCE_DRCDE=ON
+QRC_HOME=/tools/cadence/EXT/21.11
+RCHOME=/tools/cadence/GENUS/19.15.00
+RubySKILL=True
+SPECTREHOME=/tools/cadence/SPECTRE/23.10.562
+Virtuoso_IPVS_markerBrowser=PVSDRCDE
+XCELIUMHOME=/tools/cadence/XCELIUM/24.09.005
+XPEDION=/tools/keysight/GOLDENGATE/2022_1.1
+XPEDION_BROWSER=firefox
+ANSYSLMD_LICENSE_FILE=1055@micron2.eng.tau.ac.il
+EUCLIDE_HOME=/tools/synopsys/euclide/V-2023.12-1/linux.gtk.x86_64/eclipse
+FC_HOME=/tools/synopsys/fc/V-2023.12-SP3
+HFSS_HOME=/tools/ansys/AnsysEM/22.2/v222/Linux64
+ICV_HOME=/tools/synopsys/icv/W-2024.09-SP3-1
+PT_HOME=/tools/synopsys/prime/T-2022.03-SP3
+SNPSLMD_LICENSE_FILE=27020@micron2.eng.tau.ac.il:27020@micron1.eng.tau.ac.il
+STARRC_HOME=/tools/synopsys/starrc/W-2024.09-SP3
+SYNOPSYS_LC_ROOT=/tools/synopsys/lc/S-2021.06-SP5
+SYN_HOME=/tools/synopsys/syn/W-2024.09-SP3
+VCS_HOME=/tools/synopsys/vcs/T-2022.06-SP1-1
+VCS_TARGET_ARCH=suse64
+VERDI_HOME=/tools/synopsys/verdi/T-2022.06-SP1
+VG_GNU_PACKAGE=/tools/synopsys/vg_gnu/vg_gnu_2020.12/linux
+_LMFILES_000=/tools/modules/modulefiles/CDSLIC/base:/tools/modules/modulefiles/DDI/22.15:/tools/modules/modulefiles/COMMON/1.0:/tools/modules/modulefiles/SGE/8.1.9:/tools/modules/modulefiles/EMX/63.10:/tools/modules/modulefiles/SNPSLIC/base:/tools/modules/modulefiles/IC/23.10.120:/tools/modules/modulefiles/SPECTRE/23.10.562:/tools/modules/modulefiles/EXT/21.11:/tools/modules/modulefiles/INNOVUS/22.15:/tools/modules/modulefiles/GENUS/19.15.00:/tools/modules/modulefiles/XCELIUM/24.09.005:/tools/modules/modulefiles/GOLDENGATE/2022_1.1:/tools/modules/modulefiles/PVS/23.11:/tools/modules/modulefiles/RubySKILL/r20250303.3:/tools/modules/modulefiles/SYN/W-2024.09-SP3:/tools/modules/modulefiles/VCS/T-2022.06-SP1-1:/tools/modules/modulefiles/VERDI/T-2022.06-SP1:/tools/modules/modulefiles/PT/T-2022.03-SP3:/tools/modules/modulefiles/STARRC/W-2024.09-SP3:/tools/modules/modulefiles/ICV/W-2024.09-SP3-1:/tools/modules/modulefiles/EUCLIDE/V-2023.12-1:/tools/modules/modulefiles/FC/V-2023.12-SP3:/tools/modules/modul
+_LMFILES_001=efiles/HFSS/AnsysEM22.2:/tools/modules/modulefiles/CALIBRE/2022.1_36.16:/tools/modules/modulefiles/ADS/2023
+CALIBRE_HOME=/tools/mentor/CALIBRE/2022.1_36.16/aoi_cal_2022.1_36.16
+MGC_HOME=/tools/mentor/CALIBRE/2022.1_36.16/aoi_cal_2022.1_36.16
+MGC_HTML_BROWSER=firefox
+MGLS_LICENSE_FILE=1717@micron2.eng.tau.ac.il
+ADS_LICENSE_FILE=27000@micron2.eng.tau.ac.il
+ADS_MAXIMUM_BUNDLE_USAGE=on
+EESOF_MAXIMUM_BUNDLE_USAGE=on
+EMPRO_PRESERVE_QT_PLUGIN_PATH=TRUE
+GOLDENGATE_LICENSE_FILE=27000@micron2.eng.tau.ac.il
+HPEESOF_DIR=/tools/keysight/ADS/2023
+ossSimUserHnlDir=/tools/keysight/ADS/2023/idf/ads_site/hnl
+ossSimUserSiDir=/tools/keysight/ADS/2023/idf/ads_site/si
+VCS_PATHMAP_PRELOAD_DONE=1
+VCS_EXEC_DONE=1
+LC_ALL=C
+VCS_STOP_SAFE=1
+DVE=/tools/synopsys/vcs/T-2022.06-SP1-1/gui/dve
+SPECMAN_OUTPUT_TO_TTY=1
+FLEXLM_BORROWFILE=/a/home/cc/students/enginer/jp1/.micron3.eng.tau.ac.il-borrow.txt
+Runtime command line arguments:
+argv[0]=./simv
+343 profile - 100
+          CPU/Mem usage: 0.060 sys,  0.310 user,  277.40M mem
+344 Elapsed time:    0:00:00    Sun Mar 16 21:42:56 2025
+345 User CPU time used: 0 seconds
+346 System CPU time used: 0 seconds
+347 pliAppInit
+348 [SC]Init: MemoryConsumed=0.00MB ElapsedTime=0hour 0min. 0sec.
+349 FSDB_GATE is set.
+350 FSDB_RTL is set.
+351 FSDB_ALIAS_ARRAY_ELEM is set to 4294967295.
+352 Enable Parallel Dumping.
+353 pliAppMiscSet: New Sim Round
+354 pliEntryInit
+355 LIBSSCORE=found /tools/synopsys/verdi/T-2022.06-SP1/share/PLI/lib/LINUXAMD64/libsscore_vcs202206.so through $NOVAS_HOME setting.
+356 FSDB Dumper for VCS, Release Verdi_T-2022.06-SP1, Linux x86_64/64bit, 08/28/2022
+357 (C) 1996 - 2022 by Synopsys, Inc.
+358 DVDI_is_vir_unload_enabled is enable
+359 FSDB_VCS_ENABLE_NATIVE_VC is enable
+360 sps_call_fsdbDumpvars_vd_main at 0 : Unknown source file(0)
+361 *Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
+362 *Verdi* : Create FSDB file 'novas.fsdb'
+363 [spi_vcs_vd_ppi_create_root]: no upf option
+364 compile option from '/project/tsmc28mmwave/users/jp1/ws/neural-engine/Neural-Engine/CHIP/simv.daidir/vcs_rebuild'.
+365   "vcs '-f' 'build.cud' '-sverilog' '-kdb' '+vcs+fsdbon' 2>&1"
+366 *Verdi* : Begin traversing the scopes, layer (0).
+367 *Verdi* : End of traversing.
+368 pliAppHDL_DumpVarComplete traverse var: profile - 
+          CPU/Mem usage: 0.080 sys,  0.310 user,  376.98M mem
+                   incr: 0.000 sys,  0.000 user,  7.87M mem
+                   accu: 0.000 sys,  0.000 user,  7.87M mem
+              accu incr: 0.000 sys,  0.000 user,  7.87M mem
+
+          Count usage: 29 var,  27 idcode,  21 callback
+                 incr: 29 var,  27 idcode,  21 callback
+                 accu: 29 var,  27 idcode,  21 callback
+            accu incr: 29 var,  27 idcode,  21 callback
+369 Elapsed time:    0:00:00    Sun Mar 16 21:42:56 2025
+370 User CPU time used: 0 seconds
+371 System CPU time used: 0 seconds
+372 pliAppHDL_DumpVarComplete: profile - 
+          CPU/Mem usage: 0.080 sys,  0.310 user,  378.03M mem
+                   incr: 0.000 sys,  0.000 user,  1.05M mem
+                   accu: 0.000 sys,  0.000 user,  8.93M mem
+              accu incr: 0.000 sys,  0.000 user,  1.05M mem
+
+          Count usage: 29 var,  27 idcode,  21 callback
+                 incr: 0 var,  0 idcode,  0 callback
+                 accu: 29 var,  27 idcode,  21 callback
+            accu incr: 0 var,  0 idcode,  0 callback
+373 Elapsed time:    0:00:00    Sun Mar 16 21:42:56 2025
+374 User CPU time used: 0 seconds
+375 System CPU time used: 0 seconds
+376 End of simulation at 675000
+377 Memory usage: 398.422 M
+378 Maximum resident set size: 172 MB
+379 Hard page faults: 0
+380 Soft page faults: 27246
+381 Elapsed time:    0:00:00    Sun Mar 16 21:42:56 2025
+382 User CPU time used: 0 seconds
+383 System CPU time used: 0 seconds
+384 Begin FSDB profile info:
+385 FSDB Writer : bc1(286) bcn(461) mtf/stf(0/0)
+FSDB Writer elapsed time : flush(0.003898) io wait(0.000000) theadpool wait(0.000000)
+FSDB Writer cpu time : MT Compression : 0
+386 End FSDB profile info
+387 FSDB closed. Name: novas.fsdb Size: 10507
+388 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
+389                      - BlockUsed:1 Acquire:862 BufferUsed:11860
+390                      - Flush:2 Expand:0 ProducerWait:0 ConsumerWait:0
+391                      - MainProducerTime:0.434141975 TotalConsumerTime:0.000000000
+392                      - ElapsedTime:0.068643000
+393 Producer   0 profile - BlockUsed:1 Acquire:862 BufferUsed:11860
+394 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
+395                      - BlockUsed:1 Acquire:862 BufferUsed:11860
+396 SimExit
+397 Elapsed time:    0:00:00    Sun Mar 16 21:42:56 2025
+398 User CPU time used: 0 seconds
+399 System CPU time used: 0 seconds
+400 Sim process exit

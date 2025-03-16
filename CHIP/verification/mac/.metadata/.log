@@ -1,0 +1,196 @@
+!SESSION 2025-03-15 20:24:42.425 -----------------------------------------------
+eclipse.buildId=2024.1.1
+java.version=17.0.7
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -open_file /project/tsmc28mmwave/users/jp1/ws/neural-engine/Neural-Engine/CHIP/verification/mac/mac_tb.sv
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -open_file /project/tsmc28mmwave/users/jp1/ws/neural-engine/Neural-Engine/CHIP/verification/mac/mac_tb.sv
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 20:25:07.565
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 20:25:07.565
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 20:25:07.619
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 20:25:07.619
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 20:25:07.619
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 20:25:08.131
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 20:25:08.131
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY euclide 1 100003 2025-03-15 20:25:09.536
+!MESSAGE Installation and system info:
+Euclide plug-in version: 2024.1.1
+GTK version: 3.22.30
+GTK theme name as given by the OS: BlueMenta
+
+!ENTRY euclide 1 100003 2025-03-15 20:25:11.392
+!MESSAGE Euclide is listening for incoming TCP connections on port 34987
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 20:25:11.590
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 20:25:11.590
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 20:25:11.590
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY euclide 1 100003 2025-03-15 20:25:12.540
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-GUI' from the license server at 27020@micron1.eng.tau.ac.il
+
+!ENTRY euclide 1 100003 2025-03-15 20:25:12.558
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-INTR-LINT' from the license server at 27020@micron1.eng.tau.ac.il
+!SESSION 2025-03-15 21:02:53.781 -----------------------------------------------
+eclipse.buildId=2024.1.1
+java.version=17.0.7
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2025-03-15 21:03:05.043
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:03:05.580
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:03:05.580
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:03:05.642
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:03:05.642
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:03:05.642
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:03:06.177
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:03:06.178
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY euclide 1 100003 2025-03-15 21:03:08.309
+!MESSAGE Installation and system info:
+Euclide plug-in version: 2024.1.1
+GTK version: 3.22.30
+GTK theme name as given by the OS: BlueMenta
+
+!ENTRY euclide 1 100003 2025-03-15 21:03:09.827
+!MESSAGE Euclide is listening for incoming TCP connections on port 33799
+
+!ENTRY euclide 1 100003 2025-03-15 21:03:09.899
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-GUI' from the license server at 27020@micron1.eng.tau.ac.il
+
+!ENTRY euclide 1 100003 2025-03-15 21:03:09.916
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-INTR-LINT' from the license server at 27020@micron1.eng.tau.ac.il
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:03:10.127
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:03:10.128
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:03:10.128
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+!SESSION 2025-03-16 17:57:11.241 -----------------------------------------------
+eclipse.buildId=2024.1.1
+java.version=17.0.7
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2025-03-16 17:57:30.589
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 17:57:31.027
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 17:57:31.027
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 17:57:31.055
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 17:57:31.056
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 17:57:31.056
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 17:57:31.512
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 17:57:31.512
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY euclide 1 100003 2025-03-16 17:57:33.620
+!MESSAGE Installation and system info:
+Euclide plug-in version: 2024.1.1
+GTK version: 3.22.30
+GTK theme name as given by the OS: BlueMenta
+
+!ENTRY euclide 1 100003 2025-03-16 17:57:35.185
+!MESSAGE Euclide is listening for incoming TCP connections on port 38134
+
+!ENTRY euclide 1 100003 2025-03-16 17:57:35.254
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-GUI' from the license server at 27020@micron2.eng.tau.ac.il
+
+!ENTRY euclide 1 100003 2025-03-16 17:57:35.273
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-INTR-LINT' from the license server at 27020@micron2.eng.tau.ac.il
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 17:57:35.472
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 17:57:35.472
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 17:57:35.472
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY euclide 1 100003 2025-03-16 17:58:37.379
+!MESSAGE Deleted the socket information file ".euclidesocket" from workspace location
+!SESSION 2025-03-16 18:01:27.369 -----------------------------------------------
+eclipse.buildId=2024.1.1
+java.version=17.0.7
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 18:01:36.784
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 18:01:36.784
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 18:01:36.823
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 18:01:36.823
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 18:01:36.823
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 18:01:37.294
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 18:01:37.294
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY euclide 1 100003 2025-03-16 18:01:39.193
+!MESSAGE Installation and system info:
+Euclide plug-in version: 2024.1.1
+GTK version: 3.22.30
+GTK theme name as given by the OS: BlueMenta
+
+!ENTRY euclide 4 100001 2025-03-16 18:01:39.695
+!MESSAGE The location of the file 'L/light_project/External Files Open In Editor/mac_tb.sv' was not found.
+
+!ENTRY euclide 1 100003 2025-03-16 18:01:40.563
+!MESSAGE Euclide is listening for incoming TCP connections on port 42582
+
+!ENTRY euclide 1 100003 2025-03-16 18:01:40.642
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-GUI' from the license server at 27020@micron2.eng.tau.ac.il
+
+!ENTRY euclide 1 100003 2025-03-16 18:01:40.654
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-INTR-LINT' from the license server at 27020@micron2.eng.tau.ac.il
+
+!ENTRY org.eclipse.ui 2 0 2025-03-16 18:01:40.826
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 18:01:40.826
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-16 18:01:40.826
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY euclide 1 100003 2025-03-16 18:02:57.954
+!MESSAGE Deleted the socket information file ".euclidesocket" from workspace location
