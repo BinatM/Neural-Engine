@@ -28,7 +28,7 @@ module mac #(parameter IN_WIDTH = 8, OUT_WIDTH = 22)
 		if (rst_mem) begin
 			mul_register <= '0;  // Reset the register
 		end else if (mul_mem_en) begin
-			mul_register <= mul_result;  // Zero-extend the mul result to 22-bit width and store it in mul_register
+			mul_register <= mul_result;  
 		end
 	end
 	
