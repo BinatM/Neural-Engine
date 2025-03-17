@@ -1,0 +1,6 @@
+{"vcs1":{"timestamp_begin":1742230110.861824522, "rt":0.41, "ut":0.20, "st":0.17}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1742230110.235800535}
+{"VCS_COMP_START_TIME": 1742230110.235800535}
+{"VCS_COMP_END_TIME": 1742230111.420332912}
+{"VCS_USER_OPTIONS": "-f build.cud -sverilog -kdb +vcs+fsdbon"}
+{"vcs1": {"peak_mem": 505672}}

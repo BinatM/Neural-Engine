@@ -1,0 +1,71 @@
+!SESSION 2025-03-15 21:02:16.165 -----------------------------------------------
+eclipse.buildId=2024.1.1
+java.version=17.0.7
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:02:50.730
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:02:50.730
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:02:50.770
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:02:50.770
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:02:50.770
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:02:51.191
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:02:51.191
+!MESSAGE Commands should really have a category: plug-in='euclide', id='veride.ui.commands.heap_dump', categoryId='veride.heap_dump'
+
+!ENTRY euclide 1 100003 2025-03-15 21:02:52.866
+!MESSAGE Installation and system info:
+Euclide plug-in version: 2024.1.1
+GTK version: 3.22.30
+GTK theme name as given by the OS: BlueMenta
+
+!ENTRY euclide 1 100003 2025-03-15 21:02:54.764
+!MESSAGE Euclide is listening for incoming TCP connections on port 43533
+
+!ENTRY org.eclipse.ui 2 0 2025-03-15 21:02:54.963
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:02:54.963
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchForward'
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-15 21:02:54.963
+!MESSAGE Cannot bind to an undefined command: plug-in='euclide', id='com.mulgasoft.emacsplus.isearchBackward'
+
+!ENTRY euclide 1 100003 2025-03-15 21:03:07.188
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-GUI' from the license server at 27020@micron2.eng.tau.ac.il
+
+!ENTRY euclide 1 100003 2025-03-15 21:03:07.206
+!MESSAGE Successfully checked out a license for the feature 'EUCLIDE-INTR-LINT' from the license server at 27020@micron2.eng.tau.ac.il
+
+!ENTRY org.eclipse.jdt.ui 4 0 2025-03-15 21:03:07.710
+!MESSAGE Could not read: '��rttemberg', where the bad characters are replaced by '�'. Check the encoding of the spelling dictionary (bundleresource://207.fwk622790842/dictionaries/en_US.dictionary).
+!STACK 0
+java.nio.charset.MalformedInputException: Input length = 1
+	at java.base/java.nio.charset.CoderResult.throwException(CoderResult.java:274)
+	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
+	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:188)
+	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:177)
+	at java.base/java.io.BufferedReader.fill(BufferedReader.java:162)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:329)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:396)
+	at org.eclipse.jdt.internal.ui.text.spelling.engine.AbstractSpellDictionary.load(AbstractSpellDictionary.java:609)
+	at org.eclipse.jdt.internal.ui.text.spelling.engine.AbstractSpellDictionary.isCorrect(AbstractSpellDictionary.java:499)
+	at org.eclipse.jdt.internal.ui.text.spelling.engine.DefaultSpellChecker.isCorrect(DefaultSpellChecker.java:301)
+	at org.eclipse.jdt.internal.ui.text.spelling.engine.DefaultSpellChecker.execute(DefaultSpellChecker.java:240)
+	at org.eclipse.jdt.internal.ui.text.spelling.TextSpellingEngine.check(TextSpellingEngine.java:44)
+	at org.eclipse.jdt.internal.ui.text.spelling.SpellingEngine.check(SpellingEngine.java:95)
+	at org.eclipse.jdt.internal.ui.text.spelling.DefaultSpellingEngine.check(DefaultSpellingEngine.java:79)
+	at org.eclipse.ui.texteditor.spelling.SpellingService$1.run(SpellingService.java:108)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.texteditor.spelling.SpellingService.check(SpellingService.java:114)
+	at euclide.ui.editors.VerIDESpellingService.check(SourceFile:24)
+	at org.eclipse.ui.texteditor.spelling.SpellingReconcileStrategy.reconcile(SpellingReconcileStrategy.java:190)
+	at euclide.ui.editors.VerIDEReconciler.initialProcess(SourceFile:35)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:177)

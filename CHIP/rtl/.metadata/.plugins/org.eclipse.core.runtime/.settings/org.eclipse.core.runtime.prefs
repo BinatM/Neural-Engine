@@ -1,0 +1,10 @@
+content-types/veride.content.CompilationUnitDefinition/file-extensions=cud,f,list,lib,lst,vlist,vfile,vfiles,flist,filelist,incdirlist,vc,cf,xf
+content-types/veride.content.PortableStimulusDomainSpecificSource/file-extensions=pss
+content-types/veride.content.SimulatorLogSource/file-extensions=log,vcslog
+content-types/veride.content.SynopsysSimSetupSource/file-extensions=setup
+content-types/veride.content.UVMLogSource/file-extensions=uvmlog
+content-types/veride.content.VCSpyGlassLogSource/file-extensions=sglog
+content-types/veride.content.VhdlSource/file-extensions=vhd,vhdl
+content-types/veride.content.WaiverFileSource/file-extensions=tcl
+content-types/veride.content.verilogSource/file-extensions=v,va,vams,verilog,vi,vih,vihp,vh,vp,vpp,vs,vx,vg,vlib,sv,svi,svip,svlp,svh,svp,svx,sva,svlib,h,hp,map,inc,pkg,bv,gv
+eclipse.preferences.version=1

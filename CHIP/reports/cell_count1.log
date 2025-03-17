@@ -1,0 +1,550 @@
+****************************************
+Report : cell
+Design : mac
+Version: V-2023.12-SP3
+Date   : Sat Mar  8 21:44:45 2025
+****************************************
+
+Attributes
+    b - black-box (unknown)
+    h - hierarchical
+    n - noncombinational
+    u - contains unmapped logic
+    E - extracted timing model
+    Q - Quick timing model
+    U - Unbound (missing)
+    s - user size_only
+    S - implicit size_only
+    d - user dont_touch
+    D - derived dont_touch
+    o - synthetic operator
+
+
+Cell                      Reference       Library          Attributes
+--------------------------------------------------------------------------------
+A89                       AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+acc_register_reg[0]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[10]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[11]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[12]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[13]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[14]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[15]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[16]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[17]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[18]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[19]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[1]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[20]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[21]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[2]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[3]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[4]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[5]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[6]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[7]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[8]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+acc_register_reg[9]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+add_38/U_10               FA1D1BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_13               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_15               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_18               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_20               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_23               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_25               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_28               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_3                FA1D1BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_30               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_33               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_35               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_38               FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_5                FA1D1BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/U_8                FA1D1BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_708           INR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_709           ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_710           ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_711           AN2D1BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_713           IAO21D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_714           XNR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_715           XNR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_717           INR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_718           ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+add_38/ctmi_719           XNR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmTdsLR_1_90             OAI211D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmTdsLR_1_92             OAI211D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmTdsLR_1_94             OAI211D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmTdsLR_2_91             IOA21D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmTdsLR_2_93             IOA21D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmTdsLR_2_95             IOA21D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_39                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_40                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_41                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_42                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_43                   AN2D1BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_44                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_45                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_46                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_47                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_48                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_49                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_50                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_51                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_52                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_53                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_54                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_55                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_56                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_57                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_571                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_572                  NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_573                  NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_574                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_575                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_576                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_577                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_578                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_579                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_58                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_580                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_581                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_582                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_583                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_584                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_585                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_586                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_587                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_588                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_589                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_59                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_590                  NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_591                  NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_593                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_595                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_597                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_598                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_599                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_60                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_600                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_601                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_602                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_603                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_604                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_605                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_606                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_607                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_608                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_609                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_61                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_610                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_611                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_612                  AO22D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_62                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_63                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_64                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_65                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_66                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_67                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_68                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_69                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_70                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_71                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_72                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_73                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_74                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_75                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_76                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_77                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_78                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_79                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_80                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_81                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_82                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_83                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+ctmi_84                   AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mul_register_reg[0]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[10]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[11]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[12]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[13]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[14]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[15]      SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[1]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[2]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[3]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[4]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[5]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[6]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[7]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[8]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mul_register_reg[9]       SDFQD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+                                                           n, S
+mult_20/U_100             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_102             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_103             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_104             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_105             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_106             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_107             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_108             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_109             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_110             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_111             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_112             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_113             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_114             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_115             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_116             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_117             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_118             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_119             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_120             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_121             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_125             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_127             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_130             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_132             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_135             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_137             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_140             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_142             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_145             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_147             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_150             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_152             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_155             FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_82              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_84              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_85              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_87              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_88              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_89              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_91              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_92              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_93              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_94              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_96              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_97              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_98              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/U_99              FA1D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_613          AN2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_614          INR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_615          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_622          NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_623          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_624          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_630          NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_631          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_632          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_633          NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_634          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_641          NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_642          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_650          NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_651          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_652          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_661          NR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_662          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_663          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_671          INR2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_694          AOI21D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_695          XOR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_696          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_697          XOR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_698          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_699          XOR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_700          XOR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_701          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_702          XOR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_703          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_704          XOR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_705          XOR2UD0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+mult_20/ctmi_706          ND2D0BWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+optlc_168                 TIELBWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+optlc_169                 TIELBWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+optlc_170                 TIELBWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+optlc_171                 TIELBWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+optlc_172                 TIELBWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+optlc_173                 TIELBWP30P140HVT
+                                          tcbn28hpcplusbwp30p140hvt
+--------------------------------------------------------------------------------
+Total 242 cells
+
+1

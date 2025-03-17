@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>light_project</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>veride.project_builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>veride.project_nature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>External Files Open In Editor</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>External Files Open In Editor/Control_unit.sv</name>
+			<type>1</type>
+			<location>/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/rtl/Control_unit.sv</location>
+		</link>
+		<link>
+			<name>External Files Open In Editor/activation_function.sv</name>
+			<type>1</type>
+			<location>/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/rtl/activation_function.sv</location>
+		</link>
+		<link>
+			<name>External Files Open In Editor/input_memory.sv</name>
+			<type>1</type>
+			<location>/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/rtl/input_memory.sv</location>
+		</link>
+		<link>
+			<name>External Files Open In Editor/mac.sv</name>
+			<type>1</type>
+			<location>/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/rtl/mac.sv</location>
+		</link>
+		<link>
+			<name>External Files Open In Editor/neuron_io.sv</name>
+			<type>1</type>
+			<location>/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/rtl/neuron_io.sv</location>
+		</link>
+		<link>
+			<name>External Files Open In Editor/output_memory.sv</name>
+			<type>1</type>
+			<location>/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/rtl/output_memory.sv</location>
+		</link>
+		<link>
+			<name>External Files Open In Editor/top.sv</name>
+			<type>1</type>
+			<location>/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/rtl/top.sv</location>
+		</link>
+	</linkedResources>
+</projectDescription>
