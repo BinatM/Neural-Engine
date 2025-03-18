@@ -78,6 +78,7 @@ module top_level (
         .data_in      (gen_data_out),
         .wr_en        (final_wr_en),
         .rd_en        (final_rd_en),
+        .chip_sel     (final_chip_sel),
         .data_out     (mac_data_out),
         .output_ready (mac_ready)
     );
@@ -117,7 +118,6 @@ module top_level (
         .data_out    (sdram_dummy_out),
         .wr_en       (final_wr_en),
         .rd_en       (final_rd_en),
-        .chip_sel    (final_chip_sel)
     );
 
     // 10) Output selection

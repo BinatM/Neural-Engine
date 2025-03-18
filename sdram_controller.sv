@@ -15,8 +15,7 @@ module sdram_controller(
     input  wire [15:0] data_in,
     output reg  [15:0] data_out,
     input  wire        wr_en,
-    input  wire        rd_en,
-    input  wire        chip_sel
+    input  wire        rd_en
 );
 
     reg [3:0]  state;
@@ -43,7 +42,7 @@ module sdram_controller(
             clk_out       <= 1'b0;
         end 
         else begin
-            clk_out <= clk; // pass out clock if needed
+            clk_out <= clk; // pass the clock out if needed
 
             // default signals
             cas_n <= 1;
@@ -51,34 +50,34 @@ module sdram_controller(
             we_n  <= 1;
             ldqm  <= 0;
             udqm  <= 0;
+            // if we want the SDRAM to be “always selected” except in reset:
+            cs_n <= 0;
+            cke  <= 1;
 
             case (state)
-                0: if (chip_sel) begin
-                        cke  <= 1;
-                        cs_n <= 0;
-                        state <= 1;
-                   end
-                1: begin
-                    // write or read?
+                0: begin
+                    // Wait for wr_en or rd_en to become active
                     if (wr_en && !write_cycle) begin
                         memory[addr_counter] <= data_in;
                         addr_counter         <= addr_counter + 1;
                         write_cycle          <= 1;
-                        state                <= 2;
-                    end 
+                        state                <= 1;
+                    end
                     else if (rd_en && !read_cycle) begin
                         data_out     <= memory[addr_counter];
                         addr_counter <= addr_counter + 1;
                         read_cycle   <= 1;
-                        state        <= 3;
+                        state        <= 2;
                     end
                 end
-                2: begin
+                1: begin
+                    // finalize write
                     we_n        <= 0;
                     write_cycle <= 0;
                     state       <= 0;
                 end
-                3: begin
+                2: begin
+                    // finalize read
                     cas_n      <= 0;
                     read_cycle <= 0;
                     state      <= 0;
@@ -88,4 +87,5 @@ module sdram_controller(
             addr <= addr_counter;
         end
     end
+
 endmodule
