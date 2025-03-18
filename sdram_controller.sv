@@ -24,7 +24,6 @@ module sdram_controller(
     reg [12:0] addr_counter;
     reg        write_cycle, read_cycle;
 
-    // Latch signals to avoid partial assignments
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             state         <= 0;
@@ -42,32 +41,31 @@ module sdram_controller(
             addr          <= 13'b0;
             ba            <= 2'b0;
             clk_out       <= 1'b0;
-        end
+        end 
         else begin
-            clk_out <= clk; // Just pass the clock out
-            // Default assignments to avoid latches
+            clk_out <= clk; // pass out clock if needed
+
+            // default signals
             cas_n <= 1;
             ras_n <= 1;
-            ldqm <= 0;
-            udqm <= 0;
             we_n  <= 1;
+            ldqm  <= 0;
+            udqm  <= 0;
 
             case (state)
-                0: begin
-                    if (chip_sel) begin
+                0: if (chip_sel) begin
                         cke  <= 1;
                         cs_n <= 0;
                         state <= 1;
-                    end
-                end
+                   end
                 1: begin
-                    // Write or Read?
+                    // write or read?
                     if (wr_en && !write_cycle) begin
                         memory[addr_counter] <= data_in;
                         addr_counter         <= addr_counter + 1;
                         write_cycle          <= 1;
                         state                <= 2;
-                    end
+                    end 
                     else if (rd_en && !read_cycle) begin
                         data_out     <= memory[addr_counter];
                         addr_counter <= addr_counter + 1;
@@ -76,13 +74,11 @@ module sdram_controller(
                     end
                 end
                 2: begin
-                    // write cycle
-                    we_n        <= 0; 
+                    we_n        <= 0;
                     write_cycle <= 0;
                     state       <= 0;
                 end
                 3: begin
-                    // read cycle
                     cas_n      <= 0;
                     read_cycle <= 0;
                     state      <= 0;

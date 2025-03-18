@@ -8,41 +8,34 @@ module validator(
     input  wire        wr_en,
     input  wire        rd_en
 );
-
-    reg [15:0] memory [0:2047]; // 2K x 16-bit validation memory
+    
+    reg [15:0] memory [0:2047]; // 2K x 16-bit
     reg [3:0]  state;
-
+    
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             output_ready <= 0;
             data_out     <= 0;
             state        <= 0;
-        end
-        else begin
+        end else begin
             case (state)
-                0: begin
-                    if (wr_en) begin
+                0: if (wr_en) begin
                         memory[address] <= data_in;
-                        state           <= 1;
-                    end
-                    else if (rd_en) begin
+                        state <= 1;
+                   end else if (rd_en) begin
                         data_out       <= memory[address];
                         output_ready   <= 1;
                         state          <= 2;
-                    end
-                end
-
+                   end
                 1: begin
-                    // finish write
+                    // end write
                     state <= 0;
-                end
-
+                   end
                 2: begin
-                    // finish read
+                    // end read
                     output_ready <= 0;
                     state        <= 0;
-                end
-
+                   end
                 default: state <= 0;
             endcase
         end
