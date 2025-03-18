@@ -1,5 +1,8 @@
 module ResetButton (
-    input wire KEY0,  
+    input wire clk,
+    input wire KEY0,
+    output reg reset_signal,
+    output reg start_signal,
     output reg LED0,  
     output reg LED1,  
     output reg LED2,
@@ -23,6 +26,8 @@ debounce db (
 
 always @(*) begin
    if (KEY0 == 1'b0) begin
+        reset_signal <= 1'b1;
+        start_signal <= 1'b0;
         LED0 = 1'b1;
         LED1 = 1'b0;
         LED2 = 1'b0;
@@ -34,6 +39,8 @@ always @(*) begin
         LED8 = 1'b0;
         LED9 = 1'b0;
     end else if (KEY0 == 1'b1) begin
+        reset_signal <= 1'b0;
+        start_signal <= 1'b1;
         LED0 = 1'b0;
         LED1 = 1'b0;
         LED2 = 1'b0;
