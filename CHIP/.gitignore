@@ -1,3 +1,26 @@
 # Ignore log files
 verdiLog/
 novas*
+
+simv
+simv.daidir/
+log
+csrc/
+
+*.swp
+*.bak
+*.tmp
+*.txt
+*.log
+
+
+*.json
+
+*.o
+*.so
+*.dat
+*.db
+
+*.vcd
+*.jou
+*.wdb
