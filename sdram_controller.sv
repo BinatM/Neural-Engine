@@ -23,7 +23,7 @@ module sdram_controller(
     output reg          udqm
 );
 
-    // Just a local memory model for demonstration
+    // local memory model for simulation
     reg [15:0] memory [0:8191];
 
     reg [15:0] dq_out;
@@ -71,7 +71,7 @@ module sdram_controller(
                 dq_drive_en  <= 1'b1;
                 ready        <= 1'b1;
 
-                // set RAS/CAS for example
+                // set RAS/CAS 
                 cas_n <= 1'b0;
                 ras_n <= 1'b0;
                 we_n  <= 1'b1;
