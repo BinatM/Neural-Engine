@@ -18,6 +18,8 @@ module test_generator #(
 
     // Data input from on_chip_memory
     input  wire [15:0]             mem_data_in,
+
+    // Data input from DUT
     input  wire                    output_ready
 );
 
