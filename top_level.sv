@@ -155,6 +155,7 @@ module top_level (
     // MAC core
     wire [15:0] mac_data_out;
     wire        mac_ready;
+    assign      output_ready = mac_ready;
 
     mac_core dut (
         .clk          (clk_internal),
@@ -178,6 +179,7 @@ module top_level (
         .reset_n      (reset_n_sys),
         .output_ready (mac_ready),
         .dut_output   (mac_data_out),
+        .gen_wr_en    (gen_wr_en),
         .address_out  (val_address_out),
         .rd_en        (val_rd_en),
         .wr_en        (val_wr_en),
