@@ -1,28 +1,28 @@
 module control_unit #(
-    parameter LOAD_DEPTH = 256  // כמה מילים לטעון מה-SDRAM
+    parameter LOAD_DEPTH = 256  // Number of words to load from SDRAM
 )(
     input  wire clk,
     input  wire reset_n,
 
-    // מופעל פעם אחת כדי להתחיל את התהליך
+    // Activated once to start the process
     input  wire start,
 
-    // אותות לשליטה בתהליך הטעינה
+    // Load process control signals
     output reg  sdram_rd_en,
     output reg  mem_wr_en,
     output reg [9:0] mem_address,
-    input  wire [15:0] sdram_dout, // מידע שמגיע מה-sdram_controller
+    input  wire [15:0] sdram_dout, // Data from sdram_controller
 
-    // אותות לשליטה בתהליך ה-RUN
+    // Run process control signals
     output reg  wr_en,
     output reg  rd_en,
     output reg  output_ready,
 
-    // אות התחלת ריצה חיצוני (למשל ל-generator)
+    // External run trigger (e.g., for generator)
     output reg  start_run
 );
 
-    // מצבים בסיסיים
+    // State definitions
     typedef enum logic [2:0] {
         ST_IDLE = 3'd0,
         ST_LOAD = 3'd1,
@@ -32,12 +32,10 @@ module control_unit #(
 
     state_t state, next_state;
 
-    // מונה לטעינה
+    // Load counter
     reg [9:0] load_counter;
 
-    //------------------------------------------------------------
-    // מכונת מצבים
-    //------------------------------------------------------------
+    // State transition
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n)
             state <= ST_IDLE;
@@ -45,7 +43,7 @@ module control_unit #(
             state <= next_state;
     end
 
-    // מעבר בין מצבים
+    // Next state logic
     always_comb begin
         next_state = state;
         case (state)
@@ -55,27 +53,24 @@ module control_unit #(
             end
 
             ST_LOAD: begin
-                // נעצור אחרי שהעמסנו LOAD_DEPTH מילים
+                // Transition after loading LOAD_DEPTH words
                 if (load_counter == (LOAD_DEPTH-1))
                     next_state = ST_RUN;
             end
 
             ST_RUN: begin
-                // לצורך פשטות, אחרי X זמן אפשר לעבור ל-ST_DONE
-                // או ממתינים לסיגנל "test_done" (לא מופיע כאן)
+                // Can transition to ST_DONE later
                 // next_state = ST_DONE;
             end
 
             ST_DONE: begin
-                // חוזרים ל-ST_IDLE לצורך restart
+                // Return to ST_IDLE
                 next_state = ST_IDLE;
             end
         endcase
     end
 
-    //------------------------------------------------------------
-    // לוגיקת פעולות לכל מצב
-    //------------------------------------------------------------
+    // State actions
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             load_counter <= 10'd0;
@@ -90,13 +85,13 @@ module control_unit #(
             start_run     <= 1'b0;
 
         end else begin
-            // ברירות מחדל בכל מחזור
+            // Default values each cycle
             sdram_rd_en   <= 1'b0;
             mem_wr_en     <= 1'b0;
             wr_en         <= 1'b0;
             rd_en         <= 1'b0;
             output_ready  <= 1'b0;
-            start_run     <= 1'b0; // יהיה 1 רק במחזור שרוצים להתחיל RUN
+            start_run     <= 1'b0;
 
             case (state)
                 ST_IDLE: begin
@@ -104,9 +99,7 @@ module control_unit #(
                 end
 
                 ST_LOAD: begin
-                    // קריאה מ-SDRAM
                     sdram_rd_en  <= 1'b1;
-                    // כתיבה ל-on_chip_memory
                     mem_wr_en    <= 1'b1;
                     mem_address  <= load_counter;
 
@@ -124,7 +117,7 @@ module control_unit #(
                 end
             endcase
 
-            // הפעלה חד-מחזורית של start_run כאשר נכנסים ל-ST_RUN
+            // Single-cycle pulse for start_run on transition to ST_RUN
             if (state == ST_LOAD && next_state == ST_RUN)
                 start_run <= 1'b1;
         end
