@@ -4,67 +4,101 @@ module validator #(
     input  wire                  clk,
     input  wire                  reset_n,
 
+    //---------------------------------------------------------
     // DUT signals
-    input  wire                  output_ready,     // Indicates that DUT has valid outputs
-    input  wire [21:0]           Mac_output,       // 22-bit output from DUT (MAC result)
-    input  wire                  single_output,    // 1-bit output from DUT (e.g., pass/fail)
+    //---------------------------------------------------------
+    input  wire [15:0]           dut_data_out,  // partial MAC (two cycles)
+    input  wire                  dut_single_out,// single line from DUT
+    input  wire                  output_ready,  // asserts when new data is valid
 
+    //---------------------------------------------------------
     // Memory interface
-    output reg  [ADDR_WIDTH-1:0] address_out,      // Address to read from/write to memory
-    output reg                   rd_en,            // Memory read enable
-    output reg                   wr_en,            // Memory write enable
-    input  wire [15:0]           mem_data_out,     // Data read from memory
-    output reg [15:0]            data_to_mem,      // Data to write back to memory
+    //---------------------------------------------------------
+    output reg  [ADDR_WIDTH-1:0] address_out,
+    output reg                   rd_en,
+    output reg                   wr_en,
+    input  wire [15:0]           mem_data_out,
+    output reg [15:0]            data_to_mem,
 
+    //---------------------------------------------------------
     // Generator control
-    input  wire                  gen_wr_en,        // High while generator writes 66 inputs to DUT
-    output reg                   val_done          // High when validation completes (latched)
+    //---------------------------------------------------------
+    input  wire                  gen_wr_en,    // high while generator writes 66 inputs
+    output reg                   val_done      // high when validation completes
 );
 
-    // FSM states
+    // -------------------------------------------------------
+    // FSM states — 4 bits wide
+    // -------------------------------------------------------
     typedef enum logic [3:0] {
-        VAL_IDLE,                  // Reset/initial state
-        VAL_READ_EXPECTED1,       // Read lower 16 bits of expected MAC result
-        VAL_WAIT_DATA1,           // Wait for memory output (word1)
-        VAL_READ_EXPECTED2,       // Read upper 6 bits of MAC + expected single output
-        VAL_WAIT_DATA2,           // Wait for memory output (word2)
-        VAL_WAIT_AFTER_GEN_WR,    // Wait for generator to finish (66 cycles)
-        VAL_CAPTURE_OUTPUTS,      // Outputs from DUT are stable and ready to compare
-        VAL_COMPARE,              // Perform comparison between actual and expected
-        VAL_WAIT_AFTER_COMPARE,   // Wait one cycle to allow comparison result to stabilize
-        VAL_WRITE_RESULT,         // Write comparison result to memory
-        VAL_DONE                  // Validation complete, val_done will remain high
+        VAL_IDLE               = 4'd0,
+
+        // read expected 22-bit MAC + 1-bit from memory
+        VAL_READ_EXPECTED1     = 4'd1,   // read lower 16 bits
+        VAL_WAIT_DATA1         = 4'd2,
+        VAL_READ_EXPECTED2     = 4'd3,   // read upper 6 bits + 1-bit output (in memory)
+        VAL_WAIT_DATA2         = 4'd4,
+
+        // wait for generator writes to finish
+        VAL_WAIT_AFTER_GEN_WR  = 4'd5,
+
+        // two-cycle capture from the DUT
+        VAL_CAPTURE1           = 4'd6,
+        VAL_CAPTURE2           = 4'd7,
+
+        // comparison
+        VAL_COMPARE            = 4'd8,
+        VAL_WAIT_AFTER_COMPARE = 4'd9,
+        VAL_WRITE_RESULT       = 4'd10,
+        VAL_DONE               = 4'd11
     } val_state_t;
 
     val_state_t state, next_state;
 
-    // Base addresses
-    localparam [ADDR_WIDTH-1:0] EXPECTED_BASE_ADDR = 11'd512;   // Where expected data is stored
-    localparam [ADDR_WIDTH-1:0] RESULT_ADDR        = 11'd1000;  // Where to write validation result
+    // -------------------------------------------------------
+    // Memory addresses for expected data
+    // -------------------------------------------------------
+    localparam [ADDR_WIDTH-1:0] EXPECTED_BASE_ADDR = 11'd512;
+    localparam [ADDR_WIDTH-1:0] RESULT_ADDR        = 11'd1000;
 
-    // Counter to detect 66 cycles of gen_wr_en = 1
+    // -------------------------------------------------------
+    // track gen_wr_en cycles
+    // -------------------------------------------------------
     reg [7:0]  gen_wr_count;
     reg        wr_count_done;
 
-    // Expected data read from memory
-    reg [15:0] expected_word1;       // Lower 16 bits of MAC output
-    reg [15:0] expected_word2;       // Upper 6 bits of MAC (bits [5:0]) + expected 1-bit output (bit [6])
-    reg [21:0] expected_mac_output;  // Full expected MAC result
-    reg        expected_output;      // Expected 1-bit output from DUT
+    // -------------------------------------------------------
+    // expected data from memory
+    // -------------------------------------------------------
+    reg [15:0] expected_word1;      // lower 16 bits of MAC
+    reg [15:0] expected_word2;      // upper 6 bits in [5:0], single_out in [6]
+    reg [21:0] expected_mac_output; // 22-bit MAC
+    reg        expected_single_out; // 1-bit from memory
 
-    // Count generator write enable cycles
+    // -------------------------------------------------------
+    // actual data from DUT
+    // -------------------------------------------------------
+    reg [21:0] actual_mac;
+    reg        actual_single_out;
+
+    // -------------------------------------------------------
+    // Count generator write cycles
+    // -------------------------------------------------------
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             gen_wr_count  <= 8'd0;
             wr_count_done <= 1'b0;
-        end else if (!wr_count_done && gen_wr_en) begin
+        end
+        else if (!wr_count_done && gen_wr_en) begin
             gen_wr_count <= gen_wr_count + 1;
             if (gen_wr_count == 8'd65)
-                wr_count_done <= 1'b1;  // Mark done when 66 cycles observed
+                wr_count_done <= 1'b1; // done after 66 writes
         end
     end
 
-    // FSM state transition
+    // -------------------------------------------------------
+    // FSM register
+    // -------------------------------------------------------
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n)
             state <= VAL_IDLE;
@@ -72,26 +106,59 @@ module validator #(
             state <= next_state;
     end
 
-    // FSM next state logic
+    // -------------------------------------------------------
+    // FSM next-state logic
+    // -------------------------------------------------------
     always_comb begin
         next_state = state;
         case (state)
-            VAL_IDLE:                  next_state = VAL_READ_EXPECTED1;
-            VAL_READ_EXPECTED1:        next_state = VAL_WAIT_DATA1;
-            VAL_WAIT_DATA1:            next_state = VAL_READ_EXPECTED2;
-            VAL_READ_EXPECTED2:        next_state = VAL_WAIT_DATA2;
-            VAL_WAIT_DATA2:            next_state = wr_count_done ? VAL_WAIT_AFTER_GEN_WR : VAL_WAIT_DATA2;
-            VAL_WAIT_AFTER_GEN_WR:     next_state = output_ready ? VAL_CAPTURE_OUTPUTS : VAL_WAIT_AFTER_GEN_WR;
-            VAL_CAPTURE_OUTPUTS:       next_state = VAL_COMPARE;
-            VAL_COMPARE:               next_state = VAL_WAIT_AFTER_COMPARE;
-            VAL_WAIT_AFTER_COMPARE:    next_state = VAL_WRITE_RESULT;
-            VAL_WRITE_RESULT:          next_state = VAL_DONE;
-            VAL_DONE:                  next_state = VAL_DONE;  // Remain here until reset
-            default:                   next_state = VAL_IDLE;
+            VAL_IDLE: 
+                next_state = VAL_READ_EXPECTED1;
+
+            VAL_READ_EXPECTED1:
+                next_state = VAL_WAIT_DATA1;
+
+            VAL_WAIT_DATA1:
+                next_state = VAL_READ_EXPECTED2;
+
+            VAL_READ_EXPECTED2:
+                next_state = VAL_WAIT_DATA2;
+
+            VAL_WAIT_DATA2:
+                next_state = wr_count_done ? VAL_WAIT_AFTER_GEN_WR : VAL_WAIT_DATA2;
+
+            VAL_WAIT_AFTER_GEN_WR:
+                if (output_ready)
+                    next_state = VAL_CAPTURE1;
+                else
+                    next_state = VAL_WAIT_AFTER_GEN_WR;
+
+            VAL_CAPTURE1:
+                next_state = VAL_CAPTURE2;
+
+            VAL_CAPTURE2:
+                next_state = VAL_COMPARE;
+
+            VAL_COMPARE:
+                next_state = VAL_WAIT_AFTER_COMPARE;
+
+            VAL_WAIT_AFTER_COMPARE:
+                next_state = VAL_WRITE_RESULT;
+
+            VAL_WRITE_RESULT:
+                next_state = VAL_DONE;
+
+            VAL_DONE:
+                next_state = VAL_DONE; // remain
+
+            default: 
+                next_state = VAL_IDLE;
         endcase
     end
 
-    // FSM output and memory interaction logic
+    // -------------------------------------------------------
+    // FSM output & memory interaction
+    // -------------------------------------------------------
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             address_out         <= '0;
@@ -103,24 +170,29 @@ module validator #(
             expected_word1      <= 16'b0;
             expected_word2      <= 16'b0;
             expected_mac_output <= 22'b0;
-            expected_output     <= 1'b0;
-        end else begin
-            // Default signal values every clock
-            rd_en    <= 1'b0;
-            wr_en    <= 1'b0;
+            expected_single_out <= 1'b0;
+
+            actual_mac          <= 22'b0;
+            actual_single_out   <= 1'b0;
+        end 
+        else begin
+            // Defaults each cycle
+            rd_en <= 1'b0;
+            wr_en <= 1'b0;
 
             case (state)
                 VAL_IDLE: begin
-                    val_done <= 1'b0;  // Reset val_done when starting over
+                    val_done <= 1'b0;
                 end
 
+                // read the expected 22-bit MAC from memory
                 VAL_READ_EXPECTED1: begin
                     rd_en       <= 1'b1;
                     address_out <= EXPECTED_BASE_ADDR;
                 end
 
                 VAL_WAIT_DATA1: begin
-                    expected_word1 <= mem_data_out;  // Capture lower 16 bits
+                    expected_word1 <= mem_data_out; // lower 16 bits
                 end
 
                 VAL_READ_EXPECTED2: begin
@@ -130,40 +202,53 @@ module validator #(
 
                 VAL_WAIT_DATA2: begin
                     expected_word2      <= mem_data_out;
-                    expected_mac_output <= {mem_data_out[5:0], expected_word1}; // Combine for 22-bit MAC
-                    expected_output     <= mem_data_out[6];  // 1-bit expected output
+                    // bits [5:0] => upper MAC
+                    // bit  [6]   => single_out
+                    expected_mac_output <= {mem_data_out[5:0], expected_word1};
+                    expected_single_out <= mem_data_out[6];
                 end
 
+                // wait for generator writes to be done
+                // then wait for DUT output_ready
                 VAL_WAIT_AFTER_GEN_WR: begin
-                    // Wait here until DUT signals output_ready
+                    // no action; waiting for output_ready => next_state = VAL_CAPTURE1
                 end
 
-                VAL_CAPTURE_OUTPUTS: begin
-                    // No need to capture – will compare directly from DUT signals
+                // 2-cycle capture
+                VAL_CAPTURE1: begin
+                    // lower 16 bits from DUT
+                    actual_mac[15:0] <= dut_data_out;
+                end
+
+                VAL_CAPTURE2: begin
+                    // upper 6 bits in dut_data_out[5:0]
+                    actual_mac[21:16]  <= dut_data_out[5:0];
+                    // single_out is direct from separate line
+                    actual_single_out  <= dut_single_out;
                 end
 
                 VAL_COMPARE: begin
-                    // Delay 1 cycle to allow stable comparison
+                    // Delay 1 cycle
                 end
 
                 VAL_WAIT_AFTER_COMPARE: begin
-                    // Nothing to do – comparison is stable now
+                    // stable
                 end
 
                 VAL_WRITE_RESULT: begin
                     wr_en       <= 1'b1;
                     address_out <= RESULT_ADDR;
-                    // Compare DUT vs expected and pack result:
-                    // Bit 1 = match on single_output, Bit 0 = match on MAC
+
+                    // Compare 2 bits => single_out match + MAC match
                     data_to_mem <= {
                         14'b0,
-                        (single_output == expected_output),
-                        (Mac_output     == expected_mac_output)
+                        (actual_single_out == expected_single_out),
+                        (actual_mac        == expected_mac_output)
                     };
                 end
 
                 VAL_DONE: begin
-                    val_done <= 1'b1;  // Remains high until reset
+                    val_done <= 1'b1; // remain high
                 end
             endcase
         end

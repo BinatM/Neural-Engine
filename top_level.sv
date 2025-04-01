@@ -155,38 +155,50 @@ module top_level (
     // MAC core
     wire [15:0] mac_data_out;
     wire        mac_ready;
+	 wire mac_single_output; 
     assign      output_ready = mac_ready;
 
-    mac_core dut (
-        .clk          (clk_internal),
-        .reset_n      (reset_n_sys),
-        .data_in      (mem_data_out),
-        .wr_en        (gen_wr_en),
-        .rd_en        (gen_rd_en),
-        .chip_sel     (gen_chip_sel),
-        .data_out     (mac_data_out),
-        .output_ready (mac_ready)
-    );
+mac_core dut (
+    .clk          (clk_internal),
+    .reset_n      (reset_n_sys),
+    .data_in      (mem_data_out),
+    .wr_en        (gen_wr_en),
+    .rd_en        (gen_rd_en),
+    .chip_sel     (gen_chip_sel),
+
+    // These should match your mac_core.sv ports
+    .data_out     (mac_data_out),
+    .output_ready (mac_ready),
+	 .mac_single_output (mac_single_output_wire),
+);
 
     // Validator
     wire [10:0] val_address_out;
     wire        val_rd_en, val_wr_en;
     wire [15:0] val_data_to_mem;
     wire        val_done;
+validator #(.ADDR_WIDTH(11)) val (
+    .clk           (clk_internal),
+    .reset_n       (reset_n_sys),
 
-    validator #(.ADDR_WIDTH(11)) val (
-        .clk          (clk_internal),
-        .reset_n      (reset_n_sys),
-        .output_ready (mac_ready),
-        .dut_output   (mac_data_out),
-        .gen_wr_en    (gen_wr_en),
-        .address_out  (val_address_out),
-        .rd_en        (val_rd_en),
-        .wr_en        (val_wr_en),
-        .mem_data_out (mem_data_out),
-        .data_to_mem  (val_data_to_mem),
-        .val_done     (val_done)
-    );
+    // 2-cycle MAC data from DUT:
+    .dut_data_out  (mac_data_out),   // 16-bit bus from mac_core
+    .dut_single_out(mac_single_output_wire), // 1-bit line from mac_core
+    .output_ready  (mac_ready),
+
+    // memory interface
+    .address_out   (val_address_out),
+    .rd_en         (val_rd_en),
+    .wr_en         (val_wr_en),
+    .mem_data_out  (mem_data_out),
+    .data_to_mem   (val_data_to_mem),
+
+    // generator
+    .gen_wr_en     (gen_wr_en),
+
+    .val_done      (val_done)
+);
+
 
     // MUX
     reg [10:0] mux_address;
