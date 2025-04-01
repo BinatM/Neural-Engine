@@ -1,126 +1,143 @@
+// Full control_unit updated with result write-back to SDRAM
 module control_unit #(
-    parameter LOAD_DEPTH = 256  // Number of words to load from SDRAM
+    parameter LOAD_DEPTH = 69,
+    parameter BLOCK_SIZE = 70
 )(
-    input  wire clk,
-    input  wire reset_n,
+    input  wire         clk,
+    input  wire         reset_n,
+    input  wire         start,
 
-    // Activated once to start the process
-    input  wire start,
+    output reg          sdram_rd_en,
+    output reg          sdram_wr_en,
+    output reg [15:0]   sdram_data_in,
+    output reg [23:0]   sdram_address,
+    input  wire [15:0]  sdram_dout,
+    input  wire         sdram_ready,
 
-    // Load process control signals
-    output reg  sdram_rd_en,
-    output reg  mem_wr_en,
-    output reg [9:0] mem_address,
-    input  wire [15:0] sdram_dout, // Data from sdram_controller
+    output reg          mem_wr_en,
+    output reg [9:0]    mem_address,
 
-    // Run process control signals
-    output reg  wr_en,
-    output reg  rd_en,
-    output reg  output_ready,
+    output reg          output_ready,
+    output reg          start_run,
+    output reg          all_done,
 
-    // External run trigger (e.g., for generator)
-    output reg  start_run
+    input  wire [1:0]   val_result_bits
 );
 
-    // State definitions
+    localparam [15:0] HEADER_WORD = 16'hABCD;
+
     typedef enum logic [2:0] {
-        ST_IDLE = 3'd0,
-        ST_LOAD = 3'd1,
-        ST_RUN  = 3'd2,
-        ST_DONE = 3'd3
+        ST_IDLE     = 3'd0,
+        ST_READ_CNT = 3'd1,
+        ST_HEADER   = 3'd2,
+        ST_REQ_DATA = 3'd3,
+        ST_WAIT_RDY = 3'd4,
+        ST_PROCESS  = 3'd5,
+        ST_RUN      = 3'd6,
+        ST_SAVE_RESULT = 3'd7
     } state_t;
 
-    state_t state, next_state;
+    state_t state;
+    reg [15:0] test_count;
+    reg [8:0]  word_count;
+    reg [23:0] sdram_addr_next;
+    reg [15:0] current_word;
 
-    // Load counter
-    reg [9:0] load_counter;
-
-    // State transition
-    always_ff @(posedge clk or negedge reset_n) begin
-        if (!reset_n)
-            state <= ST_IDLE;
-        else
-            state <= next_state;
-    end
-
-    // Next state logic
-    always_comb begin
-        next_state = state;
-        case (state)
-            ST_IDLE: begin
-                if (start)
-                    next_state = ST_LOAD;
-            end
-
-            ST_LOAD: begin
-                // Transition after loading LOAD_DEPTH words
-                if (load_counter == (LOAD_DEPTH-1))
-                    next_state = ST_RUN;
-            end
-
-            ST_RUN: begin
-                // Can transition to ST_DONE later
-                // next_state = ST_DONE;
-            end
-
-            ST_DONE: begin
-                // Return to ST_IDLE
-                next_state = ST_IDLE;
-            end
-        endcase
-    end
-
-    // State actions
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            load_counter <= 10'd0;
-
-            sdram_rd_en   <= 1'b0;
-            mem_wr_en     <= 1'b0;
-            mem_address   <= 10'd0;
-
-            wr_en         <= 1'b0;
-            rd_en         <= 1'b0;
-            output_ready  <= 1'b0;
-            start_run     <= 1'b0;
-
+            state <= ST_IDLE;
+            sdram_rd_en <= 0;
+            sdram_wr_en <= 0;
+            sdram_address <= 0;
+            sdram_addr_next <= 0;
+            mem_wr_en <= 0;
+            mem_address <= 0;
+            output_ready <= 0;
+            start_run <= 0;
+            all_done <= 0;
+            word_count <= 0;
+            current_word <= 0;
+            sdram_data_in <= 0;
         end else begin
-            // Default values each cycle
-            sdram_rd_en   <= 1'b0;
-            mem_wr_en     <= 1'b0;
-            wr_en         <= 1'b0;
-            rd_en         <= 1'b0;
-            output_ready  <= 1'b0;
-            start_run     <= 1'b0;
+            sdram_rd_en <= 0;
+            sdram_wr_en <= 0;
+            mem_wr_en <= 0;
+            start_run <= 0;
 
             case (state)
                 ST_IDLE: begin
-                    load_counter <= 10'd0;
+                    if (start) begin
+                        sdram_addr_next <= 0;
+                        state <= ST_REQ_DATA;
+                    end
                 end
 
-                ST_LOAD: begin
-                    sdram_rd_en  <= 1'b1;
-                    mem_wr_en    <= 1'b1;
-                    mem_address  <= load_counter;
+                ST_REQ_DATA: begin
+                    sdram_rd_en <= 1;
+                    sdram_address <= sdram_addr_next;
+                    state <= ST_WAIT_RDY;
+                end
 
-                    load_counter <= load_counter + 1;
+                ST_WAIT_RDY: begin
+                    if (sdram_ready) begin
+                        current_word <= sdram_dout;
+                        sdram_addr_next <= sdram_addr_next + 1;
+                        state <= (sdram_addr_next == 0) ? ST_READ_CNT : (word_count == 0 ? ST_HEADER : ST_PROCESS);
+                    end
+                end
+
+                ST_READ_CNT: begin
+                    test_count <= current_word;
+                    word_count <= 0;
+                    state <= ST_REQ_DATA;
+                end
+
+                ST_HEADER: begin
+                    if (current_word == HEADER_WORD) begin
+                        word_count <= 0;
+                        mem_address <= 0;
+                        state <= ST_REQ_DATA;
+                    end else begin
+                        all_done <= 1;
+                        state <= ST_IDLE;
+                    end
+                end
+
+                ST_PROCESS: begin
+                    mem_wr_en <= 1;
+                    mem_address <= word_count;
+                    word_count <= word_count + 1;
+                    if (word_count == (LOAD_DEPTH - 1)) begin
+                        state <= ST_RUN;
+                    end else begin
+                        state <= ST_REQ_DATA;
+                    end
                 end
 
                 ST_RUN: begin
-                    wr_en        <= 1'b1;
-                    rd_en        <= 1'b1;
-                    output_ready <= 1'b1;
+                    start_run <= 1;
+                    output_ready <= 1;
+                    state <= ST_SAVE_RESULT;
                 end
 
-                ST_DONE: begin
-                    output_ready <= 1'b0;
+                ST_SAVE_RESULT: begin
+                    sdram_wr_en <= 1;
+                    sdram_data_in <= {14'd0, val_result_bits};
+                    sdram_address <= sdram_addr_next - 1; // store result at last word of block
+
+                    test_count <= test_count - 1;
+                    if (test_count == 1) begin
+                        all_done <= 1;
+                        state <= ST_IDLE;
+                    end else begin
+                        word_count <= 0;
+                        mem_address <= 0;
+                        state <= ST_REQ_DATA;
+                    end
                 end
+
+                default: state <= ST_IDLE;
             endcase
-
-            // Single-cycle pulse for start_run on transition to ST_RUN
-            if (state == ST_LOAD && next_state == ST_RUN)
-                start_run <= 1'b1;
         end
     end
-
 endmodule
