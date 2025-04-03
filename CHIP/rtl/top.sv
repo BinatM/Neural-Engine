@@ -1,85 +1,87 @@
 module top;
-	// Clock and Reset
+	//Clock Input (I/O)
 	logic clk;
-	logic rst_mem;
+	
+	// Bus (I/O)
+	logic [31:0] bus;
 	
 	// Control Signals
-	logic mul_mem_en, ac_mem_en, threshold_ready, output_ready, rd_en, wr_en, chip_sel;
-	logic [5:0] rd_data_ptr, wr_data_ptr;
+	logic wr_en, rd_en, chip_sel, threshold_ready;
+	logic output_ready, output_signal;
+	logic rst_mem, mul_mem_en, ac_mem_en;
+	logic [5:0] wr_data_ptr, rd_data_ptr;
 	
-	// Data Signals
-	logic [7:0] input_mem_data, weights_mem_data;
-	logic [21:0] mac_out, threshold_value;
-	logic binary_result;
+	// Threshold & Data
+	logic [15:0] input_data;
+	logic [21:0] threshold_value;
+	logic [7:0] input_mem_out, weights_mem_out;
 	
-	// Clock generation (10ns period)
-	initial begin
-		clk = 0;
-		forever #5 clk = ~clk;
-	end
+	// MAC Output
+	logic [21:0] mac_out;
 	
-	// Instantiate I/O Block (Handles external communication)
+	// I/O Module
 	neuron_io io_inst (
 		.clk(clk),
-		.bus(),                 // Need to connect this to an external source
-		.wr_en(wr_en),
+		.bus(bus),
+		.output_signal(output_signal),
+		.input_data(input_data),
 		.rd_en(rd_en),
+		.wr_en(wr_en),
 		.chip_sel(chip_sel),
 		.threshold_ready(threshold_ready),
 		.threshold(threshold_value)
 	);
 	
-	// Instantiate Control Unit (Handles FSM and control signals)
+	// Control Unit
 	control_unit ctrl_inst (
 		.clk(clk),
 		.chip_sel(chip_sel),
 		.wr_en(wr_en),
-		.threshold_ready(threshold_ready),
 		.rst_mem(rst_mem),
 		.mul_mem_en(mul_mem_en),
 		.ac_mem_en(ac_mem_en),
 		.output_ready(output_ready),
 		.wr_data_ptr(wr_data_ptr),
-		.rd_data_ptr(rd_data_ptr)
+		.rd_data_ptr(rd_data_ptr),
+		.threshold_ready(threshold_ready)
 	);
 	
-			
-	// Instantiate Input Memory
-	input_memory input_mem (
+	// Input Memory (Image)
+	input_memory image_mem (
 		.clk(clk),
-		.data_in(input_mem_data),
-		.data_out(input_mem_data),
+		.data_in(input_data),      // lower 8 bits
+		.data_out(input_mem_out),
 		.wr_data_ptr(wr_data_ptr),
 		.rd_data_ptr(rd_data_ptr)
 	);
 	
-	// Instantiate Weights Memory (Same module as input memory)
-	input_memory weights_mem (
+	// Weights Memory
+	input_memory weight_mem (
 		.clk(clk),
-		.data_in(weights_mem_data),
-		.data_out(weights_mem_data),
+		.data_in(weight_data),      // same input_data
+		.data_out(weights_mem_out),
 		.wr_data_ptr(wr_data_ptr),
 		.rd_data_ptr(rd_data_ptr)
 	);
 	
-	// Instantiate MAC Unit
+	// MAC Unit
 	mac mac_inst (
 		.clk(clk),
 		.rst_mem(rst_mem),
 		.mul_mem_en(mul_mem_en),
 		.ac_mem_en(ac_mem_en),
-		.img_in(input_mem_data),
-		.weight_in(weights_mem_data),
+		.img_in(input_mem_out),
+		.weight_in(weights_mem_out),
 		.mac_out(mac_out)
 	);
 	
-	// Instantiate Activation Function (Includes Output Register)
+	// Activation Function
 	activation_function activation_inst (
 		.clk(clk),
 		.threshold_ready(threshold_ready),
 		.mac_output(mac_out),
-		.input_bus(threshold_value),
-		.output_memory(binary_result)
+		.input_bus(input_data),             // threshold parts come from bus[15:0]
+		.output_memory(output_signal)
 	);
 
 endmodule

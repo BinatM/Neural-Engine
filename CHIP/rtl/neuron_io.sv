@@ -1,27 +1,27 @@
 module neuron_io (
-	input  logic [31:0] bus,            // 32-bit shared bus
-	input  logic        clk,            // Clock signal
-	output logic        output_signal,  // 1-bit output signal
-	output logic [15:0] input_data,     // 16-bit input data
-	output logic        rd_en,          // Read enable
-	output logic        wr_en,          // Write enable
-	output logic        chip_sel,       // Chip select
-	output logic 		threshold_ready,// threshold enable
-	output logic [21:0] threshold       // 22-bit threshold
+	input  logic        clk,              // Clock
+	input  logic [15:0] bus,              // 16-bit shared I/O bus
+
+	// Control inputs from the board
+	input  logic        rd_en,
+	input  logic        wr_en,
+	input  logic        chip_sel,
+
+	// Output control signals from internal modules
+	input logic        output_ready,     // From control_unit
+	input logic        output_bit,       // From activation_function
+	input logic [21:0] mac_result,
+
+	// Decoded outputs
+	output logic [7:0]  input_data,       // Input image pixel
+	output logic [7:0]  weight_data,      // Corresponding weight
+	output logic [15:0] threshold_data   // Used during threshold loading
 );
 
-	// Decode the bus signals for normal operation
-	assign input_data    	= bus[15:0];   // Input data (bits 0-15)
-	assign rd_en         	= bus[16];     // Read enable (bit 16)
-	assign wr_en         	= bus[17];     // Write enable (bit 17)
-	assign chip_sel      	= bus[18];     // Chip select (bit 18)
-	assign threshold_ready 	= bus[20];     // Threshold enable (bit 20)
-	assign output_signal 	= bus[21];     // Output signal (bit 21)
+	// Parallel extraction of input and weight
+	assign input_data    = bus[7:0];
+	assign weight_data   = bus[15:8];
+	assign threshold_data = bus;
+	assign mac_result     = bus;
 
-	// Allow the user to freely write the threshold via bus[21:0]
-	always_ff @(posedge clk) begin
-		if (threshold_ready == 1'b1) begin
-		threshold <= bus[21:0]; // User writes threshold directly to bits 0-21
-		end
-	end
 endmodule
