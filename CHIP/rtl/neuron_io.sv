@@ -1,6 +1,6 @@
 module neuron_io (
 	input  logic        clk,           // Clock
-	inout  logic [15:0] bus,           // 16-bit bidirectional I/O bus
+	inout wire [15:0] bus, 			   // 16-bit bidirectional I/O bus
 
 	// Control inputs from the board
 	input  logic        rd_en,
