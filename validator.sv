@@ -125,13 +125,7 @@ module validator #(
                 next_state = VAL_WAIT_DATA2;
 
             VAL_WAIT_DATA2:
-                next_state = wr_count_done ? VAL_WAIT_AFTER_GEN_WR : VAL_WAIT_DATA2;
-
-            VAL_WAIT_AFTER_GEN_WR:
-                if (output_ready)
-                    next_state = VAL_CAPTURE1;
-                else
-                    next_state = VAL_WAIT_AFTER_GEN_WR;
+                next_state = wr_count_done ? VAL_CAPTURE1: : VAL_WAIT_DATA2;
 
             VAL_CAPTURE1:
                 next_state = VAL_CAPTURE2;
