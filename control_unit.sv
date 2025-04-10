@@ -1,4 +1,3 @@
-// Full control_unit updated with result write-back to SDRAM
 module control_unit #(
     parameter LOAD_DEPTH = 69,
     parameter BLOCK_SIZE = 70
@@ -59,6 +58,7 @@ module control_unit #(
             current_word <= 0;
             sdram_data_in <= 0;
         end else begin
+            // default disables
             sdram_rd_en <= 0;
             sdram_wr_en <= 0;
             mem_wr_en <= 0;
@@ -82,7 +82,13 @@ module control_unit #(
                     if (sdram_ready) begin
                         current_word <= sdram_dout;
                         sdram_addr_next <= sdram_addr_next + 1;
-                        state <= (sdram_addr_next == 0) ? ST_READ_CNT : (word_count == 0 ? ST_HEADER : ST_PROCESS);
+
+                        if (sdram_addr_next == 0)
+                            state <= ST_READ_CNT;
+                        else if (word_count == 0 && sdram_dout == HEADER_WORD)
+                            state <= ST_HEADER;
+                        else
+                            state <= ST_PROCESS;
                     end
                 end
 
@@ -93,20 +99,19 @@ module control_unit #(
                 end
 
                 ST_HEADER: begin
-                    if (current_word == HEADER_WORD) begin
-                        word_count <= 0;
-                        mem_address <= 0;
-                        state <= ST_REQ_DATA;
-                    end else begin
-                        all_done <= 1;
-                        state <= ST_IDLE;
-                    end
+                    // Valid header — reset state and continue
+                    word_count <= 0;
+                    mem_address <= 0;
+                    state <= ST_REQ_DATA;
                 end
 
                 ST_PROCESS: begin
-                    mem_wr_en <= 1;
-                    mem_address <= word_count;
-                    word_count <= word_count + 1;
+                    if (current_word != HEADER_WORD) begin
+                        mem_wr_en <= 1;
+                        mem_address <= word_count;
+                        word_count <= word_count + 1;
+                    end
+                    // Move on regardless
                     if (word_count == (LOAD_DEPTH - 1)) begin
                         state <= ST_RUN;
                     end else begin
@@ -123,7 +128,7 @@ module control_unit #(
                 ST_SAVE_RESULT: begin
                     sdram_wr_en <= 1;
                     sdram_data_in <= {14'd0, val_result_bits};
-                    sdram_address <= sdram_addr_next - 1; // store result at last word of block
+                    sdram_address <= sdram_addr_next - 1;
 
                     test_count <= test_count - 1;
                     if (test_count == 1) begin
