@@ -1,0 +1,160 @@
+//*******************************************************************************
+//*
+//*STATEMENT OF USE
+//*
+//*This information contains confidential and proprietary information of TSMC.
+//*No part of this information may be reproduced, transmitted, transcribed,
+//*stored in a retrieval system, or translated into any human or computer
+//*language, in any form or by any means, electronic, mechanical, magnetic,
+//*optical, chemical, manual, or otherwise, without the prior written permission
+//*of TSMC. This information was prepared for informational purpose and is for
+//*use by TSMC's customers only. TSMC reserves the right to make changes in the
+//*information at any time and without notice.
+//*
+//*******************************************************************************
+//*******************************************************************************
+//*        Software         : TSMC MEMORY COMPILER tsn28hpcp2prf_2012.02.00.d.200b */
+//*        Technology       : TSMC 28nm CMOS LOGIC High Performance Compact Mobile Computing Plus 1P10M HKMG CU_ELK 0.9V */
+//*        Memory Type      : TSMC 28nm High Performance Compact Mobile Computing Plus Two Port Register File */
+//*                         : with d240 bit cell HVT periphery */
+//*        Library Name     : ts6n28hpcphvta64x8m4fwbso (user specify : TS6N28HPCPHVTA64X8M4FWBSO) */
+//*        Library Version  : 200b */
+//*        Generated Time   : 2025/04/08, 10:16:27 */
+//*******************************************************************************
+//* Template Version : S_09_41701   
+
+MemoryTemplate (TS6N28HPCPHVTA64X8M4FWBSO) {
+
+    CellName        : TS6N28HPCPHVTA64X8M4FWBSO;
+    ShadowRead 	    : On;
+    ShadowWrite     : On;
+    ShadowWriteOK   : On;
+    Algorithm       : SMarchCHKBvcd;
+    logicalPorts    : 1R1W;
+    NumberOfWords   : 64;
+    MinHold         : 0.5;
+    MilliWattsPerMegaHertz : 0.003;
+    TransparentMode : None;  // User options for DFT:
+		 	 	    // AsyncMux:    for low speed scan
+				    // SyncMux:     for at-speed scan
+				    // AsyncWriteThru: if there is AWT in this memory
+
+
+
+    Port (SLP)  {
+        Function: None ;
+	Direction: Input;
+        SafeValue:   0;
+    }
+
+
+    Port (SD)  {
+        Function: None ;
+	Direction: Input;
+        SafeValue:   0;
+    }
+
+
+    Port (CLKW)  {
+        Function: Clock;
+        LogicalPort:	A;
+    }
+    
+    Port (CLKR)  {
+        Function: Clock;
+        LogicalPort:	B;
+    }
+    
+    Port (REB)  {
+        Function: ReadEnable;
+        Polarity: ActiveLow;	
+        LogicalPort:	B;
+        EmbeddedtestLogic {
+           Testinput:	REBM;
+        }
+    }
+    
+    Port (WEB) {
+        Function: WriteEnable; 
+        Polarity: ActiveLow;
+        LogicalPort:	A;
+        EmbeddedtestLogic {
+           Testinput:	WEBM;
+        }
+    }
+    
+    port (AA[5:0]) {
+        function:    address;
+        LogicalPort:	A;
+        EmbeddedtestLogic {
+           Testinput:	AMA[5:0];
+        }
+    }
+    
+    port (AB[5:0]) {
+        function:    address;
+        LogicalPort:	B;
+        EmbeddedtestLogic {
+           Testinput:	AMB[5:0];
+        }
+    }
+    
+    Port (BWEB[7:0]) {
+        Function: GroupWriteEnable; 
+        LogicalPort:	A;
+        Polarity: ActiveLow;
+        EmbeddedtestLogic {
+           Testinput:	BWEBM[7:0];
+        }
+    }
+    
+    Port (D[7:0]) { 
+        Function: Data; 
+        Direction:   Input;
+        LogicalPort:	A;
+        EmbeddedtestLogic {
+           Testinput:	DM[7:0];
+        }
+    }
+    
+    Port (Q[7:0]) { 
+        Function: Data; 
+        LogicalPort:	B;
+        Direction:   Output; 
+    }
+
+
+    Port (BIST)  {
+        Function: BistOn ;
+	Direction: Input;
+    }
+	    
+
+    
+
+
+// 16 rows by 4 columns.
+    AddressCounter {
+        Function ( ColumnAddress ) {
+            LogicalAddressMap {
+                ColumnAddress[1:0]:Address[1:0];  // 4 columns
+            }
+            CountRange [0:3];
+        }
+
+	
+        Function  ( RowAddress ) {
+            LogicalAddressMap {
+                RowAddress[3:0]:Address[5:2];  // 16 rows
+            }
+            CountRange [0:15];
+        }
+    }
+    
+ 
+ 
+    OperationSet : syncWR;
+    bitGrouping : 1;
+    
+}
+

@@ -1,0 +1,227 @@
+****************************************************************************** 
+*        Software         : TSMC MEMORY COMPILER tsn28hpcp2prf_2012.02.00.d.200b
+*        Technology       : TSMC 28nm CMOS LOGIC High Performance Compact Mobile Computing Plus 1P10M HKMG CU_ELK 0.9V
+*        Memory Type      : TSMC 28nm High Performance Compact Mobile Computing Plus Two Port Register File
+*                         : with d240 bit cell HVT periphery
+*        Library Name     : ts6n28hpcphvta64x8m4fwbso (user specify : TS6N28HPCPHVTA64X8M4FWBSO)
+*        Library Version  : 200b
+*        Generated Time   : 2025/04/08, 10:16:27
+****************************************************************************** 
+*******************************************************************************
+*
+*STATEMENT OF USE
+*
+*This information contains confidential and proprietary information of TSMC.
+*No part of this information may be reproduced, transmitted, transcribed,
+*stored in a retrieval system, or translated into any human or computer
+*language, in any form or by any means, electronic, mechanical, magnetic,
+*optical, chemical, manual, or otherwise, without the prior written permission
+*of TSMC. This information was prepared for informational purpose and is for
+*use by TSMC's customers only. TSMC reserves the right to make changes in the
+*information at any time and without notice.
+*
+*******************************************************************************
+
+1. Area
+
+    -------------------------------------------------------------
+    |  Width(um)  | Height(um)  |  Area (um^2) pre-shrink       |
+    -------------------------------------------------------------
+    |   27.430    |  71.115    |   1950.684                     |
+    -------------------------------------------------------------
+
+
+2. Timing specification
+
+2.1  Timing Protocol (Refer to the waveforms in the databook)
+
+2.2  SRAM timing:(ss0p81v125c SS, 0.81, 125.00)
+
+I. Normal Mode
+           
+           Parameter                 Symbol    Param. Value (ns)
+ 
+           ---------                 ------    ------------
+           Minimum read cycle time   trcyc         0.928
+           Minimum write cycle time  twcyc         0.803
+           CLK to Valid Q            tcd           0.585
+           CLK to Invalid Q          thold         0.202
+           Write Address setup       taas          0.215
+           Write Address hold        taah          0.187
+           Read Address setup        tabs          0.219
+           Read Address hold         tabh          0.201
+           Read enable setup         trs           0.284
+           Read enable hold          trh           0.081
+           Write enable setup        tws           0.287
+           Write enable hold         twh           0.080
+           Bit-write enable setup    tbws          0.213
+           Bit-write enable hold     tbwh          0.210
+           Data setup                tds           0.218
+           Data hold                 tdh           0.209
+           Write Clock high          twckh         0.212
+           Write Clock low           twckl         0.390
+           Read Clock high           trckh         0.207
+           Read Clock low            trckl         0.423
+           Clock separation W-R      twrcc (1)     0.888
+           Clock separation R-W      trwcc (1)     0.928
+
+  1. twrcc apply only for determinate results where addresses match. 
+
+II. BIST Mode
+
+           Parameter                 Symbol    Param. Value (ns)
+ 
+           ---------                 ------    ------------
+           BIST Write Address setup  tamas         0.215
+           BIST Write Address hold   tamah         0.187
+           BIST Read Address setup   tambs         0.219
+           BIST Read Address hold    tambh         0.201
+           BIST Read enable setup    trms          0.284
+           BIST Read enable hold     trmh          0.081
+           BIST Write enable setup   twms          0.287
+           BIST Write enable hold    twmh          0.080
+           BIST Bit-wrt enable setup tbwms         0.213
+           BIST Bit-wrt enable hold  tbwmh         0.210
+           BIST Data setup           tdms          0.218
+           BIST Data hold            tdmh          0.209
+
+III. BIST Timing
+
+           Parameter                 Symbol    Param. Value (ns)
+
+           ---------                 ------    ------------
+           BIST setup                tbists        0.643
+           BIST hold                 tbisth        0.192
+
+IV. Sleep and Shut Down Mode
+
+           Parameter                                     Symbol    Param. Value (ns)
+ 
+           ---------                                     ------    ------------
+           Sleep mode waiting time                       tslp          0.928
+           Sleep mode wake up time                       tslpwk        1.569
+           Sleep mode wake up time to CLK                tslpwk2clk    1.856
+           Sleep mode to valid Q Low                     tslpq         0.371
+           Sleep mode to valid Q                         tslpqh        0.000
+           Sleep mode to floating input                  tslpx         1.332
+           Input valid to Sleep mode exit                txslp         0.005
+           Shut down waiting time                        tsd           0.928
+           Shut down wake up time                        tsdwk         15.162
+           Shut down wake up time to CLK                 tsdwk2clk     15.449
+           Shut down to valid Q Low                      tsdq          0.361
+           Shut down to valid Q                          tsdqh         0.000
+           Shut down to floating input                   tsdx          1.332
+           Input valid to Shut down exit                 txsd          0.005
+           Output data (low) valid after SLP/SD disable  tqh           0.000
+
+
+
+
+3. Pin capacitance
+
+           Pin          Value (pF)
+
+           ---------    ------------------
+           AA[5:0]         0.009
+           AB[5:0]         0.009
+           D[7:0]          0.001
+           CLKR            0.013
+           CLKW            0.009
+           REB             0.003
+           WEB             0.003
+           BWEB[7:0]       0.001
+           AMA[5:0]        0.009
+           AMB[5:0]        0.009
+           DM[7:0]         0.001
+           REBM            0.003
+           WEBM            0.003
+           BWEBM[7:0]      0.001
+           BIST            0.008
+           SLP	   	   0.007
+           SD	   	   0.014
+
+
+4. Power
+    The tables below provide static and dynamic power information for the 
+    different operational modes of the memory.  The total average macro 
+    power will be the sum of the static component (namely, leakage) and 
+    the dynamic components.  Although the data provided in this document 
+    mainly pertains to a specific process, voltage, and temperature (PVT) 
+    condition based on user selection, the leakage at the worst case PVT 
+    has also been provided for reference.
+
+  4.1  Static Power
+
+    Functional Mode                                                                Value
+    ------------                                         ----------------------------------------------------------
+                                                                Total            Periphery            Cell Array
+
+    Leakage Current                                           14.7169 (uA)       12.1804 (uA)         2.5365 (uA)  
+
+
+    Sleep Mode Current                                         8.7775 (uA)        6.5252 (uA)         2.2523 (uA)
+    Shut down Mode Current                                     6.4606 (uA)        6.4606 (uA)         0.0000 (uA)
+
+   * Sleep Mode = memory is disabled by REB/WEB pins and SLP is logic high state
+   ** Shut Down Mode = memory is disabled by REB/WEB pins and SD is logic high state
+
+  4.2 Dynamic Power ( unit : uA/MHz )
+
+    Functional Mode                                         Value
+    ------------                                          -----------
+                                                            Total 
+
+    Read 						 0.944 (uA/MHz)
+    Write 			                         1.142 (uA/MHz)
+    Standby*				                 0.180 (uA/MHz)
+
+    * Standby Mode = memory is disabled by REB & WEB pin, CLK, address, data, 
+      and bitwrite pins maintain 50% activity.
+
+    4.2.1  The above values assume 50% activity, which is typically defined 
+        as 1/2 the bus pins changing along with the relevant control pins, 
+        with NO load on the output pins (Q).  
+    4.2.2  For more event specific power or pin/bus contribution information, 
+        see the Dynamic Power breakout table below.
+    4.2.3  No load on outputs (Q).  
+    4.2.4  Sleep Mode = memory is disabled by WEB & REB pin and SLP is logic high state
+    4.2.5  Shut down Mode = memory is disabled by WEB & REB pin and SD is logic high state
+
+
+  4.3 Dynamic Power - Breakout per pin
+    --------------------------------
+           Pins				Value
+           ----          		-----
+           CLKR - Read Mode		0.906 (uA/MHz)      
+           CLKW - Write Mode		1.021 (uA/MHz)    
+           CLK  - Deselect 		0.037 (uA/MHz)       
+           REB				0.016 (uA/MHz)
+           WEB				0.015 (uA/MHz)  
+	   REB - Sleep Mode             0.000 (uA/MHz)              
+	   WEB - Sleep Mode             0.000 (uA/MHz) 
+           SLP                          1.431 (uA/MHz) 
+	   REB - Shut Down Mode         0.000 (uA/MHz)              
+	   WEB - Shut Down Mode         0.000 (uA/MHz) 
+           SD                           2.729 (uA/MHz) 
+           BIST				0.172 (uA/MHz)
+
+           Buses			Value (per pin)
+           -----    		 	---------------
+           D[7:0] 			0.018 (uA/MHz)    
+           BWEB[7:0]		        0.006 (uA/MHz)             
+           AA[5:0] 			0.002 (uA/MHz)                
+           AB[5:0] 			0.002 (uA/MHz)     
+           Q[7:0]			0.004 (uA/MHz)
+
+	   D[7:0] - Sleep Mode  	0.000 (uA/MHz)
+	   BWEB[7:0] - Sleep Mode	0.000 (uA/MHz)
+	   AA[5:0] - Sleep Mode  	0.000 (uA/MHz)
+	   AB[5:0] - Sleep Mode  	0.000 (uA/MHz)
+
+           D[7:0] - Shut Down Mode    0.000 (uA/MHz)
+           BWEB[7:0] - Shut Down Mode 0.000 (uA/MHz)
+           AA[5:0] - Shut Down Mode   0.000 (uA/MHz)
+           AB[5:0] - Shut Down Mode   0.000 (uA/MHz)
+
+    1. n = number of IO bits.       
+    2. m = number of addresses.

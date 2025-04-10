@@ -1,0 +1,221 @@
+
+//###############################################################################
+//#        Software       : TSMC MEMORY COMPILER 2012.02.00.d
+//*#*Template Version : S_06_61401***************************************************************/
+//*#**********************************************************************************************/
+
+//------------------------------------------------------------------------------
+memory_name = "TS6N28HPCPHVTA64X8M4FWBSO"
+masis_version = "masis_1.2"
+
+//This section contains memory general parameters
+GeneralParameters {
+    PortTypeNum {
+        ReadPortNum = 1
+        WritePortNum = 1
+    }
+    MemoryType = "SRAM"
+    NumberOfBits = 8
+    NumberOfWords = 64
+    ReadType = "Synchronous"
+    MaxHoldTime =  0.5 
+    PowerDissipation = 0.0015
+} // end of section GeneralParameters 
+
+Port {
+    CLKW {
+        Tag = Clock
+        Direction = Input
+        PortId = "A"
+    }
+    CLKR {
+        Tag = Clock
+        Direction = Input
+        PortId = "B"
+    }
+    AA {
+        Tag = Address
+        Range = "[5:0]"
+        Direction = Input
+        PortId = "A"
+    }
+    AB {
+        Tag = Address
+        Range = "[5:0]"
+        Direction = Input
+        PortId = "B"
+    }
+    AMA {
+        Tag = TestAddress
+        Range = "[5:0]"
+        Direction = Input
+        PortId = "A"
+    }
+    AMB {
+        Tag = TestAddress
+        Range = "[5:0]"
+        Direction = Input
+        PortId = "B"
+    }
+    D {
+        Tag = Data
+        Range = "[7:0]"
+        Direction = Input
+        PortId = "A"
+    }
+    DM {
+        Tag = TestData
+        Range = "[7:0]"
+        Direction = Input
+        PortId = "A"
+    }
+    BWEB {
+        Tag = WriteEnMask
+        Range =  "[7:0]"
+        ActiveLevel = False
+        Direction = Input
+        PortId = "A"
+    }    
+    BWEBM {
+        Tag = TestWriteEnMask
+        Range =  "[7:0]"
+        ActiveLevel = False
+        Direction = Input
+        PortId = "A"
+    }    
+    WEB {
+        Tag = WriteEnable
+        ActiveLevel = False
+        Direction = Input
+        PortId = "A"
+    } 
+    WEBM {
+        Tag = TestWriteEnable
+        ActiveLevel = False
+        Direction = Input
+        PortId = "A"
+    } 
+    REB {
+        Tag = ReadEnable
+        ActiveLevel = False
+        Direction = Input
+        PortId = "B"
+    } 
+    REBM {
+        Tag = TestReadEnable
+        ActiveLevel = False
+        Direction = Input
+        PortId = "B"
+    } 
+    BIST {    
+        Tag = BistEn
+        Direction = Input
+        ActiveLevel = True
+    }
+    Q {
+        Tag = Data
+        Range = "[7:0]"
+        Direction = Output
+        PortId = "B"
+    }
+    SLP {
+        Tag = None      
+        Direction = Input
+        SafeValue = "1'b0"
+        TieLevel =  TestBench
+    }    
+    SD {
+        Tag = None      
+        Direction = Input
+        SafeValue = "1'b0"
+        TieLevel =  TestBench
+    }    
+}
+
+//This section contains description of memory address bus
+AddressCounter  {
+    ColumnMultiplexing = 4
+    RowAddressRange = "[0:15]"
+    AddressScrambleMap = " RowAddress[3] RowAddress[2] RowAddress[1] RowAddress[0] ColAddress[1] ColAddress[0]"
+}  // end of section AddressCounter 
+
+ErrorInjection {
+    RunTimeErrorInjection {
+        CompilationMacroName = "TSMC_INITIALIZE_FAULT"
+    }
+}
+
+
+
+StructuralInfo {
+    NumberOfRows = 16
+    NumberOfColumns = 32
+    NumberOfColumnsInLeft = 16
+    NumberOfColumnsInRight = 16
+    InstanceOrientation = "r90"
+
+    AddressScramble {
+        AddressBus = { YA0 YA1 XA0 XA1 XA2 XA3}
+        PhysicalRowSequence = {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15}
+        PhysicalColumnSequence = {{0 3} {0 2} {0 1} {0 0} {1 3} {1 2} {1 1} {1 0} {2 3} {2 2} {2 1} {2 0} {3 3} {3 2} {3 1} {3 0} {4 0} {4 1} {4 2} {4 3} {5 0} {5 1} {5 2} {5 3} {6 0} {6 1} {6 2} {6 3} {7 0} {7 1} {7 2} {7 3}}
+        ColumnTwisting = { }
+    } //end of Address Scramble section
+    BitLineMirroring {
+        IOBitLineMirroring = {TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT}        
+        BitLineReordering = {0 {TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT TB BT}}
+        BitLineTwisting = { }
+    } //end of BitLineMirroring 
+    RowDistribution = { m 16  }
+    ColumnDistribution = {  m 16 m 16 }
+    DataScramble {
+        PhysicalIOSequence = { 0 1 2 3 4 5 6 7 }
+    } //end of Data Scramble section
+
+    BitcellHeight = 0.2700 
+    BitcellWidth = 1.1000
+
+    StrapDistribution {        
+        Strap_0 {
+            StrapName = "H__TOP"
+            StrapSize = 4.0750
+            StrapOrientation = "HORIZONTAL"
+            StrapPosition = 16
+        } // end of Strap_0
+        Strap_1 {
+            StrapName = "V__MIDDLE"
+            StrapSize = 34.2150
+            StrapOrientation = "VERTICAL"
+            StrapPosition = 16
+        } // end of Strap_1
+        Strap_2 {
+            StrapName = "V__RIGHT"
+            StrapSize = 0.8500
+            StrapOrientation = "VERTICAL"
+            StrapPosition = 32
+        } // end of Strap_2
+        Strap_3 {
+            StrapName = "V__LEFT"
+            StrapSize = 0.8500
+            StrapOrientation = "VERTICAL"
+            StrapPosition = 0
+        } // end of Strap_3
+        Strap_4 {
+            StrapName = "H_BOTTOM"
+            StrapSize = 19.0350
+            StrapOrientation = "HORIZONTAL"
+            StrapPosition = 0
+        } // end of Strap_4
+    } //end of Strap Distribution section
+
+} // end of section StructuralInfo
+
+//MIV_begin
+//pt_cells = MCB_D0240_TIEL MCB_D0240_TIEH
+//pt_cell = S6HVTFWBSO40W8_MASIS_DUMMY_MCB
+
+//dx = 1100.0000
+//dy = 270.0000
+
+//instance_orientation = r90
+//MIV_end
+

@@ -1,10 +1,14 @@
 lappend search_path scripts design_data 
+lappend search_path CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/VERILOG
+lappend search_path CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/NLDM
+
 set_host_options -max_cores 8
 set TECH_FILE     "/data/tsmc/28HPCPMMWAVE/synopsys/tsmcn28_9lm6X1Z1URDL.tf"
+
 #######################################################################
 ## Physical Library Settings
 #######################################################################
-create_lib  -technology $TECH_FILE  -ref_libs {/data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140.ndm /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140hvt.ndm /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140lvt.ndm }  ../neuron_top.dlib
+create_lib  -technology $TECH_FILE  -ref_libs {CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/NLDM/ts6n28hpcphvta64x8m4fwbso_200b_ffg0p99v0c.lib /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140.ndm /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140hvt.ndm /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140lvt.ndm }  ../neuron_top.dlib
 open_lib ../neuron_top.dlib
 report_ref_libs
 
@@ -13,11 +17,11 @@ read_parasitic_tech -tlup /data/tsmc/28HPCPMMWAVE/dig_libs/snpsflow/rcworst/crn2
 
 save_lib
 analyze -format sverilog {
+    CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/VERILOG/ts6n28hpcphvta64x8m4fwbso_200b_ffg0p99v0c.v
     CHIP/rtl/top.sv
     CHIP/rtl/mac.sv
     CHIP/rtl/Control_unit.sv
     CHIP/rtl/activation_function.sv
-    CHIP/rtl/input_memory.sv
     CHIP/rtl/neuron_io.sv
 }
 elaborate top
@@ -30,7 +34,7 @@ save_block -as top_elaborate
 remove_corners   -all
 remove_modes     -all
 remove_scenarios -all
-ד
+?
 # Create Corners
 create_corner Fast
 create_corner Slow
@@ -58,7 +62,7 @@ set_lib_cell_purpose [get_lib_cells */CKL*] -include none
 compile_fusion -to top_logic_opto
 #create_placement
 #legalize_placement
-ד
+?
 ##Power
 compile_fusion -to top_final_opto
 
