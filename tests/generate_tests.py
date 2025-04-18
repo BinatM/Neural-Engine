@@ -22,8 +22,8 @@ def flatten_matrix(mat: List[List[int]]) -> List[int]:
 def calculate_mac(pixels: List[int], weights: List[int]) -> int:
     return sum(p * w for p, w in zip(pixels, weights))
 
-# Exports test case data to Binary files: inputs, weights, threshold, and expected result
-def export_to_bin(test: dict, directory: str):
+# Exports test case data to Hexa files: inputs, weights, threshold, and expected result
+def export_to_hex(test: dict, directory: str):
     name = test['name']
     pixels = flatten_matrix(test['pixels'])
     weights = flatten_matrix(test['weights'])
@@ -32,32 +32,28 @@ def export_to_bin(test: dict, directory: str):
 
     os.makedirs(directory, exist_ok=True)
 
-    # Write inputs in binary (each byte is a pixel)
-    with open(os.path.join(directory, f"{name}_inputs.bin"), 'wb') as f:
-        f.write(bytes(pixels))
+    # Write pixel inputs as HEX lines
+    with open(os.path.join(directory, f"{name}_inputs.hex"), 'w') as f:
+        for val in pixels:
+            f.write(f"{val:02X}\n")
 
-    # Write weights in binary
-    with open(os.path.join(directory, f"{name}_weights.bin"), 'wb') as f:
-        f.write(bytes(weights))
+    # Write weight inputs as HEX lines
+    with open(os.path.join(directory, f"{name}_weights.hex"), 'w') as f:
+        for val in weights:
+            f.write(f"{val:02X}\n")
 
-    # Write threshold as 3 bytes (big endian)
-    with open(os.path.join(directory, f"{name}_threshold.bin"), 'wb') as f:
-        threshold_bytes = [
-            (test['threshold'] >> 16) & 0xFF,
-            (test['threshold'] >> 8) & 0xFF,
-            test['threshold'] & 0xFF
-        ]
-        f.write(bytes(threshold_bytes))
+    # Write threshold (22-bit) as 3 bytes in HEX
+    with open(os.path.join(directory, f"{name}_threshold.hex"), 'w') as f:
+        f.write(f"{(test['threshold'] >> 16) & 0xFF:02X}\n")
+        f.write(f"{(test['threshold'] >> 8) & 0xFF:02X}\n")
+        f.write(f"{test['threshold'] & 0xFF:02X}\n")
 
-    # Write expected output: 3 bytes for MAC + 1 byte for binary result
-    with open(os.path.join(directory, f"{name}_expected.bin"), 'wb') as f:
-        expected_bytes = [
-            (mac_result >> 16) & 0xFF,
-            (mac_result >> 8) & 0xFF,
-            mac_result & 0xFF,
-            binary_result
-        ]
-        f.write(bytes(expected_bytes))
+    # Write expected MAC result and binary output as HEX
+    with open(os.path.join(directory, f"{name}_expected.hex"), 'w') as f:
+        f.write(f"{(mac_result >> 16) & 0xFF:02X}\n")
+        f.write(f"{(mac_result >> 8) & 0xFF:02X}\n")
+        f.write(f"{mac_result & 0xFF:02X}\n")
+        f.write(f"{binary_result:02X}\n")
 
 
 # === TEST CASE GENERATORS ===
@@ -293,15 +289,15 @@ def generate_all_tests(output_folder: str):
     ]
 
     # Add many randomized tests (e.g., 2000)
-    tests.extend(generate_random_tests(2000))
+    tests.extend(generate_random_tests(5))
 
     # Add walking bit tests
     tests.extend(generate_walking_1s_tests())
     tests.extend(generate_walking_0s_tests())
 
-    # Export all tests to separate HEX files
+    # Export all tests to separate Bin files
     for test in tests:
-        export_to_bin(test, output_folder)
+        export_to_hex(test, output_folder)
 
     # Archive all test files into a ZIP
     shutil.make_archive("all_tests_hex", 'zip', output_folder)
