@@ -22,38 +22,50 @@ def flatten_matrix(mat: List[List[int]]) -> List[int]:
 def calculate_mac(pixels: List[int], weights: List[int]) -> int:
     return sum(p * w for p, w in zip(pixels, weights))
 
-# Exports test case data to Hexa files: inputs, weights, threshold, and expected result
-def export_to_hex(test: dict, directory: str):
-    name = test['name']
-    pixels = flatten_matrix(test['pixels'])
-    weights = flatten_matrix(test['weights'])
-    mac_result = calculate_mac(pixels, weights)
-    binary_result = int(mac_result >= test['threshold'])
+# Split 22-bit integer into two 16-bit padded hex strings
+def split_22bit_to_2words(val: int) -> Tuple[str, str]:
+    lower = val & 0xFFFF
+    upper = (val >> 16) & 0x3F
+    return f"{lower:04X}", f"{upper:04X}"
 
-    os.makedirs(directory, exist_ok=True)
+# Write all tests into one .hex file in custom test format
+def export_all_tests_to_hex_file(tests: list, output_file: str):
+    lines = []
 
-    # Write pixel inputs as HEX lines
-    with open(os.path.join(directory, f"{name}_inputs.hex"), 'w') as f:
-        for val in pixels:
-            f.write(f"{val:02X}\n")
+    # First line: number of tests
+    lines.append(f"{len(tests):04X}")
 
-    # Write weight inputs as HEX lines
-    with open(os.path.join(directory, f"{name}_weights.hex"), 'w') as f:
-        for val in weights:
-            f.write(f"{val:02X}\n")
+    for test in tests:
+        pixels = flatten_matrix(test['pixels'])
+        weights = flatten_matrix(test['weights'])
+        mac_result = calculate_mac(pixels, weights)
+        binary_result = int(mac_result >= test['threshold'])
 
-    # Write threshold (22-bit) as 3 bytes in HEX
-    with open(os.path.join(directory, f"{name}_threshold.hex"), 'w') as f:
-        f.write(f"{(test['threshold'] >> 16) & 0xFF:02X}\n")
-        f.write(f"{(test['threshold'] >> 8) & 0xFF:02X}\n")
-        f.write(f"{test['threshold'] & 0xFF:02X}\n")
+        # Start-of-test marker
+        lines.append("ABCD")
 
-    # Write expected MAC result and binary output as HEX
-    with open(os.path.join(directory, f"{name}_expected.hex"), 'w') as f:
-        f.write(f"{(mac_result >> 16) & 0xFF:02X}\n")
-        f.write(f"{(mac_result >> 8) & 0xFF:02X}\n")
-        f.write(f"{mac_result & 0xFF:02X}\n")
-        f.write(f"{binary_result:02X}\n")
+        # 64 lines of pixel-weight pairs (each line is 16 bits: 8-bit pixel + 8-bit weight)
+        for px, wt in zip(pixels, weights):
+            lines.append(f"{px:02X}{wt:02X}")
+
+        # Threshold (22-bit) → 2 lines
+        thr_low, thr_high = split_22bit_to_2words(test['threshold'])
+        lines.append(thr_low)
+        lines.append(thr_high)
+
+        # Expected MAC result (22-bit) → 2 lines
+        mac_low, mac_high = split_22bit_to_2words(mac_result)
+        lines.append(mac_low)
+        lines.append(mac_high)
+
+        # Expected binary output result → 1 line
+        lines.append(f"{binary_result:04X}")
+
+    # Write to file
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    with open(output_file, 'w') as f:
+        for line in lines:
+            f.write(line + '\n')
 
 
 # === TEST CASE GENERATORS ===
@@ -295,9 +307,9 @@ def generate_all_tests(output_folder: str):
     tests.extend(generate_walking_1s_tests())
     tests.extend(generate_walking_0s_tests())
 
-    # Export all tests to separate Bin files
-    for test in tests:
-        export_to_hex(test, output_folder)
+    # Write full test file
+    export_all_tests_to_hex_file(tests, os.path.join(output_folder, "full_tests.hex"))
+
 
     # Archive all test files into a ZIP
     shutil.make_archive("all_tests_hex", 'zip', output_folder)
