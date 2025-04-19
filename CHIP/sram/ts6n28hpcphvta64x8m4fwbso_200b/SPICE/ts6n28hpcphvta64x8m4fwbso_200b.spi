@@ -1,0 +1,2811 @@
+**** Created by MC2: Version 2012.02.00.d on 2025/04/08, 10:16:33 
+
+************************************************************************
+* auCdl Netlist:
+* 
+* Library Name:  tsn28hpcp2prf
+* Top Cell Name: ALL_COMPILER
+* View Name:     schematic
+* Netlisted on:  Apr 10 10:12:55 2014
+************************************************************************
+
+*.BIPOLAR
+*.CAPA
+*.DIOPERI
+*.DIOAREA
+*.EQUATION
+*.SCALE METER
+*.MEGA
+.PARAM
+
+
+*.PIN vss
+
+.SUBCKT S6HVTFWBSO40W8_inv_bulk A G Gb P Pb Y
+M1 Y A P Pb pch_mac l=lp w=wp m=multi*fp nf=1
+M3 Y A G Gb nch_mac l=ln w=wn m=multi*fn nf=1
+.ENDS
+.SUBCKT S6HVTFWBSO40W8_nand_bulk A B G Gb P Pb Y
+M1 Y A P Pb pch_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M4 Y B P Pb pch_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M6 Y B net9 Gb nch_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+M8 net9 A G Gb nch_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+.ENDS
+.SUBCKT S6HVTFWBSO40W8_nor_bulk A B G Gb P Pb Y
+M1 net021 A P Pb pch_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M3 Y B net021 Pb pch_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M5 Y B G Gb nch_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+M7 Y A G Gb nch_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+.ENDS
+.SUBCKT S6HVTFWBSO40W8_aoi_bulk A B C G Gb P Pb Y
+M1 net021 C P Pb pch_mac l=lp3 w=wp3 m=multi*fp3 nf=1
+M3 Y A net021 Pb pch_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M6 Y B net021 Pb pch_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M8 net019 A G Gb nch_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+M10 Y C G Gb nch_mac l=ln3 w=wn3 m=multi*fn3 nf=1
+MN0 Y B net019 Gb nch_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    MC28_241HC_TK_RD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_MC28_241HC_TK_RD AVDD AVDDI BLB GBL RBL RWL TIEL VDD VSS WBL WWL
+MM3 AVDDI VSS VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM2 VSS AVDDI VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM1 BLB VSS VSS VSS nchpg_sr l=35n w=120n m=1
+MM0 AVDDI VSS WBL VSS nchpg_sr l=35n w=120n m=1
+MM5 AVDDI VSS AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM4 VSS AVDDI AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM6 RBL RWL net49 VSS nch_rpsr l=32n w=195n m=1
+MM7 net49 AVDDI VSS VSS nch_rpsr l=30n w=210n m=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    MC28_241HC_TK
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_MC28_241HC_TK AVDD AVDDI BLB GBL RBL RWL TIEL VDD VSS WBL WWL
+MM3 VSS fl VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM2 fl VSS VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM0 VSS WWL WBL VSS nchpg_sr l=35n w=120n m=1
+MM1 BLB WWL fl VSS nchpg_sr l=35n w=120n m=1
+MM5 VSS fl AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM4 fl VSS AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM7 net38 VSS VSS VSS nch_rpsr l=30n w=210n m=1
+MM6 RBL RWL net38 VSS nch_rpsr l=32n w=195n m=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    MC28_241HC_TK_RD2
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_MC28_241HC_TK_RD2 AVDD AVDDI BLB GBL RBL RWL TIEL VDD VSS WBL WWL
+MM3 AVDDI VSS VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM2 VSS AVDDI VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM1 BLB WWL VSS VSS nchpg_sr l=35n w=120n m=1
+MM0 AVDDI WWL WBL VSS nchpg_sr l=35n w=120n m=1
+MM5 AVDDI VSS AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM4 VSS AVDDI AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM6 RBL RWL net49 VSS nch_rpsr l=32n w=195n m=1
+MM7 net49 AVDDI VSS VSS nch_rpsr l=30n w=210n m=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    LIO_PWR
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_LIO_PWR AVDD AVDDI KP<0> KP<1> KP<2> VDD VDDI_KP
+MM2 net19 KP<1> VDD VDD pch_mac l=250.0n w=110.0n m=1 nf=1
+MM3 net18 KP<0> VDD VDD pch_mac l=350.0n w=110.0n m=1 nf=1
+MM0 VDDI_KP KP<1> net19 VDD pch_mac l=250.0n w=110.0n m=1 nf=1
+MM15 VDDI_KP KP<0> net18 VDD pch_mac l=350.0n w=110.0n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: n28_logic_hvt_mac
+* Cell Name:    inv_bulk_hvt
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_inv_bulk_hvt A G Gb P Pb Y
+M1 Y A P Pb pch_hvt_mac l=lp w=wp m=multi*fp nf=1
+M3 Y A G Gb nch_hvt_mac l=ln w=wn m=multi*fn nf=1
+.ENDS
+
+************************************************************************
+* Library Name: n28_logic_hvt_mac
+* Cell Name:    nand_bulk_hvt
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_nand_bulk_hvt A B G Gb P Pb Y
+M1 Y A P Pb pch_hvt_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M4 Y B P Pb pch_hvt_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M6 Y B net9 Gb nch_hvt_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+M8 net9 A G Gb nch_hvt_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    MC28_241HC
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_MC28_241HC AVDD AVDDI BLB GBL RBL RWL VDD VSS WBL WWL
+MM3 tr fl VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM2 fl tr VSS VSS nchpd_sr l=35.0n w=165.0n m=1
+MM1 BLB WWL fl VSS nchpg_sr l=35.0n w=120.0n m=1
+MM0 tr WWL WBL VSS nchpg_sr l=35.0n w=120.0n m=1
+MM5 tr fl AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM4 fl tr AVDDI VDD pchpu_sr l=35.0n w=55n m=1
+MM7 net1 tr VSS VSS nch_rpsr l=30n w=210n m=1
+MM6 RBL RWL net1 VSS nch_rpsr l=32n w=195n m=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    LIO_8_DSLP
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_LIO_8_DSLP AVDD AVDDI DSLPB_LIO GBL KP<0> KP<1> KP<2> LO_BL LRPCH_L 
++ UP_BL VDD VSS WB WBB
+XI1 LO_BL UP_BL net039 VSS VDD VDD fb S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.205u ln1=0.03u 
++ fn2=1 wn2=0.205u ln2=0.03u fp2=1 wp2=0.13u lp2=0.03u multi=1 fp1=1 wp1=0.13u 
++ lp1=0.03u
+XIliopwru AVDD AVDDI KP<0> KP<1> KP<2> VDD VD_BLU S6HVTFWBSO40W8_LIO_PWR
+XIliopwrd AVDD AVDDI KP<0> KP<1> KP<2> VDD VD_BLD S6HVTFWBSO40W8_LIO_PWR
+MM0 net039 DSLPB_LIO VSS VSS nch_hvt_mac l=30n w=205.00n m=1 nf=1
+MM4 GBL fb VSS VSS nch_hvt_mac l=30n w=500n m=1 nf=1
+MM9 LO_BL LRPCH_L VDD VDD pch_hvt_mac l=30n w=130.0n m=2 nf=1
+MM1 UP_BL fb VD_BLU VDD pch_hvt_mac l=30n w=130.0n m=1 nf=1
+MM2 LO_BL fb VD_BLD VDD pch_hvt_mac l=30n w=130.0n m=1 nf=1
+MM8 UP_BL LRPCH_L VDD VDD pch_hvt_mac l=30n w=130.0n m=2 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    LIO_8_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_LIO_8_SD AVDD AVDDI DSLPB_LIO GBL KP<0> KP<1> KP<2> LO_BL LRPCH_L 
++ SD_AVDDISW UP_BL VDD VSS WB WBB
+XIDSLP AVDD AVDDI DSLPB_LIO GBL KP<0> KP<1> KP<2> LO_BL LRPCH_L UP_BL VDD VSS 
++ WB WBB S6HVTFWBSO40W8_LIO_8_DSLP
+MM3 AVDDI SD_AVDDISW VDD VDD pch_hvt_mac l=35.0n w=140.0n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: n28_logic_hvt_mac
+* Cell Name:    nor_bulk_hvt
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_nor_bulk_hvt A B G Gb P Pb Y
+M1 net021 A P Pb pch_hvt_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M3 Y B net021 Pb pch_hvt_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M5 Y B G Gb nch_hvt_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+M7 Y A G Gb nch_hvt_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    CTDEC_2TO4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_CTDEC_2TO4 CT<0> CT<1> RCT<0> RCT<1> RCT<2> RCT<3> VDD VDDI VSS VSSI
+XI29 CT<0> CT<1> VSSI VSS VDD VDD RCTB<3> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.11u 
++ ln1=0.035u fn2=1 wn2=0.11u ln2=0.035u fp2=1 wp2=0.11u lp2=0.035u multi=1 
++ fp1=1 wp1=0.11u lp1=0.035u
+XI20 RCTB<0> VSSI VSS VDD VDD RCT<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.035u 
++ multi=1 fp=1 wp=0.11u lp=0.035u
+XI30 RCTB<3> VSSI VSS VDD VDD RCT<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.035u 
++ multi=1 fp=1 wp=0.11u lp=0.035u
+XI27 RCTB<2> VSSI VSS VDD VDD RCT<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.035u 
++ multi=1 fp=1 wp=0.11u lp=0.035u
+XI24 RCTB<1> VSSI VSS VDD VDD RCT<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.035u 
++ multi=1 fp=1 wp=0.11u lp=0.035u
+XI28 CT<1> VSSI VSS VDD VDD CTB<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.035u multi=1 
++ fp=1 wp=0.11u lp=0.035u
+XI23 CT<0> VSSI VSS VDD VDD CTB<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.035u multi=1 
++ fp=1 wp=0.11u lp=0.035u
+XI47 CT<0> CT<1> VSSI VSS VDD VDD RCTB<0> S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.11u 
++ ln1=0.035u fn2=1 wn2=0.11u ln2=0.035u fp2=1 wp2=0.11u lp2=0.035u multi=1 
++ fp1=1 wp1=0.11u lp1=0.035u
+XI22 CTB<0> CT<1> VSSI VSS VDD VDD RCTB<1> S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.11u 
++ ln1=0.035u fn2=1 wn2=0.11u ln2=0.035u fp2=1 wp2=0.11u lp2=0.035u multi=1 
++ fp1=1 wp1=0.11u lp1=0.035u
+XI26 CTB<1> CT<0> VSSI VSS VDD VDD RCTB<2> S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.11u 
++ ln1=0.035u fn2=1 wn2=0.11u ln2=0.035u fp2=1 wp2=0.11u lp2=0.035u multi=1 
++ fp1=1 wp1=0.11u lp1=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: n28_logic_hvt_mac
+* Cell Name:    aoi_bulk_hvt
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_aoi_bulk_hvt A B C G Gb P Pb Y
+M1 net021 C P Pb pch_hvt_mac l=lp3 w=wp3 m=multi*fp3 nf=1
+M3 Y A net021 Pb pch_hvt_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M6 Y B net021 Pb pch_hvt_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M8 net019 A G Gb nch_hvt_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+M10 Y C G Gb nch_hvt_mac l=ln3 w=wn3 m=multi*fn3 nf=1
+MN0 Y B net019 Gb nch_hvt_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WCT_DELAY
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WCT_DELAY TM_WB_TK VDD VDDI VSS VSSI WB_TK WCT<0> WCT<1> WCT<2> WCT<3>
+XI110 d7 net74 WCTB<0> VSSI VSS VDD VDD net10 S6HVTFWBSO40W8_aoi_bulk fn2=1 wn2=0.32u 
++ ln2=0.03u fn3=1 wn3=0.32u ln3=0.03u fn1=1 wn1=0.32u ln1=0.03u fp2=1 
++ wp2=0.21u lp2=0.03u fp1=1 wp1=0.21u lp1=0.03u multi=1 fp3=1 wp3=0.21u 
++ lp3=0.03u
+XI277 WCT<1> d6 VSSI VSS VDD VDD d7 S6HVTFWBSO40W8_nand_bulk fn1=1 wn1=120n ln1=0.03u fn2=1 
++ wn2=120n ln2=0.03u fp2=1 wp2=120n lp2=0.03u multi=1 fp1=1 wp1=120n lp1=0.03u
+XI274 d5 net74 VSSI VSS VDD VDD net039 S6HVTFWBSO40W8_nand_bulk fn1=1 wn1=120n ln1=0.05u 
++ fn2=1 wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 wp1=120n 
++ lp1=0.05u
+XI273 WCT<2> d4 VSSI VSS VDD VDD d5 S6HVTFWBSO40W8_nand_bulk fn1=1 wn1=120n ln1=0.05u fn2=1 
++ wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 wp1=120n lp1=0.05u
+XI49 d3 net74 VSSI VSS VDD VDD net042 S6HVTFWBSO40W8_nand_bulk fn1=1 wn1=120n ln1=0.05u 
++ fn2=1 wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 wp1=120n 
++ lp1=0.05u
+XI266 WCT<3> net68 VSSI VSS VDD VDD d1 S6HVTFWBSO40W8_nand_bulk fn1=1 wn1=120n ln1=0.05u 
++ fn2=1 wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 wp1=120n 
++ lp1=0.05u
+XI21 net030 VSSI VSS VDD VDD net019 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.20u ln=0.03u multi=1 
++ fp=1 wp=0.3u lp=0.03u
+XI76 WCT<0> VSSI VSS VDD VDD WCTB<0> S6HVTFWBSO40W8_inv_bulk fn=1 wn=120n ln=0.035u multi=1 
++ fp=1 wp=120n lp=0.035u
+XI23 WB_TK VSSI VSS VDD VDD net030 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.18u lp=0.03u
+XI51 d2 VSSI VSS VDD VDD d3 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.12u lp=0.05u
+XI280 d1 VSSI VSS VDD VDD d2 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.12u lp=0.05u
+XI24 net019 VSSI VSS VDD VDD net74 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.40u ln=0.03u multi=1 
++ fp=1 wp=0.55u lp=0.03u
+XI26 net74 VSSI VSS VDD VDD net68 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI3 net042 VSSI VSS VDD VDD net044 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.12u lp=0.05u
+XI2 net044 VSSI VSS VDD VDD d4 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.12u lp=0.05u
+XI0 net041 VSSI VSS VDD VDD d6 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.12u lp=0.05u
+XI1 net039 VSSI VSS VDD VDD net041 S6HVTFWBSO40W8_inv_bulk fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.12u lp=0.05u
+XI64 net10 WB_TK VSS VSS VDDI VDD TM_WB_TK S6HVTFWBSO40W8_nor_bulk fn1=1 wn1=0.25u 
++ ln1=0.03u fn2=1 wn2=0.25u ln2=0.03u fp2=1 wp2=0.5u lp2=0.03u multi=1 fp1=1 
++ wp1=0.5u lp1=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    CTDEC_2TO4_W
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_CTDEC_2TO4_W CT<0> CT<1> TM_WB_TK VDD VDDI VSS VSSI WB_TK
+XI53 CT<0> CT<1> WCT<1> WCT<0> WCT<2> WCT<3> VDD VDDI VSS VSSI S6HVTFWBSO40W8_CTDEC_2TO4
+XIWCT_DLY_SVT TM_WB_TK VDD VDDI VSS VSSI WB_TK WCT<1> WCT<0> WCT<2> WCT<3> 
++ S6HVTFWBSO40W8_WCT_DELAY
+.ENDS
+
+************************************************************************
+* Library Name: n28_logic_hvt_mac
+* Cell Name:    tri_bulk_hvt
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_tri_bulk_hvt A G Gb P Pb SEL SELB Y
+M1 net016 SELB P Pb pch_hvt_mac l=lp w=wp m=multi*fp nf=1
+MP0 Y A net016 Pb pch_hvt_mac l=lp w=wp m=multi*fp nf=1
+M3 net7 SEL G Gb nch_hvt_mac l=ln w=wn m=multi*fn nf=1
+MN0 Y A net7 Gb nch_hvt_mac l=ln w=wn m=multi*fn nf=1
+.ENDS
+
+************************************************************************
+* Library Name: n28_logic_hvt_mac
+* Cell Name:    nand3_bulk_hvt
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_nand3_bulk_hvt A B C G Gb P Pb Y
+M1 Y A P Pb pch_hvt_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M3 Y B P Pb pch_hvt_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M7 Y C P Pb pch_hvt_mac l=lp3 w=wp3 m=multi*fp3 nf=1
+M9 Y C net17 Gb nch_hvt_mac l=ln3 w=wn3 m=multi*fn3 nf=1
+M11 net17 B net14 Gb nch_hvt_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+M13 net14 A G Gb nch_hvt_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    XP3_8
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_XP3_8 A<0> A<1> A<2> C C_B VDD VDDI VSS VSSI XP<0> XP<1> XP<2> XP<3> 
++ XP<4> XP<5> XP<6> XP<7>
+XI33 A<2> VSSI VSS VDD VDD C_B C A2MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=200n ln=0.03u 
++ multi=4 fp=1 wp=220n lp=0.03u
+XI44 A1MUX VSSI VSS VDD VDD C C_B A1MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.13u ln=0.03u 
++ multi=1 fp=1 wp=0.13u lp=0.03u
+XI32 A<1> VSSI VSS VDD VDD C_B C A1MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=200n ln=0.03u 
++ multi=4 fp=1 wp=220n lp=0.03u
+XI29 A<0> VSSI VSS VDD VDD C_B C A0MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=200n ln=0.03u 
++ multi=4 fp=1 wp=220n lp=0.03u
+XI42 A0MUX VSSI VSS VDD VDD C C_B A0MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.13u ln=0.03u 
++ multi=1 fp=1 wp=0.13u lp=0.03u
+XI45 A2MUX VSSI VSS VDD VDD C C_B A2MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.13u ln=0.03u 
++ multi=1 fp=1 wp=0.13u lp=0.03u
+XI13 XPB<4> VSSI VSS VDD VDD XP<4> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI18 A1MUX_B VSSI VSS VDD VDD A1MUX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=200n ln=0.03u multi=3 
++ fp=1 wp=220n lp=0.03u
+XI8 XPB<0> VSSI VSS VDD VDD XP<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI19 A2MUX_B VSSI VSS VDD VDD A2MUX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=200n ln=0.03u multi=3 
++ fp=1 wp=220n lp=0.03u
+XI43 A0MUX_B VSSI VSS VDD VDD A0MUX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=200n ln=0.03u multi=3 
++ fp=1 wp=220n lp=0.03u
+XI21 XPB<5> VSSI VSS VDD VDD XP<5> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI22 XPB<6> VSSI VSS VDD VDD XP<6> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI10 XPB<1> VSSI VSS VDD VDD XP<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI23 XPB<7> VSSI VSS VDD VDD XP<7> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI12 XPB<3> VSSI VSS VDD VDD XP<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI11 XPB<2> VSSI VSS VDD VDD XP<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=440n ln=0.03u multi=4 
++ fp=1 wp=660n lp=0.03u
+XI17 A0MUX_B A1MUX_B A2MUX VSSI VSS VDD VDD XPB<4> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 
++ wn1=0.33u ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u 
++ fp3=1 wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI16 A0MUX A1MUX_B A2MUX VSSI VSS VDD VDD XPB<5> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.33u 
++ ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u fp3=1 
++ wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI14 A0MUX A1MUX A2MUX VSSI VSS VDD VDD XPB<7> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.33u 
++ ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u fp3=1 
++ wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI6 A0MUX_B A1MUX A2MUX_B VSSI VSS VDD VDD XPB<2> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.33u 
++ ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u fp3=1 
++ wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI9 A0MUX A1MUX A2MUX_B VSSI VSS VDD VDD XPB<3> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.33u 
++ ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u fp3=1 
++ wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI15 A0MUX_B A1MUX A2MUX VSSI VSS VDD VDD XPB<6> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.33u 
++ ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u fp3=1 
++ wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI1 A0MUX_B A1MUX_B A2MUX_B VSSI VSS VDD VDD XPB<0> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 
++ wn1=0.33u ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u 
++ fp3=1 wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI5 A0MUX A1MUX_B A2MUX_B VSSI VSS VDD VDD XPB<1> S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.33u 
++ ln1=0.03u fn2=1 wn2=0.33u ln2=0.03u fn3=1 wn3=0.33u ln3=0.03u fp3=1 
++ wp3=0.12u lp3=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=2 fp1=1 wp1=0.12u 
++ lp1=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    ENB
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_ENB C EN ENB EN_XD PD TIEL VDD VDDI VSS VSSI
+XI3 EN_b4lat VSSI VSS VDD VDD CB C_D ENT S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.54u ln=0.03u 
++ multi=1 fp=1 wp=0.6u lp=0.03u
+XI5 ENB_LAT VSSI VSS VDD VDD C_D CB ENT S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.12u ln=0.03u 
++ multi=1 fp=1 wp=0.16u lp=0.03u
+XI9 TIEL ENB VSS VSS VDDI VDD EN_b4lat S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.8u ln1=0.03u 
++ fn2=1 wn2=0.8u ln2=0.03u fp2=1 wp2=0.88u lp2=0.03u multi=1 fp1=1 wp1=0.88u 
++ lp1=0.03u
+XI38 net35 ENT VSS VSS VDDI VDD EN S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.4u ln1=0.03u fn2=1 
++ wn2=0.4u ln2=0.03u fp2=1 wp2=0.7u lp2=0.03u multi=1 fp1=1 wp1=0.7u lp1=0.03u
+XI37 CB VSS VSS VDDI VDD C_D S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.25u ln=0.03u multi=1 fp=1 
++ wp=0.35u lp=0.03u
+XI6 ENT VSS VSS VDDI VDD ENB_LAT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.16u lp=0.03u
+XI8 C VSSI VSS VDD VDD CB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.25u ln=0.03u multi=1 fp=1 
++ wp=0.35u lp=0.03u
+XI42 PD VSS VSS VDD VDD net35 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 fp=1 
++ wp=0.16u lp=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WCLKGEN4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WCLKGEN4 CLK EN HCLK LAT_CK LAT_CKB PCH_L PD_H PD_L_PU SLP TIEL TM_L 
++ TM_WB_TK VDD VDDI VSS VSSI WCLK_TK XD_CK
+MM3 d2 d1 VSSI VSS nch_hvt_mac l=50n w=240.0n m=1 nf=1
+MM0 INT_EN CLK_DLY VSSI VSS nch_hvt_mac l=30n w=835.00n m=6 nf=1
+MM5 CLK_INT CLK INT_EN VSS nch_hvt_mac l=30n w=835.00n m=6 nf=1
+MM40 CLK_INT CK_LAT net053 VSS nch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM41 net053 RESET VSSI VSS nch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM2 d2 d1 net0105 VDD pch_hvt_mac l=50n w=120.0n m=1 nf=1
+MM4 INT_EN enpch VDD VDD pch_hvt_mac l=30n w=500n m=1 nf=1
+MM11 CLK_INT PD_L_PU VDD VDD pch_hvt_mac l=30n w=120.0n m=1 nf=1
+MM9 CLK_INT RESET VDD VDD pch_hvt_mac l=30n w=640.0n m=6 nf=1
+MM46 CLK_INT CK_LAT net096 VDD pch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM45 net096 CLK_DLY VDD VDD pch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM44 net096 CLK VDD VDD pch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM1 net0105 d1 VDD VDD pch_hvt_mac l=50n w=120.0n m=1 nf=1
+XI67 CLK_INT net095 VSSI VSS VDD VDD PCH_L S6HVTFWBSO40W8_nand_bulk_hvt fn1=14 wn1=1u ln1=0.03u 
++ fn2=14 wn2=1u ln2=0.03u fp2=1 wp2=1.12u lp2=0.03u multi=1 fp1=5 wp1=1.12u 
++ lp1=0.03u
+XI89 d3 EN VSSI VSS VDD VDD net0125 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.21u ln1=0.03u 
++ fn2=1 wn2=0.21u ln2=0.03u fp2=1 wp2=0.26u lp2=0.03u multi=1 fp1=1 wp1=0.26u 
++ lp1=0.03u
+XI170 CLK_INT net083 VSS VSS VDDI VDD HCLK S6HVTFWBSO40W8_nand_bulk_hvt fn1=7 wn1=1.1u 
++ ln1=0.03u fn2=7 wn2=1.1u ln2=0.03u fp2=1 wp2=0.9u lp2=0.03u multi=1 fp1=12 
++ wp1=0.53u lp1=0.03u
+XI359 net091 net092 VSSI VSS VDD VDD xd_d1 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=120n 
++ ln1=0.035u fn2=1 wn2=120n ln2=0.035u fp2=1 wp2=120n lp2=0.035u multi=1 fp1=1 
++ wp1=120n lp1=0.035u
+XI258 TM_H EN CLK VSSI VSS VDD VDD cmp S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=500n ln1=0.03u 
++ fn2=1 wn2=500n ln2=0.03u fn3=1 wn3=500n ln3=0.03u fp3=1 wp3=400n lp3=0.03u 
++ fp2=1 wp2=400n lp2=0.03u multi=1 fp1=1 wp1=400n lp1=0.03u
+XI127 cmp XD_CKD TM_WB_TK VSSI VSS VDD VDD RESET S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=900n 
++ ln1=0.03u fn2=1 wn2=900n ln2=0.03u fn3=1 wn3=900n ln3=0.03u fp3=1 wp3=400n 
++ lp3=0.03u fp2=1 wp2=400n lp2=0.03u multi=1 fp1=1 wp1=400n lp1=0.03u
+XI273 net0174 CLK_INT net0174 VSS VSS VDD VDD net088 S6HVTFWBSO40W8_nand3_bulk_hvt fn1=2 
++ wn1=0.54u ln1=0.03u fn2=2 wn2=0.54u ln2=0.03u fn3=2 wn3=0.54u ln3=0.03u 
++ fp3=1 wp3=0.12u lp3=0.03u fp2=2 wp2=0.32u lp2=0.03u multi=1 fp1=1 wp1=0.12u 
++ lp1=0.03u
+XI203 net060 VSS VSS VDDI VDD net095 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.5u ln=0.03u multi=1 
++ fp=1 wp=0.7u lp=0.03u
+XI368 CLK_INT VSSI VSS VDD VDD net091 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI364 CLK VSS VSS VDDI VDD d1 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 fp=1 
++ wp=0.24u lp=0.03u
+XI78 net088 VSS VSS VDDI VDD LAT_CKB S6HVTFWBSO40W8_inv_bulk_hvt fn=4 wn=0.73u ln=0.03u multi=1 
++ fp=4 wp=0.97u lp=0.03u
+XI163 LAT_CKB VSS VSS VDD VDD LAT_CK S6HVTFWBSO40W8_inv_bulk_hvt fn=4 wn=0.73u ln=0.03u multi=1 
++ fp=4 wp=0.97u lp=0.03u
+XI274 SLP VSS VSS VDD VDD net0174 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.12u lp=0.03u
+XI90 net0125 VSS VSS VDDI VDD CLK_DLY S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.92u ln=0.03u 
++ multi=1 fp=1 wp=0.8u lp=0.03u
+XI117 en_d1 VSS VSS VDDI VDD enpch S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.21u lp=0.03u
+XI114 EN VSSI VSS VDD VDD en_d1 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 fp=1 
++ wp=0.12u lp=0.03u
+XI118 d2 VSS VSS VDDI VDD d3 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.24u lp=0.05u
+XI353 net018 VSSI VSS VDD VDD net014 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI178 CLK_INT VSS VSS VDDI VDD CK_LAT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.19u ln=0.03u 
++ multi=1 fp=1 wp=0.25u lp=0.03u
+XI366 TM_L VSSI VSS VDD VDD TM_H S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.16u lp=0.03u
+XI201 net086 VSSI VSS VDD VDD net060 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.16u ln=0.03u multi=1 
++ fp=1 wp=0.21u lp=0.03u
+XI199 xd_d3 VSSI VSS VDD VDD XD_CKD S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.035u multi=1 
++ fp=1 wp=0.48u lp=0.035u
+XI196 xd_d1 VSSI VSS VDD VDD xd_d2 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI198 xd_d2 VSSI VSS VDD VDD xd_d3 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI179 CLK_INT VSS VSS VDDI VDD net087 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.26u ln=0.03u 
++ multi=1 fp=1 wp=0.35u lp=0.03u
+XI177 TIEL VSSI VSS VDD VDD net083 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.77u ln=0.03u multi=1 
++ fp=1 wp=0.9u lp=0.03u
+XI173 clk_intb VSSI VSS VDD VDD clk_int_d S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.66u ln=0.03u 
++ multi=1 fp=1 wp=0.8u lp=0.03u
+XI355 net091 VSSI VSS VDD VDD net021 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI357 net021 VSSI VSS VDD VDD net018 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI180 clk_intb VSS VSS VDDI VDD net089 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u 
++ multi=1 fp=1 wp=0.12u lp=0.03u
+XI174 CLK_INT VSS VSS VDDI VDD WCLK_TK S6HVTFWBSO40W8_inv_bulk_hvt fn=2 wn=0.44u ln=0.03u 
++ multi=1 fp=2 wp=0.58u lp=0.03u
+XI352 net014 VSSI VSS VDD VDD net092 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI159 CLK_INT VSS VSS VDDI VDD clk_intb S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.43u ln=0.03u 
++ multi=1 fp=1 wp=0.54u lp=0.03u
+XI167 net087 PD_H VSS VSS VDDI VDD net086 S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.56u ln1=0.03u 
++ fn2=1 wn2=0.56u ln2=0.03u fp2=1 wp2=0.56u lp2=0.03u multi=1 fp1=1 wp1=0.56u 
++ lp1=0.03u
+XI171 CLK_INT clk_int_d VSS VSS VDDI VDD XD_CK S6HVTFWBSO40W8_nor_bulk_hvt fn1=8 wn1=0.4u 
++ ln1=0.03u fn2=1 wn2=0.54u ln2=0.03u fp2=5 wp2=1.18u lp2=0.03u multi=1 fp1=5 
++ wp1=1.18u lp1=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    XP2_4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_XP2_4 A<0> A<1> C C_B VDD VDDI VSS VSSI XP<0> XP<1> XP<2> XP<3>
+XI12 XPB<3> VSSI VSS VDD VDD XP<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.5u ln=0.03u multi=4 
++ fp=1 wp=1.05u lp=0.03u
+XI18 A1MUX_B VSSI VSS VDD VDD A1MUX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.33u ln=0.03u multi=1 
++ fp=1 wp=0.440u lp=0.03u
+XI8 XPB<0> VSSI VSS VDD VDD XP<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.5u ln=0.03u multi=4 
++ fp=1 wp=1.05u lp=0.03u
+XI43 A0MUX_B VSSI VSS VDD VDD A0MUX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.33u ln=0.03u multi=1 
++ fp=1 wp=0.44u lp=0.03u
+XI10 XPB<1> VSSI VSS VDD VDD XP<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.5u ln=0.03u multi=4 
++ fp=1 wp=1.05u lp=0.03u
+XI11 XPB<2> VSSI VSS VDD VDD XP<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.5u ln=0.03u multi=4 
++ fp=1 wp=1.05u lp=0.03u
+XI5 A0MUX A1MUX_B VSSI VSS VDD VDD XPB<1> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.670u 
++ ln1=0.03u fn2=1 wn2=0.670u ln2=0.03u fp2=1 wp2=0.460u lp2=0.03u multi=1 
++ fp1=1 wp1=0.460u lp1=0.03u
+XI6 A0MUX_B A1MUX VSSI VSS VDD VDD XPB<2> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.670u 
++ ln1=0.03u fn2=1 wn2=0.670u ln2=0.03u fp2=1 wp2=0.460u lp2=0.03u multi=1 
++ fp1=1 wp1=0.460u lp1=0.03u
+XI1 A0MUX_B A1MUX_B VSSI VSS VDD VDD XPB<0> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.670u 
++ ln1=0.03u fn2=1 wn2=0.670u ln2=0.03u fp2=1 wp2=0.460u lp2=0.03u multi=1 
++ fp1=1 wp1=0.460u lp1=0.03u
+XI9 A0MUX A1MUX VSSI VSS VDD VDD XPB<3> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.670u ln1=0.03u 
++ fn2=1 wn2=0.670u ln2=0.03u fp2=1 wp2=0.460u lp2=0.03u multi=1 fp1=1 
++ wp1=0.460u lp1=0.03u
+XI42 A0MUX VSSI VSS VDD VDD C C_B A0MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.13u ln=0.03u 
++ multi=1 fp=1 wp=0.13u lp=0.03u
+XI44 A1MUX VSSI VSS VDD VDD C C_B A1MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.13u ln=0.03u 
++ multi=1 fp=1 wp=0.13u lp=0.03u
+XI32 A<1> VSSI VSS VDD VDD C_B C A1MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=400n ln=0.03u 
++ multi=1 fp=1 wp=780n lp=0.03u
+XI29 A<0> VSSI VSS VDD VDD C_B C A0MUX_B S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=400n ln=0.03u 
++ multi=1 fp=1 wp=780n lp=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    YP2_4_HP_M2
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_YP2_4_HP_M2 A<0> A<1> C C_B VDD VDDI VSS VSSI XP<0> XP<1> XP<2> XP<3>
+XI12 XPB<3> VSSI VSS VDD VDD XP<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.37u ln=0.03u multi=8 
++ fp=1 wp=0.56u lp=0.03u
+XI18 net157 VSSI VSS VDD VDD net164 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.22u ln=0.03u multi=1 
++ fp=1 wp=0.33u lp=0.03u
+XI8 XPB<0> VSSI VSS VDD VDD XP<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.37u ln=0.03u multi=8 
++ fp=1 wp=0.56u lp=0.03u
+XI39 net046 VSSI VSS VDD VDD A0MUX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.03u multi=1 
++ fp=1 wp=0.43u lp=0.03u
+XI43 net149 VSSI VSS VDD VDD net172 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.22u ln=0.03u multi=1 
++ fp=1 wp=0.33u lp=0.03u
+XI40 A0MUX VSSI VSS VDD VDD A0MUX_B S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.03u multi=1 
++ fp=1 wp=0.43u lp=0.03u
+XI47 net045 VSSI VSS VDD VDD A1MUX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.03u multi=1 
++ fp=1 wp=0.43u lp=0.03u
+XI46 A1MUX VSSI VSS VDD VDD A1MUX_B S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.03u multi=1 
++ fp=1 wp=0.43u lp=0.03u
+XI10 XPB<1> VSSI VSS VDD VDD XP<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.37u ln=0.03u multi=8 
++ fp=1 wp=0.56u lp=0.03u
+XI11 XPB<2> VSSI VSS VDD VDD XP<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.37u ln=0.03u multi=8 
++ fp=1 wp=0.56u lp=0.03u
+XI48 net164 VSSI VSS VDD VDD net045 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.22u ln=0.03u multi=1 
++ fp=1 wp=0.33u lp=0.03u
+XI49 net172 VSSI VSS VDD VDD net046 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.22u ln=0.03u multi=1 
++ fp=1 wp=0.33u lp=0.03u
+XI1<0> A0MUX_B A1MUX_B VSSI VSS VDD VDD XPB<0> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI1<1> A0MUX_B A1MUX_B VSSI VSS VDD VDD XPB<0> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI6<0> A0MUX_B A1MUX VSSI VSS VDD VDD XPB<2> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI6<1> A0MUX_B A1MUX VSSI VSS VDD VDD XPB<2> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI9<0> A0MUX A1MUX VSSI VSS VDD VDD XPB<3> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI9<1> A0MUX A1MUX VSSI VSS VDD VDD XPB<3> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI5<0> A0MUX A1MUX_B VSSI VSS VDD VDD XPB<1> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI5<1> A0MUX A1MUX_B VSSI VSS VDD VDD XPB<1> S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.450u 
++ ln1=0.03u fn2=1 wn2=0.450u ln2=0.03u fp2=1 wp2=0.360u lp2=0.03u multi=1 
++ fp1=1 wp1=0.360u lp1=0.03u
+XI42 net172 VSSI VSS VDD VDD C C_B net149 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.13u ln=0.03u 
++ multi=1 fp=1 wp=0.13u lp=0.03u
+XI44 net164 VSSI VSS VDD VDD C C_B net157 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.13u ln=0.03u 
++ multi=1 fp=1 wp=0.13u lp=0.03u
+XI32 A<1> VSSI VSS VDD VDD C_B C net157 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=400n ln=0.03u 
++ multi=1 fp=1 wp=780n lp=0.03u
+XI29 A<0> VSSI VSS VDD VDD C_B C net149 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=400n ln=0.03u 
++ multi=1 fp=1 wp=780n lp=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RCLKGEN5
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RCLKGEN5 CLK EN GBLB_TK PCH_L PD_L_PU RCLK_H RC_EN SLP TM_GBL TM_L VDD 
++ VDDI VSS VSSI XD_CK XLAT_CK XLAT_CKB YLAT_CK YLAT_CKB
+XI293 CLK_INTB RC_EN CLK_D VSSI VSS VDD VDD net095 S6HVTFWBSO40W8_aoi_bulk_hvt fn2=2 wn2=0.8u 
++ ln2=0.03u fn3=2 wn3=0.8u ln3=0.03u fn1=2 wn1=0.8u ln1=0.03u fp2=2 wp2=0.6u 
++ lp2=0.03u fp1=2 wp1=0.6u lp1=0.03u multi=1 fp3=2 wp3=0.6u lp3=0.03u
+MM41 net076 RESET VSSI VSS nch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM2 CLK_INT CLK INT_EN VSS nch_hvt_mac l=30n w=1u m=5 nf=1
+MM1 INT_EN CLK_DLY VSSI VSS nch_hvt_mac l=30n w=1u m=5 nf=1
+MM40 CLK_INT CK_LAT net076 VSS nch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM45 net094 CLK_DLY VDD VDD pch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM11 CLK_INT PD_L_PU VDD VDD pch_hvt_mac l=30n w=120.0n m=1 nf=1
+MM44 net094 CLK VDD VDD pch_hvt_mac l=30n w=250.0n m=1 nf=1
+MM0 CLK_INT RESET VDD VDD pch_hvt_mac l=30n w=640.0n m=4 nf=1
+MM4 INT_EN enpch VDD VDD pch_hvt_mac l=30n w=500n m=1 nf=1
+MM46 CLK_INT CK_LAT net094 VDD pch_hvt_mac l=30n w=250.0n m=1 nf=1
+XI258 TM_H EN CLK VSSI VSS VDD VDD cmp S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=750n ln1=0.03u 
++ fn2=1 wn2=750n ln2=0.03u fn3=1 wn3=750n ln3=0.03u fp3=1 wp3=400n lp3=0.03u 
++ fp2=1 wp2=400n lp2=0.03u multi=1 fp1=1 wp1=400n lp1=0.03u
+XI121 cmp XD_CKD GBLB_TK VSSI VSS VDD VDD RESET S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=1.5u 
++ ln1=0.03u fn2=1 wn2=1.5u ln2=0.03u fn3=1 wn3=1.5u ln3=0.03u fp3=1 wp3=500n 
++ lp3=0.03u fp2=1 wp2=500n lp2=0.03u multi=1 fp1=1 wp1=500n lp1=0.03u
+XI357 net029 VSSI VSS VDD VDD net091 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI355 net073 VSSI VSS VDD VDD net029 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI353 net091 VSSI VSS VDD VDD net023 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI352 net023 VSSI VSS VDD VDD net0132 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI345 net062 VSS VSS VDDI VDD net0121 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u 
++ multi=1 fp=1 wp=0.32u lp=0.03u
+XI341 YLAT_CK VSS VSS VDDI VDD YLAT_CKB S6HVTFWBSO40W8_inv_bulk_hvt fn=2 wn=0.21u ln=0.03u 
++ multi=1 fp=2 wp=0.32u lp=0.03u
+XI339 net083 VSSI VSS VDD VDD net086 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.32u lp=0.035u
+XI371 net031 VSSI VSS VDD VDD net073 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI331 net035 VSSI VSS VDD VDD net040 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.32u lp=0.035u
+XI326 CLK_INT_D VSS VSS VDDI VDD CLK_INTB_D S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u 
++ multi=1 fp=1 wp=0.43u lp=0.03u
+XI364 CLK VSS VSS VDDI VDD d1 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 fp=1 
++ wp=0.24u lp=0.03u
+XI4 CLK_INT VSS VSS VDDI VDD CLK_INTB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.8u ln=0.03u multi=1 
++ fp=1 wp=0.7u lp=0.03u
+XI90 net_0271 VSS VSS VDDI VDD CLK_DLY S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.92u ln=0.03u 
++ multi=1 fp=1 wp=0.8u lp=0.03u
+XI117 net0195 VSS VSS VDDI VDD enpch S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.21u lp=0.03u
+XI129 xd_d3 VSSI VSS VDD VDD XD_CKD S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.035u multi=1 
++ fp=1 wp=0.48u lp=0.035u
+XI256 net0389 VSSI VSS VDD VDD xd_d3 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI55 XLAT_CK VSS VSS VDDI VDD XLAT_CKB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.485u ln=0.03u 
++ multi=3 fp=1 wp=0.97u lp=0.03u
+XI274 SLP VSS VSS VDD VDD net0347 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI178 CLK_INT VSS VSS VDDI VDD CK_LAT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.19u ln=0.03u 
++ multi=1 fp=1 wp=0.25u lp=0.03u
+XI241 xd_d1 VSSI VSS VDD VDD net0389 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI114 EN VSSI VSS VDD VDD net0195 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.12u lp=0.03u
+XI119 d1 VSSI VSS VDD VDD d2 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.05u multi=1 fp=1 
++ wp=0.12u lp=0.05u
+XI118 d2 VSS VSS VDDI VDD d3 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.24u lp=0.05u
+XI368 CLK_INT VSSI VSS VDD VDD net071 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI27 net095 VSS VSS VDDI VDD RCLK_H S6HVTFWBSO40W8_inv_bulk_hvt fn=6 wn=0.43u ln=0.03u multi=1 
++ fp=6 wp=0.6u lp=0.03u
+XI312 net042 VSSI VSS VDD VDD net099 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.32u lp=0.035u
+XI330 net079 VSS VSS VDDI VDD net035 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI315 CLK_INT VSS VSS VDDI VDD XD_CK S6HVTFWBSO40W8_inv_bulk_hvt fn=6 wn=0.57u ln=0.03u multi=1 
++ fp=7 wp=0.89u lp=0.03u
+XI311 net040 VSS VSS VDDI VDD net042 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI366 TM_L VSSI VSS VDD VDD TM_H S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.16u lp=0.03u
+XI346 net0121 VSSI VSS VDD VDD YLAT_CK S6HVTFWBSO40W8_inv_bulk_hvt fn=2 wn=0.21u ln=0.03u 
++ multi=1 fp=2 wp=0.32u lp=0.03u
+XI372 net071 VSSI VSS VDD VDD net031 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI285 net099 VSS VSS VDDI VDD net083 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI306 net057 VSS VSS VDDI VDD PCH_L S6HVTFWBSO40W8_inv_bulk_hvt fn=6 wn=0.54u ln=0.03u multi=1 
++ fp=6 wp=0.74u lp=0.03u
+XI327 CLK_INTB VSSI VSS VDD VDD CLK_INT_D S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.54u ln=0.03u 
++ multi=1 fp=1 wp=0.54u lp=0.03u
+XI344 clkb_ylat CLK_INT_D VSSI VSS VDD VDD net062 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.21u 
++ ln1=0.03u fn2=1 wn2=0.21u ln2=0.03u fp2=1 wp2=0.21u lp2=0.03u multi=1 fp1=1 
++ wp1=0.21u lp1=0.03u
+XI273 net0347 CLK_INT_D VSS VSS VDD VDD XLAT_CK S6HVTFWBSO40W8_nand_bulk_hvt fn1=2 wn1=0.97u 
++ ln1=0.03u fn2=2 wn2=0.97u ln2=0.03u fp2=3 wp2=0.97u lp2=0.03u multi=1 fp1=1 
++ wp1=0.12u lp1=0.03u
+XI89 d3 EN VSSI VSS VDD VDD net_0271 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.21u ln1=0.03u 
++ fn2=1 wn2=0.21u ln2=0.03u fp2=1 wp2=0.26u lp2=0.03u multi=1 fp1=1 wp1=0.26u 
++ lp1=0.03u
+XI359 net073 net0132 VSSI VSS VDD VDD xd_d1 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=120n 
++ ln1=0.035u fn2=1 wn2=120n ln2=0.035u fp2=1 wp2=120n lp2=0.035u multi=1 fp1=1 
++ wp1=120n lp1=0.035u
+XI284 EN CLK VSSI VSS VDD VDD net079 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=320n ln1=0.03u 
++ fn2=1 wn2=320n ln2=0.03u fp2=1 wp2=450n lp2=0.03u multi=1 fp1=1 wp1=450n 
++ lp1=0.03u
+XI288 SLP CLK VSS VSS VDD VDD clkb_ylat S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.15u ln1=0.03u 
++ fn2=1 wn2=0.15u ln2=0.03u fp2=1 wp2=0.43u lp2=0.03u multi=1 fp1=1 wp1=0.43u 
++ lp1=0.03u
+XI295 CLK_INTB CLK_D VSSI VSS VDD VDD net057 S6HVTFWBSO40W8_nor_bulk_hvt fn1=2 wn1=1u ln1=0.03u 
++ fn2=2 wn2=1u ln2=0.03u fp2=2 wp2=0.75u lp2=0.03u multi=1 fp1=2 wp1=0.75u 
++ lp1=0.03u
+XI287 net079 net086 VSS VSS VDDI VDD CLK_D S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=1.0u ln1=0.03u 
++ fn2=1 wn2=1.0u ln2=0.03u fp2=1 wp2=1.5u lp2=0.03u multi=1 fp1=1 wp1=1.5u 
++ lp1=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    TIE_PWR
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_TIE_PWR TIEH TIEL VDD VSS
+MM3 TIEH TIEL VDD VDD pch_hvt_mac l=35.0n w=630.0n m=2 nf=1
+MM4 TIEL TIEH VSS VSS nch_hvt_mac l=35.0n w=500n m=2 nf=1
+MM2 net7 ALWH VSS VSS nch_hvt_mac l=35.0n w=150.0n m=1 nf=1
+MM1 net7 ALWL VSS VSS nch_hvt_mac l=35.0n w=150.0n m=1 nf=1
+MM0 TIEL PULLD VSS VSS nch_hvt_mac l=35.0n w=250.0n m=1 nf=1
+XI7 net7 VSS VSS VDD VDD ALWH S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 fp=1 
++ wp=0.20u lp=0.035u
+XI0 ALWH VSS VSS VDD VDD ALWL S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 fp=1 
++ wp=0.20u lp=0.035u
+XI1 ALWL VSS VSS VDD VDD PULLD S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=2 fp=1 
++ wp=0.20u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    PD_DSLP_DLY3
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_PD_DSLP_DLY3 DLY IN VDD VSS
+MM105 net097 d4 net0115 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM103 net093 d4 net0114 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM106 net081 d4 net097 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM64 d4 d3 VDD VDD pch_hvt_mac l=40n w=120.0n m=3 nf=1
+MM102 net0114 d4 net095 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM26 net0102 IN net094 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM92 d1 IN net0122 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM104 net0115 d4 net093 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM98 net099 d2 net098 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM99 net098 d2 net0100 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM6 net094 IN net36 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM95 d3 d2 net0113 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM69 DLY net081 VDD VDD pch_hvt_mac l=40n w=120.0n m=3 nf=1
+MM101 net095 d4 VDD VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM96 net0113 d2 net0101 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM100 net0100 d2 VDD VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM73 net0126 IN net0102 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM97 net0101 d2 net099 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM2 net36 IN VDD VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM32 d2 d1 VDD VDD pch_hvt_mac l=40n w=120.0n m=3 nf=1
+MM91 net0122 IN net0126 VDD pch_hvt_mac l=40n w=120.0n m=1 nf=1
+MM118 d4 d3 net0123 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM117 net0123 d3 net0154 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM116 net0154 d3 net0124 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM115 net0124 d3 net0127 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM114 net0127 d3 net0125 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM113 net0125 d3 VSS VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM58 d3 d2 VSS VSS nch_hvt_mac l=40n w=125.00n m=3 nf=1
+MM109 net0109 net081 net0112 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM110 net0111 net081 net0109 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM107 net0110 net081 VSS VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM65 net081 d4 VSS VSS nch_hvt_mac l=40n w=125.00n m=3 nf=1
+MM112 DLY net081 net0108 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM29 net0106 d1 net045 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM30 net045 d1 net096 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM14 d1 IN VSS VSS nch_hvt_mac l=40n w=125.00n m=3 nf=1
+MM33 net047 d1 VSS VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM111 net0108 net081 net0111 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM74 net096 d1 net047 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM94 d2 d1 net0103 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM93 net0103 d1 net0106 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM108 net0112 net081 net0110 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    PD_DSLP_DLY
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_PD_DSLP_DLY DLY IN VDD VSS
+MM25 net087 net081 VDD VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM22 DLY net081 net087 VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM21 net081 d4 net073 VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM17 net075 d3 VDD VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM13 d4 d3 net075 VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM9 net077 IN VDD VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM12 d3 IN net077 VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM18 net073 d4 VDD VDD pch_hvt_mac l=40n w=150.0n m=1 nf=1
+MM24 DLY net081 net088 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM23 net088 net081 VSS VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM16 d4 d3 net076 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM15 net076 d3 VSS VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM11 net078 IN VSS VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM19 net081 d4 net074 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM10 d3 IN net078 VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+MM20 net074 d4 VSS VSS nch_hvt_mac l=40n w=125.00n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: n28_logic_hvt_mac
+* Cell Name:    nor3_bulk_hvt
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_nor3_bulk_hvt A B C G Gb P Pb Y
+M1 net6 A P Pb pch_hvt_mac l=lp1 w=wp1 m=multi*fp1 nf=1
+M3 Y C net3 Pb pch_hvt_mac l=lp3 w=wp3 m=multi*fp3 nf=1
+M6 net3 B net6 Pb pch_hvt_mac l=lp2 w=wp2 m=multi*fp2 nf=1
+M8 Y C G Gb nch_hvt_mac l=ln3 w=wn3 m=multi*fn3 nf=1
+M10 Y B G Gb nch_hvt_mac l=ln2 w=wn2 m=multi*fn2 nf=1
+M12 Y A G Gb nch_hvt_mac l=ln1 w=wn1 m=multi*fn1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    PD_SEL
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_PD_SEL DSLP DSLP_SW PD_DSLP_DLY PD_H PD_H_DLY PD_L PD_SD_DLY PD_VDDI_H 
++ PD_VDDI_H_DLY PD_VSSI_L PD_VSSI_L_DLY SD SD_SW SLP SLP_INT TIEH VDD VSS
+MM10 VSS net66 VSS VSS nch_hvt_mac l=35.0n w=400n m=2 nf=1
+MM11 VDD net66 VDD VDD pch_hvt_mac l=35.0n w=500n m=2 nf=1
+XI7 net19 VSS VSS VDD VDD SLP_INT net57 net66 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=1.2u 
++ ln=0.035u multi=1 fp=1 wp=1.5u lp=0.035u
+XI10 net21 VSS VSS VDD VDD net57 SLP_INT net66 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=1.2u 
++ ln=0.035u multi=1 fp=1 wp=1.5u lp=0.035u
+XI9 net22 VSS VSS VDD VDD net57 SLP_INT net63 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=1.2u 
++ ln=0.035u multi=1 fp=1 wp=1.5u lp=0.035u
+XI8 TIEH VSS VSS VDD VDD SLP_INT net57 net63 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=1.2u ln=0.035u 
++ multi=1 fp=1 wp=1.5u lp=0.035u
+XI11 PD_DSLP_DLY VSS VSS VDD VDD net57 SLP_INT net68 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=1.2u 
++ ln=0.035u multi=1 fp=1 wp=1.5u lp=0.035u
+XI12 net20 VSS VSS VDD VDD SLP_INT net57 net68 S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=1.2u 
++ ln=0.035u multi=1 fp=1 wp=1.5u lp=0.035u
+XI59 PD_H_DLY VSS VSS VDD VDD net19 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.4u ln=0.035u multi=1 
++ fp=1 wp=0.5u lp=0.035u
+XI58 PD_VSSI_L VSS VSS VDD VDD net22 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.4u ln=0.035u multi=1 
++ fp=1 wp=0.5u lp=0.035u
+XI21 PD_VSSI_L_DLY VSS VSS VDD VDD net20 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.4u ln=0.040u 
++ multi=1 fp=1 wp=0.5u lp=0.040u
+XI26 net63 VSS VSS VDD VDD net37 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.16u ln=0.035u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI3 SLP_INT VSS VSS VDD VDD net57 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.2u ln=0.035u multi=1 
++ fp=1 wp=1.5u lp=0.035u
+XI62 net63 VSS VSS VDD VDD net73 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.2u ln=0.035u multi=2 
++ fp=1 wp=1.5u lp=0.035u
+XI25 net37 VSS VSS VDD VDD PD_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.035u multi=1 
++ fp=1 wp=0.43u lp=0.035u
+XI61 net68 VSS VSS VDD VDD net72 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.2u ln=0.035u multi=2 
++ fp=1 wp=1.5u lp=0.035u
+XI19 PD_VDDI_H_DLY VSS VSS VDD VDD net21 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.4u ln=0.035u 
++ multi=1 fp=1 wp=0.5u lp=0.035u
+XI5 net66 VSS VSS VDD VDD PD_VSSI_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.3u ln=0.035u multi=1 
++ fp=1 wp=0.5u lp=0.035u
+XI54 net17 VSS VSS VDD VDD SLP_INT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.5u ln=0.035u multi=6 
++ fp=1 wp=0.5u lp=0.035u
+XI56 net38 VSS VSS VDD VDD SD_SW S6HVTFWBSO40W8_inv_bulk_hvt fn=2 wn=1.5u ln=0.04u multi=1 fp=2 
++ wp=1.5u lp=0.04u
+XI55 net39 VSS VSS VDD VDD DSLP_SW S6HVTFWBSO40W8_inv_bulk_hvt fn=4 wn=1.5u ln=0.04u multi=1 
++ fp=4 wp=1.5u lp=0.04u
+XI29 SD VSS VSS VDD VDD net38 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.5u ln=0.04u multi=1 fp=1 
++ wp=1.5u lp=0.04u
+XI16 net68 VSS VSS VDD VDD PD_VDDI_H S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.2u ln=0.035u multi=4 
++ fp=1 wp=1.5u lp=0.035u
+XI0 net63 VSS VSS VDD VDD PD_H S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.2u ln=0.035u multi=4 fp=1 
++ wp=1.5u lp=0.035u
+XI52 SLP DSLP SD VSS VSS VDD VDD net17 S6HVTFWBSO40W8_nor3_bulk_hvt fn1=1 wn1=0.3u ln1=0.035u 
++ fn2=1 wn2=0.3u ln2=0.035u fn3=1 wn3=0.3u ln3=0.035u fp2=2 wp2=0.6u 
++ lp2=0.035u fp3=2 wp3=0.6u lp3=0.035u multi=1 fp1=2 wp1=0.6u lp1=0.035u
+XI28 DSLP SD PD_SD_DLY VSS VSS VDD VDD net39 S6HVTFWBSO40W8_nor3_bulk_hvt fn1=1 wn1=0.5u 
++ ln1=0.04u fn2=1 wn2=0.5u ln2=0.04u fn3=1 wn3=0.5u ln3=0.03u fp2=3 wp2=0.5u 
++ lp2=0.04u fp3=1 wp3=0.5u lp3=0.03u multi=1 fp1=3 wp1=0.5u lp1=0.04u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    POWERD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_POWERD DSLP DSLP_SW PD_DSLP_DLY PD_H_DLY PD_H_PDWN PD_L_UP PD_SD_DLY 
++ PD_VDDI_H PD_VDDI_H_DLY PD_VSSI_L PD_VSSI_L_GIO SD SD_SW SLP SLP_INT TIEH 
++ VDD VDDI VSS VSSI
+XI19 net50 PD_SD_DLY VDD VSS S6HVTFWBSO40W8_PD_DSLP_DLY3
+XI7 net49 PD_DSLP_DLY VDD VSS S6HVTFWBSO40W8_PD_DSLP_DLY3
+MM3 VSSI net62 VSS VSS nch_hvt_mac l=40n w=1.2u m=31 nf=1
+MM4 VSSI net37 VSS VSS nch_hvt_mac l=40n w=1.2u m=51 nf=1
+MM0 VSSI PD_VSSI_L_DLY VSS VSS nch_hvt_mac l=40n w=1.2u m=26 nf=1
+MM1 VDDI PD_VDDI_H VDD VDD pch_hvt_mac l=40n w=1.2u m=39 nf=1
+MM2 VDDI net35 VDD VDD pch_hvt_mac l=40n w=1.2u m=47 nf=1
+XI17 net47 PD_VSSI_L_DLY VDD VSS S6HVTFWBSO40W8_PD_DSLP_DLY
+XI16 net48 PD_VDDI_H_DLY VDD VSS S6HVTFWBSO40W8_PD_DSLP_DLY
+XI18 net26 PD_H_DLY VDD VSS S6HVTFWBSO40W8_PD_DSLP_DLY
+XI6 DSLP DSLP_SW net49 PD_H_PDWN net26 PD_L_UP net50 PD_VDDI_H net48 
++ PD_VSSI_L_DLY net47 SD SD_SW SLP SLP_INT TIEH VDD VSS S6HVTFWBSO40W8_PD_SEL
+XI35 net31 VSS VSS VDD VDD net92 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.16u ln=0.035u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI36 net31 VSS VSS VDD VDD net93 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.6u ln=0.035u multi=2 
++ fp=1 wp=1.0u lp=0.035u
+XI199 net52 VSS VSS VDD VDD PD_VSSI_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.0u ln=0.035u 
++ multi=3 fp=1 wp=1.5u lp=0.035u
+XI30 net92 VSS VSS VDD VDD net52 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.30u ln=0.035u multi=2 
++ fp=1 wp=0.60u lp=0.035u
+XI25 PD_VSSI_L_DLY VSS VSS VDD VDD net31 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.6u ln=0.035u 
++ multi=1 fp=1 wp=1.0u lp=0.035u
+XI131 PD_VDDI_H VSS VSS VDD VDD net33 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.20u ln=0.040u 
++ multi=1 fp=1 wp=0.30u lp=0.040u
+XI24 net36 VSS VSS VDD VDD net37 S6HVTFWBSO40W8_inv_bulk_hvt fn=3 wn=0.40u ln=0.040u multi=1 
++ fp=3 wp=0.60u lp=0.040u
+XI23 net62 VSS VSS VDD VDD net36 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.20u ln=0.040u multi=1 
++ fp=1 wp=0.30u lp=0.040u
+XI8 net33 VSS VSS VDD VDD net35 S6HVTFWBSO40W8_inv_bulk_hvt fn=2 wn=0.40u ln=0.040u multi=1 
++ fp=2 wp=0.60u lp=0.040u
+XI14 net32 VSS VSS VDD VDD net62 S6HVTFWBSO40W8_inv_bulk_hvt fn=3 wn=0.40u ln=0.040u multi=1 
++ fp=3 wp=0.60u lp=0.040u
+XI26 net31 VSS VSS VDD VDD PD_VSSI_L_GIO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.6u ln=0.035u 
++ multi=4 fp=1 wp=1.0u lp=0.035u
+XI13 PD_VSSI_L_DLY VSS VSS VDD VDD net32 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.20u ln=0.040u 
++ multi=1 fp=1 wp=0.30u lp=0.040u
+XI37 net52 VSS VSS VDD VDD net94 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.0u ln=0.035u multi=2 
++ fp=1 wp=1.5u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WXDEC2_TK_S
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WXDEC2_TK_S VDD VDDI VSS VSSI WCLK_TK WGCLK WL_TK
+XI17 net010 WGCLK VSSI VSS VDD VDD net05 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.035u fn2=1 wn2=0.12u ln2=0.035u fp2=1 wp2=0.12u lp2=0.035u multi=1 
++ fp1=1 wp1=0.12u lp1=0.035u
+XI26 net08 VSS VSS VDDI VDD net010 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI25 WGCLK VSSI VSS VDD VDD net08 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI8 net05 VSS VSS VDDI VDD net09 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.22u ln=0.035u multi=1 
++ fp=1 wp=0.29u lp=0.035u
+XI1 net020 VSS VSS VDDI VDD WL_TK S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.5u ln=0.035u multi=4 
++ fp=1 wp=1.65u lp=0.035u
+XI23 net09 VSSI VSS VDD VDD net020 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.65u ln=0.035u multi=1 
++ fp=1 wp=0.85u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RXDEC2_TK_S
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RXDEC2_TK_S GBLB_TK GBL_TK1D RACT RCT_XD<0> RCT_XD<1> RCT_XD<2> 
++ RCT_XD<3> RC_EN RGCLK RWL_TK RWL_TK_IO TM_GBL VDD VDDI VSS VSSI
+XI47_SVT net036 GBL_TK1D VSSI VSS VDD VDD GBLB_TK S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.5u 
++ ln1=0.03u fn2=1 wn2=0.5u ln2=0.03u fp2=1 wp2=1.3u lp2=0.03u multi=2 fp1=1 
++ wp1=1.3u lp1=0.03u
+XI132 RACT VSS VSS VDDI VDD net015 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.12u lp=0.03u
+XI146 RGCLK VSSI VSS VDD VDD net016 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.16u lp=0.03u
+XI140 RACT VSS VSS VDDI VDD net018 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.15u ln=0.03u multi=1 
++ fp=1 wp=0.42u lp=0.03u
+XI114_SVT net054 VSSI VSS VDD VDD net051 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u 
++ multi=1 fp=1 wp=0.32u lp=0.03u
+XI1 net023 VSS VSS VDDI VDD RWL_TK_IO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.0u ln=0.035u 
++ multi=4 fp=1 wp=1.1u lp=0.035u
+XI137 net053 VSS VSS VDDI VDD net060 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.12u lp=0.03u
+XI76_SVT RCT_XD<0> VSSI VSS VDD VDD RCT_XDB<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=120n 
++ ln=0.035u multi=1 fp=1 wp=120n lp=0.035u
+XI82_SVT net37 VSSI VSS VDD VDD net020 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u 
++ multi=1 fp=1 wp=0.12u lp=0.05u
+XI46_SVT GBL_TK1D VSSI VSS VDD VDD net42 S6HVTFWBSO40W8_inv_bulk_hvt fn=2 wn=0.21u ln=0.03u 
++ multi=1 fp=2 wp=0.21u lp=0.03u
+XI115_SVT net051 VSSI VSS VDD VDD net036 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.03u 
++ multi=1 fp=1 wp=0.43u lp=0.03u
+XI51_SVT d2 VSSI VSS VDD VDD d3 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.12u lp=0.05u
+XI144 net016 VSS VSS VDDI VDD net062 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.41u ln=0.035u 
++ multi=1 fp=1 wp=0.54u lp=0.035u
+XI85_SVT net050 VSSI VSS VDD VDD d4 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.12u lp=0.05u
+XI81_SVT net020 VSSI VSS VDD VDD net021 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u 
++ multi=1 fp=1 wp=0.12u lp=0.05u
+XI86_SVT net048 VSSI VSS VDD VDD net050 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u 
++ multi=1 fp=1 wp=0.12u lp=0.05u
+XI54_SVT net045 VSSI VSS VDD VDD net24 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u 
++ multi=1 fp=1 wp=0.12u lp=0.05u
+XI138 net060 VSSI VSS VDD VDD net059 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.16u ln=0.03u multi=1 
++ fp=1 wp=0.21u lp=0.03u
+XI280_SVT d1 VSSI VSS VDD VDD d2 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.12u lp=0.05u
+XI281_SVT GBL_TK1D VSSI VSS VDD VDD net045 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u 
++ multi=1 fp=1 wp=0.21u lp=0.05u
+XI313 net059 VSS VSS VDDI VDD RC_EN S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.6u ln=0.03u multi=1 
++ fp=1 wp=0.6u lp=0.03u
+XI64_SVT net43 net42 VSS VSS VDDI VDD TM_GBL S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=1.3u 
++ ln1=0.03u fn2=1 wn2=1.3u ln2=0.03u fp2=1 wp2=1u lp2=0.03u multi=2 fp1=1 
++ wp1=1u lp1=0.03u
+XI135 net015 RGCLK VSSI VSS VDD VDD net053 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.03u fn2=1 wn2=0.12u ln2=0.03u fp2=1 wp2=0.16u lp2=0.03u multi=1 fp1=1 
++ wp1=0.16u lp1=0.03u
+XI139 RGCLK RGCLK VSSI VSS VDD VDD net023 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=880n 
++ ln1=0.035u fn2=1 wn2=880n ln2=0.035u fp2=1 wp2=570n lp2=0.035u multi=1 fp1=1 
++ wp1=570n lp1=0.035u
+XI49_SVT d3 net045 VSSI VSS VDD VDD net048 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=120n 
++ ln1=0.05u fn2=1 wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 
++ wp1=120n lp1=0.05u
+XI273_SVT d4 RCT_XD<2> VSSI VSS VDD VDD net36 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=120n 
++ ln1=0.05u fn2=1 wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 
++ wp1=120n lp1=0.05u
+XI274_SVT net36 net045 VSSI VSS VDD VDD net37 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=120n 
++ ln1=0.05u fn2=1 wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 
++ wp1=120n lp1=0.05u
+XI277_SVT RCT_XD<1> net021 VSSI VSS VDD VDD net065 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.21u 
++ ln1=0.03u fn2=1 wn2=0.21u ln2=0.03u fp2=1 wp2=0.21u lp2=0.03u multi=1 fp1=1 
++ wp1=0.21u lp1=0.03u
+XI278_SVT net065 net42 VSSI VSS VDD VDD net40 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.54u 
++ ln1=0.03u fn2=1 wn2=0.54u ln2=0.03u fp2=1 wp2=0.43u lp2=0.03u multi=1 fp1=1 
++ wp1=0.43u lp1=0.03u
+XI266_SVT RCT_XD<3> net24 VSSI VSS VDD VDD d1 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=120n 
++ ln1=0.05u fn2=1 wn2=120n ln2=0.05u fp2=1 wp2=120n lp2=0.05u multi=1 fp1=1 
++ wp1=120n lp1=0.05u
+XI52_SVT RCT_XD<0> net40 VSSI VSS VDD VDD net43 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=1.3u 
++ ln1=0.03u fn2=1 wn2=1.3u ln2=0.03u fp2=1 wp2=1.3u lp2=0.03u multi=1 fp1=1 
++ wp1=1.3u lp1=0.03u
+XI110_SVT net065 net42 RCT_XDB<0> VSSI VSS VDD VDD net054 S6HVTFWBSO40W8_aoi_bulk_hvt fn2=1 
++ wn2=0.43u ln2=0.03u fn3=1 wn3=0.21u ln3=0.03u fn1=1 wn1=0.43u ln1=0.03u 
++ fp2=1 wp2=0.54u lp2=0.03u fp1=1 wp1=0.54u lp1=0.03u multi=1 fp3=1 wp3=0.54u 
++ lp3=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    XDEC2_2_TK_S
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_XDEC2_2_TK_S DSLP_INT GBLB_TK GBL_TK1D KP<0> KP<1> KP<2> LRPCH_1ST 
++ PD_VDDI_H PD_VSSI_L RACT RCT_XD<0> RCT_XD<1> RCT_XD<2> RCT_XD<3> RC_EN RGCLK 
++ RHITB RPD_H RRCLK RREDXD<0> RREDXD<1> RWCLK RWL_TK RWL_TK_FB RWL_TK_IO 
++ RXPA<0> RXPA<1> RXPA<2> RXPA<3> RXPA<4> RXPA<5> RXPA<6> RXPA<7> RXPB<0> 
++ RXPB<1> RXPB<2> RXPB<3> RXPB<4> RXPB<5> RXPB<6> RXPB<7> RXPC<0> RXPC<1> 
++ RXPC<2> RXPC<3> RXPC<4> RXPC<5> RXPC<6> RXPC<7> SD_INT TIEH TM_GBL VDD VDDI 
++ VSS VSSI WACT_FB WCLK_TK WGCLK WHITB WPD_H WREDXD<0> WREDXD<1> WWL_TK 
++ WWL_TK_FB WXPA<0> WXPA<1> WXPA<2> WXPA<3> WXPA<4> WXPA<5> WXPA<6> WXPA<7> 
++ WXPB<0> WXPB<1> WXPB<2> WXPB<3> WXPB<4> WXPB<5> WXPB<6> WXPB<7> WXPC<0> 
++ WXPC<1> WXPC<2> WXPC<3> WXPC<4> WXPC<5> WXPC<6> WXPC<7>
+XIw VDD VDDI VSS VSSI WCLK_TK WGCLK WWL_TK S6HVTFWBSO40W8_WXDEC2_TK_S
+XIr GBLB_TK GBL_TK1D RACT RCT_XD<0> RCT_XD<1> RCT_XD<2> RCT_XD<3> RC_EN RGCLK 
++ RWL_TK RWL_TK_IO TM_GBL VDD VDDI VSS VSSI S6HVTFWBSO40W8_RXDEC2_TK_S
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    PIN_DIODE
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_PIN_DIODE IN VSS
+DD0 VSS IN ndio area=3.6e-14 pj=7.6e-07 m=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    LCTRL4_DSLP
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_LCTRL4_DSLP AVDD AVDDI C_LO C_UP DSLPB_LIO DSLP_INT DSLP_INTO 
++ INT_VDD_LO INT_VDD_UP INT_VSS_LO INT_VSS_UP LCLK_LO LCLK_UP LRPCH_L 
++ PD_VDDI_H PRE_LO PRE_UP RACT RGCLK RHITB RVDDI TIEL TM_GBL VDD VSS VSSI 
++ turnon turnon_in
+MM4 LRPCH_L net044 VDD VDD pch_hvt_mac l=40n w=210.0n m=1 nf=1
+MM2 RVDDI net26 VDD VDD pch_hvt_mac l=35.0n w=1.05u m=34 nf=1
+MM0 RACT TIEL VSSI VSS nch_hvt_mac l=30n w=250.0n m=4 nf=1
+MM6 net043 PDB VSS VSS nch_hvt_mac l=30n w=1.3u m=8 nf=1
+MM5 LRPCH_L net045 VSS VSS nch_hvt_mac l=40n w=210.0n m=1 nf=1
+XI108 turnon_in LCLK_LOB VSS VSS RVDDI VDD net15 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.4u 
++ ln1=0.03u fn2=1 wn2=0.4u ln2=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=1 fp1=1 
++ wp1=0.12u lp1=0.03u
+XI107 RHITB C_LO RGCLK VSSI VSS VDD VDD LCLK_LOB S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=1.2u 
++ ln1=0.03u fn2=1 wn2=1.2u ln2=0.03u fn3=1 wn3=1.2u ln3=0.03u fp3=1 wp3=0.52u 
++ lp3=0.03u fp2=1 wp2=0.52u lp2=0.03u multi=3 fp1=1 wp1=0.52u lp1=0.03u
+XI106 RHITB C_UP RGCLK VSSI VSS VDD VDD turnon S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=1.2u 
++ ln1=0.03u fn2=1 wn2=1.2u ln2=0.03u fn3=1 wn3=1.2u ln3=0.03u fp3=1 wp3=0.52u 
++ lp3=0.03u fp2=1 wp2=0.52u lp2=0.03u multi=3 fp1=1 wp1=0.52u lp1=0.03u
+XI89 turnon_in LCLK_LOB LCLK_LOB VSS VSS RVDDI VDD net16 S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 
++ wn1=0.9u ln1=0.03u fn2=1 wn2=0.9u ln2=0.03u fn3=1 wn3=0.9u ln3=0.03u fp3=1 
++ wp3=0.21u lp3=0.03u fp2=1 wp2=1.3u lp2=0.03u multi=1 fp1=1 wp1=1.3u lp1=0.03u
+XI141 DSLP_INT PDB VSS VSS VDD VDD net045 S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.040u fn2=1 wn2=0.12u ln2=0.040u fp2=1 wp2=0.12u lp2=0.040u multi=1 
++ fp1=1 wp1=0.12u lp1=0.040u
+XI128 PDB VSS VSS VDD VDD net26 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.7u ln=0.03u multi=2 fp=1 
++ wp=0.6u lp=0.03u
+XI105 net16 VSSI VSS VDD VDD net17 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.1u ln=0.03u multi=3 
++ fp=1 wp=1.1u lp=0.03u
+XI2 net17 net043 VSS RVDDI VDD LRPCH_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.3u ln=0.03u 
++ multi=8 fp=1 wp=1.3u lp=0.03u
+XI131 PD_VDDI_H VSS VSS VDD VDD PDB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.36u lp=0.03u
+XI102 LCLK_LOB VSS VSS RVDDI VDD LCLK_LO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.54u ln=0.03u 
++ multi=8 fp=1 wp=0.65u lp=0.03u
+XI132 net044 VSS VSS VDD VDD net024 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.04u multi=3 
++ fp=1 wp=0.12u lp=0.04u
+XI54 net15 VSSI VSS VDD VDD LCLKB_D S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.32u lp=0.03u
+XI135 net024 VSS VSS VDD VDD DSLPB_LIO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.4u ln=0.04u 
++ multi=3 fp=1 wp=0.6u lp=0.04u
+XI146 net024 VSS VSS VDD VDD net025 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.04u multi=1 
++ fp=1 wp=0.12u lp=0.04u
+XI18 turnon VSS VSS RVDDI VDD LCLK_UP S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.54u ln=0.03u 
++ multi=8 fp=1 wp=0.65u lp=0.03u
+XI145 net025 VSS VSS VDD VDD DSLP_INTO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.04u 
++ multi=3 fp=1 wp=0.12u lp=0.04u
+XI77 DSLP_INT VSS VSS VDD VDD net044 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.04u multi=1 
++ fp=1 wp=0.12u lp=0.04u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    LCTRL4_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_LCTRL4_SD AVDD AVDDI C_LO C_UP DSLPB_LIO DSLP_INT DSLP_INTO INT_VDD_LO 
++ INT_VDD_UP INT_VSS_LO INT_VSS_UP LCLK_LO LCLK_UP LRPCH_L PD_VDDI_H PRE_LO 
++ PRE_UP RACT RGCLK RHITB RVDDI SD_AVDDISW SD_INT SD_INTO TIEL TM_GBL VDD VSS 
++ VSSI turnon turnon_in
+XIDSLP AVDD AVDDI C_LO C_UP DSLPB_LIO DSLP_INT DSLP_INTO INT_VDD_LO INT_VDD_UP 
++ INT_VSS_LO INT_VSS_UP LCLK_LO LCLK_UP LRPCH_L PD_VDDI_H PRE_LO PRE_UP RACT 
++ RGCLK RHITB RVDDI TIEL TM_GBL VDD VSS VSSI turnon turnon_in S6HVTFWBSO40W8_LCTRL4_DSLP
+XI104 SD_AVDDISW VSS VSS VDD VDD net059 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.04u 
++ multi=1 fp=1 wp=0.12u lp=0.04u
+XI103 net059 VSS VSS VDD VDD SD_INTO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.04u multi=3 
++ fp=1 wp=0.12u lp=0.04u
+XI101 net053 VSS VSS VDD VDD SD_AVDDISW S6HVTFWBSO40W8_inv_bulk_hvt fn=3 wn=0.3u ln=0.04u 
++ multi=1 fp=3 wp=0.5u lp=0.04u
+XI100 SD_INT VSS VSS VDD VDD net053 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.040u multi=1 
++ fp=1 wp=0.12u lp=0.040u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WLCTRL4_SW
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WLCTRL4_SW C_LO C_UP LCLK_LO LCLK_UP PD_VDDI_H VDD VSS VSSI WACT 
++ WACT_FB WGCLK WHITB WVDDI
+XI106 WHITB C_UP WGCLK VSSI VSS VDD VDD net13 S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.8u 
++ ln1=0.03u fn2=1 wn2=0.8u ln2=0.03u fn3=1 wn3=0.8u ln3=0.03u fp3=1 wp3=0.8u 
++ lp3=0.03u fp2=1 wp2=0.8u lp2=0.03u multi=2 fp1=1 wp1=0.8u lp1=0.03u
+XI35 WHITB C_LO WGCLK VSSI VSS VDD VDD net12 S6HVTFWBSO40W8_nand3_bulk_hvt fn1=1 wn1=0.8u 
++ ln1=0.03u fn2=1 wn2=0.8u ln2=0.03u fn3=1 wn3=0.8u ln3=0.03u fp3=1 wp3=0.8u 
++ lp3=0.03u fp2=1 wp2=0.8u lp2=0.03u multi=2 fp1=1 wp1=0.8u lp1=0.03u
+MM1 WVDDI net013 VDD VDD pch_hvt_mac l=30n w=1u m=35 nf=1
+XI34 net12 VSS VSS WVDDI VDD LCLK_LO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1u ln=0.03u multi=7 
++ fp=1 wp=1u lp=0.03u
+XI17 net13 VSS VSS WVDDI VDD LCLK_UP S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1u ln=0.03u multi=7 
++ fp=1 wp=1u lp=0.03u
+XI131 PD_VDDI_H VSS VSS VDD VDD net021 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.36u lp=0.035u
+XI128 net021 VSS VSS VDD VDD net013 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1u ln=0.035u multi=2 
++ fp=1 wp=0.9u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RWLCTRL4_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RWLCTRL4_SD AVDD AVDDI DSLPB_LIO DSLP_INT DSLP_INTO INT_VDD_LO 
++ INT_VDD_UP INT_VSS_LO INT_VSS_UP KP<0> KP<1> KP<2> KP_D<0> KP_D<1> KP_D<2> 
++ LRPCH_L PD_VDDI_H PD_VSSI_L PRE_LO PRE_UP RACT RC_LO RC_UP RGCLK RHITB 
++ RLCLK_LO RLCLK_UP RVDDI RWL_TK RXPA<0> RXPA<1> RXPA<2> RXPA<3> RXPA<4> 
++ RXPA<5> RXPA<6> RXPA<7> RXPB<0> RXPB<1> RXPB<2> RXPB<3> RXPB<4> RXPB<5> 
++ RXPB<6> RXPB<7> RXPC<0> RXPC<1> RXPC<2> RXPC<3> RXPC<4> RXPC<5> RXPC<6> 
++ RXPC<7> SD_AVDDISW SD_INT SD_INTO TIEH TIEL TMB_GBL VDD VSS VSSI WACT 
++ WACT_FB WC_LO WC_UP WGCLK WHITB WLCLK_LO WLCLK_UP WVDDI WXPA<0> WXPA<1> 
++ WXPA<2> WXPA<3> WXPA<4> WXPA<5> WXPA<6> WXPA<7> WXPB<0> WXPB<1> WXPB<2> 
++ WXPB<3> WXPB<4> WXPB<5> WXPB<6> WXPB<7> WXPC<0> WXPC<1> WXPC<2> WXPC<3> 
++ WXPC<4> WXPC<5> WXPC<6> WXPC<7>
+MM4 TIEL TIEH VSS VSS nch_hvt_mac l=30n w=210.0n m=1 nf=1
+XIr AVDD AVDDI RC_LO RC_UP DSLPB_LIO DSLP_INT DSLP_INTO INT_VDD_LO INT_VDD_UP 
++ INT_VSS_LO INT_VSS_UP RLCLK_LO RLCLK_UP LRPCH_L PD_VDDI_H PRE_LO PRE_UP RACT 
++ RGCLK RHITB RVDDI SD_AVDDISW SD_INT SD_INTO TIEL TMB_GBL VDD VSS VSSI turnon 
++ turnon S6HVTFWBSO40W8_LCTRL4_SD
+XIw WC_LO WC_UP WLCLK_LO WLCLK_UP PD_VDDI_H VDD VSS VSSI WACT WACT_FB WGCLK 
++ WHITB RVDDI S6HVTFWBSO40W8_WLCTRL4_SW
+XI32<0> net99<0> VSS VSS VDD VDD KP_D<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1u ln=0.035u 
++ multi=2 fp=1 wp=1.2u lp=0.035u
+XI32<1> net99<1> VSS VSS VDD VDD KP_D<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1u ln=0.035u 
++ multi=2 fp=1 wp=1.2u lp=0.035u
+XI32<2> net99<2> VSS VSS VDD VDD KP_D<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1u ln=0.035u 
++ multi=2 fp=1 wp=1.2u lp=0.035u
+XI31<0> KP<0> VSS VSS VDD VDD net99<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.32u lp=0.035u
+XI31<1> KP<1> VSS VSS VDD VDD net99<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.32u lp=0.035u
+XI31<2> KP<2> VSS VSS VDD VDD net99<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.32u lp=0.035u
+MM3 TIEH TIEL VDD VDD pch_hvt_mac l=30n w=210.0n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    V_TRACK
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_V_TRACK RACT RGCLK TM_GBL VDD VSS VSSI
+XI18 RGCLK VSSI VSS VDD VDD RACT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.5u ln=0.03u multi=1 fp=1 
++ wp=0.5u lp=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    BST_TRIBUF
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_BST_TRIBUF BST BSTB IN IN_M VDD VSS VSSI Y YB
+XI43 YB VSSI VSS VDD VDD Y S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.3u ln=0.035u multi=1 fp=1 
++ wp=0.5u lp=0.035u
+XI29 IN_M VSSI VSS VDD VDD BST BSTB YB S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.2u ln=0.035u 
++ multi=1 fp=1 wp=0.36u lp=0.035u
+XI28 IN VSSI VSS VDD VDD BSTB BST YB S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.2u ln=0.035u multi=1 
++ fp=1 wp=0.36u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    BST_GEN
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_BST_GEN BIST BST BSTB TIEL VDD VSS VSSI
+XI4 BIST VSSI VSS VDD VDD BSTB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.8u ln=0.035u multi=5 fp=1 
++ wp=1.2u lp=0.035u
+XI43 BSTB VSSI VSS VDD VDD BST S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.8u ln=0.035u multi=5 fp=1 
++ wp=1.2u lp=0.035u
+XI6 net18 VSS VSS VDD VDD net010 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.8u ln=0.035u multi=1 
++ fp=1 wp=1.2u lp=0.035u
+XI5 TIEL TIEL VSS VSS VDD VDD net18 S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.4u ln1=0.035u fn2=1 
++ wn2=0.4u ln2=0.035u fp2=1 wp2=1.2u lp2=0.035u multi=1 fp1=1 wp1=1.2u 
++ lp1=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    BST_GCTRL
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_BST_GCTRL AA<0> AA<1> AA<2> AA<3> AA<4> AA<5> AA<6> AA<7> AA<8> AA<9> 
++ AA<10> AA<11> AAI<0> AAI<1> AAI<2> AAI<3> AAI<4> AAI<5> AAI<6> AAI<7> AAI<8> 
++ AAI<9> AAI<10> AAI<11> AAIB<0> AAIB<1> AAIB<2> AAIB<3> AAIB<4> AAIB<5> 
++ AAIB<6> AAIB<7> AAIB<8> AAIB<9> AAIB<10> AAIB<11> AB<0> AB<1> AB<2> AB<3> 
++ AB<4> AB<5> AB<6> AB<7> AB<8> AB<9> AB<10> AB<11> ABI<0> ABI<1> ABI<2> 
++ ABI<3> ABI<4> ABI<5> ABI<6> ABI<7> ABI<8> ABI<9> ABI<10> ABI<11> ABIB<0> 
++ ABIB<1> ABIB<2> ABIB<3> ABIB<4> ABIB<5> ABIB<6> ABIB<7> ABIB<8> ABIB<9> 
++ ABIB<10> ABIB<11> AMA<0> AMA<1> AMA<2> AMA<3> AMA<4> AMA<5> AMA<6> AMA<7> 
++ AMA<8> AMA<9> AMA<10> AMA<11> AMB<0> AMB<1> AMB<2> AMB<3> AMB<4> AMB<5> 
++ AMB<6> AMB<7> AMB<8> AMB<9> AMB<10> AMB<11> BIST BST BSTB CLKR CLKW KP<0> 
++ KP<1> KP<2> RCT<0> RCT<1> REB REBI REBIB REBM SD SDSLPI SLP TIEL TM VDD VSS 
++ VSSI WCT<0> WCT<1> WEB WEBI WEBIB WEBM
+XIBIST_AB<0> BST BSTB AB<0> AMB<0> VDD VSS VSSI ABI<0> ABIB<0> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<1> BST BSTB AB<1> AMB<1> VDD VSS VSSI ABI<1> ABIB<1> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<2> BST BSTB AB<2> AMB<2> VDD VSS VSSI ABI<2> ABIB<2> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<3> BST BSTB AB<3> AMB<3> VDD VSS VSSI ABI<3> ABIB<3> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<4> BST BSTB AB<4> AMB<4> VDD VSS VSSI ABI<4> ABIB<4> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<5> BST BSTB AB<5> AMB<5> VDD VSS VSSI ABI<5> ABIB<5> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<6> BST BSTB AB<6> AMB<6> VDD VSS VSSI ABI<6> ABIB<6> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<7> BST BSTB AB<7> AMB<7> VDD VSS VSSI ABI<7> ABIB<7> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<8> BST BSTB AB<8> AMB<8> VDD VSS VSSI ABI<8> ABIB<8> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<9> BST BSTB AB<9> AMB<9> VDD VSS VSSI ABI<9> ABIB<9> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<10> BST BSTB AB<10> AMB<10> VDD VSS VSSI ABI<10> ABIB<10> 
++ S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AB<11> BST BSTB AB<11> AMB<11> VDD VSS VSSI ABI<11> ABIB<11> 
++ S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_REB BST BSTB REB REBM VDD VSS VSSI REBI REBIB S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<0> BST BSTB AA<0> AMA<0> VDD VSS VSSI AAI<0> AAIB<0> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<1> BST BSTB AA<1> AMA<1> VDD VSS VSSI AAI<1> AAIB<1> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<2> BST BSTB AA<2> AMA<2> VDD VSS VSSI AAI<2> AAIB<2> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<3> BST BSTB AA<3> AMA<3> VDD VSS VSSI AAI<3> AAIB<3> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<4> BST BSTB AA<4> AMA<4> VDD VSS VSSI AAI<4> AAIB<4> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<5> BST BSTB AA<5> AMA<5> VDD VSS VSSI AAI<5> AAIB<5> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<6> BST BSTB AA<6> AMA<6> VDD VSS VSSI AAI<6> AAIB<6> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<7> BST BSTB AA<7> AMA<7> VDD VSS VSSI AAI<7> AAIB<7> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<8> BST BSTB AA<8> AMA<8> VDD VSS VSSI AAI<8> AAIB<8> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<9> BST BSTB AA<9> AMA<9> VDD VSS VSSI AAI<9> AAIB<9> S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<10> BST BSTB AA<10> AMA<10> VDD VSS VSSI AAI<10> AAIB<10> 
++ S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_AA<11> BST BSTB AA<11> AMA<11> VDD VSS VSSI AAI<11> AAIB<11> 
++ S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_WEB BST BSTB WEB WEBM VDD VSS VSSI WEBI WEBIB S6HVTFWBSO40W8_BST_TRIBUF
+XIBIST_GEN BIST BST BSTB TIEL VDD VSS VSSI S6HVTFWBSO40W8_BST_GEN
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WCTRL_M4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WCTRL_M4 AA<0> AA<1> AA<2> AA<3> AA<4> AA<5> AA<6> AA<7> AA<8> AA<9> 
++ AA<10> AA<11> CLKW PD PD_H PD_L_PU TIEH TIEL TM_L VDD VDDI VSS VSSI WB_TK 
++ WCLK_H WCLK_TK WCT<0> WCT<1> WEB WEN_XD WGCLK WPCH_L WWL_TK WXPA<0> WXPA<1> 
++ WXPA<2> WXPA<3> WXPB<0> WXPB<1> WXPB<2> WXPB<3> WXPB<4> WXPB<5> WXPB<6> 
++ WXPB<7> WXPC<0> WXPC<1> WXPC<2> WXPC<3> WXPC<4> WXPC<5> WXPC<6> WXPC<7> 
++ WYA<0> WYA<1> WYA<2> WYA<3> WYB<0> WYB<1> WYB<2> WYB<3> lat_ck lat_ckb
+XI20 WCT<0> WCT<1> TM_WB_TK VDD VDDI VSS VSSI WB_TK S6HVTFWBSO40W8_CTDEC_2TO4_W
+XIenb CLKW WEN WEB WEN_XD PD_L_PU TIEL VDD VDDI VSS VSSI S6HVTFWBSO40W8_ENB
+XIclk CLKW WEN WCLK_H lat_ck lat_ckb WPCH_L PD_H PD_L_PU PD TIEL TM_L TM_WB_TK 
++ VDD VDDI VSS VSSI WCLK_TK WGCLK S6HVTFWBSO40W8_WCLKGEN4
+XIxpa AA<2> AA<3> lat_ck lat_ckb VDD VDDI VSS VSSI WXPA<0> WXPA<1> WXPA<2> 
++ WXPA<3> S6HVTFWBSO40W8_XP2_4
+XIypa AA<0> AA<1> lat_ck lat_ckb VDD VDDI VSS VSSI WYA<0> WYA<1> WYA<2> WYA<3> 
++ S6HVTFWBSO40W8_YP2_4_HP_M2
+XIxpb AA<4> AA<5> AA<6> lat_ck lat_ckb VDD VDDI VSS VSSI WXPB<0> WXPB<1> 
++ WXPB<2> WXPB<3> WXPB<4> WXPB<5> WXPB<6> WXPB<7> S6HVTFWBSO40W8_XP3_8
+XIxpc AA<7> AA<8> AA<9> lat_ck lat_ckb VDD VDD VSS VSS WXPC<0> WXPC<1> WXPC<2> 
++ WXPC<3> WXPC<4> WXPC<5> WXPC<6> WXPC<7> S6HVTFWBSO40W8_XP3_8
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RCTRL_M4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RCTRL_M4 AB<0> AB<1> AB<2> AB<3> AB<4> AB<5> AB<6> AB<7> AB<8> AB<9> 
++ AB<10> AB<11> CLKR GBLB_TK PD PD_L_PU RCLK_H RCT<0> RCT<1> RCT_XDTK<0> 
++ RCT_XDTK<1> RCT_XDTK<2> RCT_XDTK<3> RC_EN REB REN_XD RGCLK RPCH_L RXPA<0> 
++ RXPA<1> RXPA<2> RXPA<3> RXPB<0> RXPB<1> RXPB<2> RXPB<3> RXPB<4> RXPB<5> 
++ RXPB<6> RXPB<7> RXPC<0> RXPC<1> RXPC<2> RXPC<3> RXPC<4> RXPC<5> RXPC<6> 
++ RXPC<7> RYA<0> RYA<1> RYA<2> RYA<3> RYB<0> RYB<1> RYB<2> RYB<3> TIEH TIEL 
++ TM_GBL TM_L VDD VDDI VSS VSSI xlat_ck xlat_ckb
+XIxpb AB<4> AB<5> AB<6> xlat_ck xlat_ckb VDD VDDI VSS VSSI RXPB<0> RXPB<1> 
++ RXPB<2> RXPB<3> RXPB<4> RXPB<5> RXPB<6> RXPB<7> S6HVTFWBSO40W8_XP3_8
+XIxpc AB<7> AB<8> AB<9> xlat_ck xlat_ckb VDD VDD VSS VSS RXPC<0> RXPC<1> 
++ RXPC<2> RXPC<3> RXPC<4> RXPC<5> RXPC<6> RXPC<7> S6HVTFWBSO40W8_XP3_8
+XI25 RCT<0> RCT<1> RCT_XDTK<0> RCT_XDTK<1> RCT_XDTK<2> RCT_XDTK<3> VDD VDDI 
++ VSS VSSI S6HVTFWBSO40W8_CTDEC_2TO4
+XIenb CLKR REN REB REN_XD PD_L_PU TIEL VDD VDDI VSS VSSI S6HVTFWBSO40W8_ENB
+XIclk CLKR REN GBLB_TK RPCH_L PD_L_PU RCLK_H RC_EN PD TM_GBL TM_L VDD VDDI VSS 
++ VSSI RGCLK xlat_ck xlat_ckb lat_ck lat_ckb S6HVTFWBSO40W8_RCLKGEN5
+XIypa AB<0> AB<1> lat_ck lat_ckb VDD VDDI VSS VSSI RYA<0> RYA<1> RYA<2> RYA<3> 
++ S6HVTFWBSO40W8_YP2_4_HP_M2
+XIxpa AB<2> AB<3> xlat_ck xlat_ckb VDD VDDI VSS VSSI RXPA<0> RXPA<1> RXPA<2> 
++ RXPA<3> S6HVTFWBSO40W8_XP2_4
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    GCTRL_M4_B_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_GCTRL_M4_B_SD AA<0> AA<1> AA<2> AA<3> AA<4> AA<5> AA<6> AA<7> AA<8> 
++ AA<9> AA<10> AA<11> AB<0> AB<1> AB<2> AB<3> AB<4> AB<5> AB<6> AB<7> AB<8> 
++ AB<9> AB<10> AB<11> CLKR CLKW DSLP DSLP_SW GBLB_TK GBL_TK1D KP<0> KP<1> 
++ KP<2> KPI<0> KPI<1> KPI<2> LRPCH_1ST PD_H_PDWN PD_VDDI_FB PD_VDDI_H 
++ PD_VSSI_FB PD_VSSI_L PD_VSSI_TL RBL_TK RC0 RC1 RCLK_H RCT<0> RCT<1> 
++ RCT_XDTK<0> RCT_XDTK<1> RCT_XDTK<2> RCT_XDTK<3> RC_EN REB RGCLK RHITB RPCH_L 
++ RPD_H RRCLK RREDXD<0> RREDXD<1> RSTB RWCLK RXPA<0> RXPA<1> RXPA<2> RXPA<3> 
++ RXPB<0> RXPB<1> RXPB<2> RXPB<3> RXPB<4> RXPB<5> RXPB<6> RXPB<7> RXPC<0> 
++ RXPC<1> RXPC<2> RXPC<3> RXPC<4> RXPC<5> RXPC<6> RXPC<7> RYA<0> RYA<1> RYA<2> 
++ RYA<3> RYB<0> RYB<1> RYB<2> RYB<3> SCLK SD SDIN SDOUT SD_SW SLP SLP_INT TIEH 
++ TIEL TM TM_GBL VDD VDDI VDDP VSS VSSI WB_TK WCLK_H WCLK_TK WCT<0> WCT<1> WEB 
++ WGCLK WHITB WPCH_L WPD_H WREDXD<0> WREDXD<1> WWL_TK WXPA<0> WXPA<1> WXPA<2> 
++ WXPA<3> WXPB<0> WXPB<1> WXPB<2> WXPB<3> WXPB<4> WXPB<5> WXPB<6> WXPB<7> 
++ WXPC<0> WXPC<1> WXPC<2> WXPC<3> WXPC<4> WXPC<5> WXPC<6> WXPC<7> WYA<0> 
++ WYA<1> WYA<2> WYA<3> WYB<0> WYB<1> WYB<2> WYB<3>
+XIW AA<0> AA<1> AA<2> AA<3> AA<4> AA<5> AA<6> AA<7> AA<8> AA<9> AA<10> AA<11> 
++ CLKW SLP_INT PD_H_PDWN PD_L_PU TIEH TIEL TM_L VDD VDDI VSS VSSI WB_TK WCLK_H 
++ WCLK_TK WCT<0> WCT<1> WEB net095 WGCLK WPCH_L WWL_TK WXPA<0> WXPA<1> WXPA<2> 
++ WXPA<3> WXPB<0> WXPB<1> WXPB<2> WXPB<3> WXPB<4> WXPB<5> WXPB<6> WXPB<7> 
++ WXPC<0> WXPC<1> WXPC<2> WXPC<3> WXPC<4> WXPC<5> WXPC<6> WXPC<7> WYA<0> 
++ WYA<1> WYA<2> WYA<3> WYB<0> WYB<1> WYB<2> WYB<3> wlat_ck wlat_ckb S6HVTFWBSO40W8_WCTRL_M4
+XIR AB<0> AB<1> AB<2> AB<3> AB<4> AB<5> AB<6> AB<7> AB<8> AB<9> AB<10> AB<11> 
++ CLKR GBLB_TK SLP_INT PD_L_PU RCLK_H RCT<0> RCT<1> RCT_XDTK<0> RCT_XDTK<1> 
++ RCT_XDTK<2> RCT_XDTK<3> RC_EN REB net099 RGCLK RPCH_L RXPA<0> RXPA<1> 
++ RXPA<2> RXPA<3> RXPB<0> RXPB<1> RXPB<2> RXPB<3> RXPB<4> RXPB<5> RXPB<6> 
++ RXPB<7> RXPC<0> RXPC<1> RXPC<2> RXPC<3> RXPC<4> RXPC<5> RXPC<6> RXPC<7> 
++ RYA<0> RYA<1> RYA<2> RYA<3> RYB<0> RYB<1> RYB<2> RYB<3> TIEH TIEL TM_GBL 
++ TM_L VDD VDDI VSS VSSI rlat_ck rlat_ckb S6HVTFWBSO40W8_RCTRL_M4
+XI151 TIEH TIEL VDD VSS S6HVTFWBSO40W8_TIE_PWR
+XI214 TM VSSI VSS VDD VDD TM_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.035u multi=1 fp=1 
++ wp=0.43u lp=0.035u
+XI241 net0106 VSS VSS VDD VDD net0131 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.14u lp=0.035u
+XI222<0> net0121<0> VSS VSS VDD VDD KPI<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.3u ln=0.035u 
++ multi=3 fp=1 wp=0.4u lp=0.035u
+XI222<1> net0121<1> VSS VSS VDD VDD KPI<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.3u ln=0.035u 
++ multi=3 fp=1 wp=0.4u lp=0.035u
+XI222<2> net0121<2> VSS VSS VDD VDD KPI<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.3u ln=0.035u 
++ multi=3 fp=1 wp=0.4u lp=0.035u
+XIPD DSLP DSLP_SW DSLP_SW PD_H_PDWN PD_H_PDWN PD_L_PU SD_SW PD_VDDI_H 
++ PD_VDDI_H PD_VSSI_TL PD_VSSI_L SD SD_SW SLP SLP_INT TIEH VDD VDDI VSS VSSI 
++ S6HVTFWBSO40W8_POWERD
+XI225 SLP SD VSS VSS VDD VDD net0106 S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.12u ln1=0.035u 
++ fn2=1 wn2=0.12u ln2=0.035u fp2=1 wp2=0.14u lp2=0.035u multi=1 fp1=1 
++ wp1=0.14u lp1=0.035u
+XI223<0> KP<0> net0131 VSS VSS VDD VDD net0121<0> S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.035u fn2=1 wn2=0.12u ln2=0.035u fp2=1 wp2=0.2u lp2=0.035u multi=1 
++ fp1=1 wp1=0.2u lp1=0.035u
+XI223<1> KP<1> net0131 VSS VSS VDD VDD net0121<1> S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.035u fn2=1 wn2=0.12u ln2=0.035u fp2=1 wp2=0.2u lp2=0.035u multi=1 
++ fp1=1 wp1=0.2u lp1=0.035u
+XI223<2> KP<2> net0131 VSS VSS VDD VDD net0121<2> S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.035u fn2=1 wn2=0.12u ln2=0.035u fp2=1 wp2=0.2u lp2=0.035u multi=1 
++ fp1=1 wp1=0.2u lp1=0.035u
+MM3 RHITB TIEL VDD VDD pch_hvt_mac l=35.0n w=1.5u m=1 nf=1
+MM0 WHITB TIEL VDD VDD pch_hvt_mac l=35.0n w=1.5u m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    tri_m2
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_tri_m2 A SEL SELB VDD VDDI VSS Y
+MM3 Y SEL net9 VSS nch_hvt_mac l=30n w=220.0n m=4 nf=1
+MM2 net9 A VSS VSS nch_hvt_mac l=30n w=220.0n m=4 nf=1
+MM1 net15 A VDDI VDD pch_hvt_mac l=30n w=320.0n m=4 nf=1
+MM0 Y SELB net15 VDD pch_hvt_mac l=30n w=320.0n m=4 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RPCH_MUX2
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RPCH_MUX2 C CB PCH_L RB RB_I TIEL VDD VDDI VSS
+XI6 RB C CB VDD VDDI VSS RB_I S6HVTFWBSO40W8_tri_m2
+MM3 net022 PCH_L VSS VSS nch_hvt_mac l=35.0n w=110.0n m=1 nf=1
+MM2 RB RB_LAT net022 VSS nch_hvt_mac l=35.0n w=110.0n m=1 nf=1
+MM1 RB PCH_L VDDI VDD pch_hvt_mac l=35.0n w=1u m=1 nf=1
+MM4 net063 TIEL VDDI VDD pch_hvt_mac l=35.0n w=110.0n m=1 nf=1
+MM0 RB RB_LAT net063 VDD pch_hvt_mac l=35.0n w=110.0n m=1 nf=1
+XI1 RB VSS VSS VDDI VDD RB_LAT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=110n ln=0.035u multi=1 fp=1 
++ wp=110n lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RPCH_CTL2
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RPCH_CTL2 CK PCH_H PCH_L VDD VDDI VSS VSSI
+XI8 PCH_H VSSI VSS VDD VDD PCH_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.16u ln=0.035u multi=1 
++ fp=1 wp=0.6u lp=0.035u
+XI10 CK VSS VSS VDDI VDD PCH_H S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u multi=1 fp=1 
++ wp=0.14u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    YDECTK_R
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_YDECTK_R PD PDB RCLK_H RPCH_DLY RPCH_L VDD VDDI VSS VSSI
+XI5 net020 net031 RPCH_DLY VDD VDDI VSS VSSI S6HVTFWBSO40W8_RPCH_CTL2
+XI21 net012 VSS VSS VDDI VDD RPCH_RX S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=2 wp=0.21u lp=0.035u
+XI12 PD VSS VSS VDDI VDD PDB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 fp=1 
++ wp=0.12u lp=0.035u
+XI31 net016 VSS VSS VDDI VDD net020 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI29 RCLK_H VSSI VSS VDD VDD net012 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u multi=1 
++ fp=1 wp=0.12u lp=0.035u
+XI23 RPCH_L RPCH_RX VSSI VSS VDD VDD net016 S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.035u fn2=1 wn2=0.12u ln2=0.035u fp2=1 wp2=0.18u lp2=0.035u multi=1 
++ fp1=1 wp1=0.18u lp1=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    IO_RTK_PWR
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_IO_RTK_PWR DSLP_SW PD_VDDI_H PD_VSSI_L VDD VDDI VDDI_SW VSS VSSI 
++ VSSI_SW
+MM1 VDDI VDDI_SW VDD VDD pch_hvt_mac l=35.0n w=760.0n m=11 nf=1
+MM0 VSSI VSSI_SW VSS VSS nch_hvt_mac l=35.0n w=700n m=15 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RXDEC2_4_S2
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RXDEC2_4_S2 A<0> A<1> A<2> A<3> B INT_VDD INT_VSS LCLK PD_VDDI_H PREC 
++ VDD VDDI VSS VSSI WL<0> WL<1> WL<2> WL<3>
+MM6 I_AB<3> A<3> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM23 INT_WLB<3> I_XD_PCLK<3> INT2 VSS nch_hvt_mac l=35.0n w=875.00n m=1 nf=1
+MM47 I_AB<0> A<0> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM46 INT_WLB<0> I_XD_PCLK<0> INT2 VSS nch_hvt_mac l=35.0n w=875.00n m=1 nf=1
+MM33 INT_WLB<1> I_XD_PCLK<1> INT2 VSS nch_hvt_mac l=35.0n w=875.00n m=1 nf=1
+MM32 I_AB<1> A<1> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM31 I_AB<2> A<2> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM30 INT_WLB<2> I_XD_PCLK<2> INT2 VSS nch_hvt_mac l=35.0n w=875.00n m=1 nf=1
+MM48 INT B VSSI VSS nch_hvt_mac l=35.0n w=290.0n m=1 nf=1
+MM50 INT2 LCLK VSSI VSS nch_hvt_mac l=35.0n w=880.0n m=2 nf=1
+MM5 I_AB<3> A<3> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM3 I_AB<3> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM21 INT_WLB<3> I_XD_PCLK<3> VDD VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MM22 INT_WLB<3> LCLK VDD VDD pch_hvt_mac l=35.0n w=570.0n m=1 nf=1
+MM45 I_AB<0> A<0> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM42 I_AB<0> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM41 INT_WLB<0> I_XD_PCLK<0> VDD VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MM40 INT_WLB<0> LCLK VDD VDD pch_hvt_mac l=35.0n w=570.0n m=1 nf=1
+MM39 INT_WLB<1> LCLK VDD VDD pch_hvt_mac l=35.0n w=570.0n m=1 nf=1
+MM38 INT_WLB<1> I_XD_PCLK<1> VDD VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MM37 I_AB<1> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM34 I_AB<1> A<1> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM29 I_AB<2> A<2> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM26 I_AB<2> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM25 INT_WLB<2> I_XD_PCLK<2> VDD VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MM24 INT_WLB<2> LCLK VDD VDD pch_hvt_mac l=35.0n w=570.0n m=1 nf=1
+XI1 INT_WLB<3> VSS VSS VDDI VDD WL<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.0u ln=0.035u 
++ multi=4 fp=1 wp=1.1u lp=0.035u
+XI3 I_AB<3> VSSI VSS VDD VDD I_XD_PCLK<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+XI42 INT_WLB<2> VSS VSS VDDI VDD WL<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.0u ln=0.035u 
++ multi=4 fp=1 wp=1.1u lp=0.035u
+XI17 I_AB<0> VSSI VSS VDD VDD I_XD_PCLK<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+XI16 I_AB<1> VSSI VSS VDD VDD I_XD_PCLK<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+XI43 INT_WLB<1> VSS VSS VDDI VDD WL<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.0u ln=0.035u 
++ multi=4 fp=1 wp=1.1u lp=0.035u
+XI44 INT_WLB<0> VSS VSS VDDI VDD WL<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.0u ln=0.035u 
++ multi=4 fp=1 wp=1.1u lp=0.035u
+XI13 I_AB<2> VSSI VSS VDD VDD I_XD_PCLK<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    XDEC2_4_S
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_XDEC2_4_S A<0> A<1> A<2> A<3> B LCLK PD_VDDI_H VDD VDDI VSS VSSI WL<0> 
++ WL<1> WL<2> WL<3>
+MM6 I_AB<3> A<3> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM23 INT_WLB<3> I_XD_PCLK<3> INT2 VSS nch_hvt_mac l=35.0n w=1.3u m=1 nf=1
+MM47 I_AB<0> A<0> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM46 INT_WLB<0> I_XD_PCLK<0> INT2 VSS nch_hvt_mac l=35.0n w=1.3u m=1 nf=1
+MM33 INT_WLB<1> I_XD_PCLK<1> INT2 VSS nch_hvt_mac l=35.0n w=1.3u m=1 nf=1
+MM32 I_AB<1> A<1> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM31 I_AB<2> A<2> INT VSS nch_hvt_mac l=35.0n w=145.00n m=1 nf=1
+MM30 INT_WLB<2> I_XD_PCLK<2> INT2 VSS nch_hvt_mac l=35.0n w=1.3u m=1 nf=1
+MM48 INT B VSSI VSS nch_hvt_mac l=35.0n w=290.0n m=1 nf=1
+MM50 INT2 LCLK VSSI VSS nch_hvt_mac l=35.0n w=1.3u m=2 nf=1
+MM5 I_AB<3> A<3> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM3 I_AB<3> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM21 INT_WLB<3> I_XD_PCLK<3> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM22 INT_WLB<3> LCLK VDD VDD pch_hvt_mac l=35.0n w=850.0n m=1 nf=1
+MM45 I_AB<0> A<0> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM42 I_AB<0> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM41 INT_WLB<0> I_XD_PCLK<0> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM40 INT_WLB<0> LCLK VDD VDD pch_hvt_mac l=35.0n w=850.0n m=1 nf=1
+MM39 INT_WLB<1> LCLK VDD VDD pch_hvt_mac l=35.0n w=850.0n m=1 nf=1
+MM38 INT_WLB<1> I_XD_PCLK<1> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM37 I_AB<1> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM34 I_AB<1> A<1> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM29 I_AB<2> A<2> VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM26 I_AB<2> B VDD VDD pch_hvt_mac l=35.0n w=115.00n m=1 nf=1
+MM25 INT_WLB<2> I_XD_PCLK<2> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM24 INT_WLB<2> LCLK VDD VDD pch_hvt_mac l=35.0n w=850.0n m=1 nf=1
+XI1 INT_WLB<3> VSS VSS VDDI VDD WL<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.5u ln=0.035u 
++ multi=4 fp=1 wp=1.65u lp=0.035u
+XI3 I_AB<3> VSSI VSS VDD VDD I_XD_PCLK<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+XI42 INT_WLB<2> VSS VSS VDDI VDD WL<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.5u ln=0.035u 
++ multi=4 fp=1 wp=1.65u lp=0.035u
+XI17 I_AB<0> VSSI VSS VDD VDD I_XD_PCLK<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+XI16 I_AB<1> VSSI VSS VDD VDD I_XD_PCLK<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+XI43 INT_WLB<1> VSS VSS VDDI VDD WL<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.5u ln=0.035u 
++ multi=4 fp=1 wp=1.65u lp=0.035u
+XI44 INT_WLB<0> VSS VSS VDDI VDD WL<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.5u ln=0.035u 
++ multi=4 fp=1 wp=1.65u lp=0.035u
+XI13 I_AB<2> VSSI VSS VDD VDD I_XD_PCLK<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.24u ln=0.035u 
++ multi=1 fp=1 wp=0.24u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WCLK_BUF
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WCLK_BUF VDD VDDI VSS VSSI WCLK WCLK_B WCLK_O
+MM0 net07 WCLK net011 VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MM4 net011 WCLK VDD VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+XI11 WCLK_O VSSI VSS VDD VDD WCLK_B S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.16u ln=0.035u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI2 net07 VSS VSS VDDI VDD WCLK_O S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+MM1 net07 WCLK VSSI VSS nch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    DOLATCH
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_DOLATCH CK CKB DO DOII PD_L VDD VDDI VSS VSSI
+MM0 DOII PD_L VDD VDD pch_hvt_mac l=35.0n w=210.0n m=1 nf=1
+XI7 DOLAT net035 VSS VDD VDD CKB CK DOII S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.18u ln=0.035u 
++ multi=1 fp=1 wp=0.15u lp=0.035u
+XI1 DOII VSS VSS VDDI VDD DOLAT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.165u ln=0.035u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI3 DOII VSS VSS VDDI VDD DO S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.22u ln=0.035u multi=6 fp=1 
++ wp=0.42u lp=0.035u
+MM1 net035 PD_L VSS VSS nch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    DI_LAT_BST
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_DI_LAT_BST CKW CKW_B D DBUF DBUF_B VDD VDDI VSS VSSI
+XI42 D VSSI VSS VDD VDD dd S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.15u lp=0.05u
+XI0 net95 VSS VSS VDDI VDD DBUF S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.6u ln=0.030u multi=1 fp=1 
++ wp=1.1u lp=0.030u
+XI1 net82 VSS VSS VDDI VDD DBUF_B S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.6u ln=0.030u multi=1 
++ fp=1 wp=1.1u lp=0.030u
+XI6 DT VSSI VSS VDD VDD DB_LAT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u multi=1 fp=1 
++ wp=0.15u lp=0.035u
+XI26 dly<2> VSSI VSS VDD VDD D_b4lat S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.15u lp=0.05u
+XI24 dly<0> VSSI VSS VDD VDD dly<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.15u lp=0.05u
+XI22 DT VSS VSS VDDI VDD net95 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.175u ln=0.030u multi=1 
++ fp=1 wp=0.230u lp=0.030u
+XI23 DB_LAT VSS VSS VDDI VDD net82 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.175u ln=0.030u multi=1 
++ fp=1 wp=0.230u lp=0.030u
+XI19 dd VSSI VSS VDD VDD dly<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.15u lp=0.05u
+XI25 dly<1> VSSI VSS VDD VDD dly<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.15u lp=0.05u
+XI4 D_b4lat VSSI VSS VDD VDD CKW CKW_B DT S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.175u ln=0.03u 
++ multi=1 fp=1 wp=0.230u lp=0.03u
+XI5 DB_LAT VSSI VSS VDD VDD CKW_B CKW DT S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.12u ln=0.030u 
++ multi=1 fp=1 wp=0.15u lp=0.030u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    BWEB_LAT_BST
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_BWEB_LAT_BST BWEB BWEB_OUT CKW CKW_B VDD VDDI VSS VSSI
+XI42 BWEB VSSI VSS VDD VDD dd S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.15u lp=0.05u
+XI24 dly<0> VSSI VSS VDD VDD dly<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.15u lp=0.05u
+XI6 BWB VSSI VSS VDD VDD BW_LAT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.16u ln=0.035u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI10 BW_LAT VSSI VSS VDD VDD BWEB_OUT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.43u ln=0.035u 
++ multi=1 fp=1 wp=0.43u lp=0.035u
+XI25 dly<1> VSSI VSS VDD VDD dly<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 
++ fp=1 wp=0.15u lp=0.05u
+XI26 dly<2> VSSI VSS VDD VDD bw_b4lat S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u 
++ multi=1 fp=1 wp=0.15u lp=0.05u
+XI19 dd VSSI VSS VDD VDD dly<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.05u multi=1 fp=1 
++ wp=0.15u lp=0.05u
+XI5 BW_LAT VSSI VSS VDD VDD CKW_B CKW BWB S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.12u ln=0.030u 
++ multi=1 fp=1 wp=0.15u lp=0.030u
+XI4 bw_b4lat VSSI VSS VDD VDD CKW CKW_B BWB S6HVTFWBSO40W8_tri_bulk_hvt fn=1 wn=0.175u 
++ ln=0.030u multi=1 fp=1 wp=0.230u lp=0.030u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WPCH_MUX1
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WPCH_MUX1 C C_B PCH_L VDD VDDI VSS WB WBB WBB_I WB_I
+MM5 WB C WB_I VSS nch_hvt_mac l=30n w=890.0n m=2 nf=1
+MM6 WBB C WBB_I VSS nch_hvt_mac l=30n w=890.0n m=2 nf=1
+MM0 WBB PCH_L VDDI VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM1 WB_I C_B WB VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM2 WB PCH_L VDDI VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM3 WBB PCH_L WB VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM4 WBB_I C_B WBB VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    BST_TRIBUFX2_IO
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_BST_TRIBUFX2_IO BST BSTB BWEB BWEBI BWEBIB BWEBM D DI DIB DM Q VDD VSS 
++ VSSI
+XIBIST_BWEB BST BSTB BWEB BWEBM VDD VSS VSSI BWEBI BWEBIB S6HVTFWBSO40W8_BST_TRIBUF
+XIBISTD BST BSTB D DM VDD VSS VSSI DI DIB S6HVTFWBSO40W8_BST_TRIBUF
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WPCH_CTL4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WPCH_CTL4 PCH_L PCH_OUT VDD VDDI VSS VSSI
+XI3 PCH_L VSS VSS VDDI VDD net11 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.13u ln=0.035u multi=2 
++ fp=1 wp=0.12u lp=0.035u
+XI1 net11 VSSI VSS VDD VDD PCH_OUT S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.32u ln=0.035u multi=2 
++ fp=1 wp=0.55u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    YDEC_MUX4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_YDEC_MUX4 RB<0> RB<1> RB<2> RB<3> RB_I RC<0> RC<1> RC<2> RC<3> RCB<0> 
++ RCB<1> RCB<2> RCB<3> RPCH_L TIEL VDD VDDI VSS WB<0> WB<1> WB<2> WB<3> WBB<0> 
++ WBB<1> WBB<2> WBB<3> WBB_I WB_I WC<0> WC<1> WC<2> WC<3> WCB<0> WCB<1> WCB<2> 
++ WCB<3> WPCH_L
+XIr<0> RC<0> RCB<0> RPCH_L RB<0> RB_I TIEL VDD VDDI VSS S6HVTFWBSO40W8_RPCH_MUX2
+XIr<1> RC<1> RCB<1> RPCH_L RB<1> RB_I TIEL VDD VDDI VSS S6HVTFWBSO40W8_RPCH_MUX2
+XIr<2> RC<2> RCB<2> RPCH_L RB<2> RB_I TIEL VDD VDDI VSS S6HVTFWBSO40W8_RPCH_MUX2
+XIr<3> RC<3> RCB<3> RPCH_L RB<3> RB_I TIEL VDD VDDI VSS S6HVTFWBSO40W8_RPCH_MUX2
+XIw<0> WC<0> WCB<0> WPCH_L VDD VDDI VSS WB<0> WBB<0> WBB_I WB_I S6HVTFWBSO40W8_WPCH_MUX1
+XIw<1> WC<1> WCB<1> WPCH_L VDD VDDI VSS WB<1> WBB<1> WBB_I WB_I S6HVTFWBSO40W8_WPCH_MUX1
+XIw<2> WC<2> WCB<2> WPCH_L VDD VDDI VSS WB<2> WBB<2> WBB_I WB_I S6HVTFWBSO40W8_WPCH_MUX1
+XIw<3> WC<3> WCB<3> WPCH_L VDD VDDI VSS WB<3> WBB<3> WBB_I WB_I S6HVTFWBSO40W8_WPCH_MUX1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RYD_M4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RYD_M4 CK RC<0> RC<1> RC<2> RC<3> RCB<0> RCB<1> RCB<2> RCB<3> RX<0> 
++ RX<1> RX<2> RX<3> VDD VDDI VSS VSSI
+MM106 RCB<0> RX<0> INT VSS nch_hvt_mac l=30n w=210.0n m=1 nf=1
+MM0 RCB<1> RX<1> INT VSS nch_hvt_mac l=30n w=210.0n m=1 nf=1
+MM108 INT CK VSSI VSS nch_hvt_mac l=30n w=430.0n m=1 nf=1
+MM4 RCB<2> RX<2> INT VSS nch_hvt_mac l=30n w=210.0n m=1 nf=1
+MM3 RCB<3> RX<3> INT VSS nch_hvt_mac l=30n w=210.0n m=1 nf=1
+MM97 RCB<0> RX<0> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM98 RCB<0> CK VDD VDD pch_hvt_mac l=35.0n w=250.0n m=1 nf=1
+MM1 RCB<1> RX<1> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM2 RCB<1> CK VDD VDD pch_hvt_mac l=35.0n w=250.0n m=1 nf=1
+MM8 RCB<2> RX<2> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM7 RCB<2> CK VDD VDD pch_hvt_mac l=35.0n w=250.0n m=1 nf=1
+MM6 RCB<3> RX<3> VDD VDD pch_hvt_mac l=35.0n w=180.0n m=1 nf=1
+MM5 RCB<3> CK VDD VDD pch_hvt_mac l=35.0n w=250.0n m=1 nf=1
+XI0 RCB<1> VSS VSS VDDI VDD RC<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.030u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI38 RCB<0> VSS VSS VDDI VDD RC<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.030u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI2 RCB<3> VSS VSS VDDI VDD RC<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.030u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+XI1 RCB<2> VSS VSS VDDI VDD RC<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.11u ln=0.030u multi=1 
++ fp=1 wp=0.21u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WYD_M4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WYD_M4 VDD VDDI VSS VSSI WC<0> WC<1> WC<2> WC<3> WCB<0> WCB<1> WCB<2> 
++ WCB<3> WCLK WX<0> WX<1> WX<2> WX<3>
+MM106 WCB<0> WX<0> INT VSS nch_hvt_mac l=30n w=320.0n m=1 nf=1
+MM0 WCB<1> WX<1> INT VSS nch_hvt_mac l=30n w=320.0n m=1 nf=1
+MM13 WCB<2> WX<2> INT VSS nch_hvt_mac l=30n w=320.0n m=1 nf=1
+MM3 INT WCLK VSSI VSS nch_hvt_mac l=30n w=1u m=1 nf=1
+MM12 WCB<3> WX<3> INT VSS nch_hvt_mac l=30n w=320.0n m=1 nf=1
+MM98 WCB<0> WCLK VDD VDD pch_hvt_mac l=35.0n w=320.0n m=1 nf=1
+MM1 WCB<1> WX<1> VDD VDD pch_hvt_mac l=35.0n w=210.0n m=1 nf=1
+MM97 WCB<0> WX<0> VDD VDD pch_hvt_mac l=35.0n w=210.0n m=1 nf=1
+MM2 WCB<1> WCLK VDD VDD pch_hvt_mac l=35.0n w=320.0n m=1 nf=1
+MM11 WCB<2> WCLK VDD VDD pch_hvt_mac l=35.0n w=320.0n m=1 nf=1
+MM10 WCB<3> WX<3> VDD VDD pch_hvt_mac l=35.0n w=210.0n m=1 nf=1
+MM9 WCB<2> WX<2> VDD VDD pch_hvt_mac l=35.0n w=210.0n m=1 nf=1
+MM8 WCB<3> WCLK VDD VDD pch_hvt_mac l=35.0n w=320.0n m=1 nf=1
+XI0 WCB<1> VSS VSS VDDI VDD WC<1> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.52u lp=0.035u
+XI37 WCB<3> VSS VSS VDDI VDD WC<3> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.52u lp=0.035u
+XI36 WCB<2> VSS VSS VDDI VDD WC<2> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.52u lp=0.035u
+XI38 WCB<0> VSS VSS VDDI VDD WC<0> S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.52u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    RPCH_CTL4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_RPCH_CTL4 CK PCH_H PCH_L VDD VDDI VSS VSSI
+XI8 PCH_H VSSI VSS VDD VDD PCH_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.2u ln=0.035u multi=2 
++ fp=1 wp=0.6u lp=0.035u
+XI10 CK VSS VSS VDDI VDD PCH_H S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.43u ln=0.035u multi=1 fp=1 
++ wp=0.28u lp=0.035u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    YDEC_M4
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_YDEC_M4 PD PD_L RB<0> RB<1> RB<2> RB<3> RB_I RCLK_H RPCH_L RX<0> RX<1> 
++ RX<2> RX<3> TIEL VDD VDDI VSS VSSI WB<0> WB<1> WB<2> WB<3> WBB<0> WBB<1> 
++ WBB<2> WBB<3> WBB_I WB_I WCLK WPCH_L WX<0> WX<1> WX<2> WX<3> ckb rpch_dly
+XI19 net112 PD_L VSSI VSS VDD VDD net025 S6HVTFWBSO40W8_nand_bulk_hvt fn1=1 wn1=0.16u ln1=0.03u 
++ fn2=1 wn2=0.16u ln2=0.03u fp2=1 wp2=0.43u lp2=0.03u multi=1 fp1=1 wp1=0.43u 
++ lp1=0.03u
+XI4 WPCH_L WPCH_DLY VDD VDDI VSS VSSI S6HVTFWBSO40W8_WPCH_CTL4
+XIyd RB<0> RB<1> RB<2> RB<3> RB_I RC<0> RC<1> RC<2> RC<3> RCB<0> RCB<1> RCB<2> 
++ RCB<3> rpch_dly TIEL VDD VDDI VSS WB<0> WB<1> WB<2> WB<3> WBB<0> WBB<1> 
++ WBB<2> WBB<3> WBB_I WB_I WC<0> WC<1> WC<2> WC<3> WCB<0> WCB<1> WCB<2> WCB<3> 
++ WPCH_DLY S6HVTFWBSO40W8_YDEC_MUX4
+XIRYD rpch_rx RC<0> RC<1> RC<2> RC<3> RCB<0> RCB<1> RCB<2> RCB<3> RX<0> RX<1> 
++ RX<2> RX<3> VDD VDDI VSS VSSI S6HVTFWBSO40W8_RYD_M4
+XIWYD VDD VDDI VSS VSSI WC<0> WC<1> WC<2> WC<3> WCB<0> WCB<1> WCB<2> WCB<3> 
++ WCLK WX<0> WX<1> WX<2> WX<3> S6HVTFWBSO40W8_WYD_M4
+XI18 RPCH_L rpch_rx VSSI VSS VDD VDD net112 S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.12u 
++ ln1=0.03u fn2=1 wn2=0.12u ln2=0.03u fp2=1 wp2=0.12u lp2=0.03u multi=1 fp1=1 
++ wp1=0.12u lp1=0.03u
+XI12 PD VSS VSS VDD VDD PD_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.3u ln=0.035u multi=1 fp=1 
++ wp=0.3u lp=0.035u
+XI17 net036 VSS VSS VDDI VDD rpch_rx S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=2 
++ fp=1 wp=0.21u lp=0.03u
+XI23 RCLK_H VSSI VSS VDD VDD net036 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.16u lp=0.03u
+XI5 net025 ckb rpch_dly VDD VDDI VSS VSSI S6HVTFWBSO40W8_RPCH_CTL4
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    IO4S_TK_PWR
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_IO4S_TK_PWR DSLP_SW PD_VDDI_H PD_VSSI_L VDD VDDI VDDI_SW VSS VSSI 
++ VSSI_SW
+MM1 VDDI VDDI_SW VDD VDD pch_hvt_mac l=35.0n w=950.0n m=22 nf=1
+MM4 VDD DSLP_SW VDD VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MM3 VDDI VDDI VDDI VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+XI37 net14 VSS VSS VDD VDD VSSI_SW S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.46u ln=0.035u multi=1 
++ fp=1 wp=0.95u lp=0.035u
+XI35 net13 VSS VSS VDD VDD VDDI_SW S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.95u ln=0.035u multi=1 
++ fp=1 wp=0.46u lp=0.035u
+XI40 PD_VSSI_L VSS VSS VDD VDD net14 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.12u lp=0.035u
+XI33 PD_VDDI_H VSS VSS VDD VDD net13 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.035u 
++ multi=1 fp=1 wp=0.21u lp=0.035u
+MM0 VSSI VSSI_SW VSS VSS nch_hvt_mac l=35.0n w=950.0n m=6 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    IO4S_TK_B_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_IO4S_TK_B_SD AVDD AVDDI DSLP_SW GBL_TK1_D GBL_TK<0> GBL_TK<1> 
++ PD_H_PDWN PD_VDDI_H PD_VSSI_L RBL RCA<0> RCA<1> RCA<2> RCA<3> RCB<0> RCB<1> 
++ RCB<2> RCB<3> RCLK_H RPCH_L RWL_TRK RWL_TRK_FB TIEH TIEL VDD VDDI VDDI_SW 
++ VSS VSSI VSSI_SW WBB_TK<0> WBB_TK<1> WB_TK<0> WB_TK<1> WCA<0> WCA<1> WCA<2> 
++ WCA<3> WCB<0> WCB<1> WCB<2> WCB<3> WCLK WPCH_L
+XIIO_TK_PWR DSLP_SW PD_VDDI_H PD_VSSI_L VDD VDDI VDDI_SW VSS VSSI VSSI_SW 
++ S6HVTFWBSO40W8_IO4S_TK_PWR
+XIPWR DSLP_SW PD_VDDI_H PD_VSSI_L VDD VDDI VDDI_SW VSS VSSI VSSI_SW 
++ S6HVTFWBSO40W8_IO_RTK_PWR
+XIMUXLD<3> TIEL TIEL TIEH VDD VDDI VSS RB_TK S6HVTFWBSO40W8_tri_m2
+XIMUXLD<2> TIEL TIEL TIEH VDD VDDI VSS RB_TK S6HVTFWBSO40W8_tri_m2
+XIMUX<1> TIEL TIEL TIEH VDD VDDI VSS RB_TK S6HVTFWBSO40W8_tri_m2
+XIyd PD_H_PDWN RC RCLK_H RPCH_DLY RPCH_L VDD VDDI VSS VSSI S6HVTFWBSO40W8_YDECTK_R
+XI120 RB_TK VSSI VSS VDD VDD GBL_TK1_D S6HVTFWBSO40W8_inv_bulk_hvt fn=2 wn=0.32u ln=0.03u 
++ multi=1 fp=2 wp=0.54u lp=0.03u
+XIMUX<0> RC PD_H_PDWN RPCH_DLY GBL_TK<0> RB_TK TIEL VDD VDDI VSS S6HVTFWBSO40W8_RPCH_MUX2
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    PD_VSSI_SW
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_PD_VSSI_SW PD_VSSI_L VSS VSSI
+MM3 VSSI PD_VSSI_L VSS VSS nch_hvt_mac l=35.0n w=800n m=5 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    XDEC2_2_4_S2_SW
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_XDEC2_2_4_S2_SW DSLP_INT INT_VDD INT_VSS KP<0> KP<1> KP<2> LRPCH_1ST 
++ PD_VDDI_H PD_VSSI_L RA<0> RA<1> RA<2> RA<3> RACT RB RGCLK RHITB RLCLK RPD_H 
++ RPREC RVDDI RWL<0> RWL<1> RWL<2> RWL<3> RWL_TK RXPA<0> RXPA<1> RXPA<2> 
++ RXPA<3> RXPA<4> RXPA<5> RXPA<6> RXPA<7> RXPB<0> RXPB<1> RXPB<2> RXPB<3> 
++ RXPB<4> RXPB<5> RXPB<6> RXPB<7> RXPC<0> RXPC<1> RXPC<2> RXPC<3> RXPC<4> 
++ RXPC<5> RXPC<6> RXPC<7> SD_INT TIEH TM_GBL VDD VSS VSSI WA<0> WA<1> WA<2> 
++ WA<3> WACT WACT_FB WB WGCLK WHITB WLCLK WPD_H WVDDI WWL<0> WWL<1> WWL<2> 
++ WWL<3> WXPA<0> WXPA<1> WXPA<2> WXPA<3> WXPA<4> WXPA<5> WXPA<6> WXPA<7> 
++ WXPB<0> WXPB<1> WXPB<2> WXPB<3> WXPB<4> WXPB<5> WXPB<6> WXPB<7> WXPC<0> 
++ WXPC<1> WXPC<2> WXPC<3> WXPC<4> WXPC<5> WXPC<6> WXPC<7>
+XIr RA<0> RA<1> RA<2> RA<3> RB INT_VDD INT_VSS RLCLK PD_VDDI_H RPREC VDD RVDDI 
++ VSS VSSI RWL<0> RWL<1> RWL<2> RWL<3> S6HVTFWBSO40W8_RXDEC2_4_S2
+XIrwsw_l<0> PD_VSSI_L VSS VSSI S6HVTFWBSO40W8_PD_VSSI_SW
+XIrwsw_l<1> PD_VSSI_L VSS VSSI S6HVTFWBSO40W8_PD_VSSI_SW
+XIw WA<0> WA<1> WA<2> WA<3> WB WLCLK PD_VDDI_H VDD RVDDI VSS VSSI WWL<0> 
++ WWL<1> WWL<2> WWL<3> S6HVTFWBSO40W8_XDEC2_4_S
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    WPCH_MUX2
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_WPCH_MUX2 C C_B PCH_L VDD VDDI VSS WB WBB WBB_I WB_I
+MM5 WB C WB_I VSS nch_hvt_mac l=30n w=890.0n m=2 nf=1
+MM6 WBB C WBB_I VSS nch_hvt_mac l=30n w=890.0n m=2 nf=1
+MM0 WBB PCH_L VDDI VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM1 WB_I C_B WB VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM2 WB PCH_L VDDI VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM3 WBB PCH_L WB VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+MM4 WBB_I C_B WBB VDD pch_hvt_mac l=30n w=890.0n m=1 nf=1
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    IO4S_B_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_IO4S_B_SD AVDD AVDDI BWEB D DO DSLP_SW PD_H_PDWN PD_VDDI_H PD_VSSI_L 
++ RB<0> RB<1> RB<2> RB<3> RCLK_H RPCH_L RWL_TRK RWL_TRK_FB RYA<0> RYA<1> 
++ RYA<2> RYA<3> RYB<0> RYB<1> RYB<2> RYB<3> TIEL VDD VDDI VDDI_SW VSS VSSI 
++ VSSI_SW WB<0> WB<1> WB<2> WB<3> WBB<0> WBB<1> WBB<2> WBB<3> WCLK_H WPCH_L 
++ WYA<0> WYA<1> WYA<2> WYA<3> WYB<0> WYB<1> WYB<2> WYB<3>
+MMPD_VDDI_FLOAT VDDI VDDI_SW VDD VDD pch_hvt_mac l=35.0n w=950.0n m=40 nf=1
+MM4 VDD DSLP_SW VDD VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MM3 VDDI VDDI VDDI VDD pch_hvt_mac l=35.0n w=120.0n m=1 nf=1
+MMPD_VSSI_FLOAT VSSI VSSI_SW VSS VSS nch_hvt_mac l=35.0n w=950.0n m=12 nf=1
+XIdlat WCLKB WCLK D DIN DINB VDD VDDI VSS VSSI S6HVTFWBSO40W8_DI_LAT_BST
+XIyd PD_H_PDWN PD_L RB<0> RB<1> RB<2> RB<3> RB_MX RCLK_H RPCH_L RYA<0> RYA<1> 
++ RYA<2> RYA<3> TIEL VDD VDDI VSS VSSI WB<0> WB<1> WB<2> WB<3> WBB<0> WBB<1> 
++ WBB<2> WBB<3> DIN DINB wclkio WPCH_L WYA<0> WYA<1> WYA<2> WYA<3> ckb ck 
++ S6HVTFWBSO40W8_YDEC_M4
+XIbwlat BWEB BWE WCLKB WCLK VDD VDDI VSS VSSI S6HVTFWBSO40W8_BWEB_LAT_BST
+XIqlat ck ckb DO RB_MX PD_L VDD VDDI VSS VSSI S6HVTFWBSO40W8_DOLATCH
+XI38 WCLK_L VSS VSS VDDI VDD wclk_din S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.030u 
++ multi=1 fp=1 wp=0.16u lp=0.030u
+XI40 PD_VSSI_L VSS VSS VDD VDD net0157 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.21u lp=0.035u
+XI35 net0175 VSS VSS VDD VDD VDDI_SW S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.95u ln=0.035u 
++ multi=1 fp=1 wp=0.475u lp=0.035u
+XI30 WCLK_H VSSI VSS VDD VDD WCLK_L S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.3u ln=0.030u multi=1 
++ fp=1 wp=0.3u lp=0.030u
+XI37 net0157 VSS VSS VDD VDD VSSI_SW S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.475u ln=0.035u 
++ multi=1 fp=1 wp=0.95u lp=0.035u
+XI33 PD_VDDI_H VSS VSS VDD VDD net0175 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.035u 
++ multi=1 fp=1 wp=0.21u lp=0.035u
+XI5 VDD VDDI VSS VSSI wclk_din WCLKB WCLK S6HVTFWBSO40W8_WCLK_BUF
+XI61 WCLK_L BWE VSS VSS VDDI VDD wclkio S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.43u ln1=0.03u 
++ fn2=1 wn2=0.43u ln2=0.03u fp2=1 wp2=1.2u lp2=0.03u multi=1 fp1=1 wp1=1.2u 
++ lp1=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    LIO_8_TK1_S_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_LIO_8_TK1_S_SD AVDD AVDDI DSLPB_LIO GBL KP<0> KP<1> KP<2> LO_BL 
++ LRPCH_L RBL RWL_TK SD_AVDDISW TIEL UP_BL VDD VSS WB WBB
+XIKP_PWR_U<0> AVDD AVDDI KP<0> KP<1> KP<2> VDD VD_BL S6HVTFWBSO40W8_LIO_PWR
+XIKP_PWR_U<1> AVDD AVDDI KP<0> KP<1> KP<2> VDD VD_BL S6HVTFWBSO40W8_LIO_PWR
+XIKP_PWER_L<0> AVDD AVDDI KP<0> KP<1> KP<2> VDD VD_BL_L S6HVTFWBSO40W8_LIO_PWR
+XIKP_PWER_L<1> AVDD AVDDI KP<0> KP<1> KP<2> VDD VD_BL_L S6HVTFWBSO40W8_LIO_PWR
+MM13 VSSI DSLPB_LIO VSS VSS nch_hvt_mac l=30n w=210.0n m=1 nf=1
+MM5 GBL fb VSS VSS nch_hvt_mac l=30n w=250.0n m=2 nf=1
+MM12 AVDDI SD_AVDDISW VDD VDD pch_hvt_mac l=35.0n w=140.0n m=1 nf=1
+MMSVT_LR2 LO_BL fb VD_BL_L VDD pch_hvt_mac l=30n w=130.0n m=1 nf=1
+MMSVT_UR2 UP_BL fb VD_BL VDD pch_hvt_mac l=30n w=130.0n m=1 nf=1
+MM11 AVDDI SD_AVDDISW VDD VDD pch_hvt_mac l=35.0n w=140.0n m=1 nf=1
+MM9 LO_BL RWL_TK VDD VDD pch_hvt_mac l=30n w=130.0n m=2 nf=1
+MMSVT_UL2 UP_BL fb VD_BL VDD pch_hvt_mac l=30n w=130.0n m=1 nf=1
+MMSVT_LL2 LO_BL fb VD_BL_L VDD pch_hvt_mac l=30n w=130.0n m=1 nf=1
+MM8 UP_BL RWL_TK VDD VDD pch_hvt_mac l=30n w=130.0n m=2 nf=1
+MM0 UP_BL RWL_TK VDD VDD pch_hvt_mac l=30n w=130.0n m=2 nf=1
+MM3 LO_BL RWL_TK VDD VDD pch_hvt_mac l=30n w=130.0n m=2 nf=1
+XI24 LO_BL VSSI VSS VDD VDD fb S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 fp=1 
++ wp=0.26u lp=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    YDECTK_W
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_YDECTK_W VDD VDDI VSS VSSI WC WCB WL_TK WPCH_DLY
+XI19 WC VSSI VSS VDD VDD WCB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 fp=1 
++ wp=0.21u lp=0.03u
+XI17 net017 VSS VSS VDDI VDD WC S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 fp=1 
++ wp=0.52u lp=0.03u
+XI18 WL_TK VSSI VSS VDD VDD net017 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.21u lp=0.03u
+XI3 WL_TK VSS VSS VDDI VDD net019 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.12u lp=0.03u
+XI1 net019 VSSI VSS VDD VDD WPCH_DLY S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.55u lp=0.03u
+.ENDS
+
+************************************************************************
+* Library Name: tsn28hpcp2prf
+* Cell Name:    IO2S_WTK_B_SD
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT S6HVTFWBSO40W8_IO2S_WTK_B_SD AVDD AVDDI DSLP_SW GBL_TK<0> GBL_TK<1> PD_H_PDWN 
++ PD_VDDI_H PD_VSSI_L RBL RCA<0> RCA<1> RCA<2> RCA<3> RCB<0> RCB<1> RCB<2> 
++ RCB<3> RCLK_H RPCH_L RWL_TRK RWL_TRK_FB TIEH TIEL VDD VDDI VDDI_SW VSS VSSI 
++ VSSI_SW WBB_TK<0> WBB_TK<1> WB_TK<0> WB_TK<1> WCA<0> WCA<1> WCA<2> WCA<3> 
++ WCB<0> WCB<1> WCB<2> WCB<3> WCLK WPCH_L WWL_TK W_RESET
+XIyd VDD VDDI VSS VSSI WC WC_B net034 WPCH_DLY S6HVTFWBSO40W8_YDECTK_W
+XI159 WWL_TK net036 VSSI VSS VDD VDD W_RESET S6HVTFWBSO40W8_nand_bulk_hvt fn1=2 wn1=0.8u 
++ ln1=0.03u fn2=2 wn2=0.8u ln2=0.03u fp2=1 wp2=0.8u lp2=0.03u multi=1 fp1=1 
++ wp1=0.8u lp1=0.03u
+MM7 WCLK_L net050 net070 VDD pch_hvt_mac l=30n w=360.0n m=1 nf=1
+MM5 net070 net050 VDD VDD pch_hvt_mac l=30n w=360.0n m=1 nf=1
+MM0 net050 net055 net072 VDD pch_hvt_mac l=30n w=360.0n m=1 nf=1
+MM1 net072 net055 VDDI VDD pch_hvt_mac l=30n w=360.0n m=1 nf=1
+XI61 WCLK_L net055 VSS VSS VDDI VDD net034 S6HVTFWBSO40W8_nor_bulk_hvt fn1=1 wn1=0.32u 
++ ln1=0.03u fn2=1 wn2=0.32u ln2=0.03u fp2=1 wp2=1.0u lp2=0.03u multi=1 fp1=1 
++ wp1=1.0u lp1=0.03u
+XIMUX<0> WC WC_B WPCH_DLY VDD VDDI VSS net037 WBB_TK<0> WBB net056 S6HVTFWBSO40W8_WPCH_MUX2
+XI156 WB_TK<0> VSSI VSS VDD VDD net036 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u 
++ multi=1 fp=1 wp=0.21u lp=0.03u
+XI38 WCLK_L VSSI VSS VDD VDD net049 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.12u ln=0.03u multi=1 
++ fp=1 wp=0.16u lp=0.03u
+XI0 TIEH VSS VSS VDDI VDD WBB S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=1.6u ln=0.03u multi=1 fp=1 
++ wp=1.1u lp=0.03u
+XI30 WCLK VSSI VSS VDD VDD net055 S6HVTFWBSO40W8_inv_bulk_hvt fn=1 wn=0.21u ln=0.03u multi=1 
++ fp=1 wp=0.21u lp=0.03u
+MM4 VSS net050 VSS VSS nch_hvt_mac l=30n w=240.0n m=1 nf=1
+MM2 net057 net055 VSS VSS nch_hvt_mac l=30n w=240.0n m=1 nf=1
+MM3 WCLK_L net050 VSSI VSS nch_hvt_mac l=30n w=240.0n m=1 nf=1
+MM6 net050 net055 net057 VSS nch_hvt_mac l=30n w=240.0n m=1 nf=1
+.ENDS
+
+
+
+
+**** End of leaf cells
+
+.SUBCKT S6HVTFWBSO40W8_A4XMUX AVDD AVDDI RWL[0] RWL[1] RWL[2] RWL[3] WWL[0]
++ WWL[1] WWL[2] WWL[3] VDD VSS WB[0] WB[1] WB[2] WB[3] WBB[0] WBB[1] WBB[2]
++ WBB[3] GBL[0] GBL[1] GBL[2] GBL[3] RBL[0] RBL[1] RBL[2] RBL[3]
+XMC0_0 AVDD AVDDI WBB[0] GBL[0] RBL[0] RWL[0] VDD VSS WB[0] WWL[0]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC1_0 AVDD AVDDI WBB[0] GBL[0] RBL[0] RWL[1] VDD VSS WB[0] WWL[1]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC2_0 AVDD AVDDI WBB[0] GBL[0] RBL[0] RWL[2] VDD VSS WB[0] WWL[2]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC3_0 AVDD AVDDI WBB[0] GBL[0] RBL[0] RWL[3] VDD VSS WB[0] WWL[3]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC0_1 AVDD AVDDI WBB[1] GBL[1] RBL[1] RWL[0] VDD VSS WB[1] WWL[0]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC1_1 AVDD AVDDI WBB[1] GBL[1] RBL[1] RWL[1] VDD VSS WB[1] WWL[1]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC2_1 AVDD AVDDI WBB[1] GBL[1] RBL[1] RWL[2] VDD VSS WB[1] WWL[2]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC3_1 AVDD AVDDI WBB[1] GBL[1] RBL[1] RWL[3] VDD VSS WB[1] WWL[3]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC0_2 AVDD AVDDI WBB[2] GBL[2] RBL[2] RWL[0] VDD VSS WB[2] WWL[0]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC1_2 AVDD AVDDI WBB[2] GBL[2] RBL[2] RWL[1] VDD VSS WB[2] WWL[1]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC2_2 AVDD AVDDI WBB[2] GBL[2] RBL[2] RWL[2] VDD VSS WB[2] WWL[2]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC3_2 AVDD AVDDI WBB[2] GBL[2] RBL[2] RWL[3] VDD VSS WB[2] WWL[3]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC0_3 AVDD AVDDI WBB[3] GBL[3] RBL[3] RWL[0] VDD VSS WB[3] WWL[0]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC1_3 AVDD AVDDI WBB[3] GBL[3] RBL[3] RWL[1] VDD VSS WB[3] WWL[1]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC2_3 AVDD AVDDI WBB[3] GBL[3] RBL[3] RWL[2] VDD VSS WB[3] WWL[2]
++ S6HVTFWBSO40W8_MC28_241HC
+XMC3_3 AVDD AVDDI WBB[3] GBL[3] RBL[3] RWL[3] VDD VSS WB[3] WWL[3]
++ S6HVTFWBSO40W8_MC28_241HC
+.ENDS
+
+.SUBCKT S6HVTFWBSO40W8_A2XMUX_TK_L AVDD AVDDI RWL_TK WWL_TK VDD VSS WB[0] WB[1]
++ WB[2] WB[3] WBB[0] WBB[1] WBB[2] WBB[3] GBL[0] GBL[1] GBL[2] GBL[3]
+XMC1_0 AVDD AVDDI WBB_F[0] GBL[0] RBL_F[0] RWL_TK TIEL_F VDD VSS WB[0] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_0 AVDD AVDDI WBB_F[0] GBL[0] RBL_F[0] RWL_TK TIEL_F VDD VSS WB_F0[0] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC1_1 AVDD AVDDI WBB_F[1] GBL[1] RBL_F[1] RWL_TK TIEL_F VDD VSS WB[1] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_1 AVDD AVDDI WBB_F[1] GBL[1] RBL_F[1] RWL_TK TIEL_F VDD VSS WB_F0[1] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC1_2 AVDD AVDDI WBB_F[2] GBL[2] RBL_F[2] RWL_TK TIEL_F VDD VSS WB[2] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_2 AVDD AVDDI WBB_F[2] GBL[2] RBL_F[2] RWL_TK TIEL_F VDD VSS WB_F0[2] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC1_3 AVDD AVDDI WBB_F[3] GBL[3] RBL_F[3] RWL_TK TIEL_F VDD VSS WB[3] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_3 AVDD AVDDI WBB_F[3] GBL[3] RBL_F[3] RWL_TK TIEL_F VDD VSS WB_F0[3] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+.ENDS
+
+.SUBCKT S6HVTFWBSO40W8_A2XMUX_TK_R AVDD AVDDI RWL_TK WWL_TK VDD VSS WB[0] WB[1]
++ WB[2] WB[3] WBB[0] WBB[1] WBB[2] WBB[3] GBL[0] GBL[1] GBL[2] GBL[3]
+XMC1_0 AVDD AVDDI WBB_F[0] GBL[0] RBL_F[0] RWL_TK TIEL_F VDD VSS WB[0] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_0 AVDD AVDDI WBB_F[0] GBL[0] RBL_F[0] VSS TIEL_F VDD VSS WB_F0[0] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC1_1 AVDD AVDDI WBB_F[1] GBL[1] RBL_F[1] RWL_TK TIEL_F VDD VSS WB[1] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_1 AVDD AVDDI WBB_F[1] GBL[1] RBL_F[1] VSS TIEL_F VDD VSS WB_F0[1] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC1_2 AVDD AVDDI WBB_F[2] GBL[2] RBL_F[2] RWL_TK TIEL_F VDD VSS WB[2] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_2 AVDD AVDDI WBB_F[2] GBL[2] RBL_F[2] VSS TIEL_F VDD VSS WB_F0[2] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC1_3 AVDD AVDDI WBB_F[3] GBL[3] RBL_F[3] RWL_TK TIEL_F VDD VSS WB[3] VSS
++ S6HVTFWBSO40W8_MC28_241HC_TK
+XMC0_3 AVDD AVDDI WBB_F[3] GBL[3] RBL_F[3] VSS TIEL_F VDD VSS WB_F0[3] WWL_TK
++ S6HVTFWBSO40W8_MC28_241HC_TK
+.ENDS
+
+.SUBCKT S6HVTFWBSO40W8_LIOXMUX AVDD AVDDI DSLPB_LIO GBL[0] GBL[1] GBL[2] GBL[3]
++ KP_D[0] KP_D[1] KP_D[2] LRPCH_L SD_AVDDISW VDD VSS WB[0] WB[1] WB[2] WB[3]
++ WBB[0] WBB[1] WBB[2] WBB[3] RBL_0L RBL_1L RBL_2L RBL_3L RBL_0U RBL_1U RBL_2U
++ RBL_3U
+XLIO_0 AVDD AVDDI DSLPB_LIO GBL[0] KP_D[0] KP_D[1] KP_D[2] RBL_0L LRPCH_L
++ SD_AVDDISW RBL_0U VDD VSS WB[0] WBB[0] S6HVTFWBSO40W8_LIO_8_SD
+XLIO_1 AVDD AVDDI DSLPB_LIO GBL[1] KP_D[0] KP_D[1] KP_D[2] RBL_1L LRPCH_L
++ SD_AVDDISW RBL_1U VDD VSS WB[1] WBB[1] S6HVTFWBSO40W8_LIO_8_SD
+XLIO_2 AVDD AVDDI DSLPB_LIO GBL[2] KP_D[0] KP_D[1] KP_D[2] RBL_2L LRPCH_L
++ SD_AVDDISW RBL_2U VDD VSS WB[2] WBB[2] S6HVTFWBSO40W8_LIO_8_SD
+XLIO_3 AVDD AVDDI DSLPB_LIO GBL[3] KP_D[0] KP_D[1] KP_D[2] RBL_3L LRPCH_L
++ SD_AVDDISW RBL_3U VDD VSS WB[3] WBB[3] S6HVTFWBSO40W8_LIO_8_SD
+.ENDS
+
+.SUBCKT TS6N28HPCPHVTA64X8M4FWBSO CLKR REB CLKW WEB SLP SD D[0] D[1] D[2] D[3]
++ D[4] D[5] D[6] D[7] Q[0] Q[1] Q[2] Q[3] Q[4] Q[5] Q[6] Q[7] BWEB[0] BWEB[1]
++ BWEB[2] BWEB[3] BWEB[4] BWEB[5] BWEB[6] BWEB[7] AB[0] AB[1] AB[2] AB[3] AB[4]
++ AB[5] AA[0] AA[1] AA[2] AA[3] AA[4] AA[5] DM[0] DM[1] DM[2] DM[3] DM[4] DM[5]
++ DM[6] DM[7] BWEBM[0] BWEBM[1] BWEBM[2] BWEBM[3] BWEBM[4] BWEBM[5] BWEBM[6]
++ BWEBM[7] AMB[0] AMB[1] AMB[2] AMB[3] AMB[4] AMB[5] AMA[0] AMA[1] AMA[2] AMA[3]
++ AMA[4] AMA[5] REBM WEBM BIST VDD VSS
+XD_CLKR CLKR VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_CLKW CLKW VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_REB REB VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_WEB WEB VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_SLP SLP VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_SD SD VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XA0 AA[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XA1 AA[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XA2 AA[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XA3 AA[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XA4 AA[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XA5 AA[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XB0 AB[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XB1 AB[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XB2 AB[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XB3 AB[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XB4 AB[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XB5 AB[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BIST BIST VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_WEBM WEBM VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_REBM REBM VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMA0 AMA[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMA1 AMA[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMA2 AMA[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMA3 AMA[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMA4 AMA[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMA5 AMA[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMB0 AMB[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMB1 AMB[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMB2 AMB[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMB3 AMB[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMB4 AMB[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_XMB5 AMB[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XBST_GCTRL AA[0] AA[1] AA[2] AA[3] AA[4] AA[5] TIEL TIEL TIEL TIEL TIEL TIEL
++ AAI[0] AAI[1] AAI[2] AAI[3] AAI[4] AAI[5] AAI[6] AAI[7] AAI[8] AAI[9] AAI[10]
++ AAI[11] AAIB[0] AAIB[1] AAIB[2] AAIB[3] AAIB[4] AAIB[5] AAIB[6] AAIB[7]
++ AAIB[8] AAIB[9] AAIB[10] AAIB[11] AB[0] AB[1] AB[2] AB[3] AB[4] AB[5] TIEL
++ TIEL TIEL TIEL TIEL TIEL ABI[0] ABI[1] ABI[2] ABI[3] ABI[4] ABI[5] ABI[6]
++ ABI[7] ABI[8] ABI[9] ABI[10] ABI[11] ABIB[0] ABIB[1] ABIB[2] ABIB[3] ABIB[4]
++ ABIB[5] ABIB[6] ABIB[7] ABIB[8] ABIB[9] ABIB[10] ABIB[11] AMA[0] AMA[1] AMA[2]
++ AMA[3] AMA[4] AMA[5] TIEL TIEL TIEL TIEL TIEL TIEL AMB[0] AMB[1] AMB[2] AMB[3]
++ AMB[4] AMB[5] TIEL TIEL TIEL TIEL TIEL TIEL BIST BST BSTB CLKR CLKW TIEL TIEH
++ TIEH TIEH TIEL REB REBI REBIB REBM TIEL SDSLPI TIEL TIEL TIEL VDD VSS VSSI
++ TIEH TIEL WEB WEBI WEBIB WEBM S6HVTFWBSO40W8_BST_GCTRL
+XCTR AAI[0] AAI[1] AAI[2] AAI[3] AAI[4] AAI[5] AAI[6] AAI[7] AAI[8] AAI[9]
++ AAI[10] AAI[11] ABI[0] ABI[1] ABI[2] ABI[3] ABI[4] ABI[5] ABI[6] ABI[7] ABI[8]
++ ABI[9] ABI[10] ABI[11] CLKR CLKW TIEL DSLP_INT[0] GBLB_TK GBL_TK_L1_D TIEL
++ TIEH TIEH KPI0 KPI1 KPI2 LRPCH_1ST PD_H_PDWN PD_VDDI_H PD_VDDI_H PD_VSSI_L
++ PD_VSSI_L PD_VSSI_TL RBL_TK RXPC[0] RXPC[0] RCLK_H TIEH TIEL RCT_XDTK[0]
++ RCT_XDTK[1] RCT_XDTK[2] RCT_XDTK[3] RC_EN REBI RGCLK RHITB RPCH_L RPD_H RRCLK
++ RREDXD[0] RREDXD[1] RSTB RWCLK RXPA[0] RXPA[1] RXPA[2] RXPA[3] RXPB[0] RXPB[1]
++ RXPB[2] RXPB[3] RXPB[4] RXPB[5] RXPB[6] RXPB[7] RXPC[0] RXPC[1] RXPC[2]
++ RXPC[3] RXPC[4] RXPC[5] RXPC[6] RXPC[7] RYA[0] RYA[1] RYA[2] RYA[3] RYB[0]
++ RYB[1] RYB[2] RYB[3] SCLK SD SDIN SDOUT SD_INT[0] SLP PD_VDDI_TH TIEH TIEL
++ TIEL TM_GBL VDD VDDI VDD VSS VSSI W_RESET WCLK_H WCLK_TK TIEH TIEL WEBI WGCLK
++ WHITB WPCH_L WPD_H WREDXD[0] WREDXD[1] WWL_TK_GCTRL WXPA[0] WXPA[1] WXPA[2]
++ WXPA[3] WXPB[0] WXPB[1] WXPB[2] WXPB[3] WXPB[4] WXPB[5] WXPB[6] WXPB[7]
++ WXPC[0] WXPC[1] WXPC[2] WXPC[3] WXPC[4] WXPC[5] WXPC[6] WXPC[7] WYA[0] WYA[1]
++ WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_GCTRL_M4_B_SD
+XD_D0 D[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB0 BWEB[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM0 BWEBM[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM0 DM[0] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO0 VDD VDD BWEBI0 DI0 Q[0] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[0]
++ GBL[1] GBL[2] GBL[3] RCLK_H RPCH_L PD_VDDI_H PD_VSSI_L RYA[0] RYA[1] RYA[2]
++ RYA[3] RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_L VSS VSSI VSSI_SW_L
++ WB[0] WB[1] WB[2] WB[3] WBB[0] WBB[1] WBB[2] WBB[3] WCLK_H WPCH_L WYA[0]
++ WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST0 BST BSTB BWEB[0] BWEBI0 BWEBIB0 BWEBM[0] D[0] DI0 DIB0 DM[0] Q[0] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XD_D1 D[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB1 BWEB[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM1 BWEBM[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM1 DM[1] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO1 VDD VDD BWEBI1 DI1 Q[1] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[4]
++ GBL[5] GBL[6] GBL[7] RCLK_H RPCH_L PD_VDDI_H PD_VSSI_L RYA[0] RYA[1] RYA[2]
++ RYA[3] RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_L VSS VSSI VSSI_SW_L
++ WB[4] WB[5] WB[6] WB[7] WBB[4] WBB[5] WBB[6] WBB[7] WCLK_H WPCH_L WYA[0]
++ WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST1 BST BSTB BWEB[1] BWEBI1 BWEBIB1 BWEBM[1] D[1] DI1 DIB1 DM[1] Q[1] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XD_D2 D[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB2 BWEB[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM2 BWEBM[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM2 DM[2] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO2 VDD VDD BWEBI2 DI2 Q[2] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[8]
++ GBL[9] GBL[10] GBL[11] RCLK_H RPCH_L PD_VDDI_H PD_VSSI_L RYA[0] RYA[1] RYA[2]
++ RYA[3] RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_L VSS VSSI VSSI_SW_L
++ WB[8] WB[9] WB[10] WB[11] WBB[8] WBB[9] WBB[10] WBB[11] WCLK_H WPCH_L WYA[0]
++ WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST2 BST BSTB BWEB[2] BWEBI2 BWEBIB2 BWEBM[2] D[2] DI2 DIB2 DM[2] Q[2] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XD_D3 D[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB3 BWEB[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM3 BWEBM[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM3 DM[3] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO3 VDD VDD BWEBI3 DI3 Q[3] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[12]
++ GBL[13] GBL[14] GBL[15] RCLK_H RPCH_L PD_VDDI_H PD_VSSI_L RYA[0] RYA[1] RYA[2]
++ RYA[3] RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_L VSS VSSI VSSI_SW_L
++ WB[12] WB[13] WB[14] WB[15] WBB[12] WBB[13] WBB[14] WBB[15] WCLK_H WPCH_L
++ WYA[0] WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3]
++ S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST3 BST BSTB BWEB[3] BWEBI3 BWEBIB3 BWEBM[3] D[3] DI3 DIB3 DM[3] Q[3] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XD_D4 D[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB4 BWEB[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM4 BWEBM[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM4 DM[4] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO4 VDD VDD BWEBI4 DI4 Q[4] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[16]
++ GBL[17] GBL[18] GBL[19] RCLK_H RPCH_L RWL_TK VSS RYA[0] RYA[1] RYA[2] RYA[3]
++ RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_R VSS VSSI VSSI_SW_R WB[16]
++ WB[17] WB[18] WB[19] WBB[16] WBB[17] WBB[18] WBB[19] WCLK_H WPCH_L WYA[0]
++ WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST4 BST BSTB BWEB[4] BWEBI4 BWEBIB4 BWEBM[4] D[4] DI4 DIB4 DM[4] Q[4] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XD_D5 D[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB5 BWEB[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM5 BWEBM[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM5 DM[5] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO5 VDD VDD BWEBI5 DI5 Q[5] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[20]
++ GBL[21] GBL[22] GBL[23] RCLK_H RPCH_L RWL_TK VSS RYA[0] RYA[1] RYA[2] RYA[3]
++ RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_R VSS VSSI VSSI_SW_R WB[20]
++ WB[21] WB[22] WB[23] WBB[20] WBB[21] WBB[22] WBB[23] WCLK_H WPCH_L WYA[0]
++ WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST5 BST BSTB BWEB[5] BWEBI5 BWEBIB5 BWEBM[5] D[5] DI5 DIB5 DM[5] Q[5] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XD_D6 D[6] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB6 BWEB[6] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM6 BWEBM[6] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM6 DM[6] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO6 VDD VDD BWEBI6 DI6 Q[6] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[24]
++ GBL[25] GBL[26] GBL[27] RCLK_H RPCH_L RWL_TK VSS RYA[0] RYA[1] RYA[2] RYA[3]
++ RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_R VSS VSSI VSSI_SW_R WB[24]
++ WB[25] WB[26] WB[27] WBB[24] WBB[25] WBB[26] WBB[27] WCLK_H WPCH_L WYA[0]
++ WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST6 BST BSTB BWEB[6] BWEBI6 BWEBIB6 BWEBM[6] D[6] DI6 DIB6 DM[6] Q[6] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XD_D7 D[7] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEB7 BWEB[7] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_BWEBM7 BWEBM[7] VSS S6HVTFWBSO40W8_PIN_DIODE
+XD_DM7 DM[7] VSS S6HVTFWBSO40W8_PIN_DIODE
+XIO7 VDD VDD BWEBI7 DI7 Q[7] DSLP_INT[0] PD_H_PDWN PD_VDDI_H PD_VSSI_L GBL[28]
++ GBL[29] GBL[30] GBL[31] RCLK_H RPCH_L RWL_TK VSS RYA[0] RYA[1] RYA[2] RYA[3]
++ RYB[0] RYB[1] RYB[2] RYB[3] TIEL VDD VDDI VDDI_SW_R VSS VSSI VSSI_SW_R WB[28]
++ WB[29] WB[30] WB[31] WBB[28] WBB[29] WBB[30] WBB[31] WCLK_H WPCH_L WYA[0]
++ WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3] S6HVTFWBSO40W8_IO4S_B_SD
+XIO_BST7 BST BSTB BWEB[7] BWEBI7 BWEBIB7 BWEBM[7] D[7] DI7 DIB7 DM[7] Q[7] VDD
++ VSS VSSI S6HVTFWBSO40W8_BST_TRIBUFX2_IO
+XIOSTKL VDD VDD DSLP_INT[0] GBL_TK_L1_D GBL_TKL1 GBL_TKL2 PD_H_PDWN PD_VDDI_H
++ PD_VSSI_L RBL_TK RYA[0] RYA[1] RYA[2] RYA[3] RYB[0] RYB[1] RYB[2] RYB[3]
++ RCLK_H RPCH_L PD_VDDI_H PD_VSSI_L TIEH TIEL VDD VDDI VDDI_SW_L VSS VSSI
++ VSSI_SW_L WBB_TKL1 WBB_TKL2 WB_TKL1[0] WB_TKL2 WYA[0] WYA[1] WYA[2] WYA[3]
++ WYB[0] WYB[1] WYB[2] WYB[3] WCLK_H WPCH_L S6HVTFWBSO40W8_IO4S_TK_B_SD
+XIOSTKR VDD VDD DSLP_INT[0] GBL_TKR1 GBL_TKR2 PD_H_PDWN PD_VDDI_H PD_VSSI_L
++ RBL_TK RYA[0] RYA[1] RYA[2] RYA[3] RYB[0] RYB[1] RYB[2] RYB[3] RCLK_H RPCH_L
++ VSS VSS TIEH TIEL VDD VDDI VDDI_SW_R VSS VSSI VSSI_SW_R WBB_TKR1 WBB_TKR2
++ WBB_TKR1 WB_TKR2 WYA[0] WYA[1] WYA[2] WYA[3] WYB[0] WYB[1] WYB[2] WYB[3]
++ WCLK_H WPCH_L WWL_TK W_RESET S6HVTFWBSO40W8_IO2S_WTK_B_SD
+XDEC_TK DSLP_INT[0] GBLB_TK GBL_TK_L1_D KPI0 KPI1 KPI2 LRPCH_1ST PD_VDDI_TH
++ PD_VSSI_TL RACT RCT_XDTK[0] RCT_XDTK[1] RCT_XDTK[2] RCT_XDTK[3] RC_EN RGCLK
++ RHITB RPD_H RRCLK VSS VSS RWCLK RWL_TK RWL_TK RWL_TK RXPA[0] RXPA[1] RXPA[2]
++ RXPA[3] RXPA[4] RXPA[5] RXPA[6] RXPA[7] RXPB[0] RXPB[1] RXPB[2] RXPB[3]
++ RXPB[4] RXPB[5] RXPB[6] RXPB[7] RXPC[0] RXPC[1] RXPC[2] RXPC[3] RXPC[4]
++ RXPC[5] RXPC[6] RXPC[7] SD_INT[0] TIEH TM_GBL VDD VDDI VSS VSSI WBB_TKR1
++ WCLK_TK WGCLK WHITB WPD_H VSS VSS WWL_TK WWL_TK WXPA[0] WXPA[1] WXPA[2]
++ WXPA[3] WXPA[4] WXPA[5] WXPA[6] WXPA[7] WXPB[0] WXPB[1] WXPB[2] WXPB[3]
++ WXPB[4] WXPB[5] WXPB[6] WXPB[7] WXPC[0] WXPC[1] WXPC[2] WXPC[3] WXPC[4]
++ WXPC[5] WXPC[6] WXPC[7] S6HVTFWBSO40W8_XDEC2_2_TK_S
+XDEC0 DSLP_INT[0] INT_VDD INT_VSS KPI0 KPI1 KPI2 LRPCH_1ST PD_VDDI_TH PD_VSSI_TL
++ RXPA[0] RXPA[1] RXPA[2] RXPA[3] RACT RXPB[0] RGCLK RHITB RLCLK_LO[0] RPD_H
++ RPREC VDDI RWL[0] RWL[1] RWL[2] RWL[3] RWL_TK RXPA[0] RXPA[1] RXPA[2] RXPA[3]
++ RXPA[4] RXPA[5] RXPA[6] RXPA[7] RXPB[0] RXPB[1] RXPB[2] RXPB[3] RXPB[4]
++ RXPB[5] RXPB[6] RXPB[7] RXPC[0] RXPC[1] RXPC[2] RXPC[3] RXPC[4] RXPC[5]
++ RXPC[6] RXPC[7] SD_INT[0] TIEH TM_GBL VDD VSS VSSI WXPA[0] WXPA[1] WXPA[2]
++ WXPA[3] WACT WBB_TKR1 WXPB[0] WGCLK WHITB WLCLK_LO[0] WPD_H VDDI WWL[0] WWL[1]
++ WWL[2] WWL[3] WXPA[0] WXPA[1] WXPA[2] WXPA[3] WXPA[4] WXPA[5] WXPA[6] WXPA[7]
++ WXPB[0] WXPB[1] WXPB[2] WXPB[3] WXPB[4] WXPB[5] WXPB[6] WXPB[7] WXPC[0]
++ WXPC[1] WXPC[2] WXPC[3] WXPC[4] WXPC[5] WXPC[6] WXPC[7]
++ S6HVTFWBSO40W8_XDEC2_2_4_S2_SW
+XDEC1 DSLP_INT[0] INT_VDD INT_VSS KPI0 KPI1 KPI2 LRPCH_1ST PD_VDDI_TH PD_VSSI_TL
++ RXPA[0] RXPA[1] RXPA[2] RXPA[3] RACT RXPB[1] RGCLK RHITB RLCLK_LO[0] RPD_H
++ RPREC VDDI RWL[4] RWL[5] RWL[6] RWL[7] RWL_TK RXPA[0] RXPA[1] RXPA[2] RXPA[3]
++ RXPA[4] RXPA[5] RXPA[6] RXPA[7] RXPB[0] RXPB[1] RXPB[2] RXPB[3] RXPB[4]
++ RXPB[5] RXPB[6] RXPB[7] RXPC[0] RXPC[1] RXPC[2] RXPC[3] RXPC[4] RXPC[5]
++ RXPC[6] RXPC[7] SD_INT[0] TIEH TM_GBL VDD VSS VSSI WXPA[0] WXPA[1] WXPA[2]
++ WXPA[3] WACT WBB_TKR1 WXPB[1] WGCLK WHITB WLCLK_LO[0] WPD_H VDDI WWL[4] WWL[5]
++ WWL[6] WWL[7] WXPA[0] WXPA[1] WXPA[2] WXPA[3] WXPA[4] WXPA[5] WXPA[6] WXPA[7]
++ WXPB[0] WXPB[1] WXPB[2] WXPB[3] WXPB[4] WXPB[5] WXPB[6] WXPB[7] WXPC[0]
++ WXPC[1] WXPC[2] WXPC[3] WXPC[4] WXPC[5] WXPC[6] WXPC[7]
++ S6HVTFWBSO40W8_XDEC2_2_4_S2_SW
+XDEC2 DSLP_INT[0] INT_VDD INT_VSS KPI0 KPI1 KPI2 LRPCH_1ST PD_VDDI_TH PD_VSSI_TL
++ RXPA[0] RXPA[1] RXPA[2] RXPA[3] RACT RXPB[2] RGCLK RHITB RLCLK_LO[0] RPD_H
++ RPREC VDDI RWL[8] RWL[9] RWL[10] RWL[11] RWL_TK RXPA[0] RXPA[1] RXPA[2]
++ RXPA[3] RXPA[4] RXPA[5] RXPA[6] RXPA[7] RXPB[0] RXPB[1] RXPB[2] RXPB[3]
++ RXPB[4] RXPB[5] RXPB[6] RXPB[7] RXPC[0] RXPC[1] RXPC[2] RXPC[3] RXPC[4]
++ RXPC[5] RXPC[6] RXPC[7] SD_INT[0] TIEH TM_GBL VDD VSS VSSI WXPA[0] WXPA[1]
++ WXPA[2] WXPA[3] WACT WBB_TKR1 WXPB[2] WGCLK WHITB WLCLK_LO[0] WPD_H VDDI
++ WWL[8] WWL[9] WWL[10] WWL[11] WXPA[0] WXPA[1] WXPA[2] WXPA[3] WXPA[4] WXPA[5]
++ WXPA[6] WXPA[7] WXPB[0] WXPB[1] WXPB[2] WXPB[3] WXPB[4] WXPB[5] WXPB[6]
++ WXPB[7] WXPC[0] WXPC[1] WXPC[2] WXPC[3] WXPC[4] WXPC[5] WXPC[6] WXPC[7]
++ S6HVTFWBSO40W8_XDEC2_2_4_S2_SW
+XDEC3 DSLP_INT[0] INT_VDD INT_VSS KPI0 KPI1 KPI2 LRPCH_1ST PD_VDDI_TH PD_VSSI_TL
++ RXPA[0] RXPA[1] RXPA[2] RXPA[3] RACT RXPB[3] RGCLK RHITB RLCLK_LO[0] RPD_H
++ RPREC VDDI RWL[12] RWL[13] RWL[14] RWL[15] RWL_TK RXPA[0] RXPA[1] RXPA[2]
++ RXPA[3] RXPA[4] RXPA[5] RXPA[6] RXPA[7] RXPB[0] RXPB[1] RXPB[2] RXPB[3]
++ RXPB[4] RXPB[5] RXPB[6] RXPB[7] RXPC[0] RXPC[1] RXPC[2] RXPC[3] RXPC[4]
++ RXPC[5] RXPC[6] RXPC[7] SD_INT[0] TIEH TM_GBL VDD VSS VSSI WXPA[0] WXPA[1]
++ WXPA[2] WXPA[3] WACT WBB_TKR1 WXPB[3] WGCLK WHITB WLCLK_LO[0] WPD_H VDDI
++ WWL[12] WWL[13] WWL[14] WWL[15] WXPA[0] WXPA[1] WXPA[2] WXPA[3] WXPA[4]
++ WXPA[5] WXPA[6] WXPA[7] WXPB[0] WXPB[1] WXPB[2] WXPB[3] WXPB[4] WXPB[5]
++ WXPB[6] WXPB[7] WXPC[0] WXPC[1] WXPC[2] WXPC[3] WXPC[4] WXPC[5] WXPC[6]
++ WXPC[7] S6HVTFWBSO40W8_XDEC2_2_4_S2_SW
+XRWLCTR0 VDD AVDDI DSLPB_LIO[0] DSLP_INT[0] DSLP_INT[1] INT_VDD_LO[0]
++ INT_VDD_UP[0] INT_VSS_LO[0] INT_VSS_UP[0] KPI0 KPI1 KPI2 KP_D_0[0] KP_D_0[1]
++ KP_D_0[2] LRPCH_L[0] PD_VDDI_TH PD_VSSI_TL PRE_LO[0] PRE_UP[0] RACT RXPC[0]
++ RXPC[0] RGCLK RHITB RLCLK_LO[0] RLCLK_UP[0] VDDI RWL_TK_XDEC RXPA[0] RXPA[1]
++ RXPA[2] RXPA[3] RXPA[4] RXPA[5] RXPA[6] RXPA[7] RXPB[0] RXPB[1] RXPB[2]
++ RXPB[3] RXPB[4] RXPB[5] RXPB[6] RXPB[7] RXPC[0] RXPC[1] RXPC[2] RXPC[3]
++ RXPC[4] RXPC[5] RXPC[6] RXPC[7] SD_AVDDISW[0] SD_INT[0] SD_INT[1] TIEH TIEL[0]
++ TM_GBL VDD VSS VSSI WACT WBB_TKR1 WXPC[0] WXPC[0] WGCLK WHITB WLCLK_LO[0]
++ WLCLK_UP[0] VDDI WXPA[0] WXPA[1] WXPA[2] WXPA[3] WXPA[4] WXPA[5] WXPA[6]
++ WXPA[7] WXPB[0] WXPB[1] WXPB[2] WXPB[3] WXPB[4] WXPB[5] WXPB[6] WXPB[7]
++ WXPC[0] WXPC[1] WXPC[2] WXPC[3] WXPC[4] WXPC[5] WXPC[6] WXPC[7]
++ S6HVTFWBSO40W8_RWLCTRL4_SD
+XVTRACK RACT RGCLK TM_GBL VDD VSS VSSI S6HVTFWBSO40W8_V_TRACK
+XLIO_0_0 VDD AVDDI_L DSLPB_LIO[0] GBL[0] GBL[1] GBL[2] GBL[3] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[0] WB[1] WB[2] WB[3]
++ WBB[0] WBB[1] WBB[2] WBB[3] RBL0_L[0] RBL0_L[1] RBL0_L[2] RBL0_L[3] RBL0_U[0]
++ RBL0_U[1] RBL0_U[2] RBL0_U[3] S6HVTFWBSO40W8_LIOXMUX
+XLIO_0_1 VDD AVDDI_L DSLPB_LIO[0] GBL[4] GBL[5] GBL[6] GBL[7] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[4] WB[5] WB[6] WB[7]
++ WBB[4] WBB[5] WBB[6] WBB[7] RBL0_L[4] RBL0_L[5] RBL0_L[6] RBL0_L[7] RBL0_U[4]
++ RBL0_U[5] RBL0_U[6] RBL0_U[7] S6HVTFWBSO40W8_LIOXMUX
+XLIO_0_2 VDD AVDDI_L DSLPB_LIO[0] GBL[8] GBL[9] GBL[10] GBL[11] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[8] WB[9] WB[10] WB[11]
++ WBB[8] WBB[9] WBB[10] WBB[11] RBL0_L[8] RBL0_L[9] RBL0_L[10] RBL0_L[11]
++ RBL0_U[8] RBL0_U[9] RBL0_U[10] RBL0_U[11] S6HVTFWBSO40W8_LIOXMUX
+XLIO_0_3 VDD AVDDI_L DSLPB_LIO[0] GBL[12] GBL[13] GBL[14] GBL[15] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[12] WB[13] WB[14]
++ WB[15] WBB[12] WBB[13] WBB[14] WBB[15] RBL0_L[12] RBL0_L[13] RBL0_L[14]
++ RBL0_L[15] RBL0_U[12] RBL0_U[13] RBL0_U[14] RBL0_U[15] S6HVTFWBSO40W8_LIOXMUX
+XLIO_0_4 VDD AVDDI_R DSLPB_LIO[0] GBL[16] GBL[17] GBL[18] GBL[19] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[16] WB[17] WB[18]
++ WB[19] WBB[16] WBB[17] WBB[18] WBB[19] RBL0_L[16] RBL0_L[17] RBL0_L[18]
++ RBL0_L[19] RBL0_U[16] RBL0_U[17] RBL0_U[18] RBL0_U[19] S6HVTFWBSO40W8_LIOXMUX
+XLIO_0_5 VDD AVDDI_R DSLPB_LIO[0] GBL[20] GBL[21] GBL[22] GBL[23] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[20] WB[21] WB[22]
++ WB[23] WBB[20] WBB[21] WBB[22] WBB[23] RBL0_L[20] RBL0_L[21] RBL0_L[22]
++ RBL0_L[23] RBL0_U[20] RBL0_U[21] RBL0_U[22] RBL0_U[23] S6HVTFWBSO40W8_LIOXMUX
+XLIO_0_6 VDD AVDDI_R DSLPB_LIO[0] GBL[24] GBL[25] GBL[26] GBL[27] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[24] WB[25] WB[26]
++ WB[27] WBB[24] WBB[25] WBB[26] WBB[27] RBL0_L[24] RBL0_L[25] RBL0_L[26]
++ RBL0_L[27] RBL0_U[24] RBL0_U[25] RBL0_U[26] RBL0_U[27] S6HVTFWBSO40W8_LIOXMUX
+XLIO_0_7 VDD AVDDI_R DSLPB_LIO[0] GBL[28] GBL[29] GBL[30] GBL[31] KP_D_0[0]
++ KP_D_0[1] KP_D_0[2] LRPCH_L[0] SD_AVDDISW[0] VDD VSS WB[28] WB[29] WB[30]
++ WB[31] WBB[28] WBB[29] WBB[30] WBB[31] RBL0_L[28] RBL0_L[29] RBL0_L[30]
++ RBL0_L[31] RBL0_U[28] RBL0_U[29] RBL0_U[30] RBL0_U[31] S6HVTFWBSO40W8_LIOXMUX
+XCORE4_0_0 VDD AVDDI_L RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[0] WB[1] WB[2] WB[3] WBB[0] WBB[1] WBB[2] WBB[3] GBL[0] GBL[1]
++ GBL[2] GBL[3] RBL0_L[0] RBL0_L[1] RBL0_L[2] RBL0_L[3] S6HVTFWBSO40W8_A4XMUX
+XCORE4_0_1 VDD AVDDI_L RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[4] WB[5] WB[6] WB[7] WBB[4] WBB[5] WBB[6] WBB[7] GBL[4] GBL[5]
++ GBL[6] GBL[7] RBL0_L[4] RBL0_L[5] RBL0_L[6] RBL0_L[7] S6HVTFWBSO40W8_A4XMUX
+XCORE4_0_2 VDD AVDDI_L RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[8] WB[9] WB[10] WB[11] WBB[8] WBB[9] WBB[10] WBB[11] GBL[8] GBL[9]
++ GBL[10] GBL[11] RBL0_L[8] RBL0_L[9] RBL0_L[10] RBL0_L[11]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_0_3 VDD AVDDI_L RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[12] WB[13] WB[14] WB[15] WBB[12] WBB[13] WBB[14] WBB[15] GBL[12]
++ GBL[13] GBL[14] GBL[15] RBL0_L[12] RBL0_L[13] RBL0_L[14] RBL0_L[15]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_0_4 VDD AVDDI_R RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[16] WB[17] WB[18] WB[19] WBB[16] WBB[17] WBB[18] WBB[19] GBL[16]
++ GBL[17] GBL[18] GBL[19] RBL0_L[16] RBL0_L[17] RBL0_L[18] RBL0_L[19]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_0_5 VDD AVDDI_R RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[20] WB[21] WB[22] WB[23] WBB[20] WBB[21] WBB[22] WBB[23] GBL[20]
++ GBL[21] GBL[22] GBL[23] RBL0_L[20] RBL0_L[21] RBL0_L[22] RBL0_L[23]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_0_6 VDD AVDDI_R RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[24] WB[25] WB[26] WB[27] WBB[24] WBB[25] WBB[26] WBB[27] GBL[24]
++ GBL[25] GBL[26] GBL[27] RBL0_L[24] RBL0_L[25] RBL0_L[26] RBL0_L[27]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_0_7 VDD AVDDI_R RWL[0] RWL[1] RWL[2] RWL[3] WWL[0] WWL[1] WWL[2] WWL[3]
++ VDD VSS WB[28] WB[29] WB[30] WB[31] WBB[28] WBB[29] WBB[30] WBB[31] GBL[28]
++ GBL[29] GBL[30] GBL[31] RBL0_L[28] RBL0_L[29] RBL0_L[30] RBL0_L[31]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_0 VDD AVDDI_L RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[0] WB[1] WB[2] WB[3] WBB[0] WBB[1] WBB[2] WBB[3] GBL[0] GBL[1]
++ GBL[2] GBL[3] RBL0_L[0] RBL0_L[1] RBL0_L[2] RBL0_L[3] S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_1 VDD AVDDI_L RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[4] WB[5] WB[6] WB[7] WBB[4] WBB[5] WBB[6] WBB[7] GBL[4] GBL[5]
++ GBL[6] GBL[7] RBL0_L[4] RBL0_L[5] RBL0_L[6] RBL0_L[7] S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_2 VDD AVDDI_L RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[8] WB[9] WB[10] WB[11] WBB[8] WBB[9] WBB[10] WBB[11] GBL[8] GBL[9]
++ GBL[10] GBL[11] RBL0_L[8] RBL0_L[9] RBL0_L[10] RBL0_L[11]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_3 VDD AVDDI_L RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[12] WB[13] WB[14] WB[15] WBB[12] WBB[13] WBB[14] WBB[15] GBL[12]
++ GBL[13] GBL[14] GBL[15] RBL0_L[12] RBL0_L[13] RBL0_L[14] RBL0_L[15]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_4 VDD AVDDI_R RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[16] WB[17] WB[18] WB[19] WBB[16] WBB[17] WBB[18] WBB[19] GBL[16]
++ GBL[17] GBL[18] GBL[19] RBL0_L[16] RBL0_L[17] RBL0_L[18] RBL0_L[19]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_5 VDD AVDDI_R RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[20] WB[21] WB[22] WB[23] WBB[20] WBB[21] WBB[22] WBB[23] GBL[20]
++ GBL[21] GBL[22] GBL[23] RBL0_L[20] RBL0_L[21] RBL0_L[22] RBL0_L[23]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_6 VDD AVDDI_R RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[24] WB[25] WB[26] WB[27] WBB[24] WBB[25] WBB[26] WBB[27] GBL[24]
++ GBL[25] GBL[26] GBL[27] RBL0_L[24] RBL0_L[25] RBL0_L[26] RBL0_L[27]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_1_7 VDD AVDDI_R RWL[4] RWL[5] RWL[6] RWL[7] WWL[4] WWL[5] WWL[6] WWL[7]
++ VDD VSS WB[28] WB[29] WB[30] WB[31] WBB[28] WBB[29] WBB[30] WBB[31] GBL[28]
++ GBL[29] GBL[30] GBL[31] RBL0_L[28] RBL0_L[29] RBL0_L[30] RBL0_L[31]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_0 VDD AVDDI_L RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[0] WB[1] WB[2] WB[3] WBB[0] WBB[1] WBB[2] WBB[3] GBL[0]
++ GBL[1] GBL[2] GBL[3] RBL0_L[0] RBL0_L[1] RBL0_L[2] RBL0_L[3]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_1 VDD AVDDI_L RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[4] WB[5] WB[6] WB[7] WBB[4] WBB[5] WBB[6] WBB[7] GBL[4]
++ GBL[5] GBL[6] GBL[7] RBL0_L[4] RBL0_L[5] RBL0_L[6] RBL0_L[7]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_2 VDD AVDDI_L RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[8] WB[9] WB[10] WB[11] WBB[8] WBB[9] WBB[10] WBB[11] GBL[8]
++ GBL[9] GBL[10] GBL[11] RBL0_L[8] RBL0_L[9] RBL0_L[10] RBL0_L[11]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_3 VDD AVDDI_L RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[12] WB[13] WB[14] WB[15] WBB[12] WBB[13] WBB[14] WBB[15]
++ GBL[12] GBL[13] GBL[14] GBL[15] RBL0_L[12] RBL0_L[13] RBL0_L[14] RBL0_L[15]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_4 VDD AVDDI_R RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[16] WB[17] WB[18] WB[19] WBB[16] WBB[17] WBB[18] WBB[19]
++ GBL[16] GBL[17] GBL[18] GBL[19] RBL0_L[16] RBL0_L[17] RBL0_L[18] RBL0_L[19]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_5 VDD AVDDI_R RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[20] WB[21] WB[22] WB[23] WBB[20] WBB[21] WBB[22] WBB[23]
++ GBL[20] GBL[21] GBL[22] GBL[23] RBL0_L[20] RBL0_L[21] RBL0_L[22] RBL0_L[23]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_6 VDD AVDDI_R RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[24] WB[25] WB[26] WB[27] WBB[24] WBB[25] WBB[26] WBB[27]
++ GBL[24] GBL[25] GBL[26] GBL[27] RBL0_L[24] RBL0_L[25] RBL0_L[26] RBL0_L[27]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_2_7 VDD AVDDI_R RWL[8] RWL[9] RWL[10] RWL[11] WWL[8] WWL[9] WWL[10]
++ WWL[11] VDD VSS WB[28] WB[29] WB[30] WB[31] WBB[28] WBB[29] WBB[30] WBB[31]
++ GBL[28] GBL[29] GBL[30] GBL[31] RBL0_L[28] RBL0_L[29] RBL0_L[30] RBL0_L[31]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_0 VDD AVDDI_L RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[0] WB[1] WB[2] WB[3] WBB[0] WBB[1] WBB[2] WBB[3] GBL[0]
++ GBL[1] GBL[2] GBL[3] RBL0_L[0] RBL0_L[1] RBL0_L[2] RBL0_L[3]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_1 VDD AVDDI_L RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[4] WB[5] WB[6] WB[7] WBB[4] WBB[5] WBB[6] WBB[7] GBL[4]
++ GBL[5] GBL[6] GBL[7] RBL0_L[4] RBL0_L[5] RBL0_L[6] RBL0_L[7]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_2 VDD AVDDI_L RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[8] WB[9] WB[10] WB[11] WBB[8] WBB[9] WBB[10] WBB[11] GBL[8]
++ GBL[9] GBL[10] GBL[11] RBL0_L[8] RBL0_L[9] RBL0_L[10] RBL0_L[11]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_3 VDD AVDDI_L RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[12] WB[13] WB[14] WB[15] WBB[12] WBB[13] WBB[14] WBB[15]
++ GBL[12] GBL[13] GBL[14] GBL[15] RBL0_L[12] RBL0_L[13] RBL0_L[14] RBL0_L[15]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_4 VDD AVDDI_R RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[16] WB[17] WB[18] WB[19] WBB[16] WBB[17] WBB[18] WBB[19]
++ GBL[16] GBL[17] GBL[18] GBL[19] RBL0_L[16] RBL0_L[17] RBL0_L[18] RBL0_L[19]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_5 VDD AVDDI_R RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[20] WB[21] WB[22] WB[23] WBB[20] WBB[21] WBB[22] WBB[23]
++ GBL[20] GBL[21] GBL[22] GBL[23] RBL0_L[20] RBL0_L[21] RBL0_L[22] RBL0_L[23]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_6 VDD AVDDI_R RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[24] WB[25] WB[26] WB[27] WBB[24] WBB[25] WBB[26] WBB[27]
++ GBL[24] GBL[25] GBL[26] GBL[27] RBL0_L[24] RBL0_L[25] RBL0_L[26] RBL0_L[27]
++ S6HVTFWBSO40W8_A4XMUX
+XCORE4_3_7 VDD AVDDI_R RWL[12] RWL[13] RWL[14] RWL[15] WWL[12] WWL[13] WWL[14]
++ WWL[15] VDD VSS WB[28] WB[29] WB[30] WB[31] WBB[28] WBB[29] WBB[30] WBB[31]
++ GBL[28] GBL[29] GBL[30] GBL[31] RBL0_L[28] RBL0_L[29] RBL0_L[30] RBL0_L[31]
++ S6HVTFWBSO40W8_A4XMUX
+XLIO_TKL_0 VDD AVDDI_L DSLPB_LIO[0] GBL_TKL1 KP_D_0[0] KP_D_0[1] KP_D_0[2]
++ RBL_TK LRPCH_L[0] RBL_TK RWL_TK SD_AVDDISW[0] TIEL[0] RBL_TK_DUM_L VDD VSS
++ WB_TK_L1 WBB_TKL1 S6HVTFWBSO40W8_LIO_8_TK1_S_SD
+XLIO_TKR_0 VDD AVDDI_R DSLPB_LIO[0] GBL_TKR1 KP_D_0[0] KP_D_0[1] KP_D_0[2]
++ RBL_TK LRPCH_L[0] RBL_TK RWL_TK SD_AVDDISW[0] TIEL[0] RBL_TK_DUM_R VDD VSS
++ WB_TK_R1 WBB_TKR1 S6HVTFWBSO40W8_LIO_8_TK1_S_SD
+XCORE_TK_BOT_0 VDD AVDDI_L VSS VSS VDD VSS WB[0] WB[1] WB[2] WB[3] WBB[0] WBB[1]
++ WBB[2] WBB[3] GBL[0] GBL[1] GBL[2] GBL[3] S6HVTFWBSO40W8_A2XMUX_TK_L
+XCORE_TK_BOT_1 VDD AVDDI_L VSS VSS VDD VSS WB[4] WB[5] WB[6] WB[7] WBB[4] WBB[5]
++ WBB[6] WBB[7] GBL[4] GBL[5] GBL[6] GBL[7] S6HVTFWBSO40W8_A2XMUX_TK_L
+XCORE_TK_BOT_2 VDD AVDDI_L VSS VSS VDD VSS WB[8] WB[9] WB[10] WB[11] WBB[8]
++ WBB[9] WBB[10] WBB[11] GBL[8] GBL[9] GBL[10] GBL[11]
++ S6HVTFWBSO40W8_A2XMUX_TK_L
+XCORE_TK_BOT_3 VDD AVDDI_L VSS VSS VDD VSS WB[12] WB[13] WB[14] WB[15] WBB[12]
++ WBB[13] WBB[14] WBB[15] GBL[12] GBL[13] GBL[14] GBL[15]
++ S6HVTFWBSO40W8_A2XMUX_TK_L
+XCORE_TK_BOT_4 VDD AVDDI_R RWL_TK WWL_TK VDD VSS WB[16] WB[17] WB[18] WB[19]
++ WBB[16] WBB[17] WBB[18] WBB[19] GBL[16] GBL[17] GBL[18] GBL[19]
++ S6HVTFWBSO40W8_A2XMUX_TK_R
+XCORE_TK_BOT_5 VDD AVDDI_R RWL_TK WWL_TK VDD VSS WB[20] WB[21] WB[22] WB[23]
++ WBB[20] WBB[21] WBB[22] WBB[23] GBL[20] GBL[21] GBL[22] GBL[23]
++ S6HVTFWBSO40W8_A2XMUX_TK_R
+XCORE_TK_BOT_6 VDD AVDDI_R RWL_TK WWL_TK VDD VSS WB[24] WB[25] WB[26] WB[27]
++ WBB[24] WBB[25] WBB[26] WBB[27] GBL[24] GBL[25] GBL[26] GBL[27]
++ S6HVTFWBSO40W8_A2XMUX_TK_R
+XCORE_TK_BOT_7 VDD AVDDI_R RWL_TK WWL_TK VDD VSS WB[28] WB[29] WB[30] WB[31]
++ WBB[28] WBB[29] WBB[30] WBB[31] GBL[28] GBL[29] GBL[30] GBL[31]
++ S6HVTFWBSO40W8_A2XMUX_TK_R
+XCORE_TK_LL1_CORN VDD AVDDI_L WBB_TK_L2_FNET GBL_TKL2 RBL_TK_L2_FNET VSS VSS VDD
++ VSS WB_TKL2[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR1_CORN VDD AVDDI_L WBB_TK_L1_FNET GBL_TKL1 RBL_TK_L1_FNET VSS VSS VDD
++ VSS WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL1_CORN VDD AVDDI_R WBB_TK_R1_FNET GBL_TKR1 RBL_TK_R1_FNET RWL_TK VSS
++ VDD VSS WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR1_CORN VDD AVDDI_R WBB_TK_R2_FNET GBL_TKR2 RBL_TK_R2_FNET RWL_TK VSS
++ VDD VSS WB_TKR2[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL0_CORN VDD AVDDI_L WBB_TK_L2_FNET GBL_TKL2 RBL_TK_L2_FNET VSS VSS VDD
++ VSS WB_TK_L2_FNET VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR0_CORN VDD AVDDI_L WBB_TK_L1_FNET GBL_TKL1 RBL_TK_L1_FNET VSS VSS VDD
++ VSS WB_TK_L1_FNET VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL0_CORN VDD AVDDI_R WBB_TK_R1_FNET GBL_TKR1 RBL_TK_R1_FNET VSS VSS VDD
++ VSS WB_TK_R1_FNET WWL_TK S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR0_CORN VDD AVDDI_R WBB_TK_R2_FNET GBL_TKR2 RBL_TK_R2_FNET VSS VSS VDD
++ VSS WB_TK_R2_FNET WWL_TK S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_0 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK RWL_TK TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[0] S6HVTFWBSO40W8_MC28_241HC_TK_RD2
+XCORE_TK_LR_0_0 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK RWL_TK TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK_RD
+XCORE_TK_RL_0_0 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK RWL_TK TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK_RD
+XCORE_TK_RR_0_0 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK RWL_TK TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[0] S6HVTFWBSO40W8_MC28_241HC_TK_RD2
+XCORE_TK_LL_0_1 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[1] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_1 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_1 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_1 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[1] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_2 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[2] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_2 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_2 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_2 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[2] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_3 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[3] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_3 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_3 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_3 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[3] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_4 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[4] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_4 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_4 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_4 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[4] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_5 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[5] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_5 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_5 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_5 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[5] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_6 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[6] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_6 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_6 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_6 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[6] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_7 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[7] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_7 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_7 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_7 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[7] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_8 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[8] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_8 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_8 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_8 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[8] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_9 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[9] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_9 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_9 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_9 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[9] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_10 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[10] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_10 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_10 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_10 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[10] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_11 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[11] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_11 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_11 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_11 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[11] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_12 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[12] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_12 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_12 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_12 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[12] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_13 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[13] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_13 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_13 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_13 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[13] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_14 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[14] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_14 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_14 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_14 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[14] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LL_0_15 VDD AVDDI_L WBB_TKL2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL2[0] WWL[15] S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_LR_0_15 VDD AVDDI_L WBB_TKL1 GBL_TKL1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKL1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RL_0_15 VDD AVDDI_R WBB_TKR1 GBL_TKR1 RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR1[0] VSS S6HVTFWBSO40W8_MC28_241HC_TK
+XCORE_TK_RR_0_15 VDD AVDDI_R WBB_TKR2_LO[0] RBL_TK RBL_TK VSS TIEL[0] VDD VSS
++ WB_TKR2[0] WWL[15] S6HVTFWBSO40W8_MC28_241HC_TK
+.ENDS
+

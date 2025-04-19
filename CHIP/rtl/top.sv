@@ -60,26 +60,60 @@ control_unit ctrl_inst (
 	.threshold_ready(threshold_ready)
 );
 
-//-------------------------------------------------------------------------
-// Input Memory (Image)
-//-------------------------------------------------------------------------
-input_memory image_mem (
-	.clk(clk),
-	.data_in(img_data),          // Drive from neuron_io's decoded image data
-	.data_out(image_mem_out),    // Output to MAC unit
-	.wr_data_ptr(wr_data_ptr),
-	.rd_data_ptr(rd_data_ptr)
+// -------------------------------------------------------------------------
+// Input Memory (Image SRAM)
+// -------------------------------------------------------------------------
+TS6N28HPCPHVTA64X8M4FWBSO image_mem (
+	.AA(wr_data_ptr),      // Write address (6 bits)
+	.D(img_data),          // Write data (8-bit pixel value)
+	.BWEB(8'b0),           // Bit-wise write enable (active low), 0 = all enabled
+	.WEB(1'b0),            // Write enable (active low), 0 = write enabled
+	.CLKW(clk),            // Write clock
+
+	.AB(rd_data_ptr),      // Read address (6 bits)
+	.REB(1'b0),            // Read enable (active low), 0 = read enabled
+	.CLKR(clk),            // Read clock
+
+	.SLP(1'b0),            // Sleep mode control, 0 = normal mode
+	.SD(1'b0),             // Shutdown mode control, 0 = normal mode
+
+	.AMA(6'b0),            // Test write address (not used, tie to 0)
+	.DM(8'b0),             // Test write data (not used, tie to 0)
+	.BWEBM(8'b0),          // Test bit-wise write enable (not used)
+	.WEBM(1'b1),           // Test write enable (1 = disabled)
+	.AMB(6'b0),            // Test read address (not used)
+	.REBM(1'b1),           // Test read enable (1 = disabled)
+	.BIST(1'b0),           // BIST enable (0 = disabled)
+
+	.Q(image_mem_out)      // Read data output (8-bit)
 );
 
-//-------------------------------------------------------------------------
-// Weights Memory
-//-------------------------------------------------------------------------
-input_memory weight_mem (
-	.clk(clk),
-	.data_in(weight_data),       // Drive from neuron_io's decoded weight data
-	.data_out(weight_mem_out),   // Output to MAC unit
-	.wr_data_ptr(wr_data_ptr),
-	.rd_data_ptr(rd_data_ptr)
+// -------------------------------------------------------------------------
+// Weights Memory (Weight SRAM)
+// -------------------------------------------------------------------------
+TS6N28HPCPHVTA64X8M4FWBSO weight_mem (
+	.AA(wr_data_ptr),      // Write address
+	.D(weight_data),       // Write data (8-bit weight)
+	.BWEB(8'b0),           // Bit-wise write enable (active low)
+	.WEB(1'b0),            // Write enable (active low)
+	.CLKW(clk),            // Write clock
+
+	.AB(rd_data_ptr),      // Read address
+	.REB(1'b0),            // Read enable (active low)
+	.CLKR(clk),            // Read clock
+
+	.SLP(1'b0),            // Sleep control
+	.SD(1'b0),             // Shutdown control
+
+	.AMA(6'b0),            // Test write address (not used)
+	.DM(8'b0),             // Test write data (not used)
+	.BWEBM(8'b0),          // Test bit-wise write enable (not used)
+	.WEBM(1'b1),           // Test write enable (1 = off)
+	.AMB(6'b0),            // Test read address (not used)
+	.REBM(1'b1),           // Test read enable (1 = off)
+	.BIST(1'b0),           // BIST (0 = off)
+
+	.Q(weight_mem_out)     // Read data output
 );
 
 //-------------------------------------------------------------------------

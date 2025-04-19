@@ -1,0 +1,261 @@
+//****************************************************************************** */
+//*                                                                              */
+//*STATEMENT OF USE                                                              */
+//*                                                                              */
+//*This information contains confidential and proprietary information of TSMC.   */
+//*No part of this information may be reproduced, transmitted, transcribed,      */
+//*stored in a retrieval system, or translated into any human or computer        */
+//*language, in any form or by any means, electronic, mechanical, magnetic,      */
+//*optical, chemical, manual, or otherwise, without the prior written permission */
+//*of TSMC. This information was prepared for informational purpose and is for   */
+//*use by TSMC's customers only. TSMC reserves the right to make changes in the  */
+//*information at any time and without notice.                                   */
+//*                                                                              */
+//****************************************************************************** */
+//*        Software         : TSMC MEMORY COMPILER tsn28hpcp2prf_2012.02.00.d.200b */
+//*        Technology       : TSMC 28nm CMOS LOGIC High Performance Compact Mobile Computing Plus 1P10M HKMG CU_ELK 0.9V */
+//*        Memory Type      : TSMC 28nm High Performance Compact Mobile Computing Plus Two Port Register File */
+//*                         : with d240 bit cell HVT periphery */
+//*        Library Name     : ts6n28hpcphvta64x8m4fwbso (user specify : TS6N28HPCPHVTA64X8M4FWBSO) */
+//*        Library Version  : 200b */
+//*        Generated Time   : 2025/04/08, 10:16:27 */
+//*        Template Version : S_04_41301 */
+//*************************************************************************** ** */
+array_delimiter = "[]";
+
+model TS6N28HPCPHVTA64X8M4FWBSO (
+			AA, D, WEB, CLKW, AB, REB, CLKR, 
+                        BWEB,
+			AMA,DM,WEBM,AMB,REBM,BIST,
+                        BWEBM,
+ 			SLP,
+ 			SD,
+			Q
+			)
+
+(
+        model_source = verilog_module;
+	input (AA) (array = 5 : 0;)
+	input (AB) (array = 5 : 0;)
+        input (D)  (array = 7 : 0;)
+        input (BWEB) (array = 7 : 0;) 
+ 	input (SLP) ()
+ 	input (SD) ()
+        input (WEB) ()
+        input (REB) ()      
+	input (AMA) (array = 5 : 0;)
+	input (AMB) (array = 5 : 0;)
+        input (DM)  (array = 7 : 0;)
+        input (BWEBM) (array = 7 : 0;) 
+	input (WEBM) ()
+        input (REBM) ()      
+        input (BIST) ()      
+        input (CLKW) (clock=rise_edge;)
+        input (CLKR) (clock=rise_edge;)
+
+// Test Mode
+
+        // BIST x handling
+        intern (bist_x)  (primitive = _xnor(BIST, BIST, bist_x);)
+        intern (Q_tiex)  (primitive = _tiex(Q_tiex);)
+        //BIST MUX
+        intern (mREB)    (primitive = _mux(REB, REBM, BIST, mREB);)
+
+        intern (mWEB)    (primitive = _mux(WEB, WEBM, BIST, mWEB);)
+
+        intern (mBWEB_0) (primitive = _mux(BWEB[0], BWEBM[0], BIST, mBWEB_0);)
+        intern (mBWEB_1) (primitive = _mux(BWEB[1], BWEBM[1], BIST, mBWEB_1);)
+        intern (mBWEB_2) (primitive = _mux(BWEB[2], BWEBM[2], BIST, mBWEB_2);)
+        intern (mBWEB_3) (primitive = _mux(BWEB[3], BWEBM[3], BIST, mBWEB_3);)
+        intern (mBWEB_4) (primitive = _mux(BWEB[4], BWEBM[4], BIST, mBWEB_4);)
+        intern (mBWEB_5) (primitive = _mux(BWEB[5], BWEBM[5], BIST, mBWEB_5);)
+        intern (mBWEB_6) (primitive = _mux(BWEB[6], BWEBM[6], BIST, mBWEB_6);)
+        intern (mBWEB_7) (primitive = _mux(BWEB[7], BWEBM[7], BIST, mBWEB_7);)
+
+        intern (mD_0) (primitive = _mux(D[0],DM[0], BIST, mD_0);)
+        intern (mD_1) (primitive = _mux(D[1],DM[1], BIST, mD_1);)
+        intern (mD_2) (primitive = _mux(D[2],DM[2], BIST, mD_2);)
+        intern (mD_3) (primitive = _mux(D[3],DM[3], BIST, mD_3);)
+        intern (mD_4) (primitive = _mux(D[4],DM[4], BIST, mD_4);)
+        intern (mD_5) (primitive = _mux(D[5],DM[5], BIST, mD_5);)
+        intern (mD_6) (primitive = _mux(D[6],DM[6], BIST, mD_6);)
+        intern (mD_7) (primitive = _mux(D[7],DM[7], BIST, mD_7);)
+
+        intern (mAA_0) (primitive = _mux(AA[0],AMA[0], BIST, mAA_0);)
+        intern (mAA_1) (primitive = _mux(AA[1],AMA[1], BIST, mAA_1);)
+        intern (mAA_2) (primitive = _mux(AA[2],AMA[2], BIST, mAA_2);)
+        intern (mAA_3) (primitive = _mux(AA[3],AMA[3], BIST, mAA_3);)
+        intern (mAA_4) (primitive = _mux(AA[4],AMA[4], BIST, mAA_4);)
+        intern (mAA_5) (primitive = _mux(AA[5],AMA[5], BIST, mAA_5);)
+
+        intern (mAB_0) (primitive = _mux(AB[0],AMB[0], BIST, mAB_0);)
+        intern (mAB_1) (primitive = _mux(AB[1],AMB[1], BIST, mAB_1);)
+        intern (mAB_2) (primitive = _mux(AB[2],AMB[2], BIST, mAB_2);)
+        intern (mAB_3) (primitive = _mux(AB[3],AMB[3], BIST, mAB_3);)
+        intern (mAB_4) (primitive = _mux(AB[4],AMB[4], BIST, mAB_4);)
+        intern (mAB_5) (primitive = _mux(AB[5],AMB[5], BIST, mAB_5);)
+
+
+        //Normal Function
+        //intern (mRE_i)(primitive = _inv(mREB, mRE_i);)
+        //intern (RE)   (primitive = _and(mRE_i,mWEB,RE);)
+        intern (RE)(primitive = _inv(mREB, RE);)
+
+        //intern (WE_0) (primitive = _nor(mRE_i,mWEB,mBWEB_0,WE_0);)
+        intern (WE_0) (primitive = _nor(mWEB,mBWEB_0,WE_0);)
+        //intern (WE_1) (primitive = _nor(mRE_i,mWEB,mBWEB_1,WE_1);)
+        intern (WE_1) (primitive = _nor(mWEB,mBWEB_1,WE_1);)
+        //intern (WE_2) (primitive = _nor(mRE_i,mWEB,mBWEB_2,WE_2);)
+        intern (WE_2) (primitive = _nor(mWEB,mBWEB_2,WE_2);)
+        //intern (WE_3) (primitive = _nor(mRE_i,mWEB,mBWEB_3,WE_3);)
+        intern (WE_3) (primitive = _nor(mWEB,mBWEB_3,WE_3);)
+        //intern (WE_4) (primitive = _nor(mRE_i,mWEB,mBWEB_4,WE_4);)
+        intern (WE_4) (primitive = _nor(mWEB,mBWEB_4,WE_4);)
+        //intern (WE_5) (primitive = _nor(mRE_i,mWEB,mBWEB_5,WE_5);)
+        intern (WE_5) (primitive = _nor(mWEB,mBWEB_5,WE_5);)
+        //intern (WE_6) (primitive = _nor(mRE_i,mWEB,mBWEB_6,WE_6);)
+        intern (WE_6) (primitive = _nor(mWEB,mBWEB_6,WE_6);)
+        //intern (WE_7) (primitive = _nor(mRE_i,mWEB,mBWEB_7,WE_7);)
+        intern (WE_7) (primitive = _nor(mWEB,mBWEB_7,WE_7);)
+
+        intern (D_0) (primitive = _buf(mD_0,D_0);)
+        intern (D_1) (primitive = _buf(mD_1,D_1);)
+        intern (D_2) (primitive = _buf(mD_2,D_2);)
+        intern (D_3) (primitive = _buf(mD_3,D_3);)
+        intern (D_4) (primitive = _buf(mD_4,D_4);)
+        intern (D_5) (primitive = _buf(mD_5,D_5);)
+        intern (D_6) (primitive = _buf(mD_6,D_6);)
+        intern (D_7) (primitive = _buf(mD_7,D_7);)
+
+        intern (AA_i) (
+           array = 5:0;
+        primitive = _buf(mAA_0,AA_i[0]);
+        primitive = _buf(mAA_1,AA_i[1]);
+        primitive = _buf(mAA_2,AA_i[2]);
+        primitive = _buf(mAA_3,AA_i[3]);
+        primitive = _buf(mAA_4,AA_i[4]);
+        primitive = _buf(mAA_5,AA_i[5]);
+        )
+
+        intern (AB_i) (
+           array = 5:0;
+        primitive = _buf(mAB_0,AB_i[0]);
+        primitive = _buf(mAB_1,AB_i[1]);
+        primitive = _buf(mAB_2,AB_i[2]);
+        primitive = _buf(mAB_3,AB_i[3]);
+        primitive = _buf(mAB_4,AB_i[4]);
+        primitive = _buf(mAB_5,AB_i[5]);
+        )
+
+
+
+
+        intern (Q_0) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_0),
+                _write{,,}     (  CLKW, WE_0,AA_i, D_0) );
+                )
+		
+        intern (Q_1) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_1),
+                _write{,,}     (  CLKW, WE_1,AA_i, D_1) );
+                )
+		
+        intern (Q_2) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_2),
+                _write{,,}     (  CLKW, WE_2,AA_i, D_2) );
+                )
+		
+        intern (Q_3) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_3),
+                _write{,,}     (  CLKW, WE_3,AA_i, D_3) );
+                )
+		
+        intern (Q_4) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_4),
+                _write{,,}     (  CLKW, WE_4,AA_i, D_4) );
+                )
+		
+        intern (Q_5) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_5),
+                _write{,,}     (  CLKW, WE_5,AA_i, D_5) );
+                )
+		
+        intern (Q_6) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_6),
+                _write{,,}     (  CLKW, WE_6,AA_i, D_6) );
+                )
+		
+        intern (Q_7) (
+        data_size = 1;
+        address_size = 6;
+        min_address = 0;
+        max_address = 63;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_7),
+                _write{,,}     (  CLKW, WE_7,AA_i, D_7) );
+                )
+		
+
+	output (Q) (
+   	   array = 7:0;
+	primitive = _mux(Q_tiex, Q_0, bist_x, Q[0]);
+	primitive = _mux(Q_tiex, Q_1, bist_x, Q[1]);
+	primitive = _mux(Q_tiex, Q_2, bist_x, Q[2]);
+	primitive = _mux(Q_tiex, Q_3, bist_x, Q[3]);
+	primitive = _mux(Q_tiex, Q_4, bist_x, Q[4]);
+	primitive = _mux(Q_tiex, Q_5, bist_x, Q[5]);
+	primitive = _mux(Q_tiex, Q_6, bist_x, Q[6]);
+	primitive = _mux(Q_tiex, Q_7, bist_x, Q[7]);
+	)	
+) 
