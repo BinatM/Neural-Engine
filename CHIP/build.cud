@@ -17,6 +17,9 @@ rtl/top.sv
 #verification/mac/mac_if.sv
 #verification/mac/mac_item.sv
 #verification/mac/mac_tb.sv
+#verification/top/top_if.sv
+verification/top/top_item.sv
+verification/top/top_tb.sv
 
 
 

@@ -1,12 +1,14 @@
-module top;
-// Clock
-logic clk;
+module top (
+	inout tri [15:0] bus,
+	input logic clk,
+	input logic wr_en,
+	input logic rd_en,
+	input logic chip_sel
+);
 
 // 16-bit bidirectional I/O Bus
-wire [15:0] bus;
 
 // External control signals (driven by testbench or board)
-logic wr_en, rd_en, chip_sel;
 
 // Internal control signals from the Control Unit
 logic rst_mem, mul_mem_en, ac_mem_en;
@@ -103,14 +105,6 @@ activation_function activation_inst (
 	.input_bus(threshold_data),   // Use threshold_data from neuron_io
 	.output_memory(output_bit)
 );
-
-//-------------------------------------------------------------------------
-// Clock Generation (for simulation)
-//-------------------------------------------------------------------------
-initial begin
-	clk = 0;
-	forever #5 clk = ~clk;
-end
 
 // Test stimulus for chip_sel, wr_en, rd_en can be applied in a separate testbench.
 
