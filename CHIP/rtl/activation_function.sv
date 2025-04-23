@@ -31,7 +31,7 @@ module activation_function #(parameter WIDTH = 22, BUS_WIDTH = 16)
 
 	// Comparator to compare MAC output with the threshold
 	always_comb begin
-		if (mac_output > threshold_register) begin
+		if (mac_output >= threshold_register) begin
 			output_memory = 1'b1;  // Output 1 if MAC output is greater than threshold
 		end else begin
 			output_memory = 1'b0;  // Output 0 otherwise
