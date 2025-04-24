@@ -17,7 +17,8 @@ module top_level (
     output wire         DRAM_LDQM,
     output wire         DRAM_RAS_N,
     output wire         DRAM_UDQM,
-    output wire         DRAM_WE_N
+    output wire         DRAM_WE_N,
+    output wire [9:0]   LEDR
 );
 
     wire db_key0;
@@ -118,6 +119,7 @@ module top_level (
     wire ctrl_wr_en;
     wire [9:0] ctrl_mem_address;
     wire ctrl_output_ready, ctrl_start_run, ctrl_all_done;
+    wire led_done_wire;
 
     control_unit #(.LOAD_DEPTH(69)) ctrl (
         .clk           (clk_internal),
@@ -132,7 +134,8 @@ module top_level (
         .mem_address   (ctrl_mem_address),
         .output_ready  (ctrl_output_ready),
         .start_run     (ctrl_start_run),
-        .all_done      (ctrl_all_done)
+        .all_done      (ctrl_all_done),
+        .led_done      (led_done_wire)
     );
 
     // Generator
@@ -199,7 +202,6 @@ validator #(.ADDR_WIDTH(11)) val (
     .val_done      (val_done)
 );
 
-
     // MUX
     reg [10:0] mux_address;
     reg [15:0] mux_data_in_r;
@@ -250,5 +252,7 @@ validator #(.ADDR_WIDTH(11)) val (
     end
 
     assign FPGA_DATA_OUT = internal_data;
+    assign LEDR[9] = led_done_wire;
+
 
 endmodule
