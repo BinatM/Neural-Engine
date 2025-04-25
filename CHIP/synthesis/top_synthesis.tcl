@@ -1,6 +1,5 @@
 lappend search_path scripts design_data 
-lappend search_path CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/VERILOG
-lappend search_path CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/NLDM
+lappend search_path CHIP/sram
 
 set_host_options -max_cores 8
 set TECH_FILE     "/data/tsmc/28HPCPMMWAVE/synopsys/tsmcn28_9lm6X1Z1URDL.tf"
@@ -8,16 +7,21 @@ set TECH_FILE     "/data/tsmc/28HPCPMMWAVE/synopsys/tsmcn28_9lm6X1Z1URDL.tf"
 #######################################################################
 ## Physical Library Settings
 #######################################################################
-create_lib  -technology $TECH_FILE  -ref_libs {CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/NLDM/ts6n28hpcphvta64x8m4fwbso_200b_ffg0p99v0c.lib /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140.ndm /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140hvt.ndm /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140lvt.ndm }  ../neuron_top.dlib
-open_lib ../neuron_top.dlib
+create_lib -technology $TECH_FILE -ref_libs {
+    /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140.ndm
+    /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140hvt.ndm
+    /data/tsmc/28HPCPMMWAVE/synopsys/libs/tcbn28hpcplusbwp30p140lvt.ndm
+    /project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b_new.ndm
+} neuron_top.dlib
+open_lib neuron_top.dlib
 report_ref_libs
+read_lef CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/LEF/ts6n28hpcphvta64x8m4fwbso_200b.lef
 
 read_parasitic_tech -tlup /data/tsmc/28HPCPMMWAVE/dig_libs/snpsflow/rcbest/crn28hpc+_1p09m+ut-alrdl_6x1z1u_rcbest.tluplus -name rcbest
 read_parasitic_tech -tlup /data/tsmc/28HPCPMMWAVE/dig_libs/snpsflow/rcworst/crn28hpc+_1p09m+ut-alrdl_6x1z1u_rcworst.tluplus -name rcworst
 
 save_lib
 analyze -format sverilog {
-    CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/VERILOG/ts6n28hpcphvta64x8m4fwbso_200b_ffg0p99v0c.v
     CHIP/rtl/top.sv
     CHIP/rtl/mac.sv
     CHIP/rtl/Control_unit.sv

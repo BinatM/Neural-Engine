@@ -1,26 +1,26 @@
 ****************************************
 Report : report_utilization
-Design : mac
+Design : top
 Version: V-2023.12-SP3
-Date   : Thu Mar  6 20:44:48 2025
+Date   : Thu Apr 24 12:12:43 2025
 ****************************************
-Utilization Ratio:			0.7070
+Utilization Ratio:			0.2567
 Utilization options:
- - Area calculation based on:		site_row of block mac
+ - Area calculation based on:		site_row of block top
  - Categories of objects excluded:	hard_macros macro_keepouts soft_macros io_cells hard_blockages 
-Total Area:				431.8020
-Total Capacity Area:			431.8020
-Total Area of cells:			305.2980
+Total Area:				6348.3840
+Total Capacity Area:			2356.7040
+Total Area of cells:			605.0520
 Area of excluded objects:
- - hard_macros         :		0.0000
- - macro_keepouts      :		0.0000
+ - hard_macros         :		3951.3600
+ - macro_keepouts      :		40.3200
  - soft_macros         :		0.0000
  - io_cells            :		0.0000
  - hard_blockages      :		0.0000
-Total Area of excluded objects:		0.0000
-Ratio of excluded objects:		0.0000
+Total Area of excluded objects:		3991.6800
+Ratio of excluded objects:		0.6288
 
 Utilization of site-rows with:
- - Site 'unit':				0.7070
+ - Site 'unit':				0.2567
 
-0.7070
+0.2567
