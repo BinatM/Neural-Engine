@@ -29,14 +29,16 @@ module neuron_io (
   assign bus = bus_oe ? bus_out : 16'bz;
 
   //? latch writes on rising clk when wr_en
-  always_ff @(posedge clk) begin
-	if (chip_sel && wr_en) begin
-	  // pixel+weight pairs
-	  img_data       <= bus[7:0];
-	  weight_data    <= bus[15:8];
-	  // threshold (during the 2 threshold cycles)
-	  threshold_data <= bus;
-	end
+  always_comb begin
+	  img_data       = 8'h00;
+	  weight_data    = 8'h00;
+	  threshold_data = 16'h0000;
+
+	  if (chip_sel && wr_en) begin
+		img_data       = bus[7:0];
+		weight_data    = bus[15:8];
+		threshold_data = bus;
+	  end
   end
 
   //? two-cycle read FSM

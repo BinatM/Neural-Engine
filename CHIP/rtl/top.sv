@@ -49,7 +49,7 @@ module top (
 	.rd_data_ptr   (rd_data_ptr)
   );
 
-  // Weight memory
+   //Weight memory
   input_memory weight_mem (
 	.clk           (clk),
 	.data_in       (weight_data),
@@ -59,9 +59,9 @@ module top (
   );
 
   
-//  //------------------------------------------------------------------------
-//  // Pixel SRAM (Image)
-//  //------------------------------------------------------------------------
+//  ------------------------------------------------------------------------
+//   Pixel SRAM (Image)
+//  ------------------------------------------------------------------------
 //  TS6N28HPCPHVTA64X8M4FWBSO image_mem (
 //	.AA   (wr_data_ptr),       // write address
 //	.D    (img_data),          // write data
@@ -76,17 +76,17 @@ module top (
 //	.SLP  (1'b0),              // sleep off
 //	.SD   (1'b0),              // shutdown off
 //
-//	.AMA  (6'b0), .DM    (8'b0),
-//	.BWEBM(8'b0), .WEBM  (1'b1),
-//	.AMB  (6'b0), .REBM  (1'b1),
-//	.BIST (1'b0),
+//	.AMA  (wr_data_ptr), .DM    (img_data),
+//	.BWEBM(8'b0), .WEBM  (1'b0),
+//	.AMB  (rd_data_ptr), .REBM  (1'b0),
+//	.BIST (1'b1),
 //
 //	.Q    (image_mem_out)      // read data
 //  );
-////
-////  //------------------------------------------------------------------------
-////  // Pixel SRAM (Weight)
-////  //------------------------------------------------------------------------
+//////
+//////  //------------------------------------------------------------------------
+//////  // Pixel SRAM (Weight)
+//////  //------------------------------------------------------------------------
 //  TS6N28HPCPHVTA64X8M4FWBSO weight_mem (
 //	.AA   (wr_data_ptr),
 //	.D    (weight_data),
@@ -101,10 +101,10 @@ module top (
 //	.SLP  (1'b0),
 //	.SD   (1'b0),
 //
-//	.AMA  (6'b0), .DM    (8'b0),
-//	.BWEBM(8'b0), .WEBM  (1'b1),
-//	.AMB  (6'b0), .REBM  (1'b1),
-//	.BIST (1'b0),
+//	.AMA  (wr_data_ptr), .DM    (weight_data),
+//	.BWEBM(8'b0), .WEBM  (1'b0),
+//	.AMB  (rd_data_ptr), .REBM  (1'b0),
+//	.BIST (1'b1),
 //
 //	.Q    (weight_mem_out)
 //  );

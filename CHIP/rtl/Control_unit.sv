@@ -11,7 +11,7 @@ module Control_unit (
   output logic        output_ready,    // final bit valid
   output logic [5:0]  wr_data_ptr,     // write addr 0-63
   output logic [5:0]  rd_data_ptr,     // read  addr 0-63
-  output logic        threshold_ready, // pulse for 2 cycles
+  output wire        threshold_ready, // pulse for 2 cycles
   output logic [2:0]  ctrl_state       // DEBUG: FSM state for coverage
 );
 
@@ -22,13 +22,16 @@ module Control_unit (
 	WRITE_THRESHOLD,
 	COMPUTE,
 	WAIT_OUTPUT,
-	READ_OUTPUT
+	READ_OUTPUT,
+	HOLD
   } state_t;
 
-  state_t      state, next_state;
+  state_t      state, next_state, former_state;
   logic [5:0]  wr_ptr, rd_ptr;
   logic [1:0]  thresh_cnt, out_cnt;
   logic        chip_sel_d;
+  // in your FSM Comb block:
+  assign threshold_ready = (state == WRITE_THRESHOLD) && wr_en && (thresh_cnt < 2);
 
   // rst_mem: one-cycle pulse when chip_sel rises
   always_ff @(posedge clk) begin
@@ -41,15 +44,15 @@ module Control_unit (
 	next_state = state;
 	case (state)
 	  IDLE:
-		if (chip_sel && wr_en)
+		if ((chip_sel && wr_en) || rst_mem)
 		  next_state = WRITE_DATA;
 
 	  WRITE_DATA:
-		if (wr_ptr == 6'd63)
+		if (wr_ptr == 6'd63) 
 		  next_state = WRITE_THRESHOLD;
 
 	  WRITE_THRESHOLD:
-		if (thresh_cnt == 2)
+		if (thresh_cnt == 1)
 		  next_state = COMPUTE;
 
 	  COMPUTE:
@@ -80,7 +83,6 @@ module Control_unit (
 	  out_cnt         <= 2'd0;
 	  mul_mem_en      <= 1'b0;
 	  ac_mem_en       <= 1'b0;
-	  threshold_ready <= 1'b0;
 	  output_ready    <= 1'b0;
 	  ctrl_state      <= IDLE;
 	end else begin
@@ -90,7 +92,6 @@ module Control_unit (
 	  // defaults
 	  mul_mem_en      <= 1'b0;
 	  ac_mem_en       <= 1'b0;
-	  threshold_ready <= 1'b0;
 	  output_ready    <= 1'b0;
 
 	  case (state)
@@ -99,27 +100,32 @@ module Control_unit (
 		  if (wr_en) begin
 			wr_ptr <= wr_ptr + 1;
 			// pipeline starts on 2nd word
+			mul_mem_en <= 1'b1;
+
 			if (wr_ptr != 6'd0) begin
 			  rd_ptr     <= rd_ptr + 1;
 			  mul_mem_en <= 1'b1;
-			  ac_mem_en  <= 1'b1;
+			  if (mul_mem_en) begin
+				  ac_mem_en  <= 1'b1;
+			  end
 			end
 		  end
 		end
 
 		WRITE_THRESHOLD: begin
 		  // latch first half, then second; must see wr_en high twice
-		  if (wr_en && (thresh_cnt < 2)) begin
+		  if (wr_en && (thresh_cnt < 1)) begin
 			thresh_cnt      <= thresh_cnt + 1;
-			threshold_ready <= 1'b1;
+			ac_mem_en  <= 1'b1; //last ac_mem_en 
+			mul_mem_en <= 1'b1;
 		  end
 		end
 
 		COMPUTE: begin
 		  // finish pipeline: 64 multiplies+63 adds -> 65 clocks
 		  rd_ptr     <= rd_ptr + 1;
-		  mul_mem_en <= 1'b1;
-		  ac_mem_en  <= 1'b1;
+		  ac_mem_en  <= 1'b1; //last ac_mem_en 
+
 		end
 
 		WAIT_OUTPUT: begin
@@ -131,10 +137,16 @@ module Control_unit (
 		  // pulse the "final bit valid" flag
 		  output_ready <= 1'b1;
 		end
+		
+		HOLD : begin
+			
+		end
 
 	  endcase
 	end
   end
+
+
 
   // expose pointers
   assign wr_data_ptr = wr_ptr;

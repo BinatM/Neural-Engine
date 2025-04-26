@@ -13,10 +13,6 @@ module input_memory (
 	//Write operation
 	always_ff @(posedge clk) begin
 		mem[wr_data_ptr] <= data_in;
-	end
-	
-	//read operation
-	always_ff @(posedge clk) begin
 		data_out <= mem[rd_data_ptr];
 	end
 	

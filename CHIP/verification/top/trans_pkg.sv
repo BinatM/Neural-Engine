@@ -1,40 +1,69 @@
-// File: verification/env/trans_pkg.sv
 package trans_pkg;
 
-  //----------------------------------------------------------------------  
-  // Transaction: holds 64 16-bit ?pixel+weight? words, a 22-bit threshold,
-  // plus a 71-entry wr_en_delay array (all zero by default).
-  //----------------------------------------------------------------------  
-  class trans_item;
-	rand bit [15:0] data         [0:63];
-	rand bit [21:0] threshold;
-	int unsigned   wr_en_delay   [0:70];
+	// Transaction for input sequence
+	class trans_item;
+	  // Pixel and weight arrays: default fixed values 0..63
+	  bit [7:0]           pixel       [0:63];
+	  bit [7:0]           weight      [0:63];
+	  // Packed data word [15:0] = {weight, pixel}
+	  bit [15:0]          data        [0:63];
 
-	function new();
-	  foreach (wr_en_delay[i])
-		wr_en_delay[i] = 0;    // no delays by default
-	endfunction
+	  // Randomizable threshold, but fixed-write-enable delays by default
+	  rand bit [21:0]     threshold;
+	  // Make wr_en_delay non-rand so default zero initialization is preserved
+	  int unsigned        wr_en_delay [0:70];
 
-	// Default: data[i] == i so you get 0,1,2?63 unless you constrain otherwise
-	constraint c_data { foreach(data[i]) data[i] == i; }
-  endclass
+	  // Constructor: initialize defaults
+	  function new();
+		// Default pixel/weight = 0..63
+		for (int i = 0; i < 64; i++) begin
+		  pixel[i]  = i;
+		  weight[i] = i;
+		end
+		threshold = 0;
+		// Default no stalls
+		foreach (wr_en_delay[i])
+		  wr_en_delay[i] = 0;
+	  endfunction
 
-  //----------------------------------------------------------------------  
-  // Result: extends trans_item and adds the DUT?s outputs for checking
-  //----------------------------------------------------------------------  
-  class result_item extends trans_item;
-	bit [21:0] mac_result;
-	bit        decision;
-	int unsigned cycle;      // clock count when output_ready asserted
-	int unsigned delay_sum;  // sum of wr_en_delay array
+	  // Pack pixel+weight into data array
+	  function void pack_data();
+		foreach (data[i]) begin
+		  data[i] = { weight[i], pixel[i] };
+		end
+	  endfunction
 
-	function new(trans_item t = null);
-	  if (t) begin
-		this.data         = t.data;
-		this.threshold    = t.threshold;
-		this.wr_en_delay  = t.wr_en_delay;
-	  end
-	endfunction
-  endclass
+	  // Automatically invoked after randomize(): pack data, keep delays at zero
+	  function void post_randomize();
+		pack_data();
+		// wr_en_delay remains as initialized (all zeros)
+	  endfunction
 
-endpackage : trans_pkg
+	endclass : trans_item
+
+	// Result item passed to scoreboard
+	class result_item extends trans_item;
+	  bit [21:0]      mac_result;
+	  bit             decision;
+	  int unsigned    cycle;
+	  int unsigned    delay_sum;
+
+	  // Copy constructor: capture original transaction
+	  function new(trans_item t = null);
+		super.new();
+		if (t) begin
+		  // Copy pixel/weight/data
+		  for (int i = 0; i < 64; i++) begin
+			this.pixel[i]       = t.pixel[i];
+			this.weight[i]      = t.weight[i];
+			this.data[i]        = t.data[i];
+		  end
+		  this.threshold        = t.threshold;
+		  foreach (t.wr_en_delay[i])
+			this.wr_en_delay[i] = t.wr_en_delay[i];
+		end
+	  endfunction
+
+	endclass : result_item
+
+  endpackage : trans_pkg
