@@ -1,54 +1,39 @@
-// File: verification/top_tb.sv
+// File: verification/env/top_tb.sv
 `timescale 1ns/1ps
+
 import trans_pkg::*;
 
 module top_tb;
+  // clock gen
+  logic clk = 0; always #5 clk = ~clk;
 
-  // Clock generator
-  logic clk = 0;
-  always #5 clk = ~clk;
+  // interface instance
+  tb_if vif(.clk(clk));
 
-  // Shared tri-state bus
-  tri [15:0] bus_line;
+  // mailboxes
+  mailbox #(trans_item)   m2drv = new();
+  mailbox #(trans_item)   m2mon = new();
+  mailbox #(result_item)  m2sb  = new();
 
-  // Driver-side bus signals
-  logic [15:0] bus_drv;
-  logic        bus_drv_en;
-
-  // TB-DUT interface (control + debug)
-  tb_if vif (.clk(clk));
-
-  // Connect tri-state driver from testbench to shared bus
-  assign bus_line = bus_drv_en ? bus_drv : 16'bz;
-
-  // Instantiate DUT
+  // DUT
   top dut (
-	.bus          (bus_line),
+	.bus          (vif.bus),
 	.clk          (clk),
 	.wr_en        (vif.wr_en),
 	.rd_en        (vif.rd_en),
 	.chip_sel     (vif.chip_sel),
 	.output_ready (vif.output_ready),
 	.output_bit   (vif.output_bit),
-	.mac_result   (vif.mac_result)
+	.mac_result   (vif.mac_result),
+	.wr_data_ptr  (vif.wr_data_ptr),
+	.rd_data_ptr  (vif.rd_data_ptr),
+	.ctrl_state   (vif.ctrl_state)
   );
 
-  // Driver sends stimulus to bus
-  driver drv (
-	.vif         (vif.TB),
-	.bus_drv     (bus_drv),
-	.bus_drv_en  (bus_drv_en)
-  );
-
-  // Monitor samples DUT behavior
-  monitor mon (
-	.vif      (vif.TB),
-	.bus_line (bus_line)
-  );
-
-  // Scoreboard checks results
-  scoreboard sc (
-	.vif (vif.TB)
-  );
+  // TB components
+  generator    gen (.clk(clk),           .m2drv(m2drv));
+  driver       drv (.clk(clk), .vif(vif.TB), .m2drv(m2drv), .m2mon(m2mon));
+  monitor      mon (.clk(clk), .vif(vif.DUT), .m2mon(m2mon), .m2sb(m2sb));
+  scoreboard   sb  (.clk(clk),            .m2sb(m2sb));
 
 endmodule : top_tb

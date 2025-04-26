@@ -1,41 +1,41 @@
-// File: verification/tb_if.sv
+// File: verification/env/tb_if.sv
 `timescale 1ns/1ps
+import trans_pkg::*;
 
-interface tb_if (input logic clk);
-  // Control signals driven by the TB
-  logic        wr_en;
-  logic        rd_en;
-  logic        chip_sel;
+interface tb_if(input logic clk);
+  // Physical lines
+  tri [15:0]       bus;
+  logic [15:0]     bus_drv;
+  logic            bus_drv_en;
+  // auto-tri-state:
+  assign bus = bus_drv_en ? bus_drv : 16'bz;
 
-  // The inout bus, now a variable so the TB can drive it
-  logic [15:0] bus;
+  // Control
+  logic wr_en, rd_en, chip_sel;
 
-  // Debug outputs from the DUT
-  logic        output_ready;
-  logic        output_bit;
+  // DUT outputs
+  logic        output_ready, output_bit;
   logic [21:0] mac_result;
 
-  // Modport for the DUT instance: it sees the bus as inout
-  modport DUT (
-	inout  bus,
+  // Exposed for coverage
+  logic [5:0]  wr_data_ptr, rd_data_ptr;
+  logic [2:0]  ctrl_state;
+
+  // Modport for driving from TB
+  modport TB (
 	input  clk,
-	input  wr_en,
-	input  rd_en,
-	input  chip_sel,
-	output output_ready,
-	output output_bit,
-	output mac_result
+	inout  bus,
+	output bus_drv, bus_drv_en,
+	output wr_en, rd_en, chip_sel,
+	input  output_ready, output_bit, mac_result,
+	input  wr_data_ptr, rd_data_ptr, ctrl_state
   );
 
-  // Modport for the TB: it also drives/reads the bus
-  modport TB (
+  // Modport for connecting to DUT & Monitor
+  modport DUT (
+	input  clk, wr_en, rd_en, chip_sel,
 	inout  bus,
-	input  clk,
-	output wr_en,
-	output rd_en,
-	output chip_sel,
-	input  output_ready,
-	input  output_bit,
-	input  mac_result
+	output output_ready, output_bit, mac_result,
+	output wr_data_ptr, rd_data_ptr, ctrl_state
   );
 endinterface : tb_if

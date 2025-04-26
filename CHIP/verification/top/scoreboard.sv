@@ -1,52 +1,37 @@
 `timescale 1ns/1ps
 import trans_pkg::*;
 
-module scoreboard ( tb_if.TB vif );
-  logic [21:0] golden_mac = 0;
-  logic [21:0] golden_th;
-  int          write_count = 0;
-  trans_t      t;
+module scoreboard (
+  input  logic                clk,
+  ref mailbox #(result_item) m2sb
+);
+  result_item r;
+  bit [21:0]  golden_mac;
+  bit         golden_dec;
 
   initial begin
-	// Build golden result by draining the monitor mailbox
-	for (int i = 0; i < 66; i++) begin
-	  mon_mbx.get(t);
-	  if (!t.is_threshold) begin
-		golden_mac += t.pixel * t.weight;
-	  end else if (i == 65) begin
-		golden_th = t.threshold;
-	  end
+	// 1) Consume exactly one result
+	m2sb.get(r);
+	$display("SB: DUT mac_result = %0d, threshold = %0d", r.mac_result, r.threshold);
+
+	// 2) Compute golden MAC & decision
+	golden_mac = 0;
+	for (int i = 0; i < 64; i++) begin
+	  golden_mac += r.data[i][7:0] * r.data[i][15:8];
 	end
+	golden_dec = (golden_mac >= r.threshold);
 
-	// Wait until DUT signals ready
-	wait (vif.output_ready);
+	// 3) Compare & report
+	if (r.mac_result !== golden_mac)
+	  $error("SB: MAC MISMATCH ? got %0d, expected %0d", r.mac_result, golden_mac);
+	else
+	  $display("SB: MAC match: %0d", golden_mac);
 
-	// Check raw MAC
-	if (vif.mac_result !== golden_mac) begin
-	  $error("MAC MISMATCH: expected %0d, got %0d",
-			 golden_mac, vif.mac_result);
-	end else $display("  MAC OK: %0d", golden_mac);
+	if (r.decision !== golden_dec)
+	  $error("SB: DECISION MISMATCH ? got %b, expected %b", r.decision, golden_dec);
+	else
+	  $display("SB: DECISION match: %b", golden_dec);
 
-	// Check final output bit
-	if (vif.output_bit !== (golden_mac >= golden_th)) begin
-	  $error("OUT BIT MISMATCH: golden %0b, DUT %0b",
-			 (golden_mac >= golden_th), vif.output_bit);
-	end else $display("  OUTPUT BIT OK: %0b", vif.output_bit);
-
-	$display("=== TEST COMPLETE ===");
-	$finish;
+	// 4) End simulation
   end
-  initial begin
-	  fork
-		begin
-		  wait (vif.output_ready);
-		  $display("Output ready received.");
-		end
-		begin
-		  #10000; // Timeout after 10us sim time
-		  $fatal(1, "Timeout: output_ready never asserted.");
-		end
-	  join_any
-	end
-
-endmodule : scoreboard
+endmodule

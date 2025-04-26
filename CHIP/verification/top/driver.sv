@@ -1,78 +1,83 @@
-// File: verification/driver.sv
+// File: verification/env/driver.sv
 `timescale 1ns/1ps
 import trans_pkg::*;
 
 module driver (
-  tb_if.TB vif,
-  output logic [15:0] bus_drv,
-  output logic        bus_drv_en
+  input  logic          clk,
+  tb_if.TB              vif,
+  ref mailbox #(trans_item) m2drv,
+  ref mailbox #(trans_item) m2mon
 );
+  trans_item item;
+  int        cycle;
 
-  parameter int CLK_PERIOD = 10;
-
-  // Example test vector array (64 image+weight, 2 threshold chunks)
-  trans_t tv[0:65];
-
+  // 1) One-time reset: chip_sel=0 for 2 clocks, then 1 forever
   initial begin
-	// Init control signals
-	vif.wr_en      = 0;
-	vif.rd_en      = 0;
 	vif.chip_sel   = 0;
-	bus_drv_en     = 0;
-	bus_drv        = '0;
+	vif.wr_en      = 0;
+	vif.bus_drv_en = 0;
+	repeat (2) @(posedge clk);
+	vif.chip_sel   = 1;
+  end
 
-	// Generate example vectors
-	foreach (tv[i]) begin
-	  if (i < 64) begin
-		tv[i].pixel        = $urandom_range(0, 255);
-		tv[i].weight       = $urandom_range(0, 255);
-		tv[i].is_threshold = 0;
-	  end else begin
-		tv[i].is_threshold = 1;
-		tv[i].threshold    = 22'd1000;
-	  end
-	end
+  // 2) Main stimulus loop
+  initial begin
+	// wait until chip_sel is up
+	wait (vif.chip_sel);
 
-	// Start stimulus after one clock
-	@(posedge vif.clk);
-	vif.chip_sel <= 1;
-	@(posedge vif.clk);
+	forever begin
+	  // grab next transaction
+	  m2drv.get(item);
 
-	// Send pixel-weight pairs and threshold
-	for (int i = 0; i < $size(tv); i++) begin
-	  vif.wr_en   <= 1;
-	  bus_drv_en  <= 1;
+	  // WRITE PHASE (66 cycles: 64 data + 2 threshold)
+	  vif.wr_en = 1;
+	  // 64 pixel/weight pairs
+	  for (cycle = 0; cycle < 64; cycle++) begin
+		// optional stalls
+		if (item.wr_en_delay[cycle] > 0) begin
+		  vif.wr_en      = 0;
+		  vif.bus_drv_en = 0;
+		  repeat (item.wr_en_delay[cycle]) @(posedge clk);
+		  vif.wr_en      = 1;
+		end
+		vif.bus_drv    = item.data[cycle];
+		vif.bus_drv_en = 1;
+		@(posedge clk);
+		@(posedge clk);
 
-	  if (!tv[i].is_threshold) begin
-		bus_drv <= {tv[i].weight, tv[i].pixel};
-		drv_mbx.put(tv[i]);
-		@(posedge vif.clk);
-	  end else begin
-		// Lower 16 bits first
-		bus_drv <= tv[i].threshold[15:0];
-		drv_mbx.put(tv[i]);
-		@(posedge vif.clk);
-
-		// Upper 6 bits in LSB, zero-padded to 16 bits
-		bus_drv <= {10'b0, tv[i].threshold[21:16]};
-		@(posedge vif.clk);
 	  end
 
-	  // Tri-state off
-	  bus_drv_en <= 0;
-	  vif.wr_en  <= 0;
-	  bus_drv    <= 16'hzzzz;
-	  @(posedge vif.clk);
+	  // threshold low half
+	  vif.bus_drv    = item.threshold[15:0];
+	  vif.bus_drv_en = 1;
+	  @(posedge clk);
+
+	  // threshold high half
+	  vif.bus_drv    = {4'b0, item.threshold[21:16]};
+	  vif.bus_drv_en = 1;
+	  @(posedge clk);
+
+	  // end write
+	  vif.wr_en      = 0;
+	  vif.bus_drv_en = 0;
+
+	  // one idle cycle
+	  @(posedge clk);
+
+	  // READ PHASE (2 cycles)
+	  vif.rd_en = 1;
+	  @(posedge clk);
+	  @(posedge clk);
+	  vif.rd_en = 0;
+
+	  // hand off to monitor
+	  m2mon.put(item);
+	  repeat (25) @(posedge clk);
+	  vif.chip_sel = 0;
+	  $display("Driver: deasserted chip_sel, wait than finish.");
+	  repeat (15) @(posedge clk);
+	  $finish;
 	end
-
-	// Wait for result to be ready
-	wait (vif.output_ready);
-
-	// Trigger read of MAC result
-	vif.rd_en <= 1;
-	@(posedge vif.clk);
-	@(posedge vif.clk);
-	vif.rd_en <= 0;
   end
 
 endmodule : driver

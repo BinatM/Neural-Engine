@@ -2,100 +2,142 @@
 
 module Control_unit (
   input  logic        clk,
-  input  logic        chip_sel,         // Chip select signal
-  input  logic        wr_en,            // Write enable
-  output logic        rst_mem,          // Reset for memory/MAC (one?cycle pulse)
-  output logic        mul_mem_en,       // Enable multiplier stage
-  output logic        ac_mem_en,        // Enable accumulator stage
-  output logic        output_ready,     // Output valid
-  output logic [5:0]  wr_data_ptr,      // Write pointer (0?63)
-  output logic [5:0]  rd_data_ptr,      // Read pointer  (0?63)
-  output logic        threshold_ready   // Asserted during threshold cycles
+  input  logic        chip_sel,        // active-high
+  input  logic        wr_en,           // user write enable
+  input  logic        rd_en,           // user read enable
+  output logic        rst_mem,         // one-cycle reset pulse
+  output logic        mul_mem_en,      // pipeline stage1 enable
+  output logic        ac_mem_en,       // pipeline stage2 enable
+  output logic        output_ready,    // final bit valid
+  output logic [5:0]  wr_data_ptr,     // write addr 0-63
+  output logic [5:0]  rd_data_ptr,     // read  addr 0-63
+  output logic        threshold_ready, // pulse for 2 cycles
+  output logic [2:0]  ctrl_state       // DEBUG: FSM state for coverage
 );
 
+  // FSM states
   typedef enum logic [2:0] {
-	IDLE, WRITE_DATA, WRITE_THRESHOLD, COMPUTE, WAIT_OUTPUT, READ_OUTPUT
+	IDLE,
+	WRITE_DATA,
+	WRITE_THRESHOLD,
+	COMPUTE,
+	WAIT_OUTPUT,
+	READ_OUTPUT
   } state_t;
 
-  state_t         state, next_state;
-  logic [5:0]     wr_ptr, rd_ptr;
-  logic [1:0]     thresh_cnt;
-  logic [1:0]     out_delay_cnt;
+  state_t      state, next_state;
+  logic [5:0]  wr_ptr, rd_ptr;
+  logic [1:0]  thresh_cnt, out_cnt;
+  logic        chip_sel_d;
 
-  // Generate a one?cycle pulse when chip_sel goes 0?1
-  logic chip_sel_d1, chip_sel_d2;
+  // rst_mem: one-cycle pulse when chip_sel rises
   always_ff @(posedge clk) begin
-	// Stage the raw input
-	chip_sel_d1 <= chip_sel;
-	// Delay it one more cycle
-	chip_sel_d2 <= chip_sel_d1;
-	// Now rst_mem = ?chip_sel was high one cycle ago, but wasn't high two cycles ago?
-	rst_mem     <= chip_sel_d1 && !chip_sel_d2;
+	chip_sel_d <= chip_sel;
+	rst_mem    <= (chip_sel && !chip_sel_d);
   end
-
 
   // Next?state logic
   always_comb begin
 	next_state = state;
 	case (state)
-	  IDLE:            if (chip_sel && wr_en && !rst_mem) next_state = WRITE_DATA;
-	  WRITE_DATA:      if (!wr_en)         next_state = IDLE;
-					   else if (wr_ptr==6'd63) next_state = WRITE_THRESHOLD;
-	  WRITE_THRESHOLD: if (!wr_en)         next_state = COMPUTE;
-	  COMPUTE:         if (rd_ptr == 6'd63) next_state = WAIT_OUTPUT;
-	  WAIT_OUTPUT:     if (out_delay_cnt==2) next_state = READ_OUTPUT;
-	  READ_OUTPUT:     if (!chip_sel)      next_state = IDLE;
-	  default:         next_state = IDLE;
+	  IDLE:
+		if (chip_sel && wr_en)
+		  next_state = WRITE_DATA;
+
+	  WRITE_DATA:
+		if (wr_ptr == 6'd63)
+		  next_state = WRITE_THRESHOLD;
+
+	  WRITE_THRESHOLD:
+		if (thresh_cnt == 2)
+		  next_state = COMPUTE;
+
+	  COMPUTE:
+		if (rd_ptr == 6'd63)
+		  next_state = WAIT_OUTPUT;
+
+	  WAIT_OUTPUT:
+		if (out_cnt == 2'd1)
+		  next_state = READ_OUTPUT;
+
+	  READ_OUTPUT:
+		if (!rd_en)  // user must drop rd_en after reading both halves
+		  next_state = IDLE;
+
+	  default:
+		next_state = IDLE;
 	endcase
   end
 
-  // State, pointers, and control signals
+  // Sequential logic
   always_ff @(posedge clk) begin
 	if (!chip_sel) begin
 	  // full reset
-	  state            <= IDLE;
-	  wr_ptr           <= 6'd0;
-	  rd_ptr           <= 6'd0;
-	  thresh_cnt       <= 2'd0;
-	  out_delay_cnt    <= 2'd0;
-	  mul_mem_en       <= 1'b0;
-	  ac_mem_en        <= 1'b0;
-	  threshold_ready  <= 1'b0;
-	  output_ready     <= 1'b0;
+	  state           <= IDLE;
+	  wr_ptr          <= 6'd0;
+	  rd_ptr          <= 6'd0;
+	  thresh_cnt      <= 2'd0;
+	  out_cnt         <= 2'd0;
+	  mul_mem_en      <= 1'b0;
+	  ac_mem_en       <= 1'b0;
+	  threshold_ready <= 1'b0;
+	  output_ready    <= 1'b0;
+	  ctrl_state      <= IDLE;
 	end else begin
-	  state <= next_state;
+	  state      <= next_state;
+	  ctrl_state <= next_state;   // expose for coverage
 
-	  // WRITE_DATA: advance write pointer each cycle wr_en=1
-	  if (state==WRITE_DATA && wr_en) begin
-		wr_ptr <= wr_ptr + 6'd1;
-		// start reading from the very first multiply result
-		if (wr_ptr != 6'd0) rd_ptr <= rd_ptr + 6'd1;
-	  end
+	  // defaults
+	  mul_mem_en      <= 1'b0;
+	  ac_mem_en       <= 1'b0;
+	  threshold_ready <= 1'b0;
+	  output_ready    <= 1'b0;
 
-	  // WRITE_THRESHOLD: count two cycles, assert threshold_ready
-	  if (state==WRITE_THRESHOLD && wr_en) begin
-		thresh_cnt      <= thresh_cnt + 2'd1;
-		threshold_ready <= 1'b1;
-	  end
+	  case (state)
+		WRITE_DATA: begin
+		  // 64 cycles of pixel+weight
+		  if (wr_en) begin
+			wr_ptr <= wr_ptr + 1;
+			// pipeline starts on 2nd word
+			if (wr_ptr != 6'd0) begin
+			  rd_ptr     <= rd_ptr + 1;
+			  mul_mem_en <= 1'b1;
+			  ac_mem_en  <= 1'b1;
+			end
+		  end
+		end
 
-	  // COMPUTE: enable MAC stages
-	  mul_mem_en <= (state==COMPUTE);
-	  ac_mem_en  <= (state==COMPUTE);
+		WRITE_THRESHOLD: begin
+		  // latch first half, then second; must see wr_en high twice
+		  if (wr_en && (thresh_cnt < 2)) begin
+			thresh_cnt      <= thresh_cnt + 1;
+			threshold_ready <= 1'b1;
+		  end
+		end
 
-	  // COMPUTE: keep advancing rd_ptr each cycle
-	  if (state==COMPUTE) rd_ptr <= rd_ptr + 6'd1;
+		COMPUTE: begin
+		  // finish pipeline: 64 multiplies+63 adds -> 65 clocks
+		  rd_ptr     <= rd_ptr + 1;
+		  mul_mem_en <= 1'b1;
+		  ac_mem_en  <= 1'b1;
+		end
 
-	  // WAIT_OUTPUT: simple two?cycle delay
-	  if (state==WAIT_OUTPUT) out_delay_cnt <= out_delay_cnt + 2'd1;
-	  else                    out_delay_cnt <= 2'd0;
+		WAIT_OUTPUT: begin
+		  // one?cycle delay before output_ready
+		  out_cnt <= out_cnt + 1;
+		end
 
-	  // READ_OUTPUT: assert output_ready
-	  output_ready <= (state==READ_OUTPUT && out_delay_cnt==2);
+		READ_OUTPUT: begin
+		  // pulse the "final bit valid" flag
+		  output_ready <= 1'b1;
+		end
+
+	  endcase
 	end
   end
 
-  // Expose pointers
+  // expose pointers
   assign wr_data_ptr = wr_ptr;
   assign rd_data_ptr = rd_ptr;
 
-endmodule
+endmodule : Control_unit
