@@ -58,6 +58,57 @@ module top (
 	.rd_data_ptr   (rd_data_ptr)
   );
 
+  
+//  //------------------------------------------------------------------------
+//  // Pixel SRAM (Image)
+//  //------------------------------------------------------------------------
+//  TS6N28HPCPHVTA64X8M4FWBSO image_mem (
+//	.AA   (wr_data_ptr),       // write address
+//	.D    (img_data),          // write data
+//	.BWEB (8'b0),              // bit-write enable (active low)
+//	.WEB  (1'b0),           // write enable (active low)
+//	.CLKW (clk),               // write clock
+//
+//	.AB   (rd_data_ptr),       // read address
+//	.REB  (1'b0),              // read enable (active low)
+//	.CLKR (clk),               // read clock
+//
+//	.SLP  (1'b0),              // sleep off
+//	.SD   (1'b0),              // shutdown off
+//
+//	.AMA  (6'b0), .DM    (8'b0),
+//	.BWEBM(8'b0), .WEBM  (1'b1),
+//	.AMB  (6'b0), .REBM  (1'b1),
+//	.BIST (1'b0),
+//
+//	.Q    (image_mem_out)      // read data
+//  );
+////
+////  //------------------------------------------------------------------------
+////  // Pixel SRAM (Weight)
+////  //------------------------------------------------------------------------
+//  TS6N28HPCPHVTA64X8M4FWBSO weight_mem (
+//	.AA   (wr_data_ptr),
+//	.D    (weight_data),
+//	.BWEB (8'b0),
+//	.WEB  (1'b0),
+//	.CLKW (clk),
+//
+//	.AB   (rd_data_ptr),
+//	.REB  (1'b0),
+//	.CLKR (clk),
+//
+//	.SLP  (1'b0),
+//	.SD   (1'b0),
+//
+//	.AMA  (6'b0), .DM    (8'b0),
+//	.BWEBM(8'b0), .WEBM  (1'b1),
+//	.AMB  (6'b0), .REBM  (1'b1),
+//	.BIST (1'b0),
+//
+//	.Q    (weight_mem_out)
+//  );
+
   //------------------------------------------------------------------------
   // MAC Unit
   //------------------------------------------------------------------------

@@ -4,13 +4,13 @@ Report : timing
         -delay_type max
         -max_paths 1
         -report_by design
-Design : mac
+Design : top
 Version: V-2023.12-SP3
-Date   : Thu Mar  6 20:44:48 2025
+Date   : Thu Apr 24 12:12:43 2025
 ****************************************
 
-  Startpoint: acc_register_reg[0] (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: acc_register_reg[21] (rising edge-triggered flip-flop clocked by clk)
+  Startpoint: weight_mem (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: mac_inst/mul_register_reg[14] (rising edge-triggered flip-flop clocked by clk)
   Mode: FUNC
   Corner: Fast
   Scenario: FUNC_Fast
@@ -22,45 +22,55 @@ Date   : Thu Mar  6 20:44:48 2025
   clock clk (rise edge)                            0.00      0.00
   clock network delay (ideal)                      0.00      0.00
 
-  acc_register_reg[0]/CP (SDFQD0BWP30P140HVT)      0.00      0.00 r
-  acc_register_reg[0]/Q (SDFQD0BWP30P140HVT)       0.07      0.07 r
-  add_38/ctmi_711/Z (AN2D0BWP30P140HVT)            0.03      0.10 r
-  add_38/U_3/CO (FA1D0BWP30P140HVT)                0.04      0.14 r
-  add_38/U_5/CO (FA1D0BWP30P140HVT)                0.04      0.18 r
-  add_38/U_8/CO (FA1D0BWP30P140HVT)                0.04      0.22 r
-  add_38/U_10/CO (FA1D0BWP30P140HVT)               0.04      0.26 r
-  add_38/U_13/CO (FA1D0BWP30P140HVT)               0.04      0.30 r
-  add_38/U_15/CO (FA1D0BWP30P140HVT)               0.04      0.34 r
-  add_38/U_18/CO (FA1D0BWP30P140HVT)               0.04      0.38 r
-  add_38/U_20/CO (FA1D0BWP30P140HVT)               0.04      0.42 r
-  add_38/U_23/CO (FA1D0BWP30P140HVT)               0.04      0.46 r
-  add_38/U_25/CO (FA1D0BWP30P140HVT)               0.04      0.50 r
-  add_38/U_28/CO (FA1D0BWP30P140HVT)               0.05      0.55 r
-  add_38/U_30/CO (FA1D0BWP30P140HVT)               0.04      0.59 r
-  add_38/U_33/CO (FA1D0BWP30P140HVT)               0.04      0.63 r
-  add_38/U_35/CO (FA1D0BWP30P140HVT)               0.04      0.67 r
-  add_38/U_38/CO (FA1D0BWP30P140HVT)               0.04      0.71 r
-  add_38/ctmi_709/ZN (ND2D0BWP30P140HVT)           0.03      0.74 f
-  add_38/ctmi_708/ZN (INR2D0BWP30P140HVT)          0.02      0.76 r
-  add_38/ctmi_710/ZN (ND2D0BWP30P140HVT)           0.03      0.79 f
-  add_38/ctmi_717/ZN (INR2D0BWP30P140HVT)          0.02      0.81 r
-  add_38/ctmi_718/ZN (ND2D0BWP30P140HVT)           0.02      0.83 f
-  add_38/ctmi_719/ZN (XNR2UD0BWP30P140HVT)         0.02      0.85 r
-  ctmi_589/Z (AO22D0BWP30P140HVT)                  0.03      0.88 r
-  acc_register_reg[21]/D (SDFQD0BWP30P140HVT)      0.00      0.88 r
-  data arrival time                                          0.88
+  weight_mem/CLKR (TS6N28HPCPHVTA64X8M4FWBSO)      0.00      0.00 r
+  weight_mem/Q[1] (TS6N28HPCPHVTA64X8M4FWBSO)      0.41      0.41 f ~
+  mac_inst/mult_22/ctmi_188/ZN (CKND2D0BWP30P140HVT)
+                                                   0.02      0.43 r
+  mac_inst/mult_22/ctmi_186/Z (XOR2UD0BWP30P140HVT)
+                                                   0.03      0.46 r
+  mac_inst/mult_22/U_82/S (FA1D1BWP30P140HVT)      0.05      0.51 f
+  mac_inst/mult_22/ctmi_128/ZN (NR2D0BWP30P140HVT)
+                                                   0.02      0.53 r
+  mac_inst/mult_22/ctmi_127/Z (OA21D0BWP30P140HVT)
+                                                   0.03      0.56 r
+  mac_inst/mult_22/ctmi_125/Z (OA21D0BWP30P140HVT)
+                                                   0.03      0.59 r
+  mac_inst/mult_22/ctmi_124/Z (OA21D1BWP30P140HVT)
+                                                   0.02      0.61 r
+  mac_inst/mult_22/ctmi_122/Z (OA21D1BWP30P140HVT)
+                                                   0.02      0.63 r
+  mac_inst/mult_22/ctmi_121/Z (OA21D1BWP30P140)    0.02      0.65 r
+  mac_inst/mult_22/ctmi_119/ZN (OAI21D1BWP30P140)
+                                                   0.01      0.66 f
+  mac_inst/mult_22/ctmi_118/ZN (AOI21D0P7BWP30P140HVT)
+                                                   0.02      0.68 r
+  mac_inst/mult_22/ctmi_116/ZN (OAI21D0P7BWP30P140HVT)
+                                                   0.02      0.71 f
+  mac_inst/mult_22/ctmi_115/ZN (AOI21D0P7BWP30P140HVT)
+                                                   0.02      0.73 r
+  mac_inst/mult_22/ctmi_113/Z (OA21D1BWP30P140HVT)
+                                                   0.03      0.76 r
+  mac_inst/mult_22/ctmi_112/ZN (OAI21D0P7BWP30P140HVT)
+                                                   0.02      0.78 f
+  mac_inst/mult_22/ctmi_156/ZN (XNR2UD0BWP30P140HVT)
+                                                   0.02      0.80 r
+  ctmTdsLR_1_372/Z (AO22D0BWP30P140HVT)            0.03      0.83 r
+  mac_inst/mul_register_reg[14]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.83 r
+  data arrival time                                          0.83
 
-  clock clk (rise edge)                           10.00     10.00
-  clock network delay (ideal)                      0.00     10.00
-  acc_register_reg[21]/CP (SDFQD0BWP30P140HVT)     0.00     10.00 r
-  clock uncertainty                               -0.15      9.85
-  library setup time                              -0.02      9.83
-  data required time                                         9.83
+  clock clk (rise edge)                            1.00      1.00
+  clock network delay (ideal)                      0.00      1.00
+  mac_inst/mul_register_reg[14]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.00 r
+  clock uncertainty                               -0.15      0.85
+  library setup time                              -0.02      0.83
+  data required time                                         0.83
   ------------------------------------------------------------------------
-  data required time                                         9.83
-  data arrival time                                         -0.88
+  data required time                                         0.83
+  data arrival time                                         -0.83
   ------------------------------------------------------------------------
-  slack (MET)                                                8.94
+  slack (MET)                                                0.00
 
 
 1
