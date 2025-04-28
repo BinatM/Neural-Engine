@@ -15,7 +15,7 @@ rtl/input_memory.sv
 # Verification files
 verification/top/trans_pkg.sv
 verification/top/tb_if.sv
-verification/top/generator.sv
+#verification/top/generator.sv
 verification/top/driver.sv
 verification/top/monitor.sv
 verification/top/scoreboard.sv

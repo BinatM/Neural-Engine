@@ -1,0 +1,89 @@
+****************************************
+Report : timing
+        -path_type full
+        -delay_type max
+        -max_paths 1
+        -report_by design
+Design : top
+Version: V-2023.12-SP3
+Date   : Mon Apr 28 10:58:35 2025
+****************************************
+
+  Startpoint: mac_inst/acc_register_reg[1] (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: output_bit (output port clocked by clk)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: **reg2out_default**
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk (rise edge)                            0.00      0.00
+  clock network delay (ideal)                      0.00      0.00
+
+  mac_inst/acc_register_reg[1]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.00 r
+  mac_inst/acc_register_reg[1]/Q (SDFQD0BWP30P140HVT)
+                                                   0.09      0.09 f
+  ctmi_193/ZN (INVD1BWP30P140HVT)                  0.02      0.11 r
+  activation_inst/gte_34/ctmi_14299/ZN (IAO21D1BWP30P140HVT)
+                                                   0.02      0.13 r
+  activation_inst/gte_34/ctmi_14297/ZN (AOI22D1BWP30P140HVT)
+                                                   0.02      0.14 f
+  activation_inst/gte_34/ctmi_14295/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.17 r
+  activation_inst/gte_34/ctmi_14293/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.19 f
+  activation_inst/gte_34/ctmi_14291/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.21 r
+  activation_inst/gte_34/ctmi_14289/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.23 f
+  activation_inst/gte_34/ctmi_14287/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.26 r
+  activation_inst/gte_34/ctmi_14285/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.28 f
+  activation_inst/gte_34/ctmi_14283/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.31 r
+  activation_inst/gte_34/ctmi_14281/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.33 f
+  activation_inst/gte_34/ctmi_14279/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.03      0.36 r
+  activation_inst/gte_34/ctmi_14277/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.38 f
+  activation_inst/gte_34/ctmi_14275/ZN (MAOI222D1BWP30P140HVT)
+                                                   0.02      0.40 r
+  activation_inst/gte_34/ctmi_14273/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.43 f
+  activation_inst/gte_34/ctmi_14271/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.46 r
+  activation_inst/gte_34/ctmi_14269/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.48 f
+  activation_inst/gte_34/ctmi_14267/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.51 r
+  activation_inst/gte_34/ctmi_14265/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.54 f
+  activation_inst/gte_34/ctmi_14263/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.57 r
+  activation_inst/gte_34/ctmi_14261/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.59 f
+  activation_inst/gte_34/ctmi_14259/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.62 r
+  activation_inst/gte_34/ctmi_14257/ZN (MAOI222D0BWP30P140HVT)
+                                                   0.03      0.65 f
+  output_bit (out)                                 0.00      0.65 f
+  data arrival time                                          0.65
+
+  clock clk (rise edge)                            1.00      1.00
+  clock network delay (ideal)                      0.00      1.00
+  clock uncertainty                               -0.15      0.85
+  output external delay                           -0.20      0.65
+  data required time                                         0.65
+  ------------------------------------------------------------------------
+  data required time                                         0.65
+  data arrival time                                         -0.65
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.00
+
+
+1

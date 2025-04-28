@@ -1,0 +1,87 @@
+****************************************
+Report : power
+        -significant_digits 2
+Design : top
+Version: V-2023.12-SP3
+Date   : Mon Apr 28 10:58:35 2025
+****************************************
+Information: Activity propagation will be performed for scenario FUNC_Slow.
+Information: Doing activity propagation for mode 'FUNC' and corner 'Slow' with effort level 'medium'. (POW-024)
+Information: Timer-derived activity data is cached on scenario FUNC_Slow (POW-052)
+Infomation: Fast mode activity propagation power.rtl_activity_annotation setup is ignored. Always use accurate mode.
+Information: Running switching activity propagation with 8 threads!
+
+ **** Information : No. of simulation cycles = 7 ****
+Information: The stitching and editing of coupling caps is turned OFF for design 'neuron_top_no_sram.dlib:top.design'. (TIM-125)
+Information: Design Average RC for design top  (NEX-011)
+Information: r = 3.900369 ohm/um, via_r = 7.885707 ohm/cut, c = 0.124434 ff/um, cc = 0.000000 ff/um (X dir) (NEX-017)
+Information: r = 3.655131 ohm/um, via_r = 8.443441 ohm/cut, c = 0.122119 ff/um, cc = 0.000000 ff/um (Y dir) (NEX-017)
+Information: The RC mode used is VR for design 'top'. (NEX-022)
+Information: Update timing completed net estimation for all the timing graph nets (TIM-111)
+Information: Net estimation statistics: timing graph nets = 3598, routed nets = 0, across physical hierarchy nets = 0, parasitics cached nets = 3597, delay annotated nets = 0, parasitics annotated nets = 0, multi-voltage nets = 0. (TIM-112)
+Mode: FUNC
+Corner: Slow
+Scenario: FUNC_Slow
+Voltage: 0.99
+Temperature: 0.00
+
+Voltage Unit         : 1V
+Capacitance Unit     : 1pF
+Time Unit            : 1ns
+Temperature Unit     : 1C
+Dynamic Power Unit   : 1nW
+Leakage Power Unit   : 1nW
+
+Switched supply net power scaling:
+scaling for leakage power
+
+Supply nets:
+VDD (power) probability 1.00 (default)
+VSS (ground) probability 1.00 (default)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell image_mem/mem_reg[46][3] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[11][0] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[23][7] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[23][6] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[23][4] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[23][3] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[23][2] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[23][1] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[23][0] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[0][6] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.200000 (POW-046)
+Note - message 'POW-046' limit (10) exceeded. Remainder will be suppressed.
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4469/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4470/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4471/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4472/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4473/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4474/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4475/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4476/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4477/Z are impossible given input states; converted to zero toggles. (POW-069)
+Warning: Rise-Fall toggles on pin TSMAP_TSBUF_4478/Z are impossible given input states; converted to zero toggles. (POW-069)
+Note - message 'POW-069' limit (10) exceeded. Remainder will be suppressed.
+
+  Cell Internal Power    = 4.01e+06 nW ( 97.3%)
+  Net Switching Power    = 1.12e+05 nW (  2.7%)
+Total Dynamic Power      = 4.12e+06 nW (100.0%)
+
+Cell Leakage Power       = 2.25e+03 nW
+
+
+  Attributes
+  ----------
+      u  -  User defined power group
+      i  -  Includes clock pin internal power
+
+Power Group         Internal Power        Switching Power          Leakage Power            Total Power    (   %  )    Attrs
+-----------------------------------------------------------------------------------------------------------------------------
+io_pad                    0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+memory                    0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+black_box                 0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+clock_network             3.93e+06               0.00e+00               0.00e+00               3.93e+06    ( 95.4%)        i
+register                  3.72e+04               1.44e+04               1.47e+03               5.31e+04    (  1.3%)         
+sequential                0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+combinational             3.87e+04               9.71e+04               7.79e+02               1.37e+05    (  3.3%)         
+-----------------------------------------------------------------------------------------------------------------------------
+Total                     4.01e+06 nW            1.12e+05 nW            2.25e+03 nW            4.12e+06 nW
+1
