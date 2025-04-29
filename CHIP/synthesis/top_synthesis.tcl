@@ -73,11 +73,11 @@ compile_fusion -to logic_opto
 compile_fusion -to final_opto
 
 ## Reports Generation
-report_area > reports/area_report.log
-report_cells > reports/cell_count.log
+report_area > reports_no_sram/area_report.log
+report_cells > reports_no_sram/cell_count.log
 #report_lib_cells -objects [get_lib_cells tcbn28hpcplusbwp30p140] > CHIP/reports/lib_cells.log
-report_power > reports/power_report.log
-report_timing > reports/timing_report.log
-report_utilization > reports/utilization.log
-report_qor > reports/qor_report.log
+report_power > reports_no_sram/power_report.log
+report_timing > reports_no_sram/timing_report.log
+report_utilization > reports_no_sram/utilization.log
+report_qor > reports_no_sram/qor_report.log
 save_block -as top_final_opto
