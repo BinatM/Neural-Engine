@@ -2,13 +2,12 @@
 
 module top (
   inout  tri   [15:0] bus,           // bidir pixel/weight & MAC result
-  input  logic       clk,
+  input  logic       clk_in,
   input  logic       wr_en,
   input  logic       rd_en,
   input  logic       chip_sel,
   output logic       output_ready,
   output logic       output_bit,
-  output logic [21:0] mac_result,
 
   // for coverage / monitor
   output logic [5:0]  wr_data_ptr,
@@ -19,20 +18,29 @@ module top (
   //------------------------------------------------------------------------
   // Neuron I/O decode
   //------------------------------------------------------------------------
+  logic [21:0] mac_result;
   logic [7:0]  img_data, weight_data;
   logic [15:0] threshold_data;
+  logic output_ready_internal, output_bit_internal, wr_en_internal, rd_en_internal, chip_sel_internal, clk;
+
   neuron_io io_inst (
-	.clk            (clk),
-	.bus            (bus),
-	.wr_en          (wr_en),
-	.rd_en          (rd_en),
-	.chip_sel       (chip_sel),
-	.output_ready   (output_ready),
-	.output_bit     (output_bit),
-	.mac_result     (mac_result),
-	.img_data       (img_data),
-	.weight_data    (weight_data),
-	.threshold_data (threshold_data)
+	.clk_in            (clk_in),
+	.bus               (bus),
+	.wr_en_in          (wr_en),
+	.rd_en_in          (rd_en),
+	.chip_sel_in       (chip_sel),
+	.output_ready_in   (output_ready_internal),
+	.output_bit_in     (output_bit_internal),
+	.output_ready_out  (output_ready),
+	.output_bit_out    (output_bit),
+	.mac_result        (mac_result),
+	.img_data          (img_data),
+	.weight_data       (weight_data),
+	.threshold_data    (threshold_data),
+	.wr_en_pass        (wr_en_internal),
+	.rd_en_pass        (rd_en_internal),
+	.chip_sel_pass     (chip_sel_internal),
+	.clk_pass          (clk)
   );
 
   //------------------------------------------------------------------------
@@ -131,7 +139,7 @@ module top (
 	.threshold_ready (threshold_ready),
 	.mac_output      (mac_result),
 	.input_bus       (threshold_data),
-	.output_memory   (output_bit)
+	.output_memory   (output_bit_internal)
   );
 
   //------------------------------------------------------------------------
@@ -139,17 +147,17 @@ module top (
   //------------------------------------------------------------------------
   Control_unit ctrl_inst (
 	.clk            (clk),
-	.chip_sel       (chip_sel),
-	.wr_en          (wr_en),
+	.chip_sel       (chip_sel_internal),
+	.wr_en          (wr_en_internal),
 	.rst_mem        (rst_mem),
 	.mul_mem_en     (mul_mem_en),
 	.ac_mem_en      (ac_mem_en),
-	.output_ready   (output_ready),
+	.output_ready   (output_ready_internal),
 	.wr_data_ptr    (wr_data_ptr),
 	.rd_data_ptr    (rd_data_ptr),
 	.threshold_ready(threshold_ready),
 	.ctrl_state     (ctrl_state),
-	.rd_en			(rd_en)
+	.rd_en			(rd_en_internal)
   );
 
 endmodule : top
