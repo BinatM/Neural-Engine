@@ -28,6 +28,14 @@ def split_22bit_to_2words(val: int) -> Tuple[str, str]:
     upper = (val >> 16) & 0x3F
     return f"{lower:04X}", f"{upper:04X}"
 
+# Format MAC output: 22-bit value split to 2 words.
+# The binary output (0/1) is inserted into bit 6 of the upper word.
+def format_expected_output(mac_result: int, binary_result: int) -> Tuple[str, str]:
+    mac_low = mac_result & 0xFFFF               # Lower 16 bits
+    mac_high = (mac_result >> 16) & 0x3F        # Upper 6 bits (bits 16–21)
+    mac_high_with_bit = (binary_result & 0x1) << 6 | mac_high  # Insert binary result in bit 6
+    return f"{mac_low:04X}", f"{mac_high_with_bit:04X}"
+
 # Write all tests into one .hex file in custom test format
 def export_all_tests_to_hex_file(tests: list, output_file: str):
     lines = []
@@ -54,12 +62,10 @@ def export_all_tests_to_hex_file(tests: list, output_file: str):
         lines.append(thr_high)
 
         # Expected MAC result (22-bit) → 2 lines
-        mac_low, mac_high = split_22bit_to_2words(mac_result)
+        # Expected MAC result + binary result embedded in bit 6 of second word
+        mac_low, mac_high_with_bit = format_expected_output(mac_result, binary_result)
         lines.append(mac_low)
-        lines.append(mac_high)
-
-        # Expected binary output result → 1 line
-        lines.append(f"{binary_result:04X}")
+        lines.append(mac_high_with_bit)
 
     # Write to file
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
