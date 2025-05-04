@@ -8,7 +8,7 @@ module control_unit #(
 
     output reg          sdram_rd_en,
     output reg          sdram_wr_en,
-    output reg [15:0]   sdram_data_in,
+    output reg [15:0]   sdram_data_out,
     output reg [23:0]   sdram_address,
     input  wire [15:0]  sdram_dout,
     input  wire         sdram_ready,
@@ -18,10 +18,11 @@ module control_unit #(
 
     output reg          output_ready,
     output reg          start_run,
-    output reg          all_done,
     output reg          led_done,       // output for LED9
 
-    input  wire [1:0]   val_result_bits
+    input  wire [15:0]  val_result_bits,
+    output reg          expected_data_en,
+    output reg          expected_output_en
 );
 
     localparam [15:0] HEADER_WORD = 16'hABCD;
@@ -42,61 +43,58 @@ module control_unit #(
     reg [8:0]  word_count;
     reg [23:0] sdram_addr_next;
     reg [15:0] current_word;
-
-    // Address to begin writing validation results to SDRAM
     reg [23:0] sdram_results_start_addr;
-
-    // Address that increments during result writing
     reg [23:0] sdram_write_addr;
 
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            state <= ST_IDLE;
-            sdram_rd_en <= 0;
-            sdram_wr_en <= 0;
-            sdram_address <= 0;
-            sdram_addr_next <= 0;
-            sdram_results_start_addr <= 0;
-            sdram_write_addr <= 0;
-            mem_wr_en <= 0;
-            mem_address <= 0;
-            output_ready <= 0;
-            start_run <= 0;
-            all_done <= 0;
-            led_done <= 0;
-            word_count <= 0;
-            current_word <= 0;
-            sdram_data_in <= 0;
+            state                  <= ST_IDLE;
+            sdram_rd_en            <= 1'b0;
+            sdram_wr_en            <= 1'b0;
+            sdram_data_out         <= 16'd0;
+            sdram_address          <= 24'd0;
+            sdram_addr_next        <= 24'd0;
+            sdram_results_start_addr <= 24'd0;
+            sdram_write_addr       <= 24'd0;
+            mem_wr_en              <= 1'b0;
+            mem_address            <= 10'd0;
+            output_ready           <= 1'b0;
+            start_run              <= 1'b0;
+            led_done               <= 1'b0;
+            word_count             <= 9'd0;
+            current_word           <= 16'd0;
+            expected_data_en       <= 1'b0;
+            expected_output_en     <= 1'b0;
         end else begin
-            // Default disables
-            sdram_rd_en <= 0;
-            sdram_wr_en <= 0;
-            mem_wr_en <= 0;
-            start_run <= 0;
+            // Default values every cycle to avoid latches
+            sdram_rd_en         <= 1'b0;
+            sdram_wr_en         <= 1'b0;
+            mem_wr_en           <= 1'b0;
+            start_run           <= 1'b0;
+            output_ready        <= 1'b0;
+            expected_data_en    <= 1'b0;
+            expected_output_en  <= 1'b0;
 
             case (state)
                 ST_IDLE: begin
-                    // Wait for external 'start' signal
                     if (start) begin
-                        sdram_addr_next <= 0;
-                        sdram_write_addr <= 0;
-                        led_done <= 0;  // turn off LED at new start
-                        state <= ST_REQ_DATA;
+                        sdram_addr_next    <= 24'd0;
+                        sdram_write_addr   <= 24'd0;
+                        led_done           <= 1'b0;
+                        state              <= ST_REQ_DATA;
                     end
                 end
 
                 ST_REQ_DATA: begin
-                    // Initiate SDRAM read from current address
-                    sdram_rd_en <= 1;
-                    sdram_address <= sdram_addr_next;
-                    state <= ST_WAIT_RDY;
+                    sdram_rd_en     <= 1'b1;
+                    sdram_address   <= sdram_addr_next;
+                    state           <= ST_WAIT_RDY;
                 end
 
                 ST_WAIT_RDY: begin
-                    // Wait for SDRAM to return valid data
                     if (sdram_ready) begin
-                        current_word <= sdram_dout;
-                        sdram_addr_next <= sdram_addr_next + 1;
+                        current_word     <= sdram_dout;
+                        sdram_addr_next  <= sdram_addr_next + 1;
 
                         if (sdram_addr_next == 0)
                             state <= ST_READ_CNT;
@@ -108,59 +106,57 @@ module control_unit #(
                 end
 
                 ST_READ_CNT: begin
-                    // Load number of tests and calculate result write start address
-                    test_count <= current_word;
-                    word_count <= 0;
-                    sdram_results_start_addr <= 1 + current_word * 70;
-                    sdram_write_addr <= 1 + current_word * 70;
-                    state <= ST_REQ_DATA;
+                    test_count               <= current_word;
+                    word_count              <= 9'd0;
+                    sdram_results_start_addr <= 1 + current_word * 69;
+                    sdram_write_addr        <= 1 + current_word * 69;
+                    state                   <= ST_REQ_DATA;
                 end
 
                 ST_HEADER: begin
-                    // Reset word and memory address at test block start
-                    word_count <= 0;
-                    mem_address <= 0;
-                    state <= ST_REQ_DATA;
+                    word_count   <= 9'd0;
+                    mem_address  <= 10'd0;
+                    state        <= ST_REQ_DATA;
                 end
 
                 ST_PROCESS: begin
-                    // Write data to on-chip memory, skipping header marker
                     if (current_word != HEADER_WORD) begin
-                        mem_wr_en <= 1;
-                        mem_address <= word_count;
+                        if (word_count == 67)
+                            expected_data_en <= 1'b1;
+                        else if (word_count == 68)
+                            expected_output_en <= 1'b1;
+                        else begin
+                            mem_wr_en     <= 1'b1;
+                            mem_address   <= word_count;
+                        end
                         word_count <= word_count + 1;
                     end
-                    // Move to run phase after expected input count
-                    if (word_count == (LOAD_DEPTH - 1)) begin
+                    if (word_count == (LOAD_DEPTH - 1))
                         state <= ST_RUN;
-                    end else begin
+                    else
                         state <= ST_REQ_DATA;
-                    end
                 end
 
                 ST_RUN: begin
-                    // Trigger DUT to begin processing
-                    start_run <= 1;
-                    output_ready <= 1;
-                    state <= ST_SAVE_RESULT;
+                    start_run     <= 1'b1;
+                    output_ready  <= 1'b1;
+                    state         <= ST_SAVE_RESULT;
                 end
 
                 ST_SAVE_RESULT: begin
-                    // Write validation result to SDRAM
-                    sdram_wr_en <= 1;
-                    sdram_data_in <= {14'd0, val_result_bits};
-                    sdram_address <= sdram_write_addr;
+                    sdram_wr_en     <= 1'b1;
+                    sdram_data_out  <= val_result_bits;
+                    sdram_address   <= sdram_write_addr;
                     sdram_write_addr <= sdram_write_addr + 1;
+                    test_count      <= test_count - 1;
 
-                    test_count <= test_count - 1;
                     if (test_count == 1) begin
-                        all_done <= 1;
-                        led_done <= 1'b1;  // turn on LED9 to indicate completion
-                        state <= ST_IDLE;
+                        led_done <= 1'b1;
+                        state    <= ST_IDLE;
                     end else begin
-                        word_count <= 0;
-                        mem_address <= 0;
-                        state <= ST_REQ_DATA;
+                        word_count  <= 9'd0;
+                        mem_address <= 10'd0;
+                        state       <= ST_REQ_DATA;
                     end
                 end
 

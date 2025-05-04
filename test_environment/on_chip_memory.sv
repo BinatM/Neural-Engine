@@ -52,4 +52,3 @@ module on_chip_memory(
     end
 
 endmodule
-

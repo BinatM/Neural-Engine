@@ -8,16 +8,11 @@ module test_generator #(
     // Address bus output for on_chip_memory
     output reg  [ADDR_WIDTH-1:0]   address_BUS,
 
-    // Data bus to DUT
-    output reg  [15:0]             DATA_BUS,
 
     // Control signals
     output reg                     rd_en,     // Read from on_chip
     output reg                     wr_en,     // Write to DUT
     output reg                     chip_sel,  // DUT select
-
-    // Data input from on_chip_memory
-    input  wire [15:0]             mem_data_in,
 
     // Data input from DUT
     input  wire                    output_ready
@@ -83,7 +78,6 @@ module test_generator #(
             chip_sel_duration <= 8'd0;
             addr_counter      <= '0;
             address_BUS       <= '0;
-            DATA_BUS          <= 16'b0;
             rd_en             <= 1'b0;
             wr_en             <= 1'b0;
             chip_sel          <= 1'b0;
@@ -117,7 +111,6 @@ module test_generator #(
             case (state)
                 GEN_IDLE: begin
                     address_BUS  <= 0;
-                    DATA_BUS     <= 16'b0;
                     addr_counter <= 0;
                 end
                 GEN_READ_REQ: begin
@@ -125,7 +118,6 @@ module test_generator #(
                     rd_en       <= 1'b1;
                 end
                 GEN_WAIT_READ: begin
-                    DATA_BUS <= mem_data_in;
                 end
                 GEN_WRITE_DUT: begin
                     wr_en <= 1'b1;
