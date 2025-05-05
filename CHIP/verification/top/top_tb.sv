@@ -18,13 +18,13 @@ module top_tb;
   // DUT
   top dut (
 	.bus          (vif.bus),
-	.clk          (clk),
+	.clk_in          (clk),
 	.wr_en        (vif.wr_en),
 	.rd_en        (vif.rd_en),
 	.chip_sel     (vif.chip_sel),
 	.output_ready (vif.output_ready),
 	.output_bit   (vif.output_bit),
-	.mac_result   (vif.mac_result),
+	//.mac_result   (vif.mac_result),
 	.wr_data_ptr  (vif.wr_data_ptr),
 	.rd_data_ptr  (vif.rd_data_ptr),
 	.ctrl_state   (vif.ctrl_state)

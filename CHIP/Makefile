@@ -9,7 +9,7 @@ comp:
 	vcs -f build.cud -sverilog -kdb +vcs+fsdbon
 	
 run:
-	qrsh -V -cwd -b y -q sim_light ./simv 2>&1 | tee log
+	qrsh -V -cwd -b y ./simv 2>&1 | tee log
 	#qrsh -V -cwd -b y -q sim_light ./simv +ntb_random_seed_automatic 2>&1 | tee log
 waveverdi: 	
 	verdi -ssf novas.fsdb

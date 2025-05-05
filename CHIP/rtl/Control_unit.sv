@@ -91,7 +91,7 @@ module Control_unit (
 
 	  // defaults
 	  mul_mem_en      <= 1'b0;
-	  ac_mem_en       <= 1'b0;
+	  ac_mem_en       <= mul_mem_en;
 	  output_ready    <= 1'b0;
 
 	  case (state)
@@ -101,13 +101,15 @@ module Control_unit (
 			wr_ptr <= wr_ptr + 1;
 			// pipeline starts on 2nd word
 			mul_mem_en <= 1'b1;
-
+			ac_mem_en <= mul_mem_en;
 			if (wr_ptr != 6'd0) begin
 			  rd_ptr     <= rd_ptr + 1;
 			  mul_mem_en <= 1'b1;
-			  if (mul_mem_en) begin
-				  ac_mem_en  <= 1'b1;
-			  end
+			  ac_mem_en <= mul_mem_en;
+
+//			  if (mul_mem_en) begin
+//				  ac_mem_en  <= 1'b1;
+//			  end
 			end
 		  end
 		end
@@ -124,7 +126,7 @@ module Control_unit (
 		COMPUTE: begin
 		  // finish pipeline: 64 multiplies+63 adds -> 65 clocks
 		  rd_ptr     <= rd_ptr + 1;
-		  ac_mem_en  <= 1'b1; //last ac_mem_en 
+		  //ac_mem_en  <= 1'b1; //last ac_mem_en 
 
 		end
 
