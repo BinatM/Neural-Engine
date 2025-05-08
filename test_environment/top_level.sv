@@ -99,6 +99,7 @@ wire expected_output_en;
 
 assign DRAM_CLK = clk_internal;
 
+wire [15:0] expected_data_from_mem;
     wire [15:0] mem_data_out;
     wire [15:0] mem_data_in;
     wire [10:0] mem_address;
@@ -111,7 +112,7 @@ assign DRAM_CLK = clk_internal;
         .wr_en            (mem_wr_en),
         .rd_en            (mem_rd_en),
         .data_in          (mem_data_in),
-        .data_out         (mem_data_out),
+        .data_out         (expected_data_from_mem),
         .multi_cycle_mode (1'b0),
         .cycle_count      (2'd1),
         .address_in       (mem_address),
@@ -129,10 +130,10 @@ always_ff @(posedge clk_internal or negedge reset_n_sys) begin
         expected_single_out_r   <= 1'b0;
     end else begin
         if (expected_data_en)
-            expected_word1_r <= mem_data_out;
+            expected_word1_r <= expected_data_from_mem;
         if (expected_output_en) begin
-            expected_mac_output_r   <= {mem_data_out[5:0], expected_word1_r};
-            expected_single_out_r   <= mem_data_out[6];
+            expected_mac_output_r   <= {expected_data_from_mem[5:0], expected_word1_r};
+            expected_single_out_r   <= expected_data_from_mem[6];
         end
     end
 end
@@ -158,7 +159,7 @@ end
     .led_done          (led_done_wire),
     .val_result_bits   (mem_data_out),
     .sdram_data_out    (sdram_data_write),
-    .expected_data_en  (expected_data_en),     
+    .expected_data_en  (expected_data_en),    
     .expected_output_en(expected_output_en)    
 );
 
@@ -189,14 +190,14 @@ end
         .address_BUS (gen_address),
         .rd_en       (gen_rd_en),
         .wr_en       (gen_wr_en),
-		  .output_ready(output_ready),
+ .output_ready(output_ready),
         .chip_sel    (gen_chip_sel)
     );
 
     // MAC core
     wire [15:0] mac_data_out;
     wire        mac_ready;
-	 wire mac_single_output; 
+wire mac_single_output;
     assign      output_ready = mac_ready;
 
 //mac_core dut (
@@ -210,7 +211,7 @@ end
     // These should match your mac_core.sv ports
  //   .data_out     (mac_data_out),
  //   .output_ready (mac_ready),
-//	 .mac_single_output (mac_single_output_wire),
+// .mac_single_output (mac_single_output_wire),
 //);
     top u_dut (
         .clk_in(clk_internal),
@@ -228,7 +229,7 @@ reg [15:0] mac_data_mux;
 
 always @(*) begin
     if (mac_ready) begin
-        mac_data_mux = mem_data_out; 
+        mac_data_mux = mem_data_out;
     end else if (ctrl_output_ready) begin
         mac_data_mux = 16'h9999;
     end else if (val_done) begin
@@ -239,14 +240,14 @@ always @(*) begin
 end
 
 assign mac_data_out = mac_data_mux;
-	
+
 
     // Validator
     wire [10:0] val_address_out;
     wire        val_rd_en, val_wr_en;
     wire [15:0] val_data_to_mem;
     wire        val_done;
-	 
+
 validator #(.ADDR_WIDTH(11)) val (
     .clk           (clk_internal),
     .reset_n       (reset_n_sys),
