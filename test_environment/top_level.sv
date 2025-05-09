@@ -4,7 +4,6 @@ module top_level (
 
     input  wire [15:0]  FPGA_DATA_IN,
     output wire [15:0]  FPGA_DATA_OUT,
-    output wire         FPGA_OUTPUT_READY,
 
     // SDRAM physical pins
     output wire [12:0]  DRAM_ADDR,
@@ -190,15 +189,16 @@ end
         .address_BUS (gen_address),
         .rd_en       (gen_rd_en),
         .wr_en       (gen_wr_en),
- .output_ready(output_ready),
+        .output_ready(output_ready),
         .chip_sel    (gen_chip_sel)
     );
 
     // MAC core
     wire [15:0] mac_data_out;
     wire        mac_ready;
-wire mac_single_output;
+    wire        mac_single_output;
     assign      output_ready = mac_ready;
+    wire        rd_en_to_dut;
 
 //mac_core dut (
  //   .clk          (clk_internal),
@@ -216,8 +216,8 @@ wire mac_single_output;
     top u_dut (
         .clk_in(clk_internal),
         .bus(mem_data_out),
-        .wr_en(gen_wr_en),
-        .rd_en(gen_rd_en),
+        .wr_en(wr_en_to_dut),
+        .rd_en(rd_en_to_dut),
         .chip_sel(gen_chip_sel),
         .output_ready(mac_ready),
         .output_bit(mac_single_output),
@@ -261,7 +261,8 @@ validator #(.ADDR_WIDTH(11)) val (
     .gen_wr_en     (gen_wr_en),
     .val_done      (val_done),
     .expected_mac_output(expected_mac_output_r),
-    .expected_single_out(expected_single_out_r)
+    .expected_single_out(expected_single_out_r),
+    .dut_rd_en(rd_en_to_dut)
 );
 
  
@@ -300,10 +301,6 @@ end
     assign mem_rd_en   = mux_rd_en_r;
     assign mem_address = mux_address;
     assign mem_data_in = mux_data_in_r;
-
-    // Output
-    wire any_ready = mac_ready || val_done || ctrl_output_ready;
-    assign FPGA_OUTPUT_READY = any_ready;
 
     reg [15:0] internal_data;
     always @(*) begin

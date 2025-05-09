@@ -12,6 +12,7 @@ output reg  [ADDR_WIDTH-1:0] address_out,
 output reg                   rd_en,
 output reg                   wr_en,
 output reg  [15:0]           data_to_mem,
+output reg                   dut_rd_en,
 
 input  wire                  gen_wr_en,
 output reg                   val_done,
@@ -26,10 +27,13 @@ typedef enum logic [3:0] {
     VAL_WAIT_3_CYCLES_AFTER_WR  = 4'd1,
     VAL_CAPTURE1           = 4'd2,
     VAL_CAPTURE2           = 4'd3,
-    VAL_COMPARE            = 4'd4,
-    VAL_WAIT_AFTER_COMPARE = 4'd5,
-    VAL_WRITE_RESULT       = 4'd6,
-    VAL_DONE               = 4'd7
+    VAL_WAIT_FOR_READY     = 4'd4,
+    VAL_READ_SINGLE_BIT    = 4'd5,
+    VAL_COMPARE            = 4'd6,
+    VAL_WAIT_AFTER_COMPARE = 4'd7,
+    VAL_WRITE_RESULT       = 4'd8,
+    VAL_DONE               = 4'd9
+
 } val_state_t;
 
 val_state_t state, next_state;
@@ -84,10 +88,12 @@ end
 always_comb begin
     next_state = state;
     case (state)
-        VAL_IDLE:                    next_state = wr_count_done ? VAL_CAPTURE1 : VAL_IDLE;
+        VAL_IDLE:                    next_state = wr_count_done ? VAL_WAIT_3_CYCLES_AFTER_WR : VAL_IDLE;
         VAL_WAIT_3_CYCLES_AFTER_WR:  next_state = wait3_done ? VAL_CAPTURE1 : VAL_WAIT_3_CYCLES_AFTER_WR;
         VAL_CAPTURE1:                next_state = VAL_CAPTURE2;
-        VAL_CAPTURE2:                next_state = VAL_COMPARE;
+        VAL_CAPTURE2:                next_state = VAL_WAIT_FOR_READY;
+        VAL_WAIT_FOR_READY:          next_state = output_ready ? VAL_READ_SINGLE_BIT : VAL_WAIT_FOR_READY;
+        VAL_READ_SINGLE_BIT:         next_state = VAL_COMPARE;
         VAL_COMPARE:                 next_state = VAL_WAIT_AFTER_COMPARE;
         VAL_WAIT_AFTER_COMPARE:      next_state = VAL_WRITE_RESULT;
         VAL_WRITE_RESULT:            next_state = VAL_DONE;
@@ -101,6 +107,7 @@ always_ff @(posedge clk or negedge reset_n) begin
         address_out         <= '0;
         rd_en               <= 1'b0;
         wr_en               <= 1'b0;
+        dut_rd_en           <= 1'b0;
         data_to_mem         <= 16'b0;
         val_done            <= 1'b0;
         actual_mac          <= 22'b0;
@@ -110,10 +117,18 @@ always_ff @(posedge clk or negedge reset_n) begin
         wr_en <= 1'b0;
 
         case (state)
-            VAL_CAPTURE1: actual_mac[15:0] <= dut_data_out;
+            VAL_CAPTURE1: begin
+                if (!gen_wr_en)
+                    dut_rd_en <= 1;
+                actual_mac[15:0] <= dut_data_out;
+            end
             VAL_CAPTURE2: begin
+                if (!gen_wr_en)
+                    dut_rd_en <= 1;
                 actual_mac[21:16]  <= dut_data_out[5:0];
-                actual_single_out  <= dut_single_out;
+            end
+            VAL_READ_SINGLE_BIT: begin
+                actual_single_out <= dut_single_out;
             end
             VAL_WRITE_RESULT: begin
                 wr_en       <= 1'b1;
