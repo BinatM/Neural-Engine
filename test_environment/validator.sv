@@ -11,13 +11,11 @@ input  wire                  output_ready,
 output reg  [ADDR_WIDTH-1:0] address_out,
 output reg                   rd_en,
 output reg                   wr_en,
-input  wire [15:0]           mem_data_out,
 output reg  [15:0]           data_to_mem,
 
 input  wire                  gen_wr_en,
 output reg                   val_done,
 
-input  wire [15:0]           expected_word1,
 input  wire [21:0]           expected_mac_output,
 input  wire                  expected_single_out
 
@@ -25,7 +23,7 @@ input  wire                  expected_single_out
 
 typedef enum logic [3:0] {
     VAL_IDLE               = 4'd0,
-    VAL_WAIT_AFTER_GEN_WR  = 4'd1,
+    VAL_WAIT_3_CYCLES_AFTER_WR  = 4'd1,
     VAL_CAPTURE1           = 4'd2,
     VAL_CAPTURE2           = 4'd3,
     VAL_COMPARE            = 4'd4,
@@ -40,9 +38,13 @@ localparam [ADDR_WIDTH-1:0] RESULT_ADDR = 11'd1000;
 
 reg [7:0]  gen_wr_count;
 reg        wr_count_done;
+reg [1:0]  wait3_counter;
+reg        wait3_done;
 reg [21:0] actual_mac;
 reg        actual_single_out;
 
+
+// coung gen_wr_en pulses, stops at 64
 always_ff @(posedge clk or negedge reset_n) begin
     if (!reset_n) begin
         gen_wr_count  <= 8'd0;
@@ -50,10 +52,27 @@ always_ff @(posedge clk or negedge reset_n) begin
     end
     else if (!wr_count_done && gen_wr_en) begin
         gen_wr_count <= gen_wr_count + 1;
-        if (gen_wr_count == 8'd65)
+        if (gen_wr_count == 8'd63)  //64 cycles of data (pixels + wheights)
             wr_count_done <= 1'b1;
     end
 end
+
+// Wait 3 cycles after gen_wr_count reaches 64
+always_ff @(posedge clk or negedge reset_n) begin
+    if (!reset_n) begin
+        wait3_counter <= 2'd0;
+        wait3_done    <= 1'b0;
+    end else if (state == VAL_WAIT_3_CYCLES_AFTER_WR) begin
+        wait3_counter <= wait3_counter + 1;
+        if (wait3_counter == 2'd2)
+            wait3_done <= 1'b1;
+    end else begin
+        wait3_counter <= 2'd0;
+        wait3_done    <= 1'b0;
+    end
+end
+
+
 
 always_ff @(posedge clk or negedge reset_n) begin
     if (!reset_n)
@@ -65,15 +84,15 @@ end
 always_comb begin
     next_state = state;
     case (state)
-        VAL_IDLE:               next_state = wr_count_done ? VAL_CAPTURE1 : VAL_IDLE;
-        VAL_WAIT_AFTER_GEN_WR:  next_state = output_ready ? VAL_CAPTURE1 : VAL_WAIT_AFTER_GEN_WR;
-        VAL_CAPTURE1:           next_state = VAL_CAPTURE2;
-        VAL_CAPTURE2:           next_state = VAL_COMPARE;
-        VAL_COMPARE:            next_state = VAL_WAIT_AFTER_COMPARE;
-        VAL_WAIT_AFTER_COMPARE: next_state = VAL_WRITE_RESULT;
-        VAL_WRITE_RESULT:       next_state = VAL_DONE;
-        VAL_DONE:               next_state = VAL_DONE;
-        default:                next_state = VAL_IDLE;
+        VAL_IDLE:                    next_state = wr_count_done ? VAL_CAPTURE1 : VAL_IDLE;
+        VAL_WAIT_3_CYCLES_AFTER_WR:  next_state = wait3_done ? VAL_CAPTURE1 : VAL_WAIT_3_CYCLES_AFTER_WR;
+        VAL_CAPTURE1:                next_state = VAL_CAPTURE2;
+        VAL_CAPTURE2:                next_state = VAL_COMPARE;
+        VAL_COMPARE:                 next_state = VAL_WAIT_AFTER_COMPARE;
+        VAL_WAIT_AFTER_COMPARE:      next_state = VAL_WRITE_RESULT;
+        VAL_WRITE_RESULT:            next_state = VAL_DONE;
+        VAL_DONE:                    next_state = VAL_DONE;
+        default:                     next_state = VAL_IDLE;
     endcase
 end
 
@@ -98,7 +117,6 @@ always_ff @(posedge clk or negedge reset_n) begin
             end
             VAL_WRITE_RESULT: begin
                 wr_en       <= 1'b1;
-                address_out <= RESULT_ADDR;
                 data_to_mem <= {14'b0, (actual_single_out == expected_single_out), (actual_mac == expected_mac_output)};
             end
             VAL_DONE: val_done <= 1'b1;
