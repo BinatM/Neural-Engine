@@ -257,7 +257,6 @@ validator #(.ADDR_WIDTH(11)) val (
     .address_out   (val_address_out),
     .rd_en         (val_rd_en),
     .wr_en         (val_wr_en),
-    .mem_data_out  (mem_data_out),
     .data_to_mem   (val_data_to_mem),
     .gen_wr_en     (gen_wr_en),
     .val_done      (val_done),
