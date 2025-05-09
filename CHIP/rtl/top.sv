@@ -12,7 +12,9 @@ module top (
   // for coverage / monitor
   output logic [5:0]  wr_data_ptr,
   output logic [5:0]  rd_data_ptr,
-  output logic [2:0]  ctrl_state
+  output logic [2:0]  ctrl_state,
+  output logic [1:0] calc_finish_timer   // sim-only
+
 );
 
   //------------------------------------------------------------------------
@@ -40,7 +42,8 @@ module top (
 	.wr_en_pass        (wr_en_internal),
 	.rd_en_pass        (rd_en_internal),
 	.chip_sel_pass     (chip_sel_internal),
-	.clk_pass          (clk)
+	.clk_pass          (clk),
+	.calc_finish_timer(calc_finish_timer)
   );
 
   //------------------------------------------------------------------------
@@ -139,7 +142,9 @@ module top (
 	.threshold_ready (threshold_ready),
 	.mac_output      (mac_result),
 	.input_bus       (threshold_data),
-	.output_memory   (output_bit_internal)
+	.output_memory   (output_bit_internal),
+	.rst_mem    	 (rst_mem)
+
   );
 
   //------------------------------------------------------------------------
@@ -157,7 +162,9 @@ module top (
 	.rd_data_ptr    (rd_data_ptr),
 	.threshold_ready(threshold_ready),
 	.ctrl_state     (ctrl_state),
-	.rd_en			(rd_en_internal)
+	.rd_en			(rd_en_internal),
+	.calc_finish_timer(calc_finish_timer)
+
   );
 
 endmodule : top

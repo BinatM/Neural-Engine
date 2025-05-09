@@ -35,13 +35,13 @@ module scoreboard (
 	  $error("SB: MAC MISMATCH ? got=%0d, exp=%0d @%0t", 
 			 r.mac_result, golden_mac, $time);
 	else
-	  $display("SB: MAC OK = %0d", golden_mac);
+	  $display("SB: MAC OK WORKED FINE! = %0d", golden_mac);
 
 	if (r.decision !== golden_dec)
 	  $error("SB: DECISION MISMATCH ? got=%b, exp=%b @%0t", 
 			 r.decision, golden_dec, $time);
 	else
-	  $display("SB: DECISION OK = %b", golden_dec);
+	  $display("SB: DECISION OK WORKED FINE! = %b", golden_dec);
 
 	// 5) Finish simulation
 	$finish;

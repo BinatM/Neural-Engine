@@ -27,7 +27,8 @@ module top_tb;
 	//.mac_result   (vif.mac_result),
 	.wr_data_ptr  (vif.wr_data_ptr),
 	.rd_data_ptr  (vif.rd_data_ptr),
-	.ctrl_state   (vif.ctrl_state)
+	.ctrl_state   (vif.ctrl_state),
+    .calc_finish_timer(vif.calc_finish_timer)
   );
 
   // TB components

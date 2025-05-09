@@ -11,14 +11,38 @@ module monitor (
   trans_item   item;
   result_item  r;
   int unsigned cycle_cnt;
+  
+   // Functional coverage
+   covergroup cg_result ;
+     coverpoint item.threshold;
+     coverpoint r.mac_result;
+     coverpoint r.decision;
+     coverpoint cycle_cnt; // max = 100;
+   endgroup
+   cg_result cg = new();
 
-  always_ff @(posedge clk)
-	cycle_cnt <= cycle_cnt + 1;
+  always_ff @(posedge clk) begin 
+	  cycle_cnt <= cycle_cnt + 1;
+
+  end
 
   initial begin
 	int timeout;
 	bit decision; 
 	bit [21:0] mac;	
+	// 3) Fork off the two-cycle read so initial never stalls
+	mac = '0;
+	fork
+	  begin
+		wait (vif.rd_en);           // wait non?blocking
+		$display("MON rd_en asserted @%0t", $time);
+		@(posedge clk);
+		mac[15:0] = vif.bus;
+		@(posedge clk);
+		mac[21:16] = vif.bus[5:0];
+		$display("MON: sampled mac=%0d", mac);
+	  end
+	join_none                      // let that thread run off by itself
 	// 1) Grab the transaction
 	m2mon.get(item);
 	
@@ -34,16 +58,9 @@ module monitor (
 
 	// 3) Capture the 1-bit decision (always valid at output_ready)
 
-	mac = '0;
 
-	// 4) If the test *did* assert rd_en, grab the raw MAC from the bus
-	//    over two cycles; otherwise leave it at zero or flag ?not read.?
-	if (vif.rd_en) begin
-	  @(posedge clk);
-	  mac[15:0] = vif.bus;
-	  @(posedge clk);
-	  mac[21:16] = vif.bus[5:0];
-	end
+    wait (vif.output_ready);
+
 
 	// 5) Build result_item
 	r = new(item);
@@ -55,6 +72,9 @@ module monitor (
 
 	$display("MON: mac=%0d, decision=%b @cycle=%0d (+%0d delay)",
 			 r.mac_result, r.decision, r.cycle, r.delay_sum);
+
+	cg.sample();
+
 
 	// 6) Forward to scoreboard
 	m2sb.put(r);

@@ -3,6 +3,7 @@ module activation_function #(parameter WIDTH = 22, BUS_WIDTH = 16)
 	output logic output_memory,                 // 1-bit output
 
 	input  logic clk,
+	input  logic rst_mem,
 	input  logic threshold_ready,               // Signal to load threshold value
 	input  logic [WIDTH-1:0] mac_output,        // MAC output
 	input  logic [BUS_WIDTH-1:0] input_bus     // Threshold value from input bus
@@ -12,8 +13,14 @@ module activation_function #(parameter WIDTH = 22, BUS_WIDTH = 16)
 	logic [WIDTH-1:0] threshold_register;
 	logic cycle_counter;          // Counter to track the two cycles
 
+
+
 	// Load threshold value into the register when threshold_ready is high
 	 always_ff @(posedge clk) begin
+		 if (rst_mem) begin
+			 threshold_register <= '0;  // Reset the threshold_register 
+		 end
+		 
 		 if (threshold_ready) begin
 			 if (cycle_counter == 1'b0) begin
 				 // First cycle: Load the first 16 bits from the input bus

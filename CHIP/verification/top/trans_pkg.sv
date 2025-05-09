@@ -10,6 +10,12 @@ package trans_pkg;
 
 	  // Randomizable threshold, but fixed-write-enable delays by default
 	  rand bit [21:0]     threshold;
+	  
+	  constraint c_threshold_range {
+	   threshold >= 22'd43;
+	   threshold <= 22'd4103;
+	  }
+	  
 	  // Make wr_en_delay non-rand so default zero initialization is preserved
 	  int unsigned        wr_en_delay [0:70];
 
@@ -17,13 +23,23 @@ package trans_pkg;
 	  function new();
 		// Default pixel/weight = 0..63
 		for (int i = 0; i < 64; i++) begin
-		  pixel[i]  = i;
-		  weight[i] = i;
+		  pixel[i]  = i+2;
+		  weight[i] = i+2;
 		end
 		threshold = 0;
 		// Default no stalls
-		foreach (wr_en_delay[i])
-		  wr_en_delay[i] = 0;
+		foreach (wr_en_delay[i]) begin
+//			if (i%2 == 0) begin 
+//				wr_en_delay[i] = 1;
+//			end else begin 
+//				wr_en_delay[i] = 0;
+//			end
+			wr_en_delay[i] = 0;
+		end
+		wr_en_delay[63] = 0;
+
+
+
 	  endfunction
 
 	  // Pack pixel+weight into data array

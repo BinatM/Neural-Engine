@@ -9,6 +9,7 @@ module neuron_io (
 	input  logic        wr_en_in,
 	input  logic        rd_en_in,
 	input  logic        chip_sel_in,
+	input  logic [1:0]  calc_finish_timer,
 
 	// internal signals from MAC & Activation
 	input  logic        output_ready_in,
@@ -52,7 +53,7 @@ module neuron_io (
   //? two-cycle read FSM
   logic read_phase;
   always_ff @(posedge clk_in) begin
-	if (!chip_sel_in || !rd_en_in)  
+	if (!chip_sel_in || !rd_en_in || (calc_finish_timer == 2'd1 || calc_finish_timer == 2'd2))  
 	  read_phase <= 1'b0;
 	else
 	  read_phase <= ~read_phase;
@@ -62,7 +63,7 @@ module neuron_io (
   always_comb begin
 	bus_oe  = 1'b0;
 	bus_out = 16'h0000;
-	if (chip_sel_in && rd_en_in && output_ready_in) begin
+	if (chip_sel_in && rd_en_in && (calc_finish_timer == 2'd3 || (bus_oe = 1'b1))) begin // && output_ready_in) begin
 	  bus_oe = 1'b1;
 	  if (!read_phase)
 		bus_out = mac_result[15:0];            // lower 16
@@ -72,7 +73,7 @@ module neuron_io (
   end
 
 assign clk_pass = clk_in;
-assign rd_en_pass = rd_en_in;
+assign rd_en_pass = (rd_en_in && !wr_en_in);
 assign wr_en_pass = wr_en_in;
 assign output_ready_out = output_ready_in;
 assign output_bit_out = output_bit_in;
