@@ -33,7 +33,6 @@ module test_generator #(
     // Internal registers
     reg chip_sel_hold;
     reg output_ready_d;
-    reg [7:0] chip_sel_duration;
     reg [ADDR_WIDTH-1:0] addr_counter;
 
     // Next state logic
@@ -75,7 +74,6 @@ module test_generator #(
             // Control and data signals
             chip_sel_hold     <= 1'b0;
             output_ready_d    <= 1'b0;
-            chip_sel_duration <= 8'd0;
             addr_counter      <= '0;
             address_BUS       <= '0;
             rd_en             <= 1'b0;
@@ -102,10 +100,6 @@ module test_generator #(
 
             // Assign chip_sel output
             chip_sel <= chip_sel_hold;
-
-            // Count how long chip_sel is high (optional)
-            if (chip_sel)
-                chip_sel_duration <= chip_sel_duration + 1;
 
             // FSM actions
             case (state)

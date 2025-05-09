@@ -252,7 +252,7 @@ validator #(.ADDR_WIDTH(11)) val (
     .clk           (clk_internal),
     .reset_n       (reset_n_sys),
     .dut_data_out  (mac_data_out),
-    .dut_single_out(mac_single_output_wire),
+    .dut_single_out(mac_single_output),
     .output_ready  (mac_ready),
     .address_out   (val_address_out),
     .rd_en         (val_rd_en),
@@ -261,7 +261,6 @@ validator #(.ADDR_WIDTH(11)) val (
     .data_to_mem   (val_data_to_mem),
     .gen_wr_en     (gen_wr_en),
     .val_done      (val_done),
-    .expected_word1(expected_word1_r),
     .expected_mac_output(expected_mac_output_r),
     .expected_single_out(expected_single_out_r)
 );
