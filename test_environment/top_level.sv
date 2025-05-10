@@ -2,7 +2,6 @@ module top_level (
     input  wire         MAX10_CLK1_50,
     input  wire         KEY_0,
 
-    input  wire [15:0]  FPGA_DATA_IN,
     output wire [15:0]  FPGA_DATA_OUT,
 
     // SDRAM physical pins
@@ -216,7 +215,7 @@ end
     top u_dut (
         .clk_in(clk_internal),
         .bus(mem_data_out),
-        .wr_en(wr_en_to_dut),
+        .wr_en(gen_wr_en),
         .rd_en(rd_en_to_dut),
         .chip_sel(gen_chip_sel),
         .output_ready(mac_ready),
