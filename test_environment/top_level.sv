@@ -2,8 +2,6 @@ module top_level (
     input  wire         MAX10_CLK1_50,
     input  wire         KEY_0,
 
-    output wire [15:0]  FPGA_DATA_OUT,
-
     // SDRAM physical pins
     output wire [12:0]  DRAM_ADDR,
     output wire [1:0]   DRAM_BA,
@@ -117,24 +115,42 @@ wire [15:0] expected_data_from_mem;
         .use_external_addr(1'b1)
     );
 
+reg [15:0] current_mem_word;
+reg [6:0]  mem_read_counter;
+
+always_ff @(posedge clk_internal or negedge reset_n_sys) begin
+    if (!reset_n_sys) begin
+        current_mem_word <= 16'd0;
+        mem_read_counter <= 7'd0;
+    end else if (mem_rd_en) begin
+        current_mem_word <= expected_data_from_mem;
+        mem_read_counter <= mem_read_counter + 1;
+    end
+end
+// Registers for holding the expected MAC and single-bit output values
+// expected_word1_r stores lower 16 bits of the expected MAC output
+// expected_mac_output_r is assembled by combining upper 6 bits from data and lower 16 from word1
+// expected_single_out_r stores the expected binary classification bit
 reg [15:0] expected_word1_r;
 reg [21:0] expected_mac_output_r;
 reg        expected_single_out_r;
 
 always_ff @(posedge clk_internal or negedge reset_n_sys) begin
     if (!reset_n_sys) begin
-        expected_word1_r        <= 16'd0;
-        expected_mac_output_r   <= 22'd0;
-        expected_single_out_r   <= 1'b0;
+        expected_word1_r      <= 16'd0;
+        expected_mac_output_r <= 22'd0;
+        expected_single_out_r <= 1'b0;
     end else begin
-        if (expected_data_en)
-            expected_word1_r <= expected_data_from_mem;
-        if (expected_output_en) begin
-            expected_mac_output_r   <= {expected_data_from_mem[5:0], expected_word1_r};
-            expected_single_out_r   <= expected_data_from_mem[6];
-        end
+        case (mem_read_counter)
+            7'd66: expected_word1_r <= current_mem_word;
+            7'd67: begin
+                expected_mac_output_r <= {current_mem_word[5:0], expected_word1_r};
+                expected_single_out_r <= current_mem_word[6];
+            end
+        endcase
     end
 end
+
     // Control Unit
     wire ctrl_wr_en;
     wire [9:0] ctrl_mem_address;
@@ -156,9 +172,7 @@ end
     .start_run         (ctrl_start_run),
     .led_done          (led_done_wire),
     .val_result_bits   (mem_data_out),
-    .sdram_data_out    (sdram_data_write),
-    .expected_data_en  (expected_data_en),    
-    .expected_output_en(expected_output_en)    
+    .sdram_data_out    (sdram_data_write), 
 );
 
   //  reg [15:0] expected_mac;
@@ -207,6 +221,11 @@ end
  //   .rd_en        (gen_rd_en),
  //   .chip_sel     (gen_chip_sel),
 
+wire [15:0] dut_bus;
+assign dut_bus = (gen_wr_en && mem_read_counter < 7'd66) ? current_mem_word : 16'hZZZZ;
+
+
+ 
     // These should match your mac_core.sv ports
  //   .data_out     (mac_data_out),
  //   .output_ready (mac_ready),
@@ -214,7 +233,7 @@ end
 //);
     top u_dut (
         .clk_in(clk_internal),
-        .bus(mem_data_out),
+        .bus(dut_bus),
         .wr_en(gen_wr_en),
         .rd_en(rd_en_to_dut),
         .chip_sel(gen_chip_sel),
@@ -224,21 +243,20 @@ end
         .rd_data_ptr(),
         .ctrl_state()
     );
-reg [15:0] mac_data_mux;
+//reg [15:0] mac_data_mux;
+//
+//always @(*) begin
+//    if (mac_ready) begin
+//        mac_data_mux = mem_data_out;
+//    end else if (ctrl_output_ready) begin
+//        mac_data_mux = 16'h9999;
+//    end else if (val_done) begin
+//        mac_data_mux = 16'hF0F0;
+//    end else begin
+//        mac_data_mux = 16'h0000;
+//    end
+//end
 
-always @(*) begin
-    if (mac_ready) begin
-        mac_data_mux = mem_data_out;
-    end else if (ctrl_output_ready) begin
-        mac_data_mux = 16'h9999;
-    end else if (val_done) begin
-        mac_data_mux = 16'hF0F0;
-    end else begin
-        mac_data_mux = 16'h0000;
-    end
-end
-
-assign mac_data_out = mac_data_mux;
 
 
     // Validator
@@ -246,6 +264,8 @@ assign mac_data_out = mac_data_mux;
     wire        val_rd_en, val_wr_en;
     wire [15:0] val_data_to_mem;
     wire        val_done;
+
+assign mac_data_out = (rd_en_to_dut) ? dut_bus : 16'h0000;
 
 validator #(.ADDR_WIDTH(11)) val (
     .clk           (clk_internal),
@@ -270,7 +290,13 @@ reg [15:0] mux_data_in_r;
 reg        mux_wr_en;
 reg        mux_rd_en_r;
 
-    // MUX
+// Centralized bus multiplexer (MUX) controls access to on-chip memory
+// Priority:
+// 1. Validator writes comparison results
+// 2. Control unit loads test data from SDRAM
+// 3. Generator writes input stimulus
+// Prevents bus conflicts by ensuring only one source drives the bus at a time
+
 always @(*) begin
     mux_wr_en     = 1'b0;
     mux_rd_en_r   = 1'b0;
@@ -301,19 +327,18 @@ end
     assign mem_address = mux_address;
     assign mem_data_in = mux_data_in_r;
 
-    reg [15:0] internal_data;
-    always @(*) begin
-        if (val_done)
-            internal_data = 16'hF0F0;
-        else if (mac_ready)
-            internal_data = mac_data_out;
-        else if (ctrl_output_ready)
-            internal_data = 16'h9999;
-        else
-            internal_data = 16'h0000;
-    end
+//    reg [15:0] internal_data;
+//    always @(*) begin
+//        if (val_done)
+//            internal_data = 16'hF0F0;
+//        else if (mac_ready)
+//            internal_data = mac_data_out;
+//        else if (ctrl_output_ready)
+//            internal_data = 16'h9999;
+//        else
+//            internal_data = 16'h0000;
+//    end
 
-    assign FPGA_DATA_OUT = internal_data;
     assign LEDR[9] = led_done_wire;
 
 

@@ -20,9 +20,7 @@ module control_unit #(
     output reg          start_run,
     output reg          led_done,       // output for LED9
 
-    input  wire [15:0]  val_result_bits,
-    output reg          expected_data_en,
-    output reg          expected_output_en
+    input  wire [15:0]  val_result_bits
 );
 
     localparam [15:0] HEADER_WORD = 16'hABCD;
@@ -63,8 +61,6 @@ module control_unit #(
             led_done               <= 1'b0;
             word_count             <= 9'd0;
             current_word           <= 16'd0;
-            expected_data_en       <= 1'b0;
-            expected_output_en     <= 1'b0;
         end else begin
             // Default values every cycle to avoid latches
             sdram_rd_en         <= 1'b0;
@@ -72,8 +68,6 @@ module control_unit #(
             mem_wr_en           <= 1'b0;
             start_run           <= 1'b0;
             output_ready        <= 1'b0;
-            expected_data_en    <= 1'b0;
-            expected_output_en  <= 1'b0;
 
             case (state)
                 ST_IDLE: begin
@@ -121,11 +115,7 @@ module control_unit #(
 
                 ST_PROCESS: begin
                     if (current_word != HEADER_WORD) begin
-                        if (word_count == 67)
-                            expected_data_en <= 1'b1;
-                        else if (word_count == 68)
-                            expected_output_en <= 1'b1;
-                        else begin
+                        if (word_count < 67) begin
                             mem_wr_en     <= 1'b1;
                             mem_address   <= word_count;
                         end
@@ -149,7 +139,6 @@ module control_unit #(
                     sdram_address   <= sdram_write_addr;
                     sdram_write_addr <= sdram_write_addr + 1;
                     test_count      <= test_count - 1;
-
                     if (test_count == 1) begin
                         led_done <= 1'b1;
                         state    <= ST_IDLE;

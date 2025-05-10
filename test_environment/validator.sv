@@ -127,8 +127,8 @@ always_ff @(posedge clk or negedge reset_n) begin
                     dut_rd_en <= 1;
                 actual_mac[21:16]  <= dut_data_out[5:0];
             end
-            VAL_READ_SINGLE_BIT: begin
-                actual_single_out <= dut_single_out;
+                VAL_READ_SINGLE_BIT: begin
+                    actual_single_out <= dut_single_out;
             end
             VAL_WRITE_RESULT: begin
                 wr_en       <= 1'b1;
