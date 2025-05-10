@@ -339,7 +339,8 @@ end
 //            internal_data = 16'h0000;
 //    end
 
-    assign LEDR[9] = led_done_wire;
+    assign LEDR[9] = led_done_wire;  //indicated all tests are done
+    assign LEDR[0] = ~db_key0;  // idicates reset button is pushed 
 
 
 endmodule
