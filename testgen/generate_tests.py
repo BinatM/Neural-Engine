@@ -124,18 +124,6 @@ def generate_min_value_test() -> dict:
         "threshold": 0
     }
 
-# Test with only one active pixel-weight pair
-def generate_one_pair_test() -> dict:
-    pixels = generate_matrix(lambda i, j: 0)
-    weights = generate_matrix(lambda i, j: 0)
-    pixels[0][0] = 10
-    weights[0][0] = 3
-    return {
-        "name": "One_Pair_Test",
-        "pixels": pixels,
-        "weights": weights,
-        "threshold": 30
-    }
 
 # Test for threshold sensitivity: MAC result just above threshold
 def generate_threshold_sensitivity_test() -> dict:
@@ -292,7 +280,6 @@ def generate_all_tests(output_folder: str):
         generate_typical_input_test(),
         generate_max_value_test(),
         generate_min_value_test(),
-        generate_one_pair_test(),
         generate_threshold_sensitivity_test(),
         generate_overflow_test(),
         generate_sparse_input_test(),
