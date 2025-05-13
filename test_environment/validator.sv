@@ -8,9 +8,7 @@ input  wire [15:0]           dut_data_out,
 input  wire                  dut_single_out,
 input  wire                  output_ready,
 
-output reg  [ADDR_WIDTH-1:0] address_out,
-output reg                   rd_en,
-output reg                   wr_en,
+
 output reg  [15:0]           data_to_mem,
 output reg                   dut_rd_en,
 
@@ -104,34 +102,28 @@ end
 
 always_ff @(posedge clk or negedge reset_n) begin
     if (!reset_n) begin
-        address_out         <= '0;
-        rd_en               <= 1'b0;
-        wr_en               <= 1'b0;
-        dut_rd_en           <= 1'b0;
+
+ dut_rd_en           <= 1'b0;
         data_to_mem         <= 16'b0;
         val_done            <= 1'b0;
         actual_mac          <= 22'b0;
         actual_single_out   <= 1'b0;
-    end else begin
-        rd_en <= 1'b0;
-        wr_en <= 1'b0;
 
         case (state)
             VAL_CAPTURE1: begin
-                if (!gen_wr_en)
-                    dut_rd_en <= 1;
-                actual_mac[15:0] <= dut_data_out;
+            if (!gen_wr_en)
+                dut_rd_en <= 1;
+            actual_mac[15:0] <= dut_data_out;
             end
             VAL_CAPTURE2: begin
-                if (!gen_wr_en)
-                    dut_rd_en <= 1;
-                actual_mac[21:16]  <= dut_data_out[5:0];
+            if (!gen_wr_en)
+                dut_rd_en <= 1;
+            actual_mac[21:16]  <= dut_data_out[5:0];
             end
-                VAL_READ_SINGLE_BIT: begin
-                    actual_single_out <= dut_single_out;
+            VAL_READ_SINGLE_BIT: begin
+                actual_single_out <= dut_single_out;
             end
             VAL_WRITE_RESULT: begin
-                wr_en       <= 1'b1;
                 data_to_mem <= {14'b0, (actual_single_out == expected_single_out), (actual_mac == expected_mac_output)};
             end
             VAL_DONE: val_done <= 1'b1;

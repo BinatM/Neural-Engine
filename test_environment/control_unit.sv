@@ -5,6 +5,7 @@ module control_unit #(
     input  wire         clk,
     input  wire         reset_n,
     input  wire         start,
+input  wire         val_done,
 
     output reg          sdram_rd_en,
     output reg          sdram_wr_en,
@@ -13,10 +14,9 @@ module control_unit #(
     input  wire [15:0]  sdram_dout,
     input  wire         sdram_ready,
 
-    output reg          mem_wr_en,
     output reg [9:0]    mem_address,
+output reg   mem_wr_en,
 
-    output reg          output_ready,
     output reg          start_run,
     output reg          led_done,       // output for LED9
 
@@ -54,9 +54,7 @@ module control_unit #(
             sdram_addr_next        <= 24'd0;
             sdram_results_start_addr <= 24'd0;
             sdram_write_addr       <= 24'd0;
-            mem_wr_en              <= 1'b0;
-            mem_address            <= 10'd0;
-            output_ready           <= 1'b0;
+mem_address            <= 10'd0;
             start_run              <= 1'b0;
             led_done               <= 1'b0;
             word_count             <= 9'd0;
@@ -65,9 +63,7 @@ module control_unit #(
             // Default values every cycle to avoid latches
             sdram_rd_en         <= 1'b0;
             sdram_wr_en         <= 1'b0;
-            mem_wr_en           <= 1'b0;
             start_run           <= 1'b0;
-            output_ready        <= 1'b0;
 
             case (state)
                 ST_IDLE: begin
@@ -128,10 +124,10 @@ module control_unit #(
                 end
 
                 ST_RUN: begin
-                    start_run     <= 1'b1;
-                    output_ready  <= 1'b1;
-                    state         <= ST_SAVE_RESULT;
-                end
+start_run    <= 1'b1;
+if (val_done)
+state <= ST_SAVE_RESULT;
+end
 
                 ST_SAVE_RESULT: begin
                     sdram_wr_en     <= 1'b1;

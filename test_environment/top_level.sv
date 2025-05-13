@@ -20,14 +20,16 @@ module top_level (
 wire expected_data_en;
 wire expected_output_en;
 
+// Debounce KEY_0 button to avoid glitches
     wire db_key0;
     debounce_button #(.DELAY_MAX(100000)) key_deb (
         .clk       (MAX10_CLK1_50),
-        .rst_n     (1'b1),
+        .rst_n     (reset_n_sys),
         .noisy_in  (KEY_0),
         .clean_out (db_key0)
     );
 
+// Reset and start pulse generator
     wire reset_n_sys;
     wire start_sig;
     reset_and_start rs(
@@ -37,18 +39,21 @@ wire expected_output_en;
         .start_pulse (start_sig)
     );
 
+// Clock generator for internal logic
     wire clk_internal;
     clock_generator clkgen(
         .clk_in  (MAX10_CLK1_50),
         .clk_out (clk_internal)
     );
 
+// SDRAM interface signals
     wire [15:0] sdram_data_out;
     wire [15:0] sdram_data_in;
     wire [23:0] sdram_address;
     wire        sdram_rd_en, sdram_wr_en;
     wire        sdram_ready;
 
+// Instantiate SDRAM controller
        SDRAM_CONTROLLER #(
         .G_CLK_FREQ           (50.0),
         .G_CAS_LATENCY        (2),
@@ -92,9 +97,10 @@ wire expected_output_en;
         .O_SDRAM_INITIALIZED ()
     );
 
-
+// Drive SDRAM clock directly from internal clock
 assign DRAM_CLK = clk_internal;
 
+// On-chip memory signals
 wire [15:0] expected_data_from_mem;
     wire [15:0] mem_data_out;
     wire [15:0] mem_data_in;
@@ -102,6 +108,7 @@ wire [15:0] expected_data_from_mem;
     wire        mem_wr_en;
     wire        mem_rd_en;
 
+// On-chip memory instance
     on_chip_memory onchip_mem (
         .clk              (clk_internal),
         .reset_n          (reset_n_sys),
@@ -115,6 +122,8 @@ wire [15:0] expected_data_from_mem;
         .use_external_addr(1'b1)
     );
 
+
+// Registers to hold latest read word and counter
 reg [15:0] current_mem_word;
 reg [6:0]  mem_read_counter;
 
@@ -127,6 +136,7 @@ always_ff @(posedge clk_internal or negedge reset_n_sys) begin
         mem_read_counter <= mem_read_counter + 1;
     end
 end
+
 // Registers for holding the expected MAC and single-bit output values
 // expected_word1_r stores lower 16 bits of the expected MAC output
 // expected_mac_output_r is assembled by combining upper 6 bits from data and lower 16 from word1
@@ -151,10 +161,10 @@ always_ff @(posedge clk_internal or negedge reset_n_sys) begin
     end
 end
 
-    // Control Unit
+ // Control unit that coordinates SDRAM load and signals start of test
     wire ctrl_wr_en;
     wire [9:0] ctrl_mem_address;
-    wire ctrl_output_ready, ctrl_start_run, ctrl_all_done;
+    wire ctrl_start_run, ctrl_all_done;
     wire led_done_wire;
 
      control_unit #(.LOAD_DEPTH(69)) ctrl (
@@ -168,29 +178,16 @@ end
     .sdram_ready       (sdram_ready),
     .mem_wr_en         (ctrl_wr_en),
     .mem_address       (ctrl_mem_address),
-    .output_ready      (ctrl_output_ready),
     .start_run         (ctrl_start_run),
     .led_done          (led_done_wire),
-    .val_result_bits   (mem_data_out),
-    .sdram_data_out    (sdram_data_write), 
+.val_done  (val_done),
+    .val_result_bits   (val_data_to_mem),
+    .sdram_data_out    (sdram_data_write),
+
+   
 );
 
-  //  reg [15:0] expected_mac;
-    //reg        expected_out;
-
-    //always_ff @(posedge clk_internal or negedge reset_n_sys) begin
-      //  if (!reset_n_sys) begin
-        //    expected_mac <= 16'd0;
-          //  expected_out <= 1'b0;
-       // end else begin
-         //   if (expected_data_en)
-           //     expected_mac <= mem_data_out;
-           // if (expected_output_en)
-             //   expected_out <= mem_data_out[0];
-        //end
-    //end
-
-    // Generator
+// Test generator to provide inputs to DUT from on-chip memory
     wire [10:0] gen_address;
     wire        gen_rd_en, gen_wr_en, gen_chip_sel;
 
@@ -206,10 +203,10 @@ end
         .chip_sel    (gen_chip_sel)
     );
 
-    // MAC core
+  // Connect MAC ready signal to output_ready
     wire [15:0] mac_data_out;
     wire        mac_ready;
-    wire        mac_single_output;
+    wire mac_single_output;
     assign      output_ready = mac_ready;
     wire        rd_en_to_dut;
 
@@ -221,16 +218,12 @@ end
  //   .rd_en        (gen_rd_en),
  //   .chip_sel     (gen_chip_sel),
 
+// Tristate bus to DUT — drives data only when writing input vectors
 wire [15:0] dut_bus;
 assign dut_bus = (gen_wr_en && mem_read_counter < 7'd66) ? current_mem_word : 16'hZZZZ;
 
 
- 
-    // These should match your mac_core.sv ports
- //   .data_out     (mac_data_out),
- //   .output_ready (mac_ready),
-// .mac_single_output (mac_single_output_wire),
-//);
+// DUT instantiation — MAC core under test
     top u_dut (
         .clk_in(clk_internal),
         .bus(dut_bus),
@@ -243,29 +236,11 @@ assign dut_bus = (gen_wr_en && mem_read_counter < 7'd66) ? current_mem_word : 16
         .rd_data_ptr(),
         .ctrl_state()
     );
-//reg [15:0] mac_data_mux;
-//
-//always @(*) begin
-//    if (mac_ready) begin
-//        mac_data_mux = mem_data_out;
-//    end else if (ctrl_output_ready) begin
-//        mac_data_mux = 16'h9999;
-//    end else if (val_done) begin
-//        mac_data_mux = 16'hF0F0;
-//    end else begin
-//        mac_data_mux = 16'h0000;
-//    end
-//end
 
-
-
-    // Validator
-    wire [10:0] val_address_out;
-    wire        val_rd_en, val_wr_en;
+// Validator compares DUT output with expected and returns result
     wire [15:0] val_data_to_mem;
     wire        val_done;
-
-assign mac_data_out = (rd_en_to_dut) ? dut_bus : 16'h0000;
+// assign mac_data_out = (rd_en_to_dut) ? dut_bus : 16'h0000;
 
 validator #(.ADDR_WIDTH(11)) val (
     .clk           (clk_internal),
@@ -273,9 +248,6 @@ validator #(.ADDR_WIDTH(11)) val (
     .dut_data_out  (mac_data_out),
     .dut_single_out(mac_single_output),
     .output_ready  (mac_ready),
-    .address_out   (val_address_out),
-    .rd_en         (val_rd_en),
-    .wr_en         (val_wr_en),
     .data_to_mem   (val_data_to_mem),
     .gen_wr_en     (gen_wr_en),
     .val_done      (val_done),
@@ -292,9 +264,8 @@ reg        mux_rd_en_r;
 
 // Centralized bus multiplexer (MUX) controls access to on-chip memory
 // Priority:
-// 1. Validator writes comparison results
-// 2. Control unit loads test data from SDRAM
-// 3. Generator writes input stimulus
+// 1. Control unit loads test data from SDRAM
+// 2. Generator reads input stimulus (read-only)
 // Prevents bus conflicts by ensuring only one source drives the bus at a time
 
 always @(*) begin
@@ -303,21 +274,16 @@ always @(*) begin
     mux_address   = 11'd0;
     mux_data_in_r = 16'd0;
 
-    if (expected_data_en || expected_output_en) begin
-
-        mux_wr_en     = val_wr_en;
-        mux_rd_en_r   = val_rd_en;
-        mux_address   = val_address_out;
-        mux_data_in_r = val_data_to_mem;
-    end else if (ctrl_wr_en) begin
+    // 1. Control unit loads test data from SDRAM
+    if (ctrl_wr_en) begin
         mux_wr_en     = 1'b1;
         mux_address   = ctrl_mem_address;
         mux_data_in_r = sdram_data_out;
-    end else if (gen_wr_en || gen_rd_en) begin
-        mux_wr_en     = gen_wr_en;
-        mux_rd_en_r   = gen_rd_en;
+
+    // 2. Generator reads input stimulus
+    end else if (gen_rd_en) begin
+        mux_rd_en_r   = 1'b1;
         mux_address   = gen_address;
-        mux_data_in_r = 16'd0;
     end
 end
 
@@ -327,20 +293,9 @@ end
     assign mem_address = mux_address;
     assign mem_data_in = mux_data_in_r;
 
-//    reg [15:0] internal_data;
-//    always @(*) begin
-//        if (val_done)
-//            internal_data = 16'hF0F0;
-//        else if (mac_ready)
-//            internal_data = mac_data_out;
-//        else if (ctrl_output_ready)
-//            internal_data = 16'h9999;
-//        else
-//            internal_data = 16'h0000;
-//    end
-
-    assign LEDR[9] = led_done_wire;  //indicated all tests are done
-    assign LEDR[0] = ~db_key0;  // idicates reset button is pushed 
+// LED indicators: LED0 = button pressed, LED9 = test completed
+    assign LEDR[9] = led_done_wire;
+    assign LEDR[0] = ~db_key0; // LED0 ON while button is pressed
 
 
 endmodule
