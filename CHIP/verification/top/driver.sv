@@ -15,8 +15,7 @@ module driver (
   initial begin
 	vif.chip_sel   = 0;
 	vif.wr_en      = 0;
-	vif.rd_en      = 0;
-	vif.bus_drv_en = 0;
+	vif.bus		  = 0;
 	repeat (2) @(posedge clk);
 	vif.chip_sel   = 1;
   end
@@ -42,13 +41,11 @@ module driver (
 		if (item.wr_en_delay[cycle] > 0) begin
 		  $display("DRV: stall for %0d cycles at idx %0d @%0t", item.wr_en_delay[cycle], cycle, $time);
 		  vif.wr_en      = 0;
-		  vif.bus_drv_en = 0;
 		  repeat (item.wr_en_delay[cycle]) @(posedge clk);
 		  vif.wr_en      = 1;
 		end
 		// drive data
-		vif.bus_drv    = item.data[cycle];
-		vif.bus_drv_en = 1;
+		vif.bus    = item.data[cycle];
 		$display("DRV[%0d @%0t]: sending data[%0d]=16'h%0h  (w=%0d,p=%0d)", 
 				 cycle, $time, cycle, item.data[cycle], item.data[cycle][15:8], item.data[cycle][7:0]);
 		@(posedge clk);
@@ -61,35 +58,21 @@ module driver (
 //	  vif.wr_en      = 1;
 	  
 	  // threshold low half
-	  vif.bus_drv    = item.threshold[15:0];
-	  vif.bus_drv_en = 1;
+	  vif.bus    = item.threshold[15:0];
 	  $display("DRV: sending threshold low half = 16'h%0h @%0t", item.threshold[15:0], $time);
 	  @(posedge clk);
 
 	  // threshold high half
-	  vif.bus_drv    = {4'b0, item.threshold[21:16]};
-	  vif.bus_drv_en = 1;
+	  vif.bus    = {4'b0, item.threshold[21:16]};
 	  $display("DRV: sending threshold high half = 16'h%0h @%0t", item.threshold[21:16], $time);	 
 	  @(posedge clk);
 	  // end write
 	  vif.wr_en      = 0;
-	  vif.bus_drv_en = 0;
 	  $display("DRV: end write phase @%0t", $time);
 
 	  // one idle cycle
 	  @(posedge clk);
-
-	  // READ PHASE (2 cycles)
-//	  if (item.wr_en_delay[64] == 0) begin
-//		  wait (vif.calc_finish_timer == 2'd3);
-//	  end
-	  vif.rd_en = 1;
-	  $display("DRV: start read phase @%0t", $time);
-	  @(posedge clk);
-	  @(posedge clk);
-	  vif.rd_en = 0;
-	  $display("DRV: end read phase @%0t", $time);
-
+	  @(posedge clk); //clk for activation func to calc
 
 
 	  // hand off to monitor

@@ -20,21 +20,19 @@ module top_tb;
 	.bus          (vif.bus),
 	.clk_in          (clk),
 	.wr_en        (vif.wr_en),
-	.rd_en        (vif.rd_en),
 	.chip_sel     (vif.chip_sel),
 	.output_ready (vif.output_ready),
 	.output_bit   (vif.output_bit),
 	//.mac_result   (vif.mac_result),
 	.wr_data_ptr  (vif.wr_data_ptr),
 	.rd_data_ptr  (vif.rd_data_ptr),
-	.ctrl_state   (vif.ctrl_state),
-    .calc_finish_timer(vif.calc_finish_timer)
+	.ctrl_state   (vif.ctrl_state)
   );
 
   // TB components
-  generator    gen (.clk(clk),           .m2drv(m2drv));
+  generator    gen (           .m2drv(m2drv));
   driver       drv (.clk(clk), .vif(vif.TB), .m2drv(m2drv), .m2mon(m2mon));
   monitor      mon (.clk(clk), .vif(vif.DUT), .m2mon(m2mon), .m2sb(m2sb));
-  scoreboard   sb  (.clk(clk),            .m2sb(m2sb));
+  scoreboard   sb  (            .m2sb(m2sb));
 
 endmodule : top_tb

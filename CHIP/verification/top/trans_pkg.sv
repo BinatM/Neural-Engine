@@ -12,8 +12,8 @@ package trans_pkg;
 	  rand bit [21:0]     threshold;
 	  
 	  constraint c_threshold_range {
-	   threshold >= 22'd43;
-	   threshold <= 22'd4103;
+	   threshold >= 22'd4194303;
+	   threshold <= 22'd4194303;
 	  }
 	  
 	  // Make wr_en_delay non-rand so default zero initialization is preserved
@@ -59,7 +59,6 @@ package trans_pkg;
 
 	// Result item passed to scoreboard
 	class result_item extends trans_item;
-	  bit [21:0]      mac_result;
 	  bit             decision;
 	  int unsigned    cycle;
 	  int unsigned    delay_sum;

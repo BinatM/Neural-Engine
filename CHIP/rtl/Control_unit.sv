@@ -4,7 +4,6 @@ module Control_unit (
 	input  logic        clk,
 	input  logic        chip_sel,
 	input  logic        wr_en,
-	input  logic        rd_en,
 	output logic        rst_mem,
 	output logic        mul_mem_en,
 	output logic        ac_mem_en,
@@ -12,8 +11,7 @@ module Control_unit (
 	output logic [5:0]  wr_data_ptr,
 	output logic [5:0]  rd_data_ptr,
 	output wire        threshold_ready,
-	output logic [2:0]  ctrl_state,
-    output logic [1:0] calc_finish_timer  // only for sim
+	output logic [2:0]  ctrl_state
   );
 
 
@@ -56,9 +54,7 @@ module Control_unit (
 		  next_state = WAIT_AND_READ_OUTPUT;
 
 
-	  WAIT_AND_READ_OUTPUT:
-		if (calc_finish_timer == 2'd2)
-		  
+	  WAIT_AND_READ_OUTPUT:		  
 		  next_state = WAIT_AND_READ_OUTPUT;
 
 	  default:
@@ -77,13 +73,8 @@ module Control_unit (
 	  mul_mem_en    	  <= 1'b0;
 	  ac_mem_en      	  <= 1'b0;
 	  output_ready  	  <= 1'b0;
-	  calc_finish_timer   <= 2'd0;
-	  ctrl_state      <= IDLE;
+	  ctrl_state      	  <= IDLE;
 	end else begin
-	  //if ((rd_ptr == 6'd63 || en_counter != 2'd3) && en_counter != 0) en_counter <= en_counter - 1;
-	  if (rd_ptr == 6'd63 || calc_finish_timer != 0) begin
-		calc_finish_timer <= calc_finish_timer + 1;
-	  end
 	  state      <= next_state;
 	  ctrl_state <= next_state;   // expose for coverage
 	  if (wr_en) begin 

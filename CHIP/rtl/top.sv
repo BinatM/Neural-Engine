@@ -1,10 +1,9 @@
 `timescale 1ns/1ps
 
 module top (
-  inout  tri   [15:0] bus,           // bidir pixel/weight & MAC result
+  input  logic   [15:0] bus,
   input  logic       clk_in,
   input  logic       wr_en,
-  input  logic       rd_en,
   input  logic       chip_sel,
   output logic       output_ready,
   output logic       output_bit,
@@ -12,9 +11,7 @@ module top (
   // for coverage / monitor
   output logic [5:0]  wr_data_ptr,
   output logic [5:0]  rd_data_ptr,
-  output logic [2:0]  ctrl_state,
-  output logic [1:0] calc_finish_timer   // sim-only
-
+  output logic [2:0]  ctrl_state
 );
 
   //------------------------------------------------------------------------
@@ -23,27 +20,23 @@ module top (
   logic [21:0] mac_result;
   logic [7:0]  img_data, weight_data;
   logic [15:0] threshold_data;
-  logic output_ready_internal, output_bit_internal, wr_en_internal, rd_en_internal, chip_sel_internal, clk;
+  logic output_ready_internal, output_bit_internal, wr_en_internal, chip_sel_internal, clk;
 
   neuron_io io_inst (
 	.clk_in            (clk_in),
 	.bus               (bus),
 	.wr_en_in          (wr_en),
-	.rd_en_in          (rd_en),
 	.chip_sel_in       (chip_sel),
 	.output_ready_in   (output_ready_internal),
 	.output_bit_in     (output_bit_internal),
 	.output_ready_out  (output_ready),
 	.output_bit_out    (output_bit),
-	.mac_result        (mac_result),
 	.img_data          (img_data),
 	.weight_data       (weight_data),
 	.threshold_data    (threshold_data),
 	.wr_en_pass        (wr_en_internal),
-	.rd_en_pass        (rd_en_internal),
 	.chip_sel_pass     (chip_sel_internal),
-	.clk_pass          (clk),
-	.calc_finish_timer(calc_finish_timer)
+	.clk_pass          (clk)
   );
 
   //------------------------------------------------------------------------
@@ -68,57 +61,6 @@ module top (
 	.wr_data_ptr   (wr_data_ptr),
 	.rd_data_ptr   (rd_data_ptr)
   );
-
-  
-//  ------------------------------------------------------------------------
-//   Pixel SRAM (Image)
-//  ------------------------------------------------------------------------
-//  TS6N28HPCPHVTA64X8M4FWBSO image_mem (
-//	.AA   (wr_data_ptr),       // write address
-//	.D    (img_data),          // write data
-//	.BWEB (8'b0),              // bit-write enable (active low)
-//	.WEB  (1'b0),           // write enable (active low)
-//	.CLKW (clk),               // write clock
-//
-//	.AB   (rd_data_ptr),       // read address
-//	.REB  (1'b0),              // read enable (active low)
-//	.CLKR (clk),               // read clock
-//
-//	.SLP  (1'b0),              // sleep off
-//	.SD   (1'b0),              // shutdown off
-//
-//	.AMA  (wr_data_ptr), .DM    (img_data),
-//	.BWEBM(8'b0), .WEBM  (1'b0),
-//	.AMB  (rd_data_ptr), .REBM  (1'b0),
-//	.BIST (1'b1),
-//
-//	.Q    (image_mem_out)      // read data
-//  );
-//////
-//////  //------------------------------------------------------------------------
-//////  // Pixel SRAM (Weight)
-//////  //------------------------------------------------------------------------
-//  TS6N28HPCPHVTA64X8M4FWBSO weight_mem (
-//	.AA   (wr_data_ptr),
-//	.D    (weight_data),
-//	.BWEB (8'b0),
-//	.WEB  (1'b0),
-//	.CLKW (clk),
-//
-//	.AB   (rd_data_ptr),
-//	.REB  (1'b0),
-//	.CLKR (clk),
-//
-//	.SLP  (1'b0),
-//	.SD   (1'b0),
-//
-//	.AMA  (wr_data_ptr), .DM    (weight_data),
-//	.BWEBM(8'b0), .WEBM  (1'b0),
-//	.AMB  (rd_data_ptr), .REBM  (1'b0),
-//	.BIST (1'b1),
-//
-//	.Q    (weight_mem_out)
-//  );
 
   //------------------------------------------------------------------------
   // MAC Unit
@@ -161,10 +103,7 @@ module top (
 	.wr_data_ptr    (wr_data_ptr),
 	.rd_data_ptr    (rd_data_ptr),
 	.threshold_ready(threshold_ready),
-	.ctrl_state     (ctrl_state),
-	.rd_en			(rd_en_internal),
-	.calc_finish_timer(calc_finish_timer)
-
+	.ctrl_state     (ctrl_state)
   );
 
 endmodule : top

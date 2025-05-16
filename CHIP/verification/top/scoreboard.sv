@@ -2,7 +2,6 @@
 import trans_pkg::*;
 
 module scoreboard (
-  input  logic                clk,
   ref mailbox #(result_item) m2sb
 );
   result_item        r;
@@ -29,13 +28,6 @@ module scoreboard (
 
 	// 3) Determine golden decision
 	golden_dec = (golden_mac >= r.threshold);
-
-	// 4) Compare & report
-	if (r.mac_result !== golden_mac)
-	  $error("SB: MAC MISMATCH ? got=%0d, exp=%0d @%0t", 
-			 r.mac_result, golden_mac, $time);
-	else
-	  $display("SB: MAC OK WORKED FINE! = %0d", golden_mac);
 
 	if (r.decision !== golden_dec)
 	  $error("SB: DECISION MISMATCH ? got=%b, exp=%b @%0t", 
