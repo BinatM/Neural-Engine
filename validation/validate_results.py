@@ -6,17 +6,16 @@ def extract_test_names_from_zip(zip_path: str) -> list:
     test_names = []
     with zipfile.ZipFile(zip_path, 'r') as zipf:
         for name in zipf.namelist():
-            if name.endswith("_inputs.hex"):
+            if name.endswith("_inputs.bin"):
                 base = os.path.basename(name)
-                test_name = base.replace("_inputs.hex", "")
+                test_name = base.replace("_inputs.bin", "")
                 test_names.append(test_name)
     return test_names
 
-# Validate test results based on their 2 least significant bits
 def validate_results_with_detail(result_file_path: str, test_names: list):
     failed_tests = []
 
-    # Read result lines from file
+    # Read result lines from file (binary strings like '0000000000000001')
     with open(result_file_path, 'r') as f:
         lines = [line.strip() for line in f if line.strip()]
 
@@ -26,29 +25,19 @@ def validate_results_with_detail(result_file_path: str, test_names: list):
 
     print("=== Test Result Validation ===")
     for i, (line, name) in enumerate(zip(lines, test_names)):
-        try:
-            value = int(line, 16)
-        except ValueError:
-            print(f"[!] Invalid hex at line {i+1}: '{line}'")
-            failed_tests.append((name, "Invalid HEX"))
+        if len(line) != 16 or any(c not in '01' for c in line):
+            print(f"[!] Invalid binary at line {i+1}: '{line}'")
+            failed_tests.append((name, "Invalid binary"))
             continue
 
-        # Extract the two least significant bits
-        bit_mac = (value >> 1) & 0x1
-        bit_single = value & 0x1
+        # Extract least significant bit (pass/fail result)
+        result_bit = int(line[-1])
 
-        # Determine pass/fail and reasons
-        if bit_mac == 1 and bit_single == 1:
+        if result_bit == 1:
             print(f"[✓] {name} passed")
         else:
-            fail_reason = []
-            if bit_mac == 0:
-                fail_reason.append("MAC mismatch")
-            if bit_single == 0:
-                fail_reason.append("Single-bit mismatch")
-            reason_str = ", ".join(fail_reason)
-            print(f"[✗] {name} failed ({reason_str})")
-            failed_tests.append((name, reason_str))
+            print(f"[✗] {name} failed")
+            failed_tests.append((name, "Output mismatch"))
 
     # Summary report
     print("\n=== Validation Summary ===")
@@ -65,9 +54,10 @@ def validate_results_with_detail(result_file_path: str, test_names: list):
     else:
         print("\n All tests passed — system is valid.")
 
+
 # Main entry point
 if __name__ == "__main__":
-    zip_path = "all_tests_hex.zip"                          # ZIP in project root
+    zip_path = "all_tests_bin.zip"                          # ZIP in project root
     result_path = "generated_tests/validation_results"      # Results file in subfolder
 
     # Step 1: Get test names from ZIP
