@@ -27,7 +27,7 @@ module debounce_button #(
         if (!rst_n) begin
             counter   <= 0;
             stable_in <= 1'b1;  // default to 'not pressed' if active-low
-            clean_out <= 1'b1; 
+            clean_out <= 1'b1;
         end
         else begin
             if (sync_reg2 != stable_in) begin

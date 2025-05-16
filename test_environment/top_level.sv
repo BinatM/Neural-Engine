@@ -1,6 +1,6 @@
 module top_level (
     input  wire         MAX10_CLK1_50,
-    input  wire         KEY_0,
+input wire KEY_0,  // Reset button (active-low)
 
     // SDRAM physical pins
     output wire [12:0]  DRAM_ADDR,
@@ -17,27 +17,27 @@ module top_level (
     output wire [9:0]   LEDR
 );
 
-wire expected_data_en;
-wire expected_output_en;
 
-// Debounce KEY_0 button to avoid glitches
-    wire db_key0;
-    debounce_button #(.DELAY_MAX(100000)) key_deb (
-        .clk       (MAX10_CLK1_50),
-        .rst_n     (reset_n_sys),
-        .noisy_in  (KEY_0),
-        .clean_out (db_key0)
-    );
+// Debounced KEY_0
+wire db_key0;
+debounce_button #(.DELAY_MAX(100_000)) debounce_inst (
+.clk       (MAX10_CLK1_50),
+.rst_n     (1'b1),
+.noisy_in  (KEY_0),
+.clean_out (db_key0)
+);
 
-// Reset and start pulse generator
-    wire reset_n_sys;
-    wire start_sig;
-    reset_and_start rs(
-        .clk         (MAX10_CLK1_50),
-        .db_button_in(db_key0),
-        .reset_n_out (reset_n_sys),
-        .start_pulse (start_sig)
-    );
+// Reset and Start logic
+wire reset_n_sys;
+wire start_sig;
+
+reset_and_start rs (
+.clk             (MAX10_CLK1_50),
+.db_button_in    (db_key0),          // db_key0 = 0 when pressed
+.reset_n_out     (reset_n_sys),
+.start_pulse     (start_sig)
+);
+
 
 // Clock generator for internal logic
     wire clk_internal;
@@ -137,29 +137,18 @@ always_ff @(posedge clk_internal or negedge reset_n_sys) begin
     end
 end
 
-// Registers for holding the expected MAC and single-bit output values
-// expected_word1_r stores lower 16 bits of the expected MAC output
-// expected_mac_output_r is assembled by combining upper 6 bits from data and lower 16 from word1
-// expected_single_out_r stores the expected binary classification bit
-reg [15:0] expected_word1_r;
-reg [21:0] expected_mac_output_r;
-reg        expected_single_out_r;
+// Registers for holding the expected single-bit output value
+reg expected_single_out_r;
 
 always_ff @(posedge clk_internal or negedge reset_n_sys) begin
-    if (!reset_n_sys) begin
-        expected_word1_r      <= 16'd0;
-        expected_mac_output_r <= 22'd0;
-        expected_single_out_r <= 1'b0;
-    end else begin
-        case (mem_read_counter)
-            7'd66: expected_word1_r <= current_mem_word;
-            7'd67: begin
-                expected_mac_output_r <= {current_mem_word[5:0], expected_word1_r};
-                expected_single_out_r <= current_mem_word[6];
-            end
-        endcase
-    end
+if (!reset_n_sys) begin
+ expected_single_out_r <= 1'b0;
+end else begin
+ if (mem_read_counter == 7'd66)
+expected_single_out_r <= current_mem_word[0];  // bit 0 contains the expected single-bit result
 end
+end
+
 
  // Control unit that coordinates SDRAM load and signals start of test
     wire ctrl_wr_en;
@@ -167,7 +156,7 @@ end
     wire ctrl_start_run, ctrl_all_done;
     wire led_done_wire;
 
-     control_unit #(.LOAD_DEPTH(69)) ctrl (
+     control_unit #(.LOAD_DEPTH(68)) ctrl (
     .clk               (clk_internal),
     .reset_n           (reset_n_sys),
     .start             (start_sig),
@@ -180,7 +169,7 @@ end
     .mem_address       (ctrl_mem_address),
     .start_run         (ctrl_start_run),
     .led_done          (led_done_wire),
-.val_done  (val_done),
+.val_done          (val_done),
     .val_result_bits   (val_data_to_mem),
     .sdram_data_out    (sdram_data_write),
 
@@ -203,24 +192,16 @@ end
         .chip_sel    (gen_chip_sel)
     );
 
-  // Connect MAC ready signal to output_ready
-    wire [15:0] mac_data_out;
-    wire        mac_ready;
-    wire mac_single_output;
-    assign      output_ready = mac_ready;
-    wire        rd_en_to_dut;
+ // Connect MAC ready signal to output_ready
 
-//mac_core dut (
- //   .clk          (clk_internal),
- //   .reset_n      (reset_n_sys),
- //   .data_in      (mem_data_out),
- //   .wr_en        (gen_wr_en),
- //   .rd_en        (gen_rd_en),
- //   .chip_sel     (gen_chip_sel),
+    wire        mac_ready;
+    wire        mac_single_output;
+    assign      output_ready = mac_ready;
+ 
 
 // Tristate bus to DUT — drives data only when writing input vectors
 wire [15:0] dut_bus;
-assign dut_bus = (gen_wr_en && mem_read_counter < 7'd66) ? current_mem_word : 16'hZZZZ;
+assign dut_bus = gen_wr_en ? current_mem_word : 16'hZZZZ;
 
 
 // DUT instantiation — MAC core under test
@@ -228,7 +209,6 @@ assign dut_bus = (gen_wr_en && mem_read_counter < 7'd66) ? current_mem_word : 16
         .clk_in(clk_internal),
         .bus(dut_bus),
         .wr_en(gen_wr_en),
-        .rd_en(rd_en_to_dut),
         .chip_sel(gen_chip_sel),
         .output_ready(mac_ready),
         .output_bit(mac_single_output),
@@ -237,23 +217,19 @@ assign dut_bus = (gen_wr_en && mem_read_counter < 7'd66) ? current_mem_word : 16
         .ctrl_state()
     );
 
+
 // Validator compares DUT output with expected and returns result
     wire [15:0] val_data_to_mem;
     wire        val_done;
-// assign mac_data_out = (rd_en_to_dut) ? dut_bus : 16'h0000;
 
 validator #(.ADDR_WIDTH(11)) val (
     .clk           (clk_internal),
     .reset_n       (reset_n_sys),
-    .dut_data_out  (mac_data_out),
     .dut_single_out(mac_single_output),
     .output_ready  (mac_ready),
     .data_to_mem   (val_data_to_mem),
-    .gen_wr_en     (gen_wr_en),
     .val_done      (val_done),
-    .expected_mac_output(expected_mac_output_r),
-    .expected_single_out(expected_single_out_r),
-    .dut_rd_en(rd_en_to_dut)
+    .expected_single_out(expected_single_out_r)
 );
 
  
@@ -280,13 +256,12 @@ always @(*) begin
         mux_address   = ctrl_mem_address;
         mux_data_in_r = sdram_data_out;
 
-    // 2. Generator reads input stimulus
+    // 2. Generator reads inputs to dut
     end else if (gen_rd_en) begin
         mux_rd_en_r   = 1'b1;
         mux_address   = gen_address;
     end
 end
-
 
     assign mem_wr_en   = mux_wr_en;
     assign mem_rd_en   = mux_rd_en_r;
@@ -295,7 +270,7 @@ end
 
 // LED indicators: LED0 = button pressed, LED9 = test completed
     assign LEDR[9] = led_done_wire;
-    assign LEDR[0] = ~db_key0; // LED0 ON while button is pressed
-
+assign LEDR[0] = ~db_key0;        // physical press indicator
+assign LEDR[1] = start_sig;
 
 endmodule

@@ -1,11 +1,10 @@
 module control_unit #(
-    parameter LOAD_DEPTH = 69,
-    parameter BLOCK_SIZE = 70
+    parameter LOAD_DEPTH = 68
 )(
     input  wire         clk,
     input  wire         reset_n,
     input  wire         start,
-input  wire         val_done,
+    input  wire         val_done,
 
     output reg          sdram_rd_en,
     output reg          sdram_wr_en,
@@ -15,7 +14,7 @@ input  wire         val_done,
     input  wire         sdram_ready,
 
     output reg [9:0]    mem_address,
-output reg   mem_wr_en,
+    output reg          mem_wr_en,
 
     output reg          start_run,
     output reg          led_done,       // output for LED9
@@ -54,7 +53,7 @@ output reg   mem_wr_en,
             sdram_addr_next        <= 24'd0;
             sdram_results_start_addr <= 24'd0;
             sdram_write_addr       <= 24'd0;
-mem_address            <= 10'd0;
+            mem_address            <= 10'd0;
             start_run              <= 1'b0;
             led_done               <= 1'b0;
             word_count             <= 9'd0;
@@ -98,8 +97,9 @@ mem_address            <= 10'd0;
                 ST_READ_CNT: begin
                     test_count               <= current_word;
                     word_count              <= 9'd0;
-                    sdram_results_start_addr <= 1 + current_word * 69;
-                    sdram_write_addr        <= 1 + current_word * 69;
+                    sdram_results_start_addr <= 1 + current_word * LOAD_DEPTH;
+ sdram_write_addr         <= 1 + current_word * LOAD_DEPTH;
+
                     state                   <= ST_REQ_DATA;
                 end
 
@@ -111,23 +111,23 @@ mem_address            <= 10'd0;
 
                 ST_PROCESS: begin
                     if (current_word != HEADER_WORD) begin
-                        if (word_count < 67) begin
+                        if (word_count < 66) begin
                             mem_wr_en     <= 1'b1;
                             mem_address   <= word_count;
                         end
                         word_count <= word_count + 1;
                     end
-                    if (word_count == (LOAD_DEPTH - 1))
+                    if (word_count == 66)
                         state <= ST_RUN;
                     else
                         state <= ST_REQ_DATA;
                 end
 
                 ST_RUN: begin
-start_run    <= 1'b1;
-if (val_done)
-state <= ST_SAVE_RESULT;
-end
+                    start_run    <= 1'b1;
+                    if (val_done)
+                    state <= ST_SAVE_RESULT;
+                    end
 
                 ST_SAVE_RESULT: begin
                     sdram_wr_en     <= 1'b1;
