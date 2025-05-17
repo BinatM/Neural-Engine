@@ -1,7 +1,6 @@
 module top_level (
     input  wire         MAX10_CLK1_50,
-input wire KEY_0,  // Reset button (active-low)
-
+    input wire          KEY_0,  // Reset button (active-low)
     // SDRAM physical pins
     output wire [12:0]  DRAM_ADDR,
     output wire [1:0]   DRAM_BA,
@@ -17,11 +16,17 @@ input wire KEY_0,  // Reset button (active-low)
     output wire [9:0]   LEDR
 );
 
+// Clock generator for internal logic
+    wire clk_internal;
+    clock_generator clkgen(
+        .clk_in  (MAX10_CLK1_50),
+        .clk_out (clk_internal)
+    );
 
 // Debounced KEY_0
 wire db_key0;
 debounce_button #(.DELAY_MAX(100_000)) debounce_inst (
-.clk       (MAX10_CLK1_50),
+.clk       (clk_internal),
 .rst_n     (1'b1),
 .noisy_in  (KEY_0),
 .clean_out (db_key0)
@@ -32,19 +37,11 @@ wire reset_n_sys;
 wire start_sig;
 
 reset_and_start rs (
-.clk             (MAX10_CLK1_50),
+.clk             (clk_internal),
 .db_button_in    (db_key0),          // db_key0 = 0 when pressed
 .reset_n_out     (reset_n_sys),
 .start_pulse     (start_sig)
 );
-
-
-// Clock generator for internal logic
-    wire clk_internal;
-    clock_generator clkgen(
-        .clk_in  (MAX10_CLK1_50),
-        .clk_out (clk_internal)
-    );
 
 // SDRAM interface signals
     wire [15:0] sdram_data_out;
@@ -101,19 +98,18 @@ reset_and_start rs (
 assign DRAM_CLK = clk_internal;
 
 // On-chip memory signals
-wire [15:0] expected_data_from_mem;
+    wire [15:0] expected_data_from_mem;
     wire [15:0] mem_data_out;
     wire [15:0] mem_data_in;
     wire [10:0] mem_address;
     wire        mem_wr_en;
-    wire        mem_rd_en;
 
 // On-chip memory instance
     on_chip_memory onchip_mem (
         .clk              (clk_internal),
         .reset_n          (reset_n_sys),
         .wr_en            (mem_wr_en),
-        .rd_en            (mem_rd_en),
+        .rd_en            (gen_rd_en),
         .data_in          (mem_data_in),
         .data_out         (expected_data_from_mem),
         .multi_cycle_mode (1'b0),
@@ -121,7 +117,6 @@ wire [15:0] expected_data_from_mem;
         .address_in       (mem_address),
         .use_external_addr(1'b1)
     );
-
 
 // Registers to hold latest read word and counter
 reg [15:0] current_mem_word;
@@ -131,7 +126,7 @@ always_ff @(posedge clk_internal or negedge reset_n_sys) begin
     if (!reset_n_sys) begin
         current_mem_word <= 16'd0;
         mem_read_counter <= 7'd0;
-    end else if (mem_rd_en) begin
+    end else if (gen_rd_en) begin
         current_mem_word <= expected_data_from_mem;
         mem_read_counter <= mem_read_counter + 1;
     end
@@ -141,12 +136,12 @@ end
 reg expected_single_out_r;
 
 always_ff @(posedge clk_internal or negedge reset_n_sys) begin
-if (!reset_n_sys) begin
- expected_single_out_r <= 1'b0;
-end else begin
- if (mem_read_counter == 7'd66)
-expected_single_out_r <= current_mem_word[0];  // bit 0 contains the expected single-bit result
-end
+    if (!reset_n_sys) begin
+        expected_single_out_r <= 1'b0;
+    end else begin
+    if (mem_read_counter == 7'd66)
+        expected_single_out_r <= current_mem_word[0];  // bit 0 contains the expected single-bit result
+    end
 end
 
 
@@ -169,11 +164,10 @@ end
     .mem_address       (ctrl_mem_address),
     .start_run         (ctrl_start_run),
     .led_done          (led_done_wire),
-.val_done          (val_done),
+    .val_done          (val_done),
     .val_result_bits   (val_data_to_mem),
     .sdram_data_out    (sdram_data_write),
 
-   
 );
 
 // Test generator to provide inputs to DUT from on-chip memory
@@ -232,7 +226,6 @@ validator #(.ADDR_WIDTH(11)) val (
     .expected_single_out(expected_single_out_r)
 );
 
- 
 reg [10:0] mux_address;
 reg [15:0] mux_data_in_r;
 reg        mux_wr_en;
@@ -263,14 +256,15 @@ always @(*) begin
     end
 end
 
-    assign mem_wr_en   = mux_wr_en;
-    assign mem_rd_en   = mux_rd_en_r;
-    assign mem_address = mux_address;
-    assign mem_data_in = mux_data_in_r;
+assign mem_wr_en   = mux_wr_en;
+assign mem_rd_en   = mux_rd_en_r;
+assign mem_address = mux_address;
+assign mem_data_in = mux_data_in_r;
 
 // LED indicators: LED0 = button pressed, LED9 = test completed
-    assign LEDR[9] = led_done_wire;
+assign LEDR[9] = led_done_wire;
 assign LEDR[0] = ~db_key0;        // physical press indicator
-assign LEDR[1] = start_sig;
+assign LEDR[1] = start_sig;       // Debag start siganl
+assign LEDR[2] = reset_n_sys;
 
 endmodule
