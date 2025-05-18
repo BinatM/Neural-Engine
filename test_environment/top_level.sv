@@ -1,6 +1,7 @@
 module top_level (
     input  wire         MAX10_CLK1_50,
-    input wire          KEY_0,  // Reset button (active-low)
+input wire KEY_0,   // Reset button (active-low)
+
     // SDRAM physical pins
     output wire [12:0]  DRAM_ADDR,
     output wire [1:0]   DRAM_BA,
@@ -15,6 +16,7 @@ module top_level (
     output wire         DRAM_WE_N,
     output wire [9:0]   LEDR
 );
+
 
 // Clock generator for internal logic
     wire clk_internal;
@@ -98,7 +100,7 @@ reset_and_start rs (
 assign DRAM_CLK = clk_internal;
 
 // On-chip memory signals
-    wire [15:0] expected_data_from_mem;
+wire [15:0] expected_data_from_mem;
     wire [15:0] mem_data_out;
     wire [15:0] mem_data_in;
     wire [10:0] mem_address;
@@ -118,30 +120,31 @@ assign DRAM_CLK = clk_internal;
         .use_external_addr(1'b1)
     );
 
+
 // Registers to hold latest read word and counter
 reg [15:0] current_mem_word;
 reg [6:0]  mem_read_counter;
 
 always_ff @(posedge clk_internal or negedge reset_n_sys) begin
-    if (!reset_n_sys) begin
-        current_mem_word <= 16'd0;
-        mem_read_counter <= 7'd0;
-    end else if (gen_rd_en) begin
-        current_mem_word <= expected_data_from_mem;
-        mem_read_counter <= mem_read_counter + 1;
-    end
+if (!reset_n_sys) begin
+ current_mem_word <= 16'd0;
+ mem_read_counter <= 7'd0;
+end else if (gen_rd_en) begin
+ current_mem_word <= expected_data_from_mem;
+ mem_read_counter <= mem_read_counter + 1;
+end
 end
 
 // Registers for holding the expected single-bit output value
 reg expected_single_out_r;
 
 always_ff @(posedge clk_internal or negedge reset_n_sys) begin
-    if (!reset_n_sys) begin
-        expected_single_out_r <= 1'b0;
-    end else begin
-    if (mem_read_counter == 7'd66)
-        expected_single_out_r <= current_mem_word[0];  // bit 0 contains the expected single-bit result
-    end
+if (!reset_n_sys) begin
+ expected_single_out_r <= 1'b0;
+end else begin
+ if (mem_read_counter == 7'd66)
+expected_single_out_r <= current_mem_word[0];  // bit 0 contains the expected single-bit result
+end
 end
 
 
@@ -164,10 +167,9 @@ end
     .mem_address       (ctrl_mem_address),
     .start_run         (ctrl_start_run),
     .led_done          (led_done_wire),
-    .val_done          (val_done),
+.val_done          (val_done),
     .val_result_bits   (val_data_to_mem),
     .sdram_data_out    (sdram_data_write),
-
 );
 
 // Test generator to provide inputs to DUT from on-chip memory
@@ -182,7 +184,7 @@ end
         .address_BUS (gen_address),
         .rd_en       (gen_rd_en),
         .wr_en       (gen_wr_en),
-        .output_ready(output_ready),
+        .val_done    (val_done),
         .chip_sel    (gen_chip_sel)
     );
 
@@ -226,6 +228,7 @@ validator #(.ADDR_WIDTH(11)) val (
     .expected_single_out(expected_single_out_r)
 );
 
+ 
 reg [10:0] mux_address;
 reg [15:0] mux_data_in_r;
 reg        mux_wr_en;
@@ -256,15 +259,20 @@ always @(*) begin
     end
 end
 
-assign mem_wr_en   = mux_wr_en;
-assign mem_rd_en   = mux_rd_en_r;
-assign mem_address = mux_address;
-assign mem_data_in = mux_data_in_r;
+    assign mem_wr_en   = mux_wr_en;
+    assign mem_rd_en   = mux_rd_en_r;
+    assign mem_address = mux_address;
+    assign mem_data_in = mux_data_in_r;
 
-// LED indicators: LED0 = button pressed, LED9 = test completed
-assign LEDR[9] = led_done_wire;
-assign LEDR[0] = ~db_key0;        // physical press indicator
-assign LEDR[1] = start_sig;       // Debag start siganl
-assign LEDR[2] = reset_n_sys;
+
+///////////DEBUG///////////
+
+// Debug LEDs
+assign LEDR[0] = ~KEY_0;          // LED 0: physical button press (active-high)
+assign LEDR[1] = start_sig;         // LED 1: start signal
+assign LEDR[2] = ~reset_n_sys;      // LED 2: system is in reset (active-high)
+
+   assign LEDR[9] = led_done_wire;
+
 
 endmodule

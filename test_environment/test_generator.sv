@@ -14,8 +14,8 @@ module test_generator #(
     output reg                     wr_en,     // Write to DUT
     output reg                     chip_sel,  // DUT select
 
-    // Data input from DUT
-    input  wire                    output_ready
+
+input wire val_done    // indicates we can lower chip_sel
 );
 
     // State machine definition
@@ -32,7 +32,7 @@ module test_generator #(
 
     // Internal registers
     reg chip_sel_hold;
-    reg output_ready_d;
+    reg val_done_in;
     reg [ADDR_WIDTH-1:0] addr_counter;
 
     // Next state logic
@@ -73,7 +73,7 @@ module test_generator #(
 
             // Control and data signals
             chip_sel_hold     <= 1'b0;
-            output_ready_d    <= 1'b0;
+            val_done_in       <= 1'b0;
             addr_counter      <= '0;
             address_BUS       <= '0;
             rd_en             <= 1'b0;
@@ -87,15 +87,15 @@ module test_generator #(
             rd_en    <= 1'b0;
             wr_en    <= 1'b0;
 
-            // Latch and process output_ready
-            output_ready_d <= output_ready;
+            // Latch and process val_done
+            val_done_in <= val_done;
 
             // Raise chip_sel_hold once we leave IDLE or DONE
             if (!chip_sel_hold && state != GEN_IDLE && state != GEN_DONE)
                 chip_sel_hold <= 1;
 
             // Drop chip_sel_hold once DUT signals it's done
-            if (chip_sel_hold && output_ready_d)
+            if (chip_sel_hold && val_done_in)
                 chip_sel_hold <= 0;
 
             // Assign chip_sel output
