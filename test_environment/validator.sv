@@ -1,3 +1,4 @@
+
 module validator #(
     parameter ADDR_WIDTH = 11
 )(
@@ -5,8 +6,10 @@ module validator #(
     input  wire                  reset_n,
     input  wire                  dut_single_out,
     input  wire                  output_ready,
+
     output reg  [15:0]           data_to_mem,
     output reg                   val_done,
+
     input  wire                  expected_single_out
 );
 
@@ -62,4 +65,4 @@ always_ff @(posedge clk or negedge reset_n) begin
     end
 end
 
-endmodule
+endmodule 
