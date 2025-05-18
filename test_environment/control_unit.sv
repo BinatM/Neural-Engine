@@ -117,7 +117,7 @@ module control_unit #(
                         end
                         word_count <= word_count + 1;
                     end
-                    if (word_count == 66)
+                    if (word_count == 67)
                         state <= ST_RUN;
                     else
                         state <= ST_REQ_DATA;
