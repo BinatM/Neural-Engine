@@ -1,47 +1,52 @@
 module debounce_button #(
-    parameter DELAY_MAX = 100_000  // ~2ms if clock=50MHz; adjust as needed
+    parameter DELAY_MAX = 100_000  // Number of clock cycles required for input to be considered stable
 )(
     input  wire clk,
     input  wire rst_n,
-    input  wire noisy_in,    // raw push-button, active-low
-    output reg  clean_out    // stable, active-low
+    input  wire noisy_in,    // Raw (possibly bouncing) input signal
+    output reg  clean_out    // Debounced and stable output signal
 );
 
-    reg [16:0] counter;
-    reg sync_reg1, sync_reg2, stable_in;
+    // Double-flop synchronizer to avoid metastability
+    reg sync_reg1, sync_reg2;
 
-    // Synchronize input to the clk domain
+    // Debounce state and counter
+    reg [31:0] counter;
+    reg stable_in;
+
+    // Input synchronization to clk domain
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            sync_reg1 <= 1'b0;
-            sync_reg2 <= 1'b0;
-        end
-        else begin
+            sync_reg1 <= 1'b1;
+            sync_reg2 <= 1'b1;
+        end else begin
             sync_reg1 <= noisy_in;
             sync_reg2 <= sync_reg1;
         end
     end
 
-    // Debounce logic
+    // Debounce filtering logic
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            counter   <= 0;
-            stable_in <= 1'b1;  // default to 'not pressed' if active-low
-            clean_out <= 1'b1;
-        end
-        else begin
+            counter    <= 0;
+            stable_in  <= 1'b1;
+            clean_out  <= 1'b1;
+        end else begin
             if (sync_reg2 != stable_in) begin
-                // input changed -> reset counter
-                counter   <= 0;
-                stable_in <= sync_reg2;
-            end
-            else if (counter < DELAY_MAX) begin
+                // Input differs from current stable state → count duration
                 counter <= counter + 1;
-            end
 
-            if (counter == DELAY_MAX) begin
-                clean_out <= stable_in;  // stable version of active-low
+                if (counter >= DELAY_MAX - 1) begin
+                    // Input remained different long enough → accept as new stable value
+                    stable_in <= sync_reg2;
+                    clean_out <= sync_reg2;
+                    counter   <= 0;
+                end
+            end else begin
+                // Input is same as stable state → reset counter
+                counter <= 0;
             end
         end
     end
+
 endmodule
