@@ -294,7 +294,7 @@ def generate_all_tests(output_folder: str):
 
 
     # Archive all test files into a ZIP
-    shutil.make_archive("all_tests_hex", 'zip', output_folder)
+    shutil.make_archive("all_tests_bin", 'zip', output_folder)
 
 # Script entry point
 if __name__ == "__main__":
