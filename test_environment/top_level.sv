@@ -14,7 +14,8 @@ input wire KEY_0,   // Reset button (active-low)
     output wire         DRAM_RAS_N,
     output wire         DRAM_UDQM,
     output wire         DRAM_WE_N,
-    output wire [9:0]   LEDR
+    output wire [9:0]   LEDR,
+output wire [35:0]  GPIO_
 );
 
 
@@ -47,10 +48,13 @@ reset_and_start rs (
 
 // SDRAM interface signals
     wire [15:0] sdram_data_out;
-    wire [15:0] sdram_data_in;
+    wire [15:0] sdram_data_write;
     wire [23:0] sdram_address;
-    wire        sdram_rd_en, sdram_wr_en;
+    wire        sdram_rd_en;
+wire        sdram_wr_en;
     wire        sdram_ready;
+wire [15:0] mem_data_out;
+
 
 // Instantiate SDRAM controller
        SDRAM_CONTROLLER #(
@@ -101,17 +105,17 @@ assign DRAM_CLK = clk_internal;
 
 // On-chip memory signals
 wire [15:0] expected_data_from_mem;
-    wire [15:0] mem_data_out;
     wire [15:0] mem_data_in;
     wire [10:0] mem_address;
     wire        mem_wr_en;
+wire        mem_rd_en;
 
 // On-chip memory instance
     on_chip_memory onchip_mem (
         .clk              (clk_internal),
         .reset_n          (reset_n_sys),
         .wr_en            (mem_wr_en),
-        .rd_en            (gen_rd_en),
+        .rd_en            (mem_rd_en),
         .data_in          (mem_data_in),
         .data_out         (expected_data_from_mem),
         .multi_cycle_mode (1'b0),
@@ -131,7 +135,7 @@ if (!reset_n_sys) begin
  mem_read_counter <= 7'd0;
 end else if (gen_rd_en) begin
  current_mem_word <= expected_data_from_mem;
- mem_read_counter <= mem_read_counter + 1;
+ mem_read_counter <= mem_read_counter + 7'd1;
 end
 end
 
@@ -169,7 +173,7 @@ end
     .led_done          (led_done_wire),
 .val_done          (val_done),
     .val_result_bits   (val_data_to_mem),
-    .sdram_data_out    (sdram_data_write),
+    .sdram_data_out    (sdram_data_write)
 );
 
 // Test generator to provide inputs to DUT from on-chip memory
@@ -188,19 +192,17 @@ end
         .chip_sel    (gen_chip_sel)
     );
 
- // Connect MAC ready signal to output_ready
 
     wire        mac_ready;
     wire        mac_single_output;
-    assign      output_ready = mac_ready;
- 
 
-// Tristate bus to DUT — drives data only when writing input vectors
+// Tristate bus to DUT ? drives data only when writing input vectors
 wire [15:0] dut_bus;
 assign dut_bus = gen_wr_en ? current_mem_word : 16'hZZZZ;
+wire        output_bit;
 
 
-// DUT instantiation — MAC core under test
+// DUT instantiation ? MAC core under test
     top u_dut (
         .clk_in(clk_internal),
         .bus(dut_bus),
@@ -267,12 +269,28 @@ end
 
 ///////////DEBUG///////////
 
-// Debug LEDs
-assign LEDR[0] = ~KEY_0;          // LED 0: physical button press (active-high)
-assign LEDR[1] = start_sig;         // LED 1: start signal
-assign LEDR[2] = ~reset_n_sys;      // LED 2: system is in reset (active-high)
 
-   assign LEDR[9] = led_done_wire;
+assign GPIO_[0] = sdram_data_out[8];
+assign GPIO_[1] = sdram_data_out[9];
+assign GPIO_[2] = sdram_data_out[10];
+assign GPIO_[3] = sdram_data_out[11];
+assign GPIO_[4] = sdram_data_out[12];
+assign GPIO_[5] = sdram_data_out[13];
+assign GPIO_[6] = sdram_data_out[14];
+assign GPIO_[7] = sdram_data_out[15];
+
+assign GPIO_[8] = clk_internal;
+
+assign GPIO_[11] = reset_n_sys;
+assign GPIO_[10] = start_sig;
+
+//assign GPIO_[13] = clk_internal;
+
+//assign LEDR[0] = ~KEY_0;          // LED 0: physical button press (active-high)
+//assign LEDR[1] = start_sig;         // LED 1: start signal
+//assign LEDR[2] = ~reset_n_sys;      // LED 2: system is in reset (active-high)
+
+//assign LEDR[9] = led_done_wire;
 
 
 endmodule
