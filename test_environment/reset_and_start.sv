@@ -1,29 +1,32 @@
 module reset_and_start (
-    input  wire clk,
-    input  wire db_button_in,
-    output reg  reset_n_out,
-    output reg  start_pulse
+    input  wire clk,             // system clock
+    input  wire db_button_in,    // debounced button input (active-low)
+    output reg  reset_n_out,     // system reset output (active-low)
+    output reg  start_pulse      // one-cycle start pulse on release
 );
 
+    // Register to hold previous button state for edge detection
     reg prev_button;
-    reg ready_to_start;
+
+    // Initialize registers for simulation
+    initial begin
+        prev_button  = 1'b1;     // assume button released at start
+        start_pulse  = 1'b0;     // no pulse at start
+    end
 
     always @(posedge clk) begin
-        // Update system reset: active-low when button is pressed
+        // Drive reset_n_out directly from the button:
+        // reset is asserted (0) when button is pressed (db_button_in == 0)
         reset_n_out <= db_button_in;
 
-        // Default no pulse
-        start_pulse <= 1'b0;
+        // Detect rising edge of db_button_in (release)  
+        // and generate a one-cycle start pulse
+        start_pulse <= (prev_button == 1'b0 && db_button_in == 1'b1)
+                       ? 1'b1
+                       : 1'b0;
 
-        // Enable start generation only after first press
-        if (!ready_to_start && db_button_in == 1'b0)
-            ready_to_start <= 1'b1;
-
-        // Generate start pulse on release
-        if (ready_to_start && prev_button == 1'b0 && db_button_in == 1'b1)
-            start_pulse <= 1'b1;
-
-        // Update previous state (must be after using it!)
+        // Update previous button state for next cycle
         prev_button <= db_button_in;
     end
+
 endmodule
