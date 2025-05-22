@@ -24,3 +24,6 @@ csrc/
 *.vcd
 *.jou
 *.wdb
+
+!synthesis/core_pin_mapping.txt
+!synthesis/die_pin_mapping.txt
