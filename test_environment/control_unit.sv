@@ -18,6 +18,7 @@ module control_unit #(
 
     output reg          start_run,
     output reg          led_done,       // output for LED9
+	 output logic [2:0]    state,
 
     input  wire [15:0]  val_result_bits
 );
@@ -35,7 +36,7 @@ module control_unit #(
         ST_SAVE_RESULT  = 3'd7
     } state_t;
 
-    state_t state;
+//    state_t state;
     reg [15:0] test_count;
     reg [8:0]  word_count;
     reg [23:0] sdram_addr_next;
@@ -98,7 +99,7 @@ module control_unit #(
                     test_count               <= current_word;
                     word_count              <= 9'd0;
                     sdram_results_start_addr <= 1 + current_word * LOAD_DEPTH;
- sdram_write_addr         <= 1 + current_word * LOAD_DEPTH;
+						  sdram_write_addr         <= 1 + current_word * LOAD_DEPTH;
 
                     state                   <= ST_REQ_DATA;
                 end
