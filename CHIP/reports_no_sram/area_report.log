@@ -2,22 +2,22 @@
 Report : area
 Design : top
 Version: V-2023.12-SP3
-Date   : Mon Apr 28 10:58:34 2025
+Date   : Thu May 22 18:14:44 2025
 ****************************************
 
-Number of ports:                           61
-Number of nets:                          3600
-Number of cells:                         3530
-Number of combinational cells:           2405
-Number of sequential cells:              1125
+Number of ports:                           38
+Number of nets:                          3534
+Number of cells:                         3450
+Number of combinational cells:           2329
+Number of sequential cells:              1121
 Number of macros/black boxes:               0
-Number of buf/inv:                        106
-Number of references:                      52
+Number of buf/inv:                        105
+Number of references:                      50
 
-Combinational area:                   1668.62
-Buf/Inv area:                           28.73
-Noncombinational area:                2694.76
+Combinational area:                   1652.87
+Buf/Inv area:                           27.09
+Noncombinational area:                2685.06
 Macro/Black Box area:                    0.00
 
-Total cell area:                      4363.38
+Total cell area:                      4337.93
 1

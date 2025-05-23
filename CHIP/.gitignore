@@ -27,3 +27,4 @@ csrc/
 
 !synthesis/core_pin_mapping.txt
 !synthesis/die_pin_mapping.txt
+!reports_no_sram/*.log
