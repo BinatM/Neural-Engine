@@ -1,0 +1,74 @@
+****************************************
+Report : timing
+        -path_type full
+        -delay_type max
+        -max_paths 1
+        -report_by design
+Design : top
+Version: V-2023.12-SP3
+Date   : Fri May 23 15:35:40 2025
+****************************************
+
+  Startpoint: mac_inst/acc_register_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: mac_inst/acc_register_reg[21] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+
+  mac_inst/acc_register_reg[0]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.07 r
+  mac_inst/acc_register_reg[0]/Q (SDFQD0BWP30P140HVT)
+                                                   0.05      0.12 r
+  mac_inst/add_40/ctmi_14218/Z (AN2D0BWP30P140HVT)
+                                                   0.03      0.14 r
+  mac_inst/add_40/U_3/CO (FA1D0BWP30P140)          0.03      0.17 r
+  mac_inst/add_40/U_5/CO (FA1D0BWP30P140HVT)       0.04      0.21 r
+  mac_inst/add_40/U_8/CO (FA1D0BWP30P140HVT)       0.04      0.25 r
+  mac_inst/add_40/U_10/CO (FA1D0BWP30P140HVT)      0.04      0.28 r
+  mac_inst/add_40/U_13/CO (FA1D0BWP30P140HVT)      0.04      0.32 r
+  mac_inst/add_40/U_15/CO (FA1D0BWP30P140HVT)      0.04      0.36 r
+  mac_inst/add_40/U_18/CO (FA1D0BWP30P140HVT)      0.04      0.40 r
+  mac_inst/add_40/U_20/CO (FA1D0BWP30P140HVT)      0.04      0.43 r
+  mac_inst/add_40/U_23/CO (FA1D0BWP30P140HVT)      0.04      0.47 r
+  mac_inst/add_40/U_25/CO (FA1D0BWP30P140HVT)      0.04      0.51 r
+  mac_inst/add_40/U_28/CO (FA1D0BWP30P140HVT)      0.04      0.55 r
+  mac_inst/add_40/U_30/CO (FA1D0BWP30P140HVT)      0.04      0.58 r
+  mac_inst/add_40/U_33/CO (FA1D0BWP30P140HVT)      0.04      0.62 r
+  mac_inst/add_40/U_35/CO (FA1D0BWP30P140HVT)      0.04      0.66 r
+  mac_inst/add_40/U_38/CO (FA1D0BWP30P140HVT)      0.03      0.69 r
+  mac_inst/add_40/ctmi_14216/ZN (ND2D0BWP30P140HVT)
+                                                   0.02      0.71 f
+  ctmi_1173/ZN (NR2D0BWP30P140HVT)                 0.02      0.73 r
+  mac_inst/add_40/ctmi_14217/ZN (ND2D0BWP30P140HVT)
+                                                   0.02      0.75 f
+  ctmi_1172/ZN (NR2D0BWP30P140HVT)                 0.02      0.77 r
+  mac_inst/add_40/ctmi_14225/ZN (ND2D0BWP30P140HVT)
+                                                   0.02      0.79 f
+  ctmi_1171/ZN (MUX2ND0BWP30P140HVT)               0.01      0.81 r
+  ctmi_12927/Z (AO22D0BWP30P140HVT)                0.03      0.83 r
+  mac_inst/acc_register_reg[21]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.83 r
+  data arrival time                                          0.83
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.07      1.07
+  mac_inst/acc_register_reg[21]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.07 r
+  clock uncertainty                               -0.15      0.92
+  library setup time                              -0.02      0.90
+  data required time                                         0.90
+  ------------------------------------------------------------------------
+  data required time                                         0.90
+  data arrival time                                         -0.83
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.07
+
+
+1
