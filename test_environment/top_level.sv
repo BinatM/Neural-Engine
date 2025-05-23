@@ -1,6 +1,7 @@
 module top_level (
-    input  wire         MAX10_CLK1_50,
-input wire KEY_0,   // Reset button (active-low)
+    input wire         MAX10_CLK1_50,
+	 input wire         ADC_CLK_10,
+	 input wire KEY_0,   // Reset button (active-low)
 
     // SDRAM physical pins
     output wire [12:0]  DRAM_ADDR,
@@ -15,14 +16,20 @@ input wire KEY_0,   // Reset button (active-low)
     output wire         DRAM_UDQM,
     output wire         DRAM_WE_N,
     output wire [9:0]   LEDR,
-output wire [35:0]  GPIO_
+	 output wire [35:0]  GPIO_
 );
 
 
 // Clock generator for internal logic
+//    wire clk_internal;
+//    clock_generator clkgen(
+//        .clk_in  (MAX10_CLK1_50),
+//        .clk_out (clk_internal)
+//    );
+
     wire clk_internal;
     clock_generator clkgen(
-        .clk_in  (MAX10_CLK1_50),
+        .clk_in  (ADC_CLK_10),
         .clk_out (clk_internal)
     );
 
@@ -51,34 +58,34 @@ reset_and_start rs (
     wire [15:0] sdram_data_write;
     wire [23:0] sdram_address;
     wire        sdram_rd_en;
-wire        sdram_wr_en;
+	 wire        sdram_wr_en;
     wire        sdram_ready;
-wire [15:0] mem_data_out;
-
+	 wire [15:0] mem_data_out;
+	 
 
 // Instantiate SDRAM controller
        SDRAM_CONTROLLER #(
         .G_CLK_FREQ           (50.0),
         .G_CAS_LATENCY        (2),
-        .G_WRITE_BURST_MODE   ('0),
+        .G_WRITE_BURST_MODE   ('1),
         .G_BURST_LENGTH       (1),
         .G_USE_AUTO_PRECHARGE ('0),
         .G_BURST_TYPE         ('0),
-        .G_ADDR_WIDTH         (24),
+        .G_ADDR_WIDTH         (25),
         .G_SDRAM_ADDR_WIDTH   (13),
         .G_SDRAM_DATA_WIDTH   (16),
-        .G_SDRAM_COL_WIDTH    (9),
+        .G_SDRAM_COL_WIDTH    (10),
         .G_SDRAM_ROW_WIDTH    (13),
         .G_SDRAM_BANK_WIDTH   (2),
         .G_T_DESL             (200_000.0),
         .G_T_MRD              (14.0),
         .G_T_RC               (65.0),
-        .G_T_RCD              (20.0),
-        .G_T_RP               (20.0),
+        .G_T_RCD              (15.0),
+        .G_T_RP               (15.0),
         .G_T_WR               (14.0),
-        .G_T_REFI             (7800.0)
+        .G_T_REFI             (7812.5)
     ) sdram (
-        .I_CLOCK             (clk_internal),
+        .I_CLOCK             (MAX10_CLK1_50),
         .I_RESET_N           (reset_n_sys),
         .I_ADDRESS           (sdram_address),
         .I_DATA              (sdram_data_write),
@@ -101,14 +108,14 @@ wire [15:0] mem_data_out;
     );
 
 // Drive SDRAM clock directly from internal clock
-assign DRAM_CLK = clk_internal;
+assign DRAM_CLK = MAX10_CLK1_50;
 
 // On-chip memory signals
 wire [15:0] expected_data_from_mem;
     wire [15:0] mem_data_in;
     wire [10:0] mem_address;
     wire        mem_wr_en;
-wire        mem_rd_en;
+	 wire        mem_rd_en;
 
 // On-chip memory instance
     on_chip_memory onchip_mem (
@@ -157,6 +164,7 @@ end
     wire [9:0] ctrl_mem_address;
     wire ctrl_start_run, ctrl_all_done;
     wire led_done_wire;
+	 logic [2:0] control_state;
 
      control_unit #(.LOAD_DEPTH(68)) ctrl (
     .clk               (clk_internal),
@@ -173,7 +181,8 @@ end
     .led_done          (led_done_wire),
 .val_done          (val_done),
     .val_result_bits   (val_data_to_mem),
-    .sdram_data_out    (sdram_data_write)
+    .sdram_data_out    (sdram_data_write),
+	 .state(control_state)
 );
 
 // Test generator to provide inputs to DUT from on-chip memory
@@ -270,27 +279,43 @@ end
 ///////////DEBUG///////////
 
 
-assign GPIO_[0] = sdram_data_out[8];
-assign GPIO_[1] = sdram_data_out[9];
-assign GPIO_[2] = sdram_data_out[10];
-assign GPIO_[3] = sdram_data_out[11];
-assign GPIO_[4] = sdram_data_out[12];
-assign GPIO_[5] = sdram_data_out[13];
-assign GPIO_[6] = sdram_data_out[14];
-assign GPIO_[7] = sdram_data_out[15];
+//assign GPIO_[0] = sdram_data_out[8];
+//assign GPIO_[1] = sdram_data_out[9];
+//assign GPIO_[2] = sdram_data_out[10];
+//assign GPIO_[3] = sdram_data_out[11];
+//assign GPIO_[4] = sdram_data_out[12];
+//assign GPIO_[5] = sdram_data_out[13];
+//assign GPIO_[6] = sdram_data_out[14];
+//assign GPIO_[7] = sdram_data_out[15];
+
+assign GPIO_[0] = control_state[0];
+assign GPIO_[1] = control_state[1];
+assign GPIO_[2] = control_state[2];
+
+
+assign GPIO_[3] = reset_n_sys;
+assign GPIO_[4] = start_sig;
+assign GPIO_[5] = sdram_ready;
+assign GPIO_[6] = sdram_rd_en;
 
 assign GPIO_[8] = clk_internal;
+assign GPIO_[13] = clk_internal;
 
-assign GPIO_[11] = reset_n_sys;
-assign GPIO_[10] = start_sig;
 
-//assign GPIO_[13] = clk_internal;
 
 //assign LEDR[0] = ~KEY_0;          // LED 0: physical button press (active-high)
-//assign LEDR[1] = start_sig;         // LED 1: start signal
 //assign LEDR[2] = ~reset_n_sys;      // LED 2: system is in reset (active-high)
 
-//assign LEDR[9] = led_done_wire;
+
+// 3)  Latch “validation done” pulse
+sr_ff u_ff_val_done (
+    .clk        (clk_internal),
+    .rst_n      (reset_n_sys),
+    .set_pulse  (led_done_wire),
+    .Q          (led_done_latched)
+);
+
+assign LEDR[9] = led_done_latched;
 
 
 endmodule
