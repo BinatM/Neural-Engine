@@ -93,8 +93,8 @@ wire sdram_ack;
         .G_T_WR               (14.0),
         .G_T_REFI             (7812.5)
     ) sdram (
+	     .I_RESET_N           (reset_n_sys),
         .I_CLOCK             (MAX10_CLK1_50),
-        .I_RESET_N           (reset_n_sys),
         .I_ADDRESS           (sdram_address),
         .I_DATA              (sdram_data_write),
         .I_REQUEST           (sdram_rd_en || sdram_wr_en),
@@ -288,25 +288,51 @@ end
     assign mem_data_in = mux_data_in_r;
 
 
-///////////DEBUG///////////
+	 
+///////////////////////////////////////////////////////
+/////////////////////////DEBUG/////////////////////////
+///////////////////////////////////////////////////////
 
 
-//assign GPIO_[0] = sdram_data_out[8];
-//assign GPIO_[1] = sdram_data_out[9];
-//assign GPIO_[2] = sdram_data_out[10];
-//assign GPIO_[3] = sdram_data_out[11];
-//assign GPIO_[4] = sdram_data_out[12];
+//////// sdram data out debug///////////
+
+assign GPIO_[0] = sdram_data_out[8];
+assign GPIO_[1] = sdram_data_out[9];
+assign GPIO_[2] = sdram_data_out[10];
+assign GPIO_[3] = sdram_data_out[11];
+assign GPIO_[4] = sdram_data_out[12];
 //assign GPIO_[5] = sdram_data_out[13];
 //assign GPIO_[6] = sdram_data_out[14];
 //assign GPIO_[7] = sdram_data_out[15];
 
-assign GPIO_[0] = control_state[0];
-assign GPIO_[1] = control_state[1];
-assign GPIO_[2] = control_state[2];
-assign GPIO_[3] = counter;
+
+
+///////// sdram address debug////////// 
+
+//assign GPIO_[0] = sdram_address[0];
+//assign GPIO_[1] = sdram_address[1];
+//assign GPIO_[2] = sdram_address[2];
+//assign GPIO_[3] = sdram_address[3];
+
+
+
+///////// control unit FSM debug//////////
+
+//assign GPIO_[0] = control_state[0];
+//assign GPIO_[1] = control_state[1];
+//assign GPIO_[2] = control_state[2];
+//assign GPIO_[3] = counter;
+
+
+
+////// reset and start debug////////
 
 //assign GPIO_[4] = reset_n_sys;
 //assign GPIO_[4] = start_sig;
+
+
+
+////// sdram signals and FSM debug ////////
 
 assign GPIO_[5] = sdram_ready;
 assign GPIO_[6] = sdram_rd_en;
@@ -314,17 +340,20 @@ assign GPIO_[7] = sdram_ack;
 
 //assign GPIO_[3:0]    = sdram_state_wire;    // SDRAM internal state [3:0]
 
+
+
+////////clk ports 
+
 assign GPIO_[8] = clk_internal;
 assign GPIO_[13] = clk_internal;
 
+
+
 // debug: raise a flag if on the 55th read we really got 16'b0011011000000010
-wire match_word_55;
-// binary 0011_0110_0000_0010 == 16'h3602
-assign match_word_55 = (mem_data_in == 16'h3602);
+//wire match_word_55;
+//assign match_word_55 = (mem_data_in == 16'h3602);
 
-// drive that onto a spare GPIO pin
-assign GPIO_[4] = match_word_55;
-
+//assign GPIO_[4] = match_word_55;
 
 
 //assign LEDR[0] = ~KEY_0;          // LED 0: physical button press (active-high)
