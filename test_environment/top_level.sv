@@ -61,6 +61,14 @@ reset_and_start rs (
 	 wire        sdram_wr_en;
     wire        sdram_ready;
 	 wire [15:0] mem_data_out;
+	 wire sdram_initialized;
+	 
+	 
+	 // debug wires for SDRAM interface
+
+wire [3:0]  sdram_state_wire;    // internal SDRAM state
+wire sdram_ack;
+
 	 
 
 // Instantiate SDRAM controller
@@ -91,9 +99,10 @@ reset_and_start rs (
         .I_DATA              (sdram_data_write),
         .I_REQUEST           (sdram_rd_en || sdram_wr_en),
         .I_WRITE_ENABLE      (sdram_wr_en),
-        .O_ACKNOWLEDGE       (),
+        .O_ACKNOWLEDGE       (sdram_ack),
         .O_VALID             (sdram_ready),
         .O_Q                 (sdram_data_out),
+		  .O_STATE             (sdram_state_wire),
         .O_SDRAM_A           (DRAM_ADDR),
         .O_SDRAM_BA          (DRAM_BA),
         .IO_SDRAM_DQ         (DRAM_DQ),
@@ -104,7 +113,7 @@ reset_and_start rs (
         .O_SDRAM_WE          (DRAM_WE_N),
         .O_SDRAM_DQML        (DRAM_LDQM),
         .O_SDRAM_DQMH        (DRAM_UDQM),
-        .O_SDRAM_INITIALIZED ()
+        .O_SDRAM_INITIALIZED (sdram_initialized)
     );
 
 // Drive SDRAM clock directly from internal clock
@@ -165,6 +174,7 @@ end
     wire ctrl_start_run, ctrl_all_done;
     wire led_done_wire;
 	 logic [2:0] control_state;
+	 reg counter;
 
      control_unit #(.LOAD_DEPTH(68)) ctrl (
     .clk               (clk_internal),
@@ -179,7 +189,9 @@ end
     .mem_address       (ctrl_mem_address),
     .start_run         (ctrl_start_run),
     .led_done          (led_done_wire),
-.val_done          (val_done),
+    .val_done          (val_done),
+	 .done_67 (counter),
+	 .sdram_initialized (sdram_initialized),
     .val_result_bits   (val_data_to_mem),
     .sdram_data_out    (sdram_data_write),
 	 .state(control_state)
@@ -291,15 +303,27 @@ end
 assign GPIO_[0] = control_state[0];
 assign GPIO_[1] = control_state[1];
 assign GPIO_[2] = control_state[2];
+assign GPIO_[3] = counter;
 
+//assign GPIO_[4] = reset_n_sys;
+//assign GPIO_[4] = start_sig;
 
-assign GPIO_[3] = reset_n_sys;
-assign GPIO_[4] = start_sig;
 assign GPIO_[5] = sdram_ready;
 assign GPIO_[6] = sdram_rd_en;
+assign GPIO_[7] = sdram_ack;
+
+//assign GPIO_[3:0]    = sdram_state_wire;    // SDRAM internal state [3:0]
 
 assign GPIO_[8] = clk_internal;
 assign GPIO_[13] = clk_internal;
+
+// debug: raise a flag if on the 55th read we really got 16'b0011011000000010
+wire match_word_55;
+// binary 0011_0110_0000_0010 == 16'h3602
+assign match_word_55 = (mem_data_in == 16'h3602);
+
+// drive that onto a spare GPIO pin
+assign GPIO_[4] = match_word_55;
 
 
 
