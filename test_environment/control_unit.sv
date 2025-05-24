@@ -5,6 +5,7 @@ module control_unit #(
     input  wire         reset_n,
     input  wire         start,
     input  wire         val_done,
+	 input  wire      sdram_initialized, 
 
     output reg          sdram_rd_en,
     output reg          sdram_wr_en,
@@ -19,9 +20,14 @@ module control_unit #(
     output reg          start_run,
     output reg          led_done,       // output for LED9
 	 output logic [2:0]    state,
+	 output logic          done_67,
 
     input  wire [15:0]  val_result_bits
 );
+
+
+	// done_67 is high exactly when word_count reaches 67
+   assign done_67 = (word_count == 9'd60);
 
     localparam [15:0] HEADER_WORD = 16'hABCD;
 
@@ -67,7 +73,7 @@ module control_unit #(
 
             case (state)
                 ST_IDLE: begin
-                    if (start) begin
+                    if ( start ) begin
                         sdram_addr_next    <= 24'd0;
                         sdram_write_addr   <= 24'd0;
                         led_done           <= 1'b0;
@@ -76,10 +82,14 @@ module control_unit #(
                 end
 
                 ST_REQ_DATA: begin
-                    sdram_rd_en     <= 1'b1;
-                    sdram_address   <= sdram_addr_next;
-                    state           <= ST_WAIT_RDY;
-                end
+		            // wait here until SDRAM reports initialized
+		            if (sdram_initialized) begin
+		                sdram_rd_en   <= 1'b1;          // issue read
+		                sdram_address <= sdram_addr_next;
+		                state         <= ST_WAIT_RDY;   // move on only when SDRAM ready
+		            end
+		            // else: remain in ST_REQ_DATA, keep sdram_rd_en == 0
+		       	 end
 
                 ST_WAIT_RDY: begin
                     if (sdram_ready) begin
@@ -112,7 +122,7 @@ module control_unit #(
 
                 ST_PROCESS: begin
                     if (current_word != HEADER_WORD) begin
-                        if (word_count < 66) begin
+                        if (word_count <= 66) begin
                             mem_wr_en     <= 1'b1;
                             mem_address   <= word_count;
                         end
