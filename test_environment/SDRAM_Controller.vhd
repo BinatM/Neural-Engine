@@ -107,6 +107,8 @@ entity SDRAM_CONTROLLER is
 
     --! output data bus
     O_Q                 : out   std_logic_vector(G_SDRAM_DATA_WIDTH - 1 downto 0);
+	 
+	 O_STATE             : out std_logic_vector(3 downto 0);  -- debug: current state
 
     -- SDRAM interface
     --! Address bus connected to the sdram.
@@ -946,8 +948,27 @@ begin
   O_Q                                                <= r_q;
   O_SDRAM_BA                                         <= r_bank;
   O_VALID                                            <= r_valid;
+    -- expose internal state as a 4-bit vector for debugging
+  STATE_DEBUG_PROC: process(r_state) is
+  begin
+    case r_state is
+      when INIT            => O_STATE <= "0000";
+      when MODE            => O_STATE <= "0001";
+      when IDLE            => O_STATE <= "0010";
+      when ACTIVE          => O_STATE <= "0011";
+      when READ            => O_STATE <= "0100";
+      when WRITE           => O_STATE <= "0101";
+      when REFRESH         => O_STATE <= "0110";
+      when PRECHARGE       => O_STATE <= "0111";
+      when WRITE_RECOVERY  => O_STATE <= "1000";
+      when READ_RECOVERY   => O_STATE <= "1001";
+      when others          => O_STATE <= "1111";  -- invalid/unused
+    end case;
+  end process STATE_DEBUG_PROC;
+
   O_SDRAM_CKE                                        <= r_cke;
   O_SDRAM_INITIALIZED                                <= '0' when r_state = INIT or r_state = MODE else
                                                         '1';
 
 end architecture ARCH;
+ 
