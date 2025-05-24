@@ -10,7 +10,7 @@ module control_unit #(
     output reg          sdram_rd_en,
     output reg          sdram_wr_en,
     output reg [15:0]   sdram_data_out,
-    output reg [23:0]   sdram_address,
+    output reg [24:0]   sdram_address,
     input  wire [15:0]  sdram_dout,
     input  wire         sdram_ready,
 
@@ -45,10 +45,10 @@ module control_unit #(
 //    state_t state;
     reg [15:0] test_count;
     reg [8:0]  word_count;
-    reg [23:0] sdram_addr_next;
+    reg [24:0] sdram_addr_next;
     reg [15:0] current_word;
-    reg [23:0] sdram_results_start_addr;
-    reg [23:0] sdram_write_addr;
+    reg [24:0] sdram_results_start_addr;
+    reg [24:0] sdram_write_addr;
 
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
@@ -56,10 +56,10 @@ module control_unit #(
             sdram_rd_en            <= 1'b0;
             sdram_wr_en            <= 1'b0;
             sdram_data_out         <= 16'd0;
-            sdram_address          <= 24'd0;
-            sdram_addr_next        <= 24'd0;
-            sdram_results_start_addr <= 24'd0;
-            sdram_write_addr       <= 24'd0;
+            sdram_address          <= 25'd0;
+            sdram_addr_next        <= 25'd0;
+            sdram_results_start_addr <= 25'd0;
+            sdram_write_addr       <= 25'd0;
             mem_address            <= 10'd0;
             start_run              <= 1'b0;
             led_done               <= 1'b0;
