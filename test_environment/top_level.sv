@@ -130,12 +130,38 @@ module top_level (
 	
 	
 	//// LEDR[9] lights when the test passes (result == 1); LEDR[8] lights when the test fails (result == 0)
+	// Capture the test result in flip-flops so the LEDs remain lit until the next test
+	// led_pass: will light if the test passes (result == 1)
+	// led_fail: will light if the test fails (result == 0)
 
-	assign LEDR[8] = ~result;
-	assign LEDR[9] = result;
+	reg led_pass, led_fail;
 
-	 
-	 
+	always_ff @(posedge clk_internal or negedge reset_n_sys) begin
+		 if (!reset_n_sys) begin
+			  // Asynchronous reset: clear both LEDs
+			  led_pass <= 1'b0;
+			  led_fail <= 1'b0;
+		 end else begin
+			  if (start_sig) begin
+					// At the start of a new test, clear previous LED indicators
+					led_pass <= 1'b0;
+					led_fail <= 1'b0;
+			  end else if (val_done) begin
+					// Once validation is done, latch the result into the flip-flops
+					led_pass <= result;
+					led_fail <= ~result;
+			  end
+		 end
+	end
+
+	// Drive the physical LEDs:
+	// LEDR[8] lights when the test passed,
+	// LEDR[9] lights when the test failed.
+	assign LEDR[8] = led_fail;
+	assign LEDR[9] = led_pass;
+
+	
+	
 	 
 	///////////////////////////////////////////////////////
 	/////////////////////////DEBUG/////////////////////////
