@@ -1,15 +1,11 @@
 
-module validator #(
-    parameter ADDR_WIDTH = 11
-)(
+module validator (
     input  wire                  clk,
     input  wire                  reset_n,
     input  wire                  dut_single_out,
     input  wire                  output_ready,
-
-    output reg  [15:0]           data_to_mem,
+    output wire                  data_to_LED,
     output reg                   val_done,
-
     input  wire                  expected_single_out
 );
 
@@ -48,7 +44,7 @@ end
 // Output and data capture logic
 always_ff @(posedge clk or negedge reset_n) begin
     if (!reset_n) begin
-        data_to_mem       <= 16'b0;
+        data_to_LED       <= 1'b0;
         val_done          <= 1'b0;
         actual_single_out <= 1'b0;
     end else begin
@@ -59,7 +55,7 @@ always_ff @(posedge clk or negedge reset_n) begin
                 actual_single_out <= dut_single_out;
             end
             VAL_WRITE_RESULT: begin
-                data_to_mem <= {15'b0, (actual_single_out == expected_single_out)};
+                data_to_LED <= (actual_single_out == expected_single_out);
             end
         endcase
     end
