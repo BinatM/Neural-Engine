@@ -4,7 +4,7 @@ module validator (
     input  wire                  reset_n,
     input  wire                  dut_single_out,
     input  wire                  output_ready,
-    output wire                  data_to_LED,
+    output reg                   data_to_LED,
     output reg                   val_done,
     input  wire                  expected_single_out
 );
