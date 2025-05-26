@@ -8,12 +8,12 @@ module top_level (
 );
 
 
-// Clock generator for internal logic
-//    wire clk_internal;
-//    clock_generator clkgen(
-//        .clk_in  (MAX10_CLK1_50),
-//        .clk_out (clk_internal)
-//    );
+	// Clock generator for internal logic
+	//    wire clk_internal;
+	//    clock_generator clkgen(
+	//        .clk_in  (MAX10_CLK1_50),
+	//        .clk_out (clk_internal)
+	//    );
 
     wire clk_internal;
     clock_generator clkgen(
@@ -72,8 +72,8 @@ module top_level (
 );
 
 	// Test generator to provide inputs to DUT from on-chip memory
-    wire [6:0] gen_address;
-    wire        gen_rd_en, gen_wr_en, gen_chip_sel;
+
+	 wire gen_wr_en, gen_chip_sel;
 
     
 	 test_generator #(
@@ -115,7 +115,6 @@ module top_level (
 
 	// Validator compares DUT output with expected and returns result
     wire         result;
-    wire        val_done;
 
 	validator val (
 		 .clk           (clk_internal),
