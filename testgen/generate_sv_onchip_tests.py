@@ -233,6 +233,8 @@ def generate_all_named_tests() -> List[dict]:
                 "threshold": 64
             } for idx in range(64)
         ]
+    
+
 
     return [
         generate_typical_input_test(),
@@ -248,10 +250,24 @@ def generate_all_named_tests() -> List[dict]:
         generate_two_cycle_read_test(),
         generate_retention_test(),
         generate_address_decoding_test(),
-        generate_data_bus_stress_test()
+        generate_data_bus_stress_test(),
     ] + generate_walking_1s_tests() + generate_walking_0s_tests()
+
+def generate_random_tests(num_tests: int) -> List[dict]:
+        tests = []
+        for i in range(num_tests):
+            pixels = generate_matrix(lambda i, j: random.randint(0, 255))
+            weights = generate_matrix(lambda i, j: random.randint(0, 255))
+            threshold = random.randint(0, (1 << THRESHOLD_WIDTH) - 1)
+            tests.append({
+                "name": f"Random_Test_{i+1}",
+                "pixels": pixels,
+                "weights": weights,
+                "threshold": threshold
+            })
+        return tests
 
 # Main execution
 if __name__ == "__main__":
-    all_tests = generate_all_named_tests()
+    all_tests = generate_all_named_tests() + generate_random_tests(40)
     save_sv_files_and_zip(all_tests)
