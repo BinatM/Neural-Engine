@@ -61,19 +61,20 @@ module top_level (
 	// Control unit that coordinates SDRAM load and signals start of test
 
     wire ctrl_start_run;
-	 logic [0:0] control_state;
+//	 logic [0:0] control_state;
 
      control_unit ctrl (
     .clk               (clk_internal),
     .reset_n           (reset_n_sys),
     .start             (start_sig),
-    .start_run         (ctrl_start_run),
-	 .state             (control_state)
+    .start_run         (ctrl_start_run)
+//	 .state             (control_state)
 );
 
 	// Test generator to provide inputs to DUT from on-chip memory
 
 	 wire gen_wr_en, gen_chip_sel;
+	 reg [6:0] gen_address;
 
     
 	 test_generator #(
@@ -94,22 +95,26 @@ module top_level (
     wire        mac_single_output;
 
 	// Tristate bus to DUT ? drives data only when writing input vectors
-	wire [15:0] dut_bus;
-	assign dut_bus = gen_wr_en ? current_mem_word : 16'hZZZZ;
-	wire        output_bit;
+//	wire [15:0] dut_bus;
+//	assign dut_bus = gen_wr_en ? current_mem_word : 16'hZZZZ;
+//	wire output_bit;
+//	logic rst_mem;
+//	logic [21:0] threshold_register;
 
 
 	// DUT instantiation
     top u_dut (
         .clk_in(clk_internal),
-        .bus(dut_bus),
+        .bus(current_mem_word),
         .wr_en(gen_wr_en),
         .chip_sel(gen_chip_sel),
         .output_ready(mac_ready),
         .output_bit(mac_single_output),
         .wr_data_ptr(),
         .rd_data_ptr(),
-        .ctrl_state()
+        .ctrl_state(),
+		  .rst_mem(rst_mem),
+		  .threshold_register(threshold_register)
     );
 
 
@@ -133,31 +138,31 @@ module top_level (
 	// led_pass: will light if the test passes (result == 1)
 	// led_fail: will light if the test fails (result == 0)
 
-	reg led_pass, led_fail;
-
-	always_ff @(posedge clk_internal or negedge reset_n_sys) begin
-		 if (!reset_n_sys) begin
-			  // Asynchronous reset: clear both LEDs
-			  led_pass <= 1'b0;
-			  led_fail <= 1'b0;
-		 end else begin
-			  if (start_sig) begin
-					// At the start of a new test, clear previous LED indicators
-					led_pass <= 1'b0;
-					led_fail <= 1'b0;
-			  end else if (val_done) begin
-					// Once validation is done, latch the result into the flip-flops
-					led_pass <= result;
-					led_fail <= ~result;
-			  end
-		 end
-	end
-
-	// Drive the physical LEDs:
-	// LEDR[9] lights when the test passed,
-	// LEDR[8] lights when the test failed.
-	assign LEDR[8] = led_fail;
-	assign LEDR[9] = led_pass;
+//	reg led_pass, led_fail;
+//
+//	always_ff @(posedge clk_internal or negedge reset_n_sys) begin
+//		 if (!reset_n_sys) begin
+//			  // Asynchronous reset: clear both LEDs
+//			  led_pass <= 1'b0;
+//			  led_fail <= 1'b0;
+//		 end else begin
+//			  if (start_sig) begin
+//					// At the start of a new test, clear previous LED indicators
+//					led_pass <= 1'b0;
+//					led_fail <= 1'b0;
+//			  end else if (val_done) begin
+//					// Once validation is done, latch the result into the flip-flops
+//					led_pass <= result;
+//					led_fail <= ~result;
+//			  end
+//		 end
+//	end
+//
+//	// Drive the physical LEDs:
+//	// LEDR[9] lights when the test passed,
+//	// LEDR[8] lights when the test failed.
+//	assign LEDR[8] = led_fail;
+//	assign LEDR[9] = led_pass;
 
 	
 	
@@ -167,21 +172,25 @@ module top_level (
 	///////////////////////////////////////////////////////
 
 
+
+//	assign GPIO_[0] = current_mem_word[0];
+//	assign GPIO_[1] = current_mem_word[1];
+//	assign GPIO_[2] = current_mem_word[2];
+//	assign GPIO_[3] = gen_address[0];
+//	assign GPIO_[4] = gen_address[1];
+//	assign GPIO_[5] = gen_address[2];
+//
+//	assign GPIO_[7] = gen_wr_en;
+//	assign GPIO_[8] = clk_internal;
 	
-
-	assign GPIO_[0] = control_state[0];
-	
-	assign GPIO_[1] = gen_chip_sel;
-	assign GPIO_[2] = mac_ready;
-
-	assign GPIO_[3] = result;
-
-	assign GPIO_[4] = reset_n_sys;
-	assign GPIO_[5] = start_sig;
-	
-	assign GPIO_[6] = ctrl_start_run;
-	assign GPIO_[7] = val_done;
-
+	assign GPIO_[0] = mac_single_output;
+	assign GPIO_[1] = expected_res;
+	assign GPIO_[2] = threshold_register;
+	assign GPIO_[3] = gen_chip_sel;
+	assign GPIO_[4] = gen_wr_en;
+	assign GPIO_[5] = mac_ready;
+	assign GPIO_[6] = val_done;
+	assign GPIO_[7] = result;
 	assign GPIO_[8] = clk_internal;
 	
 
