@@ -61,14 +61,12 @@ module top_level (
 	// Control unit that coordinates SDRAM load and signals start of test
 
     wire ctrl_start_run;
-//	 logic [0:0] control_state;
 
      control_unit ctrl (
     .clk               (clk_internal),
     .reset_n           (reset_n_sys),
     .start             (start_sig),
     .start_run         (ctrl_start_run)
-//	 .state             (control_state)
 );
 
 	// Test generator to provide inputs to DUT from on-chip memory
@@ -93,13 +91,6 @@ module top_level (
 
     wire        mac_ready;
     wire        mac_single_output;
-
-	// Tristate bus to DUT ? drives data only when writing input vectors
-//	wire [15:0] dut_bus;
-//	assign dut_bus = gen_wr_en ? current_mem_word : 16'hZZZZ;
-//	wire output_bit;
-//	logic rst_mem;
-//	logic [21:0] threshold_register;
 
 
 	// DUT instantiation
