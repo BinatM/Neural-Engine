@@ -4,7 +4,7 @@ module top_level (
 	 input wire KEY_0,   // Reset button (active-low)
 	 
     output wire [9:0]   LEDR,
-	 output wire [35:0]  GPIO_
+	 output wire [8:0]  GPIO_
 );
 
 
@@ -61,7 +61,7 @@ module top_level (
 	// Control unit that coordinates SDRAM load and signals start of test
 
     wire ctrl_start_run;
-	 logic [2:0] control_state;
+	 logic [0:0] control_state;
 
      control_unit ctrl (
     .clk               (clk_internal),
@@ -154,8 +154,8 @@ module top_level (
 	end
 
 	// Drive the physical LEDs:
-	// LEDR[8] lights when the test passed,
-	// LEDR[9] lights when the test failed.
+	// LEDR[9] lights when the test passed,
+	// LEDR[8] lights when the test failed.
 	assign LEDR[8] = led_fail;
 	assign LEDR[9] = led_pass;
 
@@ -167,18 +167,20 @@ module top_level (
 	///////////////////////////////////////////////////////
 
 
-	///////// control unit FSM debug//////////
+	
 
 	assign GPIO_[0] = control_state[0];
-	assign GPIO_[1] = control_state[1];
-	assign GPIO_[2] = control_state[2];
+	
+	assign GPIO_[1] = gen_chip_sel;
+	assign GPIO_[2] = mac_ready;
 
-	////// reset and start debug////////
+	assign GPIO_[3] = result;
 
 	assign GPIO_[4] = reset_n_sys;
 	assign GPIO_[5] = start_sig;
-
-	////////clk ports 
+	
+	assign GPIO_[6] = ctrl_start_run;
+	assign GPIO_[7] = val_done;
 
 	assign GPIO_[8] = clk_internal;
 	
