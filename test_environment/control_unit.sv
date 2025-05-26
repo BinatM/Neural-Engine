@@ -4,13 +4,13 @@ module control_unit (
     input  wire       start,     // start pulse from reset_and_start
 
     output reg        start_run, // one-cycle pulse to test_generator
-    output logic [2:0] state     // debug state
+    output logic [0:0] state     // debug state
 );
 
     // state encoding
-    typedef enum logic [2:0] {
-        ST_IDLE  = 3'd0,  // waiting for start
-        ST_START = 3'd1  // issue start_run pulse
+    typedef enum logic [0:0] {
+        ST_IDLE  = 1'd0,  // waiting for start
+        ST_START = 1'd1  // issue start_run pulse
     } state_t;
 
     state_t current_state, next_state;
