@@ -3,8 +3,7 @@ module control_unit (
     input  wire       reset_n,   // active-low reset
     input  wire       start,     // start pulse from reset_and_start
 
-    output reg        start_run, // one-cycle pulse to test_generator
-    output logic [0:0] state     // debug state
+    output reg        start_run // one-cycle pulse to test_generator
 );
 
     // state encoding
@@ -43,12 +42,5 @@ module control_unit (
         endcase
     end
 
-    // expose state for external debug
-    always_ff @(posedge clk or negedge reset_n) begin
-        if (!reset_n)
-            state <= ST_IDLE;
-        else
-            state <= current_state;
-    end
 
 endmodule
