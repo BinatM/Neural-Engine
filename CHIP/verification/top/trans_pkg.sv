@@ -3,18 +3,18 @@ package trans_pkg;
 	// Transaction for input sequence
 	class trans_item;
 	  // Pixel and weight arrays: default fixed values 0..63
-	  bit [7:0]           pixel       [0:63];
-	  bit [7:0]           weight      [0:63];
+	  rand bit [7:0]           pixel       [0:63];
+	  rand bit [7:0]           weight      [0:63];
 	  // Packed data word [15:0] = {weight, pixel}
 	  bit [15:0]          data        [0:63];
 
 	  // Randomizable threshold, but fixed-write-enable delays by default
 	  rand bit [21:0]     threshold;
 	  
-	  constraint c_threshold_range {
-	   threshold >= 22'd4194303;
-	   threshold <= 22'd4194303;
-	  }
+//	  constraint c_threshold_range {
+//	   threshold >= 22'd0;
+//	   threshold <= 22'd93665;
+//	  }
 	  
 	  // Make wr_en_delay non-rand so default zero initialization is preserved
 	  int unsigned        wr_en_delay [0:70];
@@ -22,10 +22,10 @@ package trans_pkg;
 	  // Constructor: initialize defaults
 	  function new();
 		// Default pixel/weight = 0..63
-		for (int i = 0; i < 64; i++) begin
-		  pixel[i]  = i+2;
-		  weight[i] = i+2;
-		end
+//		for (int i = 0; i < 64; i++) begin
+//		  pixel[i]  = i+2;
+//		  weight[i] = i+2;
+//		end
 		threshold = 0;
 		// Default no stalls
 		foreach (wr_en_delay[i]) begin
