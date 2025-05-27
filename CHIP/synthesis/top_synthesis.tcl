@@ -1,11 +1,8 @@
 #RUN FROM CHIP FOLDER
 lappend search_path scripts design_data 
-#lappend search_path CHIP/sram
 
 set_host_options -max_cores 8
 set TECH_FILE     "/data/tsmc/28HPCPMMWAVE/synopsys/tsmcn28_9lm6X1Z1URDL.tf"
-
-#/project/tsmc28mmwave/users/binatmakhlin/ws/neuron/CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b_new.ndm
 
 ######### Create Physical library #########
 create_lib -technology $TECH_FILE -ref_libs {
@@ -15,7 +12,6 @@ create_lib -technology $TECH_FILE -ref_libs {
 } neuron_top_no_sram.dlib
 open_lib neuron_top_no_sram.dlib
 report_ref_libs
-#read_lef CHIP/sram/ts6n28hpcphvta64x8m4fwbso_200b/LEF/ts6n28hpcphvta64x8m4fwbso_200b.lef
 
 read_parasitic_tech -tlup /data/tsmc/28HPCPMMWAVE/dig_libs/snpsflow/rcbest/crn28hpc+_1p09m+ut-alrdl_6x1z1u_rcbest.tluplus -name rcbest
 read_parasitic_tech -tlup /data/tsmc/28HPCPMMWAVE/dig_libs/snpsflow/rcworst/crn28hpc+_1p09m+ut-alrdl_6x1z1u_rcworst.tluplus -name rcworst
@@ -73,15 +69,40 @@ compile_fusion -to logic_opto
 #legalize_placement
 compile_fusion -to final_opto
 
- ######### Reports Generation #########
+######### Reports Generation #########
 report_area > reports_no_sram/area_report.log
-report_cells > reports_no_sram/cell_count.log
-report_power > reports_no_sram/power_report.log
-report_timing > reports_no_sram/timing_report.log
 report_utilization > reports_no_sram/utilization.log
-report_qor > reports_no_sram/qor_report.log
 save_block -as top_final_opto
 
+######### Pin placement constraints for core #########
+
+set_pin_physical_constraints -pin clk_in          -side top
+set_pin_physical_constraints -pin wr_en        -side left
+set_pin_physical_constraints -pin chip_sel     -side left
+
+# Bus[0:7] on bottom
+set_pin_physical_constraints -pin bus[0]       -side bottom
+set_pin_physical_constraints -pin bus[1]       -side bottom
+set_pin_physical_constraints -pin bus[2]       -side bottom
+set_pin_physical_constraints -pin bus[3]       -side bottom
+set_pin_physical_constraints -pin bus[4]       -side bottom
+set_pin_physical_constraints -pin bus[5]       -side bottom
+set_pin_physical_constraints -pin bus[6]       -side bottom
+set_pin_physical_constraints -pin bus[7]       -side bottom
+
+# Bus[8:15] on right
+set_pin_physical_constraints -pin bus[8]       -side right
+set_pin_physical_constraints -pin bus[9]       -side right
+set_pin_physical_constraints -pin bus[10]      -side right
+set_pin_physical_constraints -pin bus[11]      -side right
+set_pin_physical_constraints -pin bus[12]      -side right
+set_pin_physical_constraints -pin bus[13]      -side right
+set_pin_physical_constraints -pin bus[14]      -side right
+set_pin_physical_constraints -pin bus[15]      -side right
+
+# Outputs on left
+set_pin_physical_constraints -pin output_ready -side left
+set_pin_physical_constraints -pin output       -side left
 
 ######### Power #########
 ####remove all old defination
@@ -131,7 +152,13 @@ clock_opt
 set_propagated_clock [get_ports clk]
 report_timing
 
+report_timing > reports_no_sram/timing_after_cts.log
+report_qor > reports_no_sram/qor_after_cts.log
+
 ######### Routing #########
 route_opt
 save_block -as neuron_top_no_sram.dlib:top_with_clk_routing.design
-report_timing
+
+report_timing > reports_no_sram/timing_after_route.log
+report_power  > reports_no_sram/power_after_route.log
+report_qor    > reports_no_sram/qor_after_route.log

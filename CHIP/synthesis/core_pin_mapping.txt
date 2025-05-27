@@ -1,0 +1,23 @@
+Signal_Name     Direction   Side
+-----------------------------------
+clk             input       top
+wr_en           input       left
+chip_sel        input       left
+bus[0]          input       bottom
+bus[1]          input       bottom
+bus[2]          input       bottom
+bus[3]          input       bottom
+bus[4]          input       bottom
+bus[5]          input       bottom
+bus[6]          input       bottom
+bus[7]          input       bottom
+bus[8]          input       right
+bus[9]          input       right
+bus[10]         input       right
+bus[11]         input       right
+bus[12]         input       right
+bus[13]         input       right
+bus[14]         input       right
+bus[15]         input       right
+output_ready    output      left
+output          output      left

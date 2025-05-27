@@ -1,0 +1,63 @@
+****************************************
+Report : power
+        -significant_digits 2
+Design : top
+Version: V-2023.12-SP3
+Date   : Thu May 22 18:58:23 2025
+****************************************
+Information: Activity for scenario FUNC_Slow was cached, no propagation required. (POW-005)
+Mode: FUNC
+Corner: Slow
+Scenario: FUNC_Slow
+Voltage: 0.99
+Temperature: 0.00
+
+Voltage Unit         : 1V
+Capacitance Unit     : 1pF
+Time Unit            : 1ns
+Temperature Unit     : 1C
+Dynamic Power Unit   : 1nW
+Leakage Power Unit   : 1nW
+
+Switched supply net power scaling:
+scaling for leakage power
+
+Supply nets:
+VDD (power) probability 1.00 (default)
+VSS (ground) probability 1.00 (default)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/mem_reg[0][6] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.103531 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell image_mem/mem_reg[0][6] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.103283 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell mac_inst/mul_register_reg[14] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.078545 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell weight_mem/data_out_reg[7] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.103512 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell ctrl_inst/ac_mem_en_reg for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.076027 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell image_mem/data_out_reg[7] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.097923 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell image_mem/mem_reg[2][1] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.100574 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port CP on cell mac_inst/acc_register_reg[15] for parameter Tinp. Lowest table value = inf, highest table value = inf, value = 0.087566 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port A1 on cell ctmi_12806 for parameter Tinp. Lowest table value = 0.001700, highest table value = 0.602200, value = 0.000229 (POW-046)
+Warning: Power table extrapolation (extrapolation mode) for port A1 on cell ctmi_12808 for parameter Tinp. Lowest table value = 0.001700, highest table value = 0.602200, value = 0.000305 (POW-046)
+Note - message 'POW-046' limit (10) exceeded. Remainder will be suppressed.
+
+  Cell Internal Power    = 3.83e+06 nW ( 78.2%)
+  Net Switching Power    = 1.07e+06 nW ( 21.8%)
+Total Dynamic Power      = 4.90e+06 nW (100.0%)
+
+Cell Leakage Power       = 3.05e+03 nW
+
+
+  Attributes
+  ----------
+      u  -  User defined power group
+      i  -  Includes clock pin internal power
+
+Power Group         Internal Power        Switching Power          Leakage Power            Total Power    (   %  )    Attrs
+-----------------------------------------------------------------------------------------------------------------------------
+io_pad                    0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+memory                    0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+black_box                 0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+clock_network             3.76e+06               9.58e+05               8.37e+02               4.72e+06    ( 96.2%)        i
+register                  3.45e+04               1.37e+04               1.47e+03               4.97e+04    (  1.0%)         
+sequential                0.00e+00               0.00e+00               0.00e+00               0.00e+00    (  0.0%)         
+combinational             3.90e+04               9.90e+04               7.39e+02               1.39e+05    (  2.8%)         
+-----------------------------------------------------------------------------------------------------------------------------
+Total                     3.83e+06 nW            1.07e+06 nW            3.05e+03 nW            4.90e+06 nW
+1
