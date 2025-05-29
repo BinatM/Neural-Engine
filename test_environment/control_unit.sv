@@ -2,8 +2,8 @@ module control_unit (
     input  wire       clk,       // system clock
     input  wire       reset_n,   // active-low reset
     input  wire       start,     // start pulse from reset_and_start
-
-    output reg        start_run // one-cycle pulse to test_generator
+input  wire       val_done,  // idicates one test is done
+    output reg        start_run  // one-cycle pulse to test_generator
 );
 
     // state encoding
@@ -29,7 +29,8 @@ module control_unit (
 
         case (current_state)
             ST_IDLE: begin
-                if (start)
+ // if initial start or post-validation, trigger start_run
+                if (start||val_done)
                     next_state = ST_START;
             end
 

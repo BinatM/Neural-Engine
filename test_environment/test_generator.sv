@@ -1,8 +1,10 @@
 module test_generator #(
     // Address width for on-chip memory
-    parameter ADDR_WIDTH = 7,
+parameter ADDR_WIDTH = 16,
     // Number of words to stream per test (64 data + 2 threshold)
-    parameter LOAD_DEPTH = 66
+    parameter LOAD_DEPTH = 66,
+parameter TOTAL_TESTS = 500
+
 )(
     input  wire                    clk,        // system clock
     input  wire                    reset,      // active-low reset
@@ -12,7 +14,7 @@ module test_generator #(
     output reg                     rd_en,      // read enable for on-chip memory
     output reg                     wr_en,      // write enable to DUT bus
     output reg                     chip_sel,   // chip select for DUT
-
+    output reg [8:0]               tests_count,
     input  wire                    val_done    // validation complete from validator
 );
 
@@ -27,8 +29,11 @@ module test_generator #(
     } gen_state_t;
 
     gen_state_t               state;          // current FSM state
+
     reg [ADDR_WIDTH-1:0]      addr_counter;   // memory address counter
-    reg                        chip_sel_hold; // holds chip select high
+    reg                       chip_sel_hold; // holds chip select high
+    reg [TOTAL_TESTS-1:0]     Row_counter;
+
 
     // single clocked process for state and outputs
     always_ff @(posedge clk or negedge reset) begin
@@ -41,6 +46,8 @@ module test_generator #(
             rd_en           <= 1'b0;
             wr_en           <= 1'b0;
             chip_sel        <= 1'b0;
+            Row_counter     <= '0;
+            tests_count     <= '0;
         end else begin
             // default deassertions
             rd_en <= 1'b0;
@@ -51,15 +58,14 @@ module test_generator #(
                 GEN_IDLE: begin
                     if (start) begin
                         chip_sel_hold <= 1'b1;      // select DUT
-                        addr_counter  <= '0;        // start at address 0
-                        address_BUS   <= '0;
+                        addr_counter  <= '0;        // start at address
                         state         <= GEN_READ;
                     end
                 end
 
                 GEN_READ: begin
                     rd_en        <= 1'b1;           // read from on-chip memory
-                    address_BUS  <= addr_counter;
+                    address_BUS  <= addr_counter + Row_counter*tests_count ;
                     state        <= GEN_READ_WAIT;
                 end
 
@@ -77,6 +83,7 @@ module test_generator #(
                         state <= GEN_WAIT_VAL;
                     else begin
                         addr_counter <= addr_counter + 1;
+                        Row_counter<=Row_counter+1;
                         state        <= GEN_READ;
                     end
                 end
@@ -85,6 +92,7 @@ module test_generator #(
                     if (val_done) begin
                         chip_sel_hold <= 1'b0;      // deselect DUT after validation
                         state         <= GEN_IDLE;
+                        tests_count<=tests_count+1;
                     end
                 end
 
