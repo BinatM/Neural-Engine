@@ -132,8 +132,6 @@ module top_level (
         .wr_data_ptr(),
         .rd_data_ptr(),
         .ctrl_state(),
-		  .rst_mem(rst_mem),
-		  .threshold_register(threshold_register)
     );
 
 
