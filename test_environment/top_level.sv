@@ -77,7 +77,8 @@ module top_level (
     .reset_n           (reset_n_sys),
     .start             (start_sig),
     .start_run         (ctrl_start_run),
-	 .val_done          (val_done)
+	 .val_done          (val_done),
+	 .stop_tests        (stop_tests)
 );
 
 	// Test generator to provide inputs to DUT from on-chip memory
