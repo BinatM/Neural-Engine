@@ -102,6 +102,7 @@ module top_level (
 
 	 wire gen_wr_en, gen_chip_sel;
 	 reg [15:0] gen_address;
+	 reg [8:0] test_count;
     
 	 test_generator #(
 		  .ADDR_WIDTH (16),
@@ -146,7 +147,8 @@ module top_level (
 		 .output_ready  (mac_ready),
 		 .result_out    (result),
 		 .val_done      (val_done),
-		 .expected_single_out(expected_res)
+		 .expected_single_out(expected_res),
+		 .chip_sel       (chip_sel)
 	);
 	
 	
@@ -168,7 +170,7 @@ module top_level (
         .seg2_0     (HEX3),
         .seg2_1     (HEX4),
         .seg2_2     (HEX5)
-		);
+		); 
 
 	 
 	///////////////////////////////////////////////////////
@@ -187,16 +189,20 @@ module top_level (
 //	assign GPIO_[7] = gen_wr_en;
 //	assign GPIO_[8] = clk_internal;
 	
-//	assign GPIO_[0] = mac_single_output;
-//	assign GPIO_[1] = expected_res;
-//	assign GPIO_[2] = threshold_register;
-//	assign GPIO_[3] = gen_chip_sel;
-//	assign GPIO_[4] = gen_wr_en;
-//	assign GPIO_[5] = mac_ready;
-//	assign GPIO_[6] = val_done;
-//	assign GPIO_[7] = result;
-//	assign GPIO_[8] = clk_internal;
+	assign GPIO_[0] = mac_single_output;
+	assign GPIO_[1] = expected_res;
+	assign GPIO_[2] = gen_chip_sel;
+	assign GPIO_[3] = gen_wr_en;
+   assign GPIO_[4] = clk_internal;
+	assign GPIO_[5] = mac_ready;
+	assign GPIO_[6] = val_done;
+	assign GPIO_[7] = result;
+	assign GPIO_[8] = clk_internal;
 	
+//	assign GPIO_[4] = test_count[0];
+//	assign GPIO_[5] = test_count[1];
+//	assign GPIO_[6] = test_count[2];
+//	
 
 
 
