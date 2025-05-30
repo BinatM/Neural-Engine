@@ -1,14 +1,14 @@
 module on_chip_memory #(
     parameter ADDR_WIDTH = 16,           // supports up to 33000 addresses
     parameter DATA_WIDTH = 16,           // width of each data word
-    parameter LOAD_DEPTH = 264,        // number of words in all test
-parameter TOTAL_TESTS = 4          // number of test in total
+    parameter LOAD_DEPTH = 330,        // number of words in all test
+    parameter TOTAL_TESTS = 5          // number of test in total
 )(
     input  wire                     clk,           // system clock
     input  wire                     reset_n,       // active-low reset
     input  wire                     rd_en,         // read enable from generator
     input  wire [ADDR_WIDTH-1:0]    address_in,    // address input from generator
-input  reg  [8:0]               test_count,    // represnts the current test number out of 500
+	 input  reg  [8:0]               test_count,    // represnts the current test number out of 500
     output reg  [DATA_WIDTH-1:0]    data_out,      // data output to DUT
     output reg                      expected_out   // expected result output
 );
