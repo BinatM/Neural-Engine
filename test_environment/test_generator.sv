@@ -89,7 +89,7 @@ module test_generator #(
                     if (val_done) begin
                         chip_sel_hold <= 1'b0;      // deselect DUT after validation
                         state         <= GEN_IDLE;
-						tests_count<=tests_count+1;
+			tests_count<=tests_count+1;
                     end
                 end
 
