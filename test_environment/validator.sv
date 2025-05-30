@@ -4,17 +4,19 @@ module validator (
     input  wire                  reset_n,
     input  wire                  dut_single_out,
     input  wire                  output_ready,
+	 input  wire                  chip_sel,
     output reg                   result_out,
     output reg                   val_done,
     input  wire                  expected_single_out
 );
 
 // State encoding
-typedef enum logic [1:0] {
-    VAL_IDLE            = 2'd0,
-    VAL_READ_SINGLE_BIT = 2'd1,
-    VAL_WRITE_RESULT    = 2'd2,
-    VAL_DONE            = 2'd3
+typedef enum logic [2:0] {
+    VAL_IDLE            = 3'd0,
+    VAL_READ_SINGLE_BIT = 3'd1,
+    VAL_WRITE_RESULT    = 3'd2,
+    VAL_DONE            = 3'd3,
+	 CHIP_SEL            = 3'd4
 } val_state_t;
 
 val_state_t state, next_state;
@@ -37,6 +39,8 @@ always_comb begin
         VAL_READ_SINGLE_BIT: next_state = VAL_WRITE_RESULT;
         VAL_WRITE_RESULT:    next_state = VAL_DONE;
         VAL_DONE:            next_state = VAL_IDLE;
+		  CHIP_SEL:            next_state = !chip_sel ? VAL_IDLE: CHIP_SEL;
+		  
     endcase
 end
 
