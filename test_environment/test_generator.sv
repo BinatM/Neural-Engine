@@ -1,9 +1,9 @@
 module test_generator #(
     // Address width for on-chip memory
-parameter ADDR_WIDTH = 16,
+	 parameter ADDR_WIDTH = 16,
     // Number of words to stream per test (64 data + 2 threshold)
     parameter LOAD_DEPTH = 66,
-parameter TOTAL_TESTS = 500
+	 parameter TOTAL_TESTS = 500
 
 )(
     input  wire                    clk,        // system clock
@@ -14,7 +14,7 @@ parameter TOTAL_TESTS = 500
     output reg                     rd_en,      // read enable for on-chip memory
     output reg                     wr_en,      // write enable to DUT bus
     output reg                     chip_sel,   // chip select for DUT
-    output reg [8:0]               tests_count,
+	 output reg [8:0]               tests_count,
     input  wire                    val_done    // validation complete from validator
 );
 
@@ -29,11 +29,10 @@ parameter TOTAL_TESTS = 500
     } gen_state_t;
 
     gen_state_t               state;          // current FSM state
-
+	 
     reg [ADDR_WIDTH-1:0]      addr_counter;   // memory address counter
     reg                       chip_sel_hold; // holds chip select high
-    reg [TOTAL_TESTS-1:0]     Row_counter;
-
+	
 
     // single clocked process for state and outputs
     always_ff @(posedge clk or negedge reset) begin
@@ -46,8 +45,7 @@ parameter TOTAL_TESTS = 500
             rd_en           <= 1'b0;
             wr_en           <= 1'b0;
             chip_sel        <= 1'b0;
-            Row_counter     <= '0;
-            tests_count     <= '0;
+				tests_count     <= '0;
         end else begin
             // default deassertions
             rd_en <= 1'b0;
@@ -65,7 +63,7 @@ parameter TOTAL_TESTS = 500
 
                 GEN_READ: begin
                     rd_en        <= 1'b1;           // read from on-chip memory
-                    address_BUS  <= addr_counter + Row_counter*tests_count ;
+					address_BUS  <= addr_counter + LOAD_DEPTH*tests_count ;
                     state        <= GEN_READ_WAIT;
                 end
 
@@ -83,7 +81,6 @@ parameter TOTAL_TESTS = 500
                         state <= GEN_WAIT_VAL;
                     else begin
                         addr_counter <= addr_counter + 1;
-                        Row_counter<=Row_counter+1;
                         state        <= GEN_READ;
                     end
                 end
@@ -92,7 +89,7 @@ parameter TOTAL_TESTS = 500
                     if (val_done) begin
                         chip_sel_hold <= 1'b0;      // deselect DUT after validation
                         state         <= GEN_IDLE;
-                        tests_count<=tests_count+1;
+						tests_count<=tests_count+1;
                     end
                 end
 
