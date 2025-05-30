@@ -2,6 +2,7 @@ module top_level (
     //input wire         MAX10_CLK1_50,
 	 input wire         ADC_CLK_10,
 	 input wire KEY_0,   // Reset button (active-low)
+	 input wire KEY_1,
 	 
     output wire [9:0]   LEDR,
 	 output wire [8:0]  GPIO_,
@@ -31,14 +32,22 @@ module top_level (
     );
 
 	// Debounced KEY_0
-	wire db_key0;
+	wire db_key0, db_key1;
 	
-	debounce_button #(.DELAY_MAX(100_000)) debounce_inst (
+		debounce_button #(.DELAY_MAX(100_000)) debounce_inst (
 	.clk       (clk_internal),
 	.rst_n     (1'b1),
 	.noisy_in  (KEY_0),
 	.clean_out (db_key0)
 	);
+	
+		debounce_button #(.DELAY_MAX(100_000)) debounce_inst2 (
+	.clk       (clk_internal),
+	.rst_n     (1'b1),
+	.noisy_in  (KEY_1),
+	.clean_out (db_key1)
+	);
+	
 
 	// Reset and Start logic
 	wire reset_n_sys, start_sig;
@@ -50,6 +59,14 @@ module top_level (
 	.start_pulse     (start_sig)
 	);
 
+	wire stop_reset;
+	
+	reset_stop_signal resetstop (
+	.clk             (clk_internal),
+	.db_button_in    (db_key1),          // db_key0 = 0 when pressed
+	.stop_reset      (stop_reset)
+	);
+	
 
 	// On-chip memory signals
 	 wire        expected_res;
@@ -135,7 +152,7 @@ module top_level (
 	
 	
 	// instantiate failure-counter & 7-seg driver
-    wire stop_tests, result;
+    wire stop_tests;
 	 
     seven_seg_failures fail_disp (
         .clk        (clk_internal),
@@ -143,14 +160,15 @@ module top_level (
         .val_done   (val_done),
         .result     (result),
         .test_count (test_count),
+		  .stop_reset (stop_reset),
 		  .stop_tests (stop_tests),
         .seg1_0     (HEX0),
         .seg1_1     (HEX1),
         .seg1_2     (HEX2),
         .seg2_0     (HEX3),
         .seg2_1     (HEX4),
-        .seg2_2     (HEX5),
-		)
+        .seg2_2     (HEX5)
+		);
 
 	 
 	///////////////////////////////////////////////////////
