@@ -29,14 +29,13 @@ module control_unit (
         next_state  = current_state;
 
         case (current_state)
-            ST_IDLE: begin
-				  // if initial start or post-validation, trigger start_run
-                if (start||val_done)
-					     if (!stop_tests)
-								next_state = ST_START;
-						  else if 
-								next_state = ST_IDLE;
-						  
+             ST_IDLE: begin
+                // if initial start or post-validation, and not stopped, trigger start_run
+                if ((start || val_done) && !stop_tests) begin
+                    next_state = ST_START;
+                end else begin
+                    next_state = ST_IDLE;
+                end
             end
 
             ST_START: begin
