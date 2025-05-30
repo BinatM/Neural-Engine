@@ -4,6 +4,7 @@ module seven_seg_failures (
     input  wire        val_done,     // goes high for one cycle when a test completes
     input  wire        result,       // 1 = pass, 0 = fail
     input  wire [8:0]  test_count,   // index of the test that just completed
+	 input  wire        stop_reset,
 
     // display digits for first failure (ones, tens, hundreds)
     output reg [6:0]   seg1_0,       // ones digit on first 7-seg
@@ -62,8 +63,8 @@ module seven_seg_failures (
     endfunction
 
     // main logic: on second failure, stop_tests goes high and both displays freeze
-    always_ff @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
+    always_ff @(posedge clk or negedge reset_n or posedge stop_reset) begin
+        if (!reset_n||stop_reset) begin
             fails        <= 2'd0;
             first_fail   <= 9'd0;
             second_fail  <= 9'd0;
