@@ -61,6 +61,7 @@ module top_level (
 
 	wire stop_reset;
 	
+	
 	reset_stop_signal resetstop (
 	.clk             (clk_internal),
 	.db_button_in    (db_key1),          // db_key0 = 0 when pressed
@@ -95,6 +96,7 @@ module top_level (
     .start             (start_sig),
     .start_run         (ctrl_start_run),
 	 .val_done          (val_done),
+	 .stop_reset  (stop_reset),
 	 .stop_tests        (stop_tests)
 );
 
@@ -131,7 +133,7 @@ module top_level (
         .output_bit(mac_single_output),
         .wr_data_ptr(),
         .rd_data_ptr(),
-        .ctrl_state(),
+        .ctrl_state()
     );
 
 
@@ -146,7 +148,7 @@ module top_level (
 		 .result_out    (result),
 		 .val_done      (val_done),
 		 .expected_single_out(expected_res),
-		 .chip_sel       (chip_sel)
+		 .chip_sel       (gen_chip_sel)
 	);
 	
 	
@@ -187,15 +189,15 @@ module top_level (
 //	assign GPIO_[7] = gen_wr_en;
 //	assign GPIO_[8] = clk_internal;
 	
-	assign GPIO_[0] = mac_single_output;
-	assign GPIO_[1] = expected_res;
-	assign GPIO_[2] = gen_chip_sel;
-	assign GPIO_[3] = gen_wr_en;
-   assign GPIO_[4] = clk_internal;
-	assign GPIO_[5] = mac_ready;
-	assign GPIO_[6] = val_done;
-	assign GPIO_[7] = result;
-	assign GPIO_[8] = clk_internal;
+//	assign GPIO_[0] = mac_single_output;
+//	assign GPIO_[1] = expected_res;
+//	assign GPIO_[2] = gen_chip_sel;
+//	assign GPIO_[3] = gen_wr_en;
+// assign GPIO_[4] = clk_internal;
+//	assign GPIO_[5] = mac_ready;
+//	assign GPIO_[6] = val_done;
+//	assign GPIO_[7] = result;
+//	assign GPIO_[8] = clk_internal;
 	
 //	assign GPIO_[4] = test_count[0];
 //	assign GPIO_[5] = test_count[1];
