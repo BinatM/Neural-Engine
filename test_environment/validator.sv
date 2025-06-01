@@ -22,6 +22,8 @@ typedef enum logic [2:0] {
 val_state_t state, next_state;
 
 reg actual_single_out;
+reg actual_expected_out;
+
 
 // FSM state register
 always_ff @(posedge clk or negedge reset_n) begin
@@ -33,35 +35,47 @@ end
 
 // FSM next state logic
 always_comb begin
-    next_state = state;
-    case (state)
-        VAL_IDLE:            next_state = output_ready ? VAL_READ_SINGLE_BIT : VAL_IDLE;
-        VAL_READ_SINGLE_BIT: next_state = VAL_WRITE_RESULT;
-        VAL_WRITE_RESULT:    next_state = VAL_DONE;
-        VAL_DONE:            next_state = VAL_IDLE;
-		  CHIP_SEL:            next_state = !chip_sel ? VAL_IDLE: CHIP_SEL;
-		  
-    endcase
+  next_state = state;
+  case(state)
+    VAL_IDLE:            next_state = output_ready        ? VAL_READ_SINGLE_BIT : VAL_IDLE;
+    VAL_READ_SINGLE_BIT: next_state = VAL_WRITE_RESULT;
+    VAL_WRITE_RESULT:    next_state = VAL_DONE;
+    // hold DONE until output_ready de-asserts
+    VAL_DONE:            next_state = output_ready        ? VAL_DONE            : VAL_IDLE;
+  endcase
 end
+
+
 
 // Output and data capture logic
 always_ff @(posedge clk or negedge reset_n) begin
     if (!reset_n) begin
-        result_out       <= 1'b0;
-        val_done          <= 1'b0;
-        actual_single_out <= 1'b0;
+        result_out           <= 1'b0;
+        val_done             <= 1'b0;
+        actual_single_out    <= 1'b0;
+        actual_expected_out  <= 1'b0;
     end else begin
+        // pulse high in the DONE state
         val_done <= (state == VAL_DONE);
 
         case (state)
             VAL_READ_SINGLE_BIT: begin
-                actual_single_out <= dut_single_out;
+                // latch both sides of the comparison
+                actual_single_out   <= dut_single_out;
+                actual_expected_out <= expected_single_out;
             end
+
             VAL_WRITE_RESULT: begin
-                result_out <= (actual_single_out == expected_single_out);
+                // compare the two latched values
+                result_out <= (actual_single_out == actual_expected_out);
+            end
+
+            default: begin
+                // nothing else changes here
             end
         endcase
     end
 end
+
 
 endmodule 
