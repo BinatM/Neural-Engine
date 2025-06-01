@@ -4,6 +4,7 @@ module control_unit (
     input  wire       start,     // start pulse from reset_and_start
 	 input  wire       val_done,  // idicates one test is done
 	 input  wire       stop_tests,
+	 input  wire       stop_reset,
     output reg        start_run  // one-cycle pulse to test_generator
 );
 
@@ -31,7 +32,7 @@ module control_unit (
         case (current_state)
              ST_IDLE: begin
                 // if initial start or post-validation, and not stopped, trigger start_run
-                if ((start || val_done) && !stop_tests) begin
+                if ((start || val_done|| stop_reset) && !stop_tests) begin
                     next_state = ST_START;
                 end else begin
                     next_state = ST_IDLE;
