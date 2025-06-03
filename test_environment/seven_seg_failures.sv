@@ -4,7 +4,7 @@ module seven_seg_failures (
     input  wire        val_done,     // goes high for one cycle when a test completes
     input  wire        result,       // 1 = pass, 0 = fail
     input  wire [8:0]  test_count,   // index of the test that just completed
-	 input  wire        stop_reset,
+    input  wire        stop_reset,
 
     // display digits for first failure (ones, tens, hundreds)
     output reg [6:0]   seg1_0,       // ones digit on first 7-seg
@@ -22,9 +22,12 @@ module seven_seg_failures (
     // how many failures seen so far (0, 1 or 2)
     reg [1:0] fails;
 
-    // record the test indices of failures
+    // store the test index of failures (not used for display logic but kept for reference)
     reg [8:0] first_fail;
     reg [8:0] second_fail;
+
+    // extra register to detect rising edge of val_done
+    reg prev_val_done;
 
     // 7-segment decoder: maps 0–9 to segment pattern
     function [6:0] decode7;
@@ -64,28 +67,34 @@ module seven_seg_failures (
 
     // main logic: on second failure, stop_tests goes high and both displays freeze
     always_ff @(posedge clk or negedge reset_n or posedge stop_reset) begin
-        if (!reset_n||stop_reset) begin
-            fails        <= 2'd0;
-            first_fail   <= 9'd0;
-            second_fail  <= 9'd0;
-            seg1_0       <= 7'b1111111;
-            seg1_1       <= 7'b1111111;
-            seg1_2       <= 7'b1111111;
-            seg2_0       <= 7'b1111111;
-            seg2_1       <= 7'b1111111;
-            seg2_2       <= 7'b1111111;
-            stop_tests   <= 1'b0;
+        if (!reset_n || stop_reset) begin
+            // reset all registers and clear previous val_done
+            fails         <= 2'd0;
+            first_fail    <= 9'd0;
+            second_fail   <= 9'd0;
+            seg1_0        <= 7'b1111111;
+            seg1_1        <= 7'b1111111;
+            seg1_2        <= 7'b1111111;
+            seg2_0        <= 7'b1111111;
+            seg2_1        <= 7'b1111111;
+            seg2_2        <= 7'b1111111;
+            stop_tests    <= 1'b0;
+            prev_val_done <= 1'b0;  // clear the edge detector
         end else begin
-            if (val_done && !result && (fails < 2)) begin
+            // capture previous val_done for rising-edge detection
+            prev_val_done <= val_done;
+
+            // only register failure on the rising edge of val_done and when result is 0
+            if ((val_done && !prev_val_done) && !result && (fails < 2)) begin
                 if (fails == 2'd0) begin
-                    // record first failure
+                    // record first failure using the current test_count
                     first_fail <= test_count;
                     seg1_0     <= decode7(digit(test_count, 0));
                     seg1_1     <= decode7(digit(test_count, 1));
                     seg1_2     <= decode7(digit(test_count, 2));
                     fails      <= 2'd1;
                 end else if (fails == 2'd1) begin
-                    // record second failure and stop
+                    // record second failure and stop further tests
                     second_fail <= test_count;
                     seg2_0      <= decode7(digit(test_count, 0));
                     seg2_1      <= decode7(digit(test_count, 1));
