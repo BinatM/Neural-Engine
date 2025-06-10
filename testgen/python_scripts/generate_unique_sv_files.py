@@ -6,15 +6,15 @@ from typing import List, Dict, Callable
 MATRIX_SIZE = 8
 PIXEL_WIDTH = 8
 WEIGHT_WIDTH = 8
-THRESHOLD_WIDTH = 16  # limit threshold to 16 bits only!
+THRESHOLD_WIDTH = 22  
 ADDR_WIDTH = 16
 DATA_WIDTH = 16
 LOAD_DEPTH = 66
-TOTAL_TESTS_PER_FILE = 500
+TOTAL_TESTS_PER_FILE = 490
 TOTAL_FILES = 10
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "on_chip_memory_sv_unique")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "on_chip_memory_sv_unique_new")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Utility Functions
@@ -37,7 +37,7 @@ def generate_unique_test(existing_keys: set) -> Dict:
         flat_pixels = flatten_matrix(pixels)
         flat_weights = flatten_matrix(weights)
         mac = calculate_mac(flat_pixels, flat_weights)
-        threshold = random.randint(0, 0xFFFF)  # 16-bit threshold only
+        threshold = random.randint(0, (1 << THRESHOLD_WIDTH) - 1)
         expected = int(mac >= threshold)
 
         # Unique key representation
@@ -53,6 +53,7 @@ def generate_unique_test(existing_keys: set) -> Dict:
 
 def create_sv_module(tests: List[Dict], filename: str):
     lines = []
+    # ─── module header ──────────────────────────────────────────────────────────
     lines.append("module on_chip_memory #(")
     lines.append(f"    parameter ADDR_WIDTH = {ADDR_WIDTH},")
     lines.append(f"    parameter DATA_WIDTH = {DATA_WIDTH},")
@@ -61,33 +62,48 @@ def create_sv_module(tests: List[Dict], filename: str):
     lines.append(")(")
     lines.append("    input  wire                     clk,")
     lines.append("    input  wire                     reset_n,")
-    lines.append("    input  wire                     rd_en,")
     lines.append(f"    input  wire [{ADDR_WIDTH-1}:0] address_in,")
     lines.append(f"    input  wire [{TOTAL_TESTS_PER_FILE.bit_length()-1}:0] test_count,")
     lines.append(f"    output reg  [{DATA_WIDTH-1}:0] data_out,")
     lines.append("    output reg                     expected_out")
     lines.append(");")
-    lines.append("")
+    lines.append("")  # end of header
+
+    # ─── memory declarations ────────────────────────────────────────────────────
     lines.append(f"    reg [{DATA_WIDTH-1}:0] mem [0:LOAD_DEPTH-1];")
     lines.append(f"    reg expected_mem [0:TOTAL_TESTS-1];")
-    lines.append("")
+    lines.append("")  # blank line before initial
+
+    # ─── initial block ──────────────────────────────────────────────────────────
     lines.append("    initial begin")
 
+
     for t, test in enumerate(tests):
-        pixels = flatten_matrix(test['pixels'])
-        weights = flatten_matrix(test['weights'])
-        threshold = test['threshold']
+        pixels   = flatten_matrix(test['pixels'])
+        weights  = flatten_matrix(test['weights'])
+        threshold= test['threshold']
         expected = test['expected']
 
+        # split threshold into two DATA_WIDTH-bit words
+        low_bits  = threshold & ((1 << DATA_WIDTH) - 1)  # lower DATA_WIDTH bits
+        high_bits = threshold >> DATA_WIDTH              # remaining upper bits
+
+        # comment before each test
         lines.append(f"        // Test {t}")
+
+        # write the 64 pixel–weight words
         for i, (px, wt) in enumerate(zip(pixels, weights)):
-            word = (px << 8) | wt
+            word = (px << WEIGHT_WIDTH) | wt
             lines.append(f"        mem[{t*LOAD_DEPTH + i}] = 16'b{to_bin16(word)};")
 
-        lines.append(f"        mem[{t*LOAD_DEPTH + 64}] = 16'b{to_bin16(threshold & 0xFFFF)};")
-        lines.append(f"        mem[{t*LOAD_DEPTH + 65}] = 16'b0000000000000000; // upper bits zero")
+        # after the 64 words, write the two threshold words
+        lines.append(f"        mem[{t*LOAD_DEPTH + 64}] = 16'b{to_bin16(low_bits)};   // lower DATA_WIDTH bits of threshold")
+        lines.append(f"        mem[{t*LOAD_DEPTH + 65}] = 16'b{to_bin16(high_bits)};  // upper threshold bits")
+
+        # then write the expected result
         lines.append(f"        expected_mem[{t}] = 1'b{expected};")
 
+   
     lines.append("    end")
     lines.append("")
     lines.append("    always_ff @(posedge clk or negedge reset_n) begin")
@@ -105,6 +121,8 @@ def create_sv_module(tests: List[Dict], filename: str):
 
     with open(os.path.join(OUTPUT_DIR, filename), "w") as f:
         f.write("\n".join(lines))
+
+
 
 # Main generation loop
 if __name__ == "__main__":
