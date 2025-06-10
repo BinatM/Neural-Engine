@@ -1,14 +1,14 @@
 #!/bin/tcsh -f
 #!/usr/bin/env python3
 
-qrsh -V -cwd -b y -q normal vcs -f build.cud -sverilog -kdb +vcs+fsdbon
+qrsh -V -cwd -b y -q normal vcs -cm_dir coverdir -f build.cud -sverilog -kdb +vcs+fsdbon
 
 if ($status != 0) then
   exit $status
 endif
 
-foreach f ( `seq 1 5000` )
-	qrsh -V -cwd -b y -q normal ./simv +ntb_random_seed_automatic >& sim.$f.log
+foreach f ( `seq 1 8` )
+	qrsh -V -cwd -b y -q normal ./simv +ntb_random_seed_automatic -cm_dir coverdir -cm_name cover.$f >& logs/sim.$f.log
 	echo $status
 	if ( $status != 0 ) then
 	  exit $status

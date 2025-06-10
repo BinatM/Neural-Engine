@@ -42,7 +42,7 @@ def check_log(path):
 
 def main():
     # sort by the integer inside the filename instead of lexicographically
-    logs = sorted(glob.glob('sim.*.log'), key=extract_run_number)
+    logs = sorted(glob.glob('logs/sim.*.log'), key=extract_run_number)
     if not logs:
         print("No sim.*.log files found.", file=sys.stderr)
         sys.exit(1)
