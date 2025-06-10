@@ -6,9 +6,8 @@ module on_chip_memory #(
 )(
     input  wire                     clk,           // system clock
     input  wire                     reset_n,       // active-low reset
-    input  wire                     rd_en,         // read enable from generator
     input  wire [ADDR_WIDTH-1:0]    address_in,    // address input from generator
-	 input  reg  [8:0]               test_count,    // represnts the current test number out of 500
+	input  reg  [8:0]               test_count,    // represnts the current test number out of 500
     output reg  [DATA_WIDTH-1:0]    data_out,      // data output to DUT
     output reg                      expected_out   // expected result output
 );
@@ -368,12 +367,10 @@ end
     // on rd_en, output the selected memory word and the expected result
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            data_out     <= {DATA_WIDTH{1'b0}};
+            data_out     <= '0;
             expected_out <= 1'b0;
         end else begin
-            if (rd_en) begin
-                data_out <= mem[address_in];  // provide data word
-            end
+            data_out <= mem[address_in];  // provide data word
              // index into expected_mem using test_count
             expected_out <= expected_mem[test_count];
         end
