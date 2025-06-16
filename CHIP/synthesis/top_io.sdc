@@ -1,0 +1,8 @@
+create_clock -period 1 [get_ports PAD_clk]
+set_clock_uncertainty -setup 0.15 [get_clocks PAD_clk]
+set_input_delay -max 0.2 -clock PAD_clk [get_ports {PAD_clk PAD_wr_en PAD_chip_sel PAD_bus[*]}]
+set_output_delay 0.2 -max -clock PAD_clk [get_ports {PAD_output_ready PAD_output}]
+set_clock_transition -max 0.2 [get_clocks PAD_clk]
+set_load 2.5 [get_ports PAD_output_ready]
+set_load 2.5 [get_ports PAD_output]
+set_input_transition 0.05 [get_ports {PAD_clk PAD_wr_en PAD_chip_sel PAD_bus[*]}]
