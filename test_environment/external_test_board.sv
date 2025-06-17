@@ -1,10 +1,9 @@
-module external_test_board(
-    input wire clk,
-    input wire reset_n,
-    inout wire [15:0] gpio_data,
-    output wire [10:0] gpio_addr,
-    output wire gpio_wr_en,
-    output wire gpio_rd_en,
-    output wire output_ready
+module external_test_board (
+    input  logic        clk_in,
+    input  logic [15:0] bus,
+    input  logic        wr_en,
+    input  logic        chip_sel,
+    output logic        output_ready,
+    output logic        output_bit
 );
 endmodule

@@ -1,10 +1,9 @@
 module top_level (
     input wire         MAX10_CLK1_50,
-//input wire         ADC_CLK_10,
+// input wire         ADC_CLK_10,
 input wire KEY_0,   // Reset button (active-low)
 input wire KEY_1,
 
-    output wire [9:0]   LEDR,
 output wire [8:0]  GPIO_,
 
 // seven-segment display ports (6 digits: 0-5)
@@ -16,23 +15,20 @@ output wire [8:0]  GPIO_,
     output wire [6:0]   HEX5           // second failure, hundreds
 );
 
-
-  wire clk_internal;
-
 // Clock generator for internal logic
+
+wire clk_internal;
 
    clock_generator clkgen(
        .clk_in  (MAX10_CLK1_50),
        .clk_out (clk_internal)
    );
 
-//    wire clk_internal;
 
 //    clock_generator clkgen(
 //        .clk_in  (ADC_CLK_10),
 //        .clk_out (clk_internal)
 //    );
-
 
 
 // Debounced KEY_0
@@ -126,7 +122,17 @@ test_generator #(
 
     wire        mac_ready, mac_single_output;
 
-// DUT instantiation
+// DUT instantiation with support for RTL and physical board
+`ifdef EXTERNAL_TEST_BOARD
+    external_test_board dut (
+        .clk_in(clk_internal),
+        .bus(current_mem_word),
+        .wr_en(gen_wr_en),
+        .chip_sel(gen_chip_sel),
+        .output_ready(mac_ready),
+        .output_bit(mac_single_output)
+    );
+`else
     top u_dut (
         .clk_in(clk_internal),
         .bus(current_mem_word),
@@ -138,10 +144,13 @@ test_generator #(
         .rd_data_ptr(),
         .ctrl_state()
     );
+`endif
+
 
 
 // Validator compares DUT output with expected and returns result
     wire         result;
+logic [2:0] val_state;
 
 validator val (
 .clk           (clk_internal),
@@ -151,7 +160,7 @@ validator val (
 .result_out    (result),
 .val_done      (val_done),
 .expected_single_out(expected_res),
-.chip_sel       (gen_chip_sel)
+.chip_sel      (gen_chip_sel)
 );
 
 
@@ -182,31 +191,16 @@ validator val (
 
 
 
-// assign GPIO_[0] = current_mem_word[0];
-// assign GPIO_[1] = current_mem_word[1];
-// assign GPIO_[2] = current_mem_word[2];
-// assign GPIO_[3] = gen_address[0];
-// assign GPIO_[4] = gen_address[1];
-// assign GPIO_[5] = gen_address[2];
+assign GPIO_[0] = mac_single_output;
+assign GPIO_[1] = expected_res;
+assign GPIO_[2] = gen_chip_sel;
+assign GPIO_[3] = gen_wr_en;
+assign GPIO_[4] = clk_internal;
+assign GPIO_[5] = mac_ready;
+assign GPIO_[6] = val_done;
+assign GPIO_[7] = result;
+assign GPIO_[8] = clk_internal;
 //
-// assign GPIO_[7] = gen_wr_en;
-// assign GPIO_[8] = clk_internal;
-
-// assign GPIO_[0] = current_mem_word[0];
-// assign GPIO_[1] = current_mem_word[1];
-// assign GPIO_[2] = current_mem_word[2];
-// assign GPIO_[3] = gen_wr_en;
-// assign GPIO_[4] = clk_internal;
-// assign GPIO_[5] = mac_ready;
-// assign GPIO_[6] = val_done;
-// assign GPIO_[7] = result;
-// assign GPIO_[8] = clk_internal;
-
-// assign GPIO_[4] = test_count[0];
-// assign GPIO_[5] = test_count[1];
-// assign GPIO_[6] = test_count[2];
-//
-
 
 
 endmodule
