@@ -1,5 +1,6 @@
 import os
 import random
+from typing import Tuple
 from typing import List, Callable
 
 # Constants
@@ -29,35 +30,50 @@ def mac(pix: List[int], wei: List[int]) -> int:
 def to_bin16(val: int) -> str:
     return f"{val & 0xFFFF:016b}"
 
+def split_threshold(thresh: int) -> Tuple[int, int]:
+    lsb = thresh & 0xFFFF                     # Lower 16 bits
+    msb = (thresh >> 16) & 0x3F               # Upper 6 bits (22-16), padded to 16 bits
+    return lsb, msb
+
 # Test generator
 def generate_balanced_tests(n: int) -> List[dict]:
     tests = []
-    for _ in range(n):
-        threshold = random.randint(0, 0xFFFF)  # Limit to 16-bit
+    for i in range(n):
         desired = random.choice([0, 1])
 
-        while True:
-            if random.random() < 0.3:
-                # edge case: full ones
-                pixels = generate_matrix(lambda i, j: 255)
-                weights = generate_matrix(lambda i, j: 255)
-            elif random.random() < 0.6:
-                # sparse: mostly zeros
-                pixels = generate_matrix(lambda i, j: 0 if random.random() < 0.8 else random.randint(1, 30))
-                weights = generate_matrix(lambda i, j: 0 if random.random() < 0.8 else random.randint(1, 30))
-            else:
-                # mixed
-                pixels = generate_matrix(lambda i, j: random.randint(0, 255))
-                weights = generate_matrix(lambda i, j: random.randint(0, 255))
+        if random.random() < 0.3:
+            # edge case: full ones
+            pixels = generate_matrix(lambda i, j: 255)
+            weights = generate_matrix(lambda i, j: 255)
+        elif random.random() < 0.6:
+            # sparse: mostly zeros
+            pixels = generate_matrix(lambda i, j: 0 if random.random() < 0.8 else random.randint(1, 30))
+            weights = generate_matrix(lambda i, j: 0 if random.random() < 0.8 else random.randint(1, 30))
+        else:
+            # mixed
+            pixels = generate_matrix(lambda i, j: random.randint(0, 255))
+            weights = generate_matrix(lambda i, j: random.randint(0, 255))
 
-            mac_val = mac(flatten(pixels), flatten(weights))
-            if (mac_val >= threshold and desired == 1) or (mac_val < threshold and desired == 0):
-                tests.append({
-                    "pixels": pixels,
-                    "weights": weights,
-                    "threshold": threshold
-                })
-                break
+        mac_val = mac(flatten(pixels), flatten(weights))
+
+        # Choose threshold based on desired result
+        if desired == 1:
+            threshold = max(0, mac_val - random.randint(0, 20))  # make sure MAC >= threshold
+        else:
+            threshold = mac_val + random.randint(1, 20)          # make sure MAC < threshold
+
+        # Clamp threshold to 22-bit max
+        threshold = min(threshold, (1 << THRESHOLD_WIDTH) - 1)
+
+        tests.append({
+            "pixels": pixels,
+            "weights": weights,
+            "threshold": threshold
+        })
+
+        if i % 50 == 0:
+            print(f" Generated {i+1}/{n} tests...", flush=True)
+
     return tests
 
 # SV creation
@@ -94,8 +110,9 @@ def create_sv_module(tests: List[dict], total_tests: int) -> str:
         for idx, (p, w) in enumerate(zip(pixels, weights)):
             word = (p << 8) | w
             lines.append(f"        mem[{t*LOAD_DEPTH + idx}] = 16'b{to_bin16(word)};")
-        lines.append(f"        mem[{t*LOAD_DEPTH + 64}] = 16'b{to_bin16(threshold)};")
-        lines.append(f"        mem[{t*LOAD_DEPTH + 65}] = 16'b0000000000000000;")
+        thresh_lsb, thresh_msb = split_threshold(threshold)
+        lines.append(f"        mem[{t*LOAD_DEPTH + 64}] = 16'b{to_bin16(thresh_lsb)};")
+        lines.append(f"        mem[{t*LOAD_DEPTH + 65}] = 16'b{to_bin16(thresh_msb)};")
         lines.append(f"        expected_mem[{t}] = 1'b{expected};")
 
     lines.append("    end\n")
@@ -122,7 +139,7 @@ def save_sv_file(tests: List[dict], index: int):
     code = create_sv_module(tests, TOTAL_TESTS)
     with open(full_path, "w") as f:
         f.write(code)
-    print(f"✅ Generated {filename} with {len(tests)} tests at {full_path}")
+    print(f" Generated {filename} with {len(tests)} tests at {full_path}")
 
 # Main
 if __name__ == "__main__":
