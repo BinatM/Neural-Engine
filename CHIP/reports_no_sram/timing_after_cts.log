@@ -6,84 +6,44 @@ Report : timing
         -report_by design
 Design : top
 Version: V-2023.12-SP3
-Date   : Thu May 22 18:34:27 2025
+Date   : Fri Jun 27 16:47:02 2025
 ****************************************
 
-  Startpoint: mac_inst/acc_register_reg[1] (rising edge-triggered flip-flop clocked by clk_in)
-  Endpoint: output_bit (output port clocked by clk_in)
+  Startpoint: wr_en (input port clocked by clk_in)
+  Endpoint: activation_inst/threshold_register_reg[13] (rising edge-triggered flip-flop clocked by clk_in)
   Mode: FUNC
   Corner: Fast
   Scenario: FUNC_Fast
-  Path Group: **reg2out_default**
+  Path Group: **in2reg_default**
   Path Type: max
 
   Point                                            Incr      Path  
   ------------------------------------------------------------------------
   clock clk_in (rise edge)                         0.00      0.00
-  clock network delay (propagated)                 0.11      0.11
-
-  mac_inst/acc_register_reg[1]/CP (SDFQD0BWP30P140HVT)
-                                                   0.00      0.11 r
-  mac_inst/acc_register_reg[1]/Q (SDFQD0BWP30P140HVT)
-                                                   0.07      0.18 f
-  phfnr_buf_1456/ZN (CKND0BWP30P140)               0.01      0.19 r
-  activation_inst/gte_41/ctmi_14119/ZN (IAO21D0BWP30P140HVT)
-                                                   0.02      0.21 r
-  activation_inst/gte_41/ctmi_14117/ZN (AOI22D0BWP30P140)
-                                                   0.01      0.23 f
-  activation_inst/gte_41/ctmi_14115/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.25 r
-  activation_inst/gte_41/ctmi_14113/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.27 f
-  activation_inst/gte_41/ctmi_14111/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.30 r
-  activation_inst/gte_41/ctmi_14109/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.32 f
-  activation_inst/gte_41/ctmi_14107/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.34 r
-  activation_inst/gte_41/ctmi_14105/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.36 f
-  activation_inst/gte_41/ctmi_14103/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.38 r
-  activation_inst/gte_41/ctmi_14101/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.40 f
-  activation_inst/gte_41/ctmi_14099/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.43 r
-  activation_inst/gte_41/ctmi_14097/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.44 f
-  activation_inst/gte_41/ctmi_14095/ZN (MAOI222D0BWP30P140HVT)
-                                                   0.03      0.47 r
-  activation_inst/gte_41/ctmi_14093/ZN (MAOI222D0BWP30P140HVT)
-                                                   0.03      0.50 f
-  activation_inst/gte_41/ctmi_14091/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.52 r
-  activation_inst/gte_41/ctmi_14089/ZN (MAOI222D0BWP30P140HVT)
-                                                   0.02      0.55 f
-  activation_inst/gte_41/ctmi_14087/ZN (MAOI222D0BWP30P140HVT)
-                                                   0.03      0.58 r
-  activation_inst/gte_41/ctmi_14085/ZN (MAOI222D0BWP30P140)
-                                                   0.02      0.59 f
-  activation_inst/gte_41/ctmi_14083/ZN (MAOI222D0BWP30P140HVT)
-                                                   0.03      0.63 r
-  activation_inst/gte_41/ctmi_14081/ZN (MAOI222D1BWP30P140HVT)
-                                                   0.03      0.65 f
-  activation_inst/gte_41/ctmi_14079/ZN (MAOI222D0BWP30P140HVT)
-                                                   0.03      0.68 r
-  activation_inst/gte_41/ctmi_14077/ZN (MAOI222D0BWP30P140HVT)
-                                                   0.03      0.72 f
-  output_bit (out)                                 0.00      0.72 f
-  data arrival time                                          0.72
+  clock network delay (ideal)                      0.04      0.04
+  input external delay                             0.20      0.24 f
+  wr_en (in)                                       0.00      0.24 f
+  ctmTdsLR_1_50114/ZN (CKND2D4BWP30P140)           0.03      0.27 r
+  ctmi_45739/ZN (INR2D0BWP30P140HVT)               0.02      0.29 f
+  HFSINV_778_46151/ZN (INVD0BWP30P140HVT)          0.09      0.38 r
+  HFSINV_595_46150/ZN (CKND0BWP30P140HVT)          0.17      0.54 f
+  ctmi_12865/Z (AO22D0BWP30P140HVT)                0.07      0.61 f
+  activation_inst/threshold_register_reg[13]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.61 f
+  data arrival time                                          0.61
 
   clock clk_in (rise edge)                         1.00      1.00
-  clock network delay (propagated)                 0.07      1.07
-  clock uncertainty                               -0.15      0.92
-  output external delay                           -0.20      0.72
-  data required time                                         0.72
+  clock network delay (ideal)                      0.00      1.00
+  activation_inst/threshold_register_reg[13]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.00 r
+  clock uncertainty                               -0.15      0.85
+  library setup time                              -0.02      0.83
+  data required time                                         0.83
   ------------------------------------------------------------------------
-  data required time                                         0.72
-  data arrival time                                         -0.72
+  data required time                                         0.83
+  data arrival time                                         -0.61
   ------------------------------------------------------------------------
-  slack (MET)                                                0.00
+  slack (MET)                                                0.23
 
 
 1

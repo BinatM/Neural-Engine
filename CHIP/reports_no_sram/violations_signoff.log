@@ -1,0 +1,56 @@
+Information: Starting 'analyze_design_violations' (FLW-8000)
+Information: Time: 2025-06-27 18:16:57 / Session:  03:14:24 / Command:  00:00:00 / CPU:  00:00:00 / Memory: 2965 MB (FLW-8100)
+
+****************************************
+Report : Violation analysis
+Design : top
+Block  : neuron_top_no_sram.dlib:top_with_power.design
+Version: V-2023.12-SP3
+Date   : Fri Jun 27 18:16:57 2025
+****************************************
+
+START_CMD: analyze_design_violations CPU:   3423 s ( 0.95 hr) ELAPSE:  11664 s ( 3.24 hr) MEM-PEAK:  2964 Mb Fri Jun 27 18:16:57 2025
+Number of Site types in the design = 1
+Setting up Chip Core
+Chip Core shape: (20000 20000) (830600 830000)
+Number of VARs = 1
+Number of unique PDs = 1
+Number of Power Domains = 1
+Number of Voltage Areas = 1
+Number of supply Nets = 2
+Number of used supplies = 0
+Blocked VAs: 
+Information: Initializing classic cellmap without advanced rules enabled and without PDC enabled
+Information: The following app options are used in cellmap
+        place.legalize.enable_color_aware_placement : false
+        place.legalize.use_nll_query_cm : false
+        place.legalize.enable_advanced_legalizer : false
+        place.legalize.enable_prerouted_net_check : true
+        place.legalize.enable_advanced_prerouted_net_check : false
+        place.legalize.always_continue : true
+        place.legalize.limit_legality_checks : false
+        place.common.pnet_aware_density : 1.0000
+        place.common.pnet_aware_min_width : 0.0000
+        place.common.pnet_aware_layers : {}
+        place.common.use_placement_model : false
+        place.common.enable_advanced_placement_model : true
+        cts.placement.cell_spacing_rule_style : maximum
+Total 0.0635 seconds to build cellmap data
+INFO: creating 19(r) x 19(c) GridCells YDim 4.5 XDim 4.5
+INFO: number of GridCells (top_with_power): 361
+INFO: creating 19(r) x 19(c) GridCells YDim 4.5 XDim 4.5
+INFO: number of GridCells (top_with_power): 361
+Total 0.1328 seconds to load 6930 cell instances into cellmap
+Moveable cells: 6604; Application fixed cells: 8; Macro cells: 0; User fixed cells: 318
+3655 out of 3655 data nets are detail routed, 9 out of 9 clock nets are detail routed and total 3664 nets have been analyzed
+Estimated current stage is after clock and data detail route stage
+Average cell width 1.0606, cell height 0.9000, cell area 0.9545 for total 6612 placed and application fixed cells
+Design utilization is 0.982211
+
+  Start analyzing max_trans violations.
+
+  No max_trans violation is found.
+
+END_CMD: analyze_design_violations CPU:   3424 s ( 0.95 hr) ELAPSE:  11665 s ( 3.24 hr) MEM-PEAK:  2964 Mb Fri Jun 27 18:16:58 2025
+Information: Ending   'analyze_design_violations' (FLW-8001)
+Information: Time: 2025-06-27 18:16:58 / Session:  03:14:25 / Command:  00:00:00 / CPU:  00:00:00 / Memory: 2965 MB (FLW-8100)

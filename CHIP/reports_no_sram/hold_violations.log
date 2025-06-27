@@ -1,0 +1,45 @@
+****************************************
+Report : timing
+        -path_type full
+        -delay_type min
+        -max_paths 1
+        -report_by design
+Design : top
+Version: V-2023.12-SP3
+Date   : Fri Jun 27 17:44:26 2025
+****************************************
+
+  Startpoint: ctrl_inst/chip_sel_d_reg (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: ctrl_inst/rst_mem_reg (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  ctrl_inst/chip_sel_d_reg/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.11 r
+  ctrl_inst/chip_sel_d_reg/Q (SDFQD0BWP30P140HVT)
+                                                   0.05      0.16 r
+  ctmi_11822/ZN (NR2D0BWP30P140HVT)                0.01      0.17 f
+  ctrl_inst/rst_mem_reg/D (SDFQD0BWP30P140HVT)     0.00      0.17 f
+  data arrival time                                          0.17
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+  ctrl_inst/rst_mem_reg/CP (SDFQD0BWP30P140HVT)    0.00      0.11 r
+  library hold time                                0.01      0.12
+  data required time                                         0.12
+  ------------------------------------------------------------------------
+  data required time                                         0.12
+  data arrival time                                         -0.17
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.05
+
+
+1

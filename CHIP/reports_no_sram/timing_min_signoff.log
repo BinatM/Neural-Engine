@@ -1,0 +1,369 @@
+****************************************
+Report : timing
+        -path_type full
+        -delay_type min
+        -max_paths 10
+        -report_by design
+Design : top
+Version: V-2023.12-SP3
+Date   : Fri Jun 27 18:16:42 2025
+****************************************
+
+  Startpoint: ctrl_inst/chip_sel_d_reg (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: ctrl_inst/rst_mem_reg (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  ctrl_inst/chip_sel_d_reg/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.11 r
+  ctrl_inst/chip_sel_d_reg/Q (SDFQD0BWP30P140HVT)
+                                                   0.05      0.16 r
+  ctmi_11822/ZN (NR2D0BWP30P140HVT)                0.01      0.17 f
+  ctrl_inst/rst_mem_reg/D (SDFQD0BWP30P140HVT)     0.00      0.17 f
+  data arrival time                                          0.17
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+  ctrl_inst/rst_mem_reg/CP (SDFQD0BWP30P140HVT)    0.00      0.11 r
+  library hold time                                0.01      0.12
+  data required time                                         0.12
+  ------------------------------------------------------------------------
+  data required time                                         0.12
+  data arrival time                                         -0.17
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.05
+
+
+
+  Startpoint: weight_mem/mem_reg[17][1] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/mem_reg[17][1] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  weight_mem/mem_reg[17][1]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.11 r
+  weight_mem/mem_reg[17][1]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.16 r
+  ctmi_13707/ZN (OAI22D0BWP30P140HVT)              0.02      0.18 f
+  weight_mem/mem_reg[17][1]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.18 f
+  data arrival time                                          0.18
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+  weight_mem/mem_reg[17][1]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.11 r
+  library hold time                                0.01      0.12
+  data required time                                         0.12
+  ------------------------------------------------------------------------
+  data required time                                         0.12
+  data arrival time                                         -0.18
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: weight_mem/mem_reg[35][7] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/mem_reg[35][7] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.10      0.10
+
+  weight_mem/mem_reg[35][7]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.10 r
+  weight_mem/mem_reg[35][7]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.16 r
+  ctmi_13845/ZN (OAI22D0BWP30P140HVT)              0.02      0.18 f
+  weight_mem/mem_reg[35][7]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.18 f
+  data arrival time                                          0.18
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+  weight_mem/mem_reg[35][7]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.11 r
+  library hold time                                0.01      0.12
+  data required time                                         0.12
+  ------------------------------------------------------------------------
+  data required time                                         0.12
+  data arrival time                                         -0.18
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: image_mem/mem_reg[37][6] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/mem_reg[37][6] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.10      0.10
+
+  image_mem/mem_reg[37][6]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.10 r
+  image_mem/mem_reg[37][6]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.16 r
+  ctmi_13325/ZN (OAI22D0BWP30P140HVT)              0.02      0.17 f
+  image_mem/mem_reg[37][6]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.17 f
+  data arrival time                                          0.17
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.10      0.10
+  image_mem/mem_reg[37][6]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.10 r
+  library hold time                                0.01      0.11
+  data required time                                         0.11
+  ------------------------------------------------------------------------
+  data required time                                         0.11
+  data arrival time                                         -0.17
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: weight_mem/mem_reg[37][3] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/mem_reg[37][3] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  weight_mem/mem_reg[37][3]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.11 r
+  weight_mem/mem_reg[37][3]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.16 r
+  ctmi_13865/ZN (OAI22D0BWP30P140HVT)              0.02      0.18 f
+  weight_mem/mem_reg[37][3]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.18 f
+  data arrival time                                          0.18
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+  weight_mem/mem_reg[37][3]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.11 r
+  library hold time                                0.01      0.12
+  data required time                                         0.12
+  ------------------------------------------------------------------------
+  data required time                                         0.12
+  data arrival time                                         -0.18
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: weight_mem/mem_reg[35][5] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/mem_reg[35][5] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  weight_mem/mem_reg[35][5]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.11 r
+  weight_mem/mem_reg[35][5]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.16 r
+  ctmi_13847/ZN (OAI22D0BWP30P140HVT)              0.02      0.18 f
+  weight_mem/mem_reg[35][5]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.18 f
+  data arrival time                                          0.18
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+  weight_mem/mem_reg[35][5]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.11 r
+  library hold time                                0.01      0.12
+  data required time                                         0.12
+  ------------------------------------------------------------------------
+  data required time                                         0.12
+  data arrival time                                         -0.18
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: weight_mem/mem_reg[36][2] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/mem_reg[36][2] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.10      0.10
+
+  weight_mem/mem_reg[36][2]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.10 r
+  weight_mem/mem_reg[36][2]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.16 r
+  ctmi_13858/ZN (OAI22D0BWP30P140HVT)              0.02      0.17 f
+  weight_mem/mem_reg[36][2]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.17 f
+  data arrival time                                          0.17
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.10      0.10
+  weight_mem/mem_reg[36][2]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.10 r
+  library hold time                                0.01      0.11
+  data required time                                         0.11
+  ------------------------------------------------------------------------
+  data required time                                         0.11
+  data arrival time                                         -0.17
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: weight_mem/mem_reg[10][2] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/mem_reg[10][2] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.13      0.13
+
+  weight_mem/mem_reg[10][2]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.13 r
+  weight_mem/mem_reg[10][2]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.19 r
+  ctmi_13650/ZN (OAI22D0BWP30P140HVT)              0.02      0.21 f
+  weight_mem/mem_reg[10][2]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.21 f
+  data arrival time                                          0.21
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.13      0.13
+  weight_mem/mem_reg[10][2]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.13 r
+  library hold time                                0.01      0.15
+  data required time                                         0.15
+  ------------------------------------------------------------------------
+  data required time                                         0.15
+  data arrival time                                         -0.21
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: image_mem/mem_reg[17][6] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/mem_reg[17][6] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.06      0.06
+
+  image_mem/mem_reg[17][6]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.06 r
+  image_mem/mem_reg[17][6]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.12 r
+  ctmi_13130/ZN (OAI22D0BWP30P140HVT)              0.02      0.14 f
+  image_mem/mem_reg[17][6]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.14 f
+  data arrival time                                          0.14
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+  image_mem/mem_reg[17][6]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.07 r
+  library hold time                                0.01      0.08
+  data required time                                         0.08
+  ------------------------------------------------------------------------
+  data required time                                         0.08
+  data arrival time                                         -0.14
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+
+  Startpoint: image_mem/mem_reg[36][1] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/mem_reg[36][1] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Slow
+  Scenario: FUNC_Slow
+  Path Group: clk_in
+  Path Type: min
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.10      0.10
+
+  image_mem/mem_reg[36][1]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.10 r
+  image_mem/mem_reg[36][1]/QN (SDFQND0BWP30P140HVT)
+                                                   0.06      0.16 r
+  ctmi_13320/ZN (OAI22D0BWP30P140HVT)              0.02      0.17 f
+  image_mem/mem_reg[36][1]/D (SDFQND0BWP30P140HVT)
+                                                   0.00      0.17 f
+  data arrival time                                          0.17
+
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.10      0.10
+  image_mem/mem_reg[36][1]/CP (SDFQND0BWP30P140HVT)
+                                                   0.00      0.10 r
+  library hold time                                0.01      0.11
+  data required time                                         0.11
+  ------------------------------------------------------------------------
+  data required time                                         0.11
+  data arrival time                                         -0.17
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.06
+
+
+1

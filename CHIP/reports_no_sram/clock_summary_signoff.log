@@ -1,0 +1,40 @@
+****************************************
+Report : clock timing
+        -type summary
+Design : top
+Version: V-2023.12-SP3
+Date   : Fri Jun 27 18:16:42 2025
+****************************************
+
+  Mode: FUNC
+  Clock: clk_in
+                                                                                 Corner
+---------------------------------------------------------------------------------------------------
+  Maximum setup launch latency:
+      image_mem/mem_reg[9][3]/CP                               0.14       rp-+       Slow
+
+  Minimum setup capture latency:
+      weight_mem/mem_reg[47][0]/CP                             0.06       rp-+       Slow
+
+  Minimum hold launch latency:
+      weight_mem/mem_reg[47][0]/CP                             0.06       rp-+       Slow
+
+  Maximum hold capture latency:
+      image_mem/mem_reg[9][3]/CP                               0.14       rp-+       Slow
+
+  Maximum active transition:
+      weight_mem/mem_reg[4][5]/CP                              0.11       rp-+       Slow
+
+  Minimum active transition:
+      weight_mem/mem_reg[50][4]/CP                             0.05       rp-+       Fast
+
+  Maximum setup skew:
+      ctrl_inst/ctrl_state_reg[1]/CP                                      rp-+       Slow
+      ctrl_inst/rd_ptr_reg[4]/CP                               0.05       rp-+       Slow
+
+  Maximum hold skew:
+      ctrl_inst/wr_ptr_reg[1]/CP                                          rp-+       Slow
+      image_mem/mem_reg[9][3]/CP                               0.08       rp-+       Slow
+
+
+1

@@ -1,0 +1,501 @@
+****************************************
+Report : timing
+        -path_type full
+        -delay_type max
+        -max_paths 10
+        -report_by design
+Design : top
+Version: V-2023.12-SP3
+Date   : Fri Jun 27 18:16:42 2025
+****************************************
+
+  Startpoint: ctrl_inst/rd_ptr_reg[4] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/data_out_reg[7] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+
+  ctrl_inst/rd_ptr_reg[4]/CP (SDFQD1BWP30P140HVT)
+                                                   0.00      0.07 r
+  ctrl_inst/rd_ptr_reg[4]/Q (SDFQD1BWP30P140HVT)   0.07      0.14 f
+  ctmi_148/ZN (CKND0BWP30P140HVT)                  0.03      0.16 r
+  ctmi_11853/ZN (NR2D0BWP30P140HVT)                0.02      0.19 f
+  ctmi_11917/ZN (CKND2D0BWP30P140HVT)              0.05      0.23 r
+  ctmi_11948/ZN (NR2D1BWP30P140HVT)                0.06      0.30 f
+  ctmi_12405/ZN (AOI222D0BWP30P140HVT)             0.07      0.36 r
+  ctmi_12402/ZN (OAI211D0BWP30P140HVT)             0.06      0.42 f
+  ctmi_12401/ZN (AOI221D0BWP30P140HVT)             0.05      0.48 r
+  ctmi_12400/ZN (ND4D1BWP30P140HVT)                0.07      0.55 f
+  ctmi_12378/ZN (NR4D0BWP30P140HVT)                0.09      0.64 r
+  ctmi_12364/ZN (ND4D0BWP30P140HVT)                0.10      0.74 f
+  image_mem/data_out_reg[7]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.74 f
+  data arrival time                                          0.74
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  image_mem/data_out_reg[7]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.03      0.92
+  data required time                                         0.92
+  ------------------------------------------------------------------------
+  data required time                                         0.92
+  data arrival time                                         -0.74
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.19
+
+
+
+  Startpoint: mac_inst/acc_register_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: mac_inst/acc_register_reg[21] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  mac_inst/acc_register_reg[0]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.11 r
+  mac_inst/acc_register_reg[0]/Q (SDFQD0BWP30P140HVT)
+                                                   0.06      0.17 r
+  A27119/Z (AN2D0BWP30P140HVT)                     0.03      0.20 r
+  A26953/ZN (ND2D0BWP30P140HVT)                    0.02      0.22 f
+  A27035/ZN (OAI21D0BWP30P140HVT)                  0.02      0.24 r
+  A27037/ZN (ND2D0BWP30P140HVT)                    0.02      0.26 f
+  A27102/ZN (OAI21D0BWP30P140HVT)                  0.02      0.28 r
+  A27104/ZN (ND2D0BWP30P140HVT)                    0.02      0.30 f
+  A27105/ZN (OAI21D0BWP30P140HVT)                  0.02      0.33 r
+  mac_inst/add_40/U_10/CO (FA1D0BWP30P140HVT)      0.04      0.37 r
+  mac_inst/add_40/U_13/CO (FA1D0BWP30P140HVT)      0.04      0.41 r
+  mac_inst/add_40/U_15/CO (FA1D0BWP30P140HVT)      0.05      0.45 r
+  A27087/ZN (AOI32D0BWP30P140HVT)                  0.04      0.49 f
+  ctmi_34671/ZN (IND2D0BWP30P140HVT)               0.04      0.53 f
+  ctmTdsLR_2_32625/ZN (OAI31D0BWP30P140HVT)        0.04      0.57 r
+  ctmTdsLR_3_50126/ZN (ND2D0BWP30P140HVT)          0.02      0.59 f
+  ctmTdsLR_1_50124/ZN (IND4D0BWP30P140HVT)         0.02      0.61 r
+  ctmi_31787/ZN (ND2D0BWP30P140HVT)                0.04      0.65 f
+  ctmTdsLR_1_28145/Z (OR3D0BWP30P140HVT)           0.04      0.69 f
+  ctmi_1171/ZN (MUX2ND0BWP30P140HVT)               0.01      0.71 r
+  ctmTdsLR_1_28116/Z (AO22D0BWP30P140HVT)          0.03      0.74 r
+  mac_inst/acc_register_reg[21]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.74 r
+  data arrival time                                          0.74
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  mac_inst/acc_register_reg[21]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.02      0.94
+  data required time                                         0.94
+  ------------------------------------------------------------------------
+  data required time                                         0.94
+  data arrival time                                         -0.74
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.20
+
+
+
+  Startpoint: mac_inst/acc_register_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: mac_inst/acc_register_reg[19] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  mac_inst/acc_register_reg[0]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.11 r
+  mac_inst/acc_register_reg[0]/Q (SDFQD0BWP30P140HVT)
+                                                   0.06      0.17 r
+  A27119/Z (AN2D0BWP30P140HVT)                     0.03      0.20 r
+  A26953/ZN (ND2D0BWP30P140HVT)                    0.02      0.22 f
+  A27035/ZN (OAI21D0BWP30P140HVT)                  0.02      0.24 r
+  A27037/ZN (ND2D0BWP30P140HVT)                    0.02      0.26 f
+  A27102/ZN (OAI21D0BWP30P140HVT)                  0.02      0.28 r
+  A27104/ZN (ND2D0BWP30P140HVT)                    0.02      0.30 f
+  A27105/ZN (OAI21D0BWP30P140HVT)                  0.02      0.33 r
+  mac_inst/add_40/U_10/CO (FA1D0BWP30P140HVT)      0.04      0.37 r
+  mac_inst/add_40/U_13/CO (FA1D0BWP30P140HVT)      0.04      0.41 r
+  mac_inst/add_40/U_15/CO (FA1D0BWP30P140HVT)      0.05      0.45 r
+  A27087/ZN (AOI32D0BWP30P140HVT)                  0.04      0.49 f
+  ctmi_34671/ZN (IND2D0BWP30P140HVT)               0.04      0.53 f
+  ctmTdsLR_2_32625/ZN (OAI31D0BWP30P140HVT)        0.04      0.57 r
+  ctmTdsLR_3_50126/ZN (ND2D0BWP30P140HVT)          0.02      0.59 f
+  ctmTdsLR_1_50124/ZN (IND4D0BWP30P140HVT)         0.02      0.61 r
+  ctmi_31787/ZN (ND2D0BWP30P140HVT)                0.04      0.65 f
+  A26946/ZN (IND2D0BWP30P140HVT)                   0.04      0.69 f
+  A27031/ZN (MUX2ND0BWP30P140HVT)                  0.03      0.71 f
+  A27033/ZN (OAI21D0BWP30P140HVT)                  0.02      0.73 r
+  mac_inst/acc_register_reg[19]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.73 r
+  data arrival time                                          0.73
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  mac_inst/acc_register_reg[19]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.02      0.94
+  data required time                                         0.94
+  ------------------------------------------------------------------------
+  data required time                                         0.94
+  data arrival time                                         -0.73
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.21
+
+
+
+  Startpoint: ctrl_inst/rd_ptr_reg[4] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/data_out_reg[5] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+
+  ctrl_inst/rd_ptr_reg[4]/CP (SDFQD1BWP30P140HVT)
+                                                   0.00      0.07 r
+  ctrl_inst/rd_ptr_reg[4]/Q (SDFQD1BWP30P140HVT)   0.07      0.14 f
+  ctmi_148/ZN (CKND0BWP30P140HVT)                  0.03      0.16 r
+  ctmi_11853/ZN (NR2D0BWP30P140HVT)                0.02      0.19 f
+  ctmi_11852/ZN (ND2D0BWP30P140HVT)                0.03      0.22 r
+  ctmi_11945/ZN (NR2D0P7BWP30P140)                 0.06      0.28 f
+  ctmi_12515/ZN (AOI222D0BWP30P140HVT)             0.09      0.37 r
+  ctmi_12512/ZN (OAI211D0BWP30P140HVT)             0.06      0.43 f
+  ctmi_12511/ZN (AOI221D0BWP30P140HVT)             0.06      0.49 r
+  ctmi_12510/ZN (ND4D1BWP30P140)                   0.07      0.56 f
+  ctmi_12488/ZN (NR4D0BWP30P140HVT)                0.09      0.65 r
+  ctmi_12474/ZN (ND4D0BWP30P140HVT)                0.07      0.72 f
+  image_mem/data_out_reg[5]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.72 f
+  data arrival time                                          0.72
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  image_mem/data_out_reg[5]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.02      0.93
+  data required time                                         0.93
+  ------------------------------------------------------------------------
+  data required time                                         0.93
+  data arrival time                                         -0.72
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.21
+
+
+
+  Startpoint: mac_inst/acc_register_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: mac_inst/acc_register_reg[18] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  mac_inst/acc_register_reg[0]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.11 r
+  mac_inst/acc_register_reg[0]/Q (SDFQD0BWP30P140HVT)
+                                                   0.06      0.17 r
+  A27119/Z (AN2D0BWP30P140HVT)                     0.03      0.20 r
+  A26953/ZN (ND2D0BWP30P140HVT)                    0.02      0.22 f
+  A27035/ZN (OAI21D0BWP30P140HVT)                  0.02      0.24 r
+  A27037/ZN (ND2D0BWP30P140HVT)                    0.02      0.26 f
+  A27102/ZN (OAI21D0BWP30P140HVT)                  0.02      0.28 r
+  A27104/ZN (ND2D0BWP30P140HVT)                    0.02      0.30 f
+  A27105/ZN (OAI21D0BWP30P140HVT)                  0.02      0.33 r
+  mac_inst/add_40/U_10/CO (FA1D0BWP30P140HVT)      0.04      0.37 r
+  mac_inst/add_40/U_13/CO (FA1D0BWP30P140HVT)      0.04      0.41 r
+  mac_inst/add_40/U_15/CO (FA1D0BWP30P140HVT)      0.05      0.45 r
+  A27087/ZN (AOI32D0BWP30P140HVT)                  0.04      0.49 f
+  ctmi_34671/ZN (IND2D0BWP30P140HVT)               0.04      0.53 f
+  ctmTdsLR_2_32625/ZN (OAI31D0BWP30P140HVT)        0.04      0.57 r
+  ctmTdsLR_3_50126/ZN (ND2D0BWP30P140HVT)          0.02      0.59 f
+  ctmTdsLR_1_50124/ZN (IND4D0BWP30P140HVT)         0.02      0.61 r
+  ctmi_31787/ZN (ND2D0BWP30P140HVT)                0.04      0.65 f
+  A26947/ZN (NR2D0BWP30P140HVT)                    0.03      0.68 r
+  ctmTdsLR_1_1608/ZN (OAI211D0BWP30P140HVT)        0.03      0.71 f
+  ctmTdsLR_2_1609/ZN (IOA21D0BWP30P140HVT)         0.02      0.73 r
+  mac_inst/acc_register_reg[18]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.73 r
+  data arrival time                                          0.73
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  mac_inst/acc_register_reg[18]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.02      0.94
+  data required time                                         0.94
+  ------------------------------------------------------------------------
+  data required time                                         0.94
+  data arrival time                                         -0.73
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.21
+
+
+
+  Startpoint: mac_inst/acc_register_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: mac_inst/acc_register_reg[20] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.11      0.11
+
+  mac_inst/acc_register_reg[0]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      0.11 r
+  mac_inst/acc_register_reg[0]/Q (SDFQD0BWP30P140HVT)
+                                                   0.06      0.17 r
+  A27119/Z (AN2D0BWP30P140HVT)                     0.03      0.20 r
+  A26953/ZN (ND2D0BWP30P140HVT)                    0.02      0.22 f
+  A27035/ZN (OAI21D0BWP30P140HVT)                  0.02      0.24 r
+  A27037/ZN (ND2D0BWP30P140HVT)                    0.02      0.26 f
+  A27102/ZN (OAI21D0BWP30P140HVT)                  0.02      0.28 r
+  A27104/ZN (ND2D0BWP30P140HVT)                    0.02      0.30 f
+  A27105/ZN (OAI21D0BWP30P140HVT)                  0.02      0.33 r
+  mac_inst/add_40/U_10/CO (FA1D0BWP30P140HVT)      0.04      0.37 r
+  mac_inst/add_40/U_13/CO (FA1D0BWP30P140HVT)      0.04      0.41 r
+  mac_inst/add_40/U_15/CO (FA1D0BWP30P140HVT)      0.05      0.45 r
+  A27087/ZN (AOI32D0BWP30P140HVT)                  0.04      0.49 f
+  ctmi_34671/ZN (IND2D0BWP30P140HVT)               0.04      0.53 f
+  ctmTdsLR_2_32625/ZN (OAI31D0BWP30P140HVT)        0.04      0.57 r
+  ctmTdsLR_3_50126/ZN (ND2D0BWP30P140HVT)          0.02      0.59 f
+  ctmTdsLR_1_50124/ZN (IND4D0BWP30P140HVT)         0.02      0.61 r
+  ctmi_31787/ZN (ND2D0BWP30P140HVT)                0.04      0.65 f
+  A26945/ZN (NR2D0BWP30P140HVT)                    0.03      0.68 r
+  ctmTdsLR_1_1606/ZN (OAI211D0BWP30P140HVT)        0.02      0.70 f
+  ctmTdsLR_1_28119/ZN (IOA21D0BWP30P140HVT)        0.02      0.72 r
+  mac_inst/acc_register_reg[20]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.72 r
+  data arrival time                                          0.72
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  mac_inst/acc_register_reg[20]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.02      0.94
+  data required time                                         0.94
+  ------------------------------------------------------------------------
+  data required time                                         0.94
+  data arrival time                                         -0.72
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.22
+
+
+
+  Startpoint: ctrl_inst/rd_ptr_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/data_out_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+
+  ctrl_inst/rd_ptr_reg[0]/CP (SDFQD1BWP30P140HVT)
+                                                   0.00      0.07 r
+  ctrl_inst/rd_ptr_reg[0]/Q (SDFQD1BWP30P140HVT)   0.07      0.14 f
+  ctmi_11846/ZN (ND2D0BWP30P140HVT)                0.02      0.16 r
+  phfnr_buf_46036/ZN (CKND0BWP30P140HVT)           0.03      0.19 f
+  ctmi_11907/ZN (ND2D0BWP30P140HVT)                0.04      0.23 r
+  ctmi_11976/ZN (NR2D1BWP30P140HVT)                0.06      0.29 f
+  ctmi_12803/ZN (AOI222D0BWP30P140HVT)             0.07      0.37 r
+  ctmi_12800/ZN (OAI211D0BWP30P140HVT)             0.06      0.42 f
+  ctmi_12799/ZN (AOI221D0BWP30P140HVT)             0.05      0.47 r
+  ctmi_12785/ZN (ND4D1BWP30P140HVT)                0.07      0.54 f
+  ctmi_12763/ZN (NR4D0BWP30P140HVT)                0.07      0.62 r
+  ctmi_12749/ZN (ND4D0BWP30P140HVT)                0.09      0.71 f
+  image_mem/data_out_reg[0]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.71 f
+  data arrival time                                          0.71
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  image_mem/data_out_reg[0]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.03      0.93
+  data required time                                         0.93
+  ------------------------------------------------------------------------
+  data required time                                         0.93
+  data arrival time                                         -0.71
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.22
+
+
+
+  Startpoint: ctrl_inst/rd_ptr_reg[4] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/data_out_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+
+  ctrl_inst/rd_ptr_reg[4]/CP (SDFQD1BWP30P140HVT)
+                                                   0.00      0.07 r
+  ctrl_inst/rd_ptr_reg[4]/Q (SDFQD1BWP30P140HVT)   0.07      0.14 f
+  ctmi_148/ZN (CKND0BWP30P140HVT)                  0.03      0.16 r
+  ctmi_11853/ZN (NR2D0BWP30P140HVT)                0.02      0.19 f
+  ctmi_11917/ZN (CKND2D0BWP30P140HVT)              0.05      0.23 r
+  ctmi_11948/ZN (NR2D1BWP30P140HVT)                0.06      0.30 f
+  ctmi_12350/ZN (AOI222D0BWP30P140HVT)             0.07      0.37 r
+  ctmi_12347/ZN (OAI211D0BWP30P140HVT)             0.04      0.40 f
+  ctmi_12346/ZN (AOI221D0BWP30P140HVT)             0.06      0.46 r
+  ctmi_12345/ZN (ND4D0BWP30P140)                   0.08      0.54 f
+  ctmi_12323/ZN (NR4D0BWP30P140HVT)                0.08      0.62 r
+  ctmTdsLR_1_50115/ZN (IND3D0BWP30P140HVT)         0.09      0.71 f
+  weight_mem/data_out_reg[0]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.71 f
+  data arrival time                                          0.71
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  weight_mem/data_out_reg[0]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.03      0.93
+  data required time                                         0.93
+  ------------------------------------------------------------------------
+  data required time                                         0.93
+  data arrival time                                         -0.71
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.22
+
+
+
+  Startpoint: ctrl_inst/rd_ptr_reg[0] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/data_out_reg[2] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+
+  ctrl_inst/rd_ptr_reg[0]/CP (SDFQD1BWP30P140HVT)
+                                                   0.00      0.07 r
+  ctrl_inst/rd_ptr_reg[0]/Q (SDFQD1BWP30P140HVT)   0.07      0.14 f
+  ctmi_11846/ZN (ND2D0BWP30P140HVT)                0.02      0.16 r
+  phfnr_buf_46036/ZN (CKND0BWP30P140HVT)           0.03      0.19 f
+  ctmi_11907/ZN (ND2D0BWP30P140HVT)                0.04      0.23 r
+  ctmi_11976/ZN (NR2D1BWP30P140HVT)                0.06      0.29 f
+  ctmi_12693/ZN (AOI222D0BWP30P140HVT)             0.06      0.35 r
+  ctmi_12690/ZN (OAI211D0BWP30P140HVT)             0.05      0.40 f
+  ctmi_12689/ZN (AOI221D0BWP30P140HVT)             0.04      0.44 r
+  ctmi_12675/ZN (ND4D1BWP30P140HVT)                0.08      0.53 f
+  ctmi_12653/ZN (NR4D0BWP30P140HVT)                0.08      0.61 r
+  ctmi_12639/ZN (ND4D0BWP30P140HVT)                0.09      0.70 f
+  image_mem/data_out_reg[2]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.70 f
+  data arrival time                                          0.70
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  image_mem/data_out_reg[2]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.03      0.92
+  data required time                                         0.92
+  ------------------------------------------------------------------------
+  data required time                                         0.92
+  data arrival time                                         -0.70
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.22
+
+
+
+  Startpoint: ctrl_inst/rd_ptr_reg[4] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: weight_mem/data_out_reg[3] (rising edge-triggered flip-flop clocked by clk_in)
+  Mode: FUNC
+  Corner: Fast
+  Scenario: FUNC_Fast
+  Path Group: clk_in
+  Path Type: max
+
+  Point                                            Incr      Path  
+  ------------------------------------------------------------------------
+  clock clk_in (rise edge)                         0.00      0.00
+  clock network delay (propagated)                 0.07      0.07
+
+  ctrl_inst/rd_ptr_reg[4]/CP (SDFQD1BWP30P140HVT)
+                                                   0.00      0.07 r
+  ctrl_inst/rd_ptr_reg[4]/Q (SDFQD1BWP30P140HVT)   0.07      0.14 f
+  ctmi_148/ZN (CKND0BWP30P140HVT)                  0.03      0.16 r
+  ctmi_11853/ZN (NR2D0BWP30P140HVT)                0.02      0.19 f
+  ctmi_11917/ZN (CKND2D0BWP30P140HVT)              0.05      0.23 r
+  ctmi_11948/ZN (NR2D1BWP30P140HVT)                0.06      0.30 f
+  ctmi_12185/ZN (AOI222D0BWP30P140HVT)             0.06      0.36 r
+  ctmi_12182/ZN (OAI211D0BWP30P140HVT)             0.06      0.41 f
+  ctmi_12181/ZN (AOI221D0BWP30P140HVT)             0.05      0.46 r
+  ctmi_12180/ZN (ND4D0BWP30P140HVT)                0.07      0.53 f
+  ctmi_12158/ZN (NR4D0BWP30P140HVT)                0.10      0.63 r
+  ctmi_12144/ZN (ND4D0BWP30P140HVT)                0.07      0.71 f
+  weight_mem/data_out_reg[3]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.71 f
+  data arrival time                                          0.71
+
+  clock clk_in (rise edge)                         1.00      1.00
+  clock network delay (propagated)                 0.10      1.10
+  weight_mem/data_out_reg[3]/CP (SDFQD0BWP30P140HVT)
+                                                   0.00      1.10 r
+  clock uncertainty                               -0.15      0.95
+  library setup time                              -0.02      0.93
+  data required time                                         0.93
+  ------------------------------------------------------------------------
+  data required time                                         0.93
+  data arrival time                                         -0.71
+  ------------------------------------------------------------------------
+  slack (MET)                                                0.22
+
+
+1

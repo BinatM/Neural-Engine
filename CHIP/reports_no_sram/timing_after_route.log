@@ -6,11 +6,11 @@ Report : timing
         -report_by design
 Design : top
 Version: V-2023.12-SP3
-Date   : Thu May 22 18:58:23 2025
+Date   : Fri Jun 27 17:44:25 2025
 ****************************************
 
-  Startpoint: ctrl_inst/rd_ptr_reg[2] (rising edge-triggered flip-flop clocked by clk_in)
-  Endpoint: weight_mem/data_out_reg[4] (rising edge-triggered flip-flop clocked by clk_in)
+  Startpoint: ctrl_inst/rd_ptr_reg[4] (rising edge-triggered flip-flop clocked by clk_in)
+  Endpoint: image_mem/data_out_reg[7] (rising edge-triggered flip-flop clocked by clk_in)
   Mode: FUNC
   Corner: Fast
   Scenario: FUNC_Fast
@@ -20,35 +20,37 @@ Date   : Thu May 22 18:58:23 2025
   Point                                            Incr      Path  
   ------------------------------------------------------------------------
   clock clk_in (rise edge)                         0.00      0.00
-  clock network delay (propagated)                 0.10      0.10
+  clock network delay (propagated)                 0.07      0.07
 
-  ctrl_inst/rd_ptr_reg[2]/CP (SDFQD0BWP30P140HVT)
-                                                   0.00      0.10 r
-  ctrl_inst/rd_ptr_reg[2]/Q (SDFQD0BWP30P140HVT)   0.09      0.20 f
-  ctmi_11839/ZN (ND2D0BWP30P140HVT)                0.11      0.31 r
-  ctmi_11947/ZN (NR2D0BWP30P140HVT)                0.12      0.43 f
-  ctmi_12130/ZN (AOI222D0BWP30P140HVT)             0.09      0.52 r
-  ctmi_12127/ZN (OAI211D0BWP30P140HVT)             0.05      0.57 f
-  ctmi_12126/ZN (AOI221D0BWP30P140HVT)             0.07      0.63 r
-  ctmi_12125/ZN (ND4D0BWP30P140HVT)                0.13      0.76 f
-  ctmi_12103/ZN (NR4D0BWP30P140HVT)                0.08      0.84 r
-  ctmi_12089/ZN (ND4D0BWP30P140HVT)                0.10      0.95 f
-  weight_mem/data_out_reg[4]/D (SDFQD0BWP30P140HVT)
-                                                   0.00      0.95 f
-  data arrival time                                          0.95
+  ctrl_inst/rd_ptr_reg[4]/CP (SDFQD1BWP30P140HVT)
+                                                   0.00      0.07 r
+  ctrl_inst/rd_ptr_reg[4]/Q (SDFQD1BWP30P140HVT)   0.07      0.14 f
+  ctmi_148/ZN (CKND0BWP30P140HVT)                  0.03      0.16 r
+  ctmi_11853/ZN (NR2D0BWP30P140HVT)                0.02      0.19 f
+  ctmi_11917/ZN (CKND2D0BWP30P140HVT)              0.05      0.23 r
+  ctmi_11948/ZN (NR2D1BWP30P140HVT)                0.06      0.30 f
+  ctmi_12405/ZN (AOI222D0BWP30P140HVT)             0.07      0.36 r
+  ctmi_12402/ZN (OAI211D0BWP30P140HVT)             0.06      0.42 f
+  ctmi_12401/ZN (AOI221D0BWP30P140HVT)             0.05      0.48 r
+  ctmi_12400/ZN (ND4D1BWP30P140HVT)                0.07      0.55 f
+  ctmi_12378/ZN (NR4D0BWP30P140HVT)                0.09      0.64 r
+  ctmi_12364/ZN (ND4D0BWP30P140HVT)                0.10      0.74 f
+  image_mem/data_out_reg[7]/D (SDFQD0BWP30P140HVT)
+                                                   0.00      0.74 f
+  data arrival time                                          0.74
 
   clock clk_in (rise edge)                         1.00      1.00
   clock network delay (propagated)                 0.10      1.10
-  weight_mem/data_out_reg[4]/CP (SDFQD0BWP30P140HVT)
+  image_mem/data_out_reg[7]/CP (SDFQD0BWP30P140HVT)
                                                    0.00      1.10 r
   clock uncertainty                               -0.15      0.95
-  library setup time                              -0.03      0.93
-  data required time                                         0.93
+  library setup time                              -0.03      0.92
+  data required time                                         0.92
   ------------------------------------------------------------------------
-  data required time                                         0.93
-  data arrival time                                         -0.95
+  data required time                                         0.92
+  data arrival time                                         -0.74
   ------------------------------------------------------------------------
-  slack (VIOLATED)                                          -0.02
+  slack (MET)                                                0.19
 
 
 1

@@ -62,47 +62,55 @@ current_scenario FUNC_Slow
 source  synthesis/top.sdc
 
 ######### Synthesis #########
-set_auto_floorplan_constraints -core_utilization 0.7 -side_ratio {1 1} -core_offset 2
+set_auto_floorplan_constraints -core_utilization 0.67 -side_ratio {1 1} -core_offset 2
 set_lib_cell_purpose [get_lib_cells */CKL*] -include none
+set_individual_pin_constraints -nets {bus[2] bus[3] bus[4] bus[5] bus[6] bus[7]} -sides {4}
+set_individual_pin_constraints -nets {bus[10] bus[11] chip_sel wr_en output_bit} -sides {3}
+set_individual_pin_constraints -nets {clk_in bus[8] bus[9] bus[14] bus[15]} -sides {2}
+set_individual_pin_constraints -nets {output_ready bus[0] bus[1] bus[12] bus[13]} -sides {1}
+
+# === Enable LVT Optimization ===
+# Clean up any old group assignments:
+remove_attributes [get_lib_cells */*] threshold_voltage_group
+# Set LVT group:
+set_attribute [get_lib_cells */*LVT*] threshold_voltage_group LVT
+set_threshold_voltage_group_type -type low_vt LVT
+# Make sure optimizer is allowed to use them:
+set_lib_cell_purpose -include optimization [get_lib_cells */*LVT*]
+# Allow percentage LVT (here: 100%, but you can reduce to 30, 50, etc.)
+set_multi_vth_constraint -low_vt_percentage 50 -cost cell_count
+
+create_clock -period 0.7 [get_ports clk_in]
 compile_fusion -to logic_opto
-#create_placement
-#legalize_placement
-compile_fusion -to final_opto
+place_pins -self
+compile_fusion -from logic_opto -to final_opto
+place_pins -self
+create_clock -period 1 [get_ports clk_in]
+
 
 ######### Reports Generation #########
 report_area > reports_no_sram/area_report.log
 report_utilization > reports_no_sram/utilization.log
 save_block -as top_final_opto
 
-######### Pin placement constraints for core #########
+# Insert Boundary cells
+create_boundary_cells \
+  -left_boundary_cell  tcbn28hpcplusbwp30p140/BOUNDARY_LEFTBWP30P140 \
+  -right_boundary_cell tcbn28hpcplusbwp30p140/BOUNDARY_RIGHTBWP30P140 \
+  -prefix BOUND
 
-set_pin_physical_constraints -pin clk_in          -side top
-set_pin_physical_constraints -pin wr_en        -side left
-set_pin_physical_constraints -pin chip_sel     -side left
+# Insert TAP cells to ensure well and substrate ties
+create_tap_cells \
+  -lib_cell tcbn28hpcplusbwp30p140/TAPCELLBWP30P140 \
+  -distance 60 \
+  -pattern stagger \
+  -skip_fixed_cells
 
-# Bus[0:7] on bottom
-set_pin_physical_constraints -pin bus[0]       -side bottom
-set_pin_physical_constraints -pin bus[1]       -side bottom
-set_pin_physical_constraints -pin bus[2]       -side bottom
-set_pin_physical_constraints -pin bus[3]       -side bottom
-set_pin_physical_constraints -pin bus[4]       -side bottom
-set_pin_physical_constraints -pin bus[5]       -side bottom
-set_pin_physical_constraints -pin bus[6]       -side bottom
-set_pin_physical_constraints -pin bus[7]       -side bottom
+#Checking legality of placement
+legalize_placement -incremental
+check_legality
 
-# Bus[8:15] on right
-set_pin_physical_constraints -pin bus[8]       -side right
-set_pin_physical_constraints -pin bus[9]       -side right
-set_pin_physical_constraints -pin bus[10]      -side right
-set_pin_physical_constraints -pin bus[11]      -side right
-set_pin_physical_constraints -pin bus[12]      -side right
-set_pin_physical_constraints -pin bus[13]      -side right
-set_pin_physical_constraints -pin bus[14]      -side right
-set_pin_physical_constraints -pin bus[15]      -side right
-
-# Outputs on left
-set_pin_physical_constraints -pin output_ready -side left
-set_pin_physical_constraints -pin output       -side left
+save_block -as top_placed_with_tap_and_boundary
 
 ######### Power #########
 ####remove all old defination
@@ -148,9 +156,15 @@ save_block -as neuron_top_no_sram.dlib:top_with_power.design
 
 #report_ideal_network
 ######### CTS #########
+set_lib_cell_purpose -include optimization [get_lib_cells *CKBD*]
+set_lib_cell_purpose -include cts [get_lib_cells *CKBD*]
+set_clock_tree_options -clocks [get_clocks clk_in] -root_ndr_fanout_limit 36
 clock_opt
-set_propagated_clock [get_ports clk]
-report_timing
+set_propagated_clock [get_ports clk_in]
+report_timing -max_paths 10 -delay_type max
+report_timing -max_paths 10 -delay_type min
+report_clock_timing -type summary
+save_block -as neuron_top_no_sram.dlib:top_with_clk.design
 
 report_timing > reports_no_sram/timing_after_cts.log
 report_qor > reports_no_sram/qor_after_cts.log
@@ -162,3 +176,6 @@ save_block -as neuron_top_no_sram.dlib:top_with_clk_routing.design
 report_timing > reports_no_sram/timing_after_route.log
 report_power  > reports_no_sram/power_after_route.log
 report_qor    > reports_no_sram/qor_after_route.log
+report_timing -delay_type min > reports_no_sram/hold_violations.log
+
+######### Fillers #########

@@ -114,3 +114,82 @@ create_io_filler_cells -reference_cells {PFILLER0005_G PFILLER05_G PFILLER10_G P
 
 save_block -as top_io_placed
 
+
+######### Power #########
+####remove all old defination
+remove_pg_via_master_rules -all
+remove_pg_patterns -all
+remove_pg_strategies -all
+remove_pg_strategy_via_rules -all
+remove_routes -ring -stripe -lib_cell_pin_connect
+
+# === Create PG Nets ===
+create_net VDD_CORE
+create_net VDD_IO
+create_net VSS_CORE
+create_net VSS_IO
+
+# === Tag PG Nets as Power/Ground ===
+set_attribute -objects [get_nets VDD_CORE] -name net_type -value power
+set_attribute -objects [get_nets VSS_CORE] -name net_type -value ground
+set_attribute -objects [get_nets VDD_IO] -name net_type -value power
+set_attribute -objects [get_nets VSS_IO] -name net_type -value ground
+
+connect_net -net VDD_CORE [get_pins {
+    vdd_core_left/VDD     vdd_core_left/VDDPST
+    vdd_core_top/VDD      vdd_core_top/VDDPST
+    vdd_core_right/VDD    vdd_core_right/VDDPST
+    vdd_core_bot/VDD      vdd_core_bot/VDDPST
+}]
+connect_net -net VDD_CORE [get_pins {
+    vdd_core_left/VDD     vdd_core_left/VDDPST
+    vdd_core_top/VDD      vdd_core_top/VDDPST
+    vdd_core_right/VDD    vdd_core_right/VDDPST
+    vdd_core_bot/VDD      vdd_core_bot/VDDPST
+}]
+
+connect_net -net VSS_CORE [get_pins {
+    vss_core_left/VSS     vss_core_left/VSSPST
+    vss_core_top/VSS      vss_core_top/VSSPST
+    vss_core_right/VSS    vss_core_right/VSSPST
+    vss_core_bot/VSS      vss_core_bot/VSSPST
+}]
+
+# === Create Core PG Ring Pattern ===
+create_pg_ring_pattern core_ring \
+  -horizontal_layer M6 -horizontal_width 2.0 -horizontal_spacing 0.5 \
+  -vertical_layer   M5 -vertical_width   2.0 -vertical_spacing   0.5
+
+# === Define Core Ring Strategy ===
+set_pg_strategy core_ring_strategy -core \
+  -pattern {{name: core_ring} {nets: {VDD_CORE VSS_CORE}}} \
+  -extension {{stop: core_boundary}}
+
+# === Apply Core Ring Strategy ===
+compile_pg -strategies {core_ring_strategy}
+
+# === same for io facing ring===
+create_pg_ring_pattern io_facing_ring \
+  -horizontal_layer M6 -horizontal_width 2.0 -horizontal_spacing 0.5 \
+  -vertical_layer   M5 -vertical_width   2.0 -vertical_spacing   0.5
+
+set_pg_strategy io_facing_ring_strategy -design_boundary \
+  -pattern {{name: io_facing_ring} {nets: {VDD_CORE VSS_CORE}} {offset: {-30 -30}}} \
+  -extension {{stop: core_boundary}}
+
+compile_pg -strategies {io_facing_ring_strategy}
+
+# === Create PG Straps from IO to Core ===
+create_pg_strap -net VDD_CORE -direction horizontal -layer M7 -width 2.0 -spacing 0.4 -pitch 20.0
+create_pg_strap -net VSS_CORE -direction horizontal -layer M7 -width 2.0 -spacing 0.4 -pitch 20.0
+create_pg_strap -net VDD_CORE -direction vertical   -layer M8 -width 2.0 -spacing 0.4 -pitch 20.0
+create_pg_strap -net VSS_CORE -direction vertical   -layer M8 -width 2.0 -spacing 0.4 -pitch 20.0
+
+# === Create VIAs for Connectivity ===
+create_pg_vias -nets {VDD_CORE VSS_CORE} -from_layers metal5 -to_layers metal6
+create_pg_vias -nets {VDD_CORE VSS_CORE} -from_layers metal6 -to_layers metal7
+create_pg_vias -nets {VDD_CORE VSS_CORE} -from_layers metal7 -to_layers metal8
+
+# === Final Check ===
+check_pg_connectivity
+report_pg_nets
