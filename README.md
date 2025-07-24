@@ -1,4 +1,4 @@
-# 🧠 SPEAR: Single Neuron Hardware Accelerator Engine (CHIP Branch)
+# 🧠 SPEAR: Single Neuron Hardware Accelerator Engine
 
 Welcome to the `main.rtl_block_design` branch of the SPEAR project - an undergraduate VLSI design initiative carried out at Tel Aviv University.
 
