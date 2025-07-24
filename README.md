@@ -4,6 +4,8 @@ Welcome to the `main.rtl_block_design` branch of the SPEAR project - an undergra
 
 > 🏆 **1st Place Winner** - Faculty of Engineering Final Projects Competition, Tel Aviv University
 
+<img width="100" height="93" alt="image" src="https://github.com/user-attachments/assets/1a108bef-d862-4121-ae54-592b4f69b84d" />
+
 This repository documents the complete RTL-to-GDSII flow of a custom ASIC designed to accelerate the computation of a single perceptron neuron, implemented using TSMC 28nm technology.
 
 ---
