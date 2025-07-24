@@ -1,6 +1,6 @@
 # 🧠 SPEAR: Single Neuron Hardware Accelerator Engine
 
-Welcome to the `main.rtl_block_design` branch of the SPEAR project - an undergraduate VLSI design initiative carried out at Tel Aviv University.
+This branch contains the full RTL-to-GDSII flow of the **SPEAR Project**, a custom ASIC developed as part of an undergraduate VLSI initiative at Tel Aviv University, in collaboration with engineers from Apple.
 
 > 🏆 **1st Place Winner** - Faculty of Engineering Final Projects Competition, Tel Aviv University
 
