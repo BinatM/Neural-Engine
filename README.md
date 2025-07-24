@@ -12,8 +12,11 @@ The project includes both a **custom silicon chip (ASIC)** implementation of a p
 
 The repository is organized into two branches — each maintained independently by a dedicated team:
 
-[`main.rtl_block_design`](https://github.com/BinatM/Neural-Engine/tree/main.rtl_block_design) | Full RTL-to-GDSII flow using Synopsys Fusion Compiler. Includes RTL code, synthesis & PD scripts, verification tests, and signoff reports. 
-[`FPGA`](https://github.com/BinatM/Neural-Engine/tree/FPGA) | FPGA validation wrapper and simulation framework using Quartus and DE10-Lite board. Supports testing with on-chip memory and programmable test vectors. 
+
+| Branch | Description |
+|--------|-------------|
+| [`main.rtl_block_design`](https://github.com/BinatM/Neural-Engine/tree/main.rtl_block_design) | RTL-to-GDSII chip design. Includes RTL code, synthesis & physical design scripts, verification tests, and full signoff reports. *This team won 1st place in the final project competition.* |
+| [`FPGA`](https://github.com/BinatM/Neural-Engine/tree/FPGA) | FPGA testbench and validation environment using the DE10-Lite board. Includes randomized vector generation and simulation setup. |
 
 > ℹ️ The `main` branch is only a **navigation landing page**. Please follow the appropriate branch for code, documentation, and usage instructions.
 
